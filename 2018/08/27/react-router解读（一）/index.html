@@ -108,24 +108,24 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="前言前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。目前在浏览器环境中这一功能的实现主要有2种:  利用URL中的hash 利用H5中history  pushState 和 replaceState 了解一下 history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello Hexo">
-<meta property="og:url" content="https://achenjs.github.io/2018/08/24/hello-world/index.html">
+<meta property="og:title" content="react-router解读(一)">
+<meta property="og:url" content="https://achenjs.github.io/2018/08/27/react-router解读（一）/index.html">
 <meta property="og:site_name" content="狗日天">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="前言前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。目前在浏览器环境中这一功能的实现主要有2种:  利用URL中的hash 利用H5中history  pushState 和 replaceState 了解一下 history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-27T07:02:11.000Z">
+<meta property="og:updated_time" content="2018-08-27T12:58:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello Hexo">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="react-router解读(一)">
+<meta name="twitter:description" content="前言前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。目前在浏览器环境中这一功能的实现主要有2种:  利用URL中的hash 利用H5中history  pushState 和 replaceState 了解一下 history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问">
 
 
 
 
 
 
-  <link rel="canonical" href="https://achenjs.github.io/2018/08/24/hello-world/"/>
+  <link rel="canonical" href="https://achenjs.github.io/2018/08/27/react-router解读（一）/"/>
 
 
 
@@ -135,7 +135,7 @@
   };
 </script>
 
-  <title>Hello Hexo | 狗日天</title>
+  <title>react-router解读(一) | 狗日天</title>
   
 
 
@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/24/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/27/react-router解读（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achenjs">
@@ -297,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello Hexo
+          <h1 class="post-title" itemprop="name headline">react-router解读(一)
               
             
           </h1>
@@ -322,24 +322,12 @@
                 
               
 
-              <time title="创建时间：2018-08-24 14:49:36" itemprop="dateCreated datePublished" datetime="2018-08-24T14:49:36+08:00">2018-08-24</time>
+              <time title="创建时间：2018-08-27 20:10:45 / 修改时间：20:58:29" itemprop="dateCreated datePublished" datetime="2018-08-27T20:10:45+08:00">2018-08-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-27 15:02:11" itemprop="dateModified" datetime="2018-08-27T15:02:11+08:00">2018-08-27</time>
               
             
           </span>
@@ -372,16 +360,50 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。<br>目前在浏览器环境中这一功能的实现主要有2种:</p>
+<ul>
+<li>利用URL中的hash</li>
+<li>利用H5中history</li>
+</ul>
+<h3 id="pushState-和-replaceState-了解一下"><a href="#pushState-和-replaceState-了解一下" class="headerlink" title="pushState 和 replaceState 了解一下"></a>pushState 和 replaceState 了解一下</h3><blockquote>
+<p>history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问记录， replaceState 则是直接替换了当前访问记录</p>
+</blockquote>
+<p>history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结，我们引用阮老师的教程介绍，<a href="http://javascript.ruanyifeng.com/bom/history.html" target="_blank" rel="noopener">history对象 – JavaScript 标准参考教程（alpha）</a></p>
+<h4 id="history-pushState"><a href="#history-pushState" class="headerlink" title="history.pushState"></a>history.pushState</h4><p>history.pushState方法接受三个参数，依次为：</p>
+<blockquote>
+<p>state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。<br>title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。<br>url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。<br>假定当前网址是example.com/1.html，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
+</blockquote>
+<pre>
+    var stateObj = { foo: 'bar' };
+    history.pushState(stateObj, 'page 2', '2.html');
+</pre>
 
+<p>添加上面这个新记录后，浏览器地址栏立刻显示 example.com/2.html，但并不会跳转到 2.html，甚至也不会检查2.html 是否存在，它只是成为浏览历史中的最新记录。这时，你在地址栏输入一个新的地址(比如访问 google.com )，然后点击了倒退按钮，页面的 URL 将显示 2.html；你再点击一次倒退按钮，URL 将显示 1.html。</p>
+<p>总之，pushState 方法不会触发页面刷新，只是导致 history 对象发生变化，地址栏会有反应。</p>
+<p>如果 pushState 的 url参数，设置了一个新的锚点值（即hash），并不会触发 hashchange 事件。如果设置了一个跨域网址，则会报错。</p>
+<pre>
+    // 报错
+    history.pushState(null, null, 'https://twitter.com/hello');
+
+    上面代码中，pushState想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。
+</pre>
+
+<h4 id="history-replaceState"><a href="#history-replaceState" class="headerlink" title="history.replaceState"></a>history.replaceState</h4><p>history.replaceState 方法的参数与 pushState 方法一模一样，区别是它修改浏览历史中当前纪录,假定当前网页是 example.com/example.html。</p>
+<pre>
+    history.pushState({page: 1}, 'title 1', '?page=1');
+    history.pushState({page: 2}, 'title 2', '?page=2');
+    history.replaceState({page: 3}, 'title 3', '?page=3');
+
+    history.back()
+    // url显示为http://example.com/example.html?page=1
+
+    history.back()
+    // url显示为http://example.com/example.html
+
+    history.go(2)
+    // url显示为http://example.com/example.html?page=3
+
+</pre>
       
     </div>
 
@@ -408,14 +430,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/08/24/hello-world/" rel="next" title="Hello Hexo">
+                <i class="fa fa-chevron-left"></i> Hello Hexo
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/27/react-router解读（一）/" rel="prev" title="react-router解读(一)">
-                react-router解读(一) <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/27/react-router解读（二）/" rel="prev" title="react-router解读（二）">
+                react-router解读（二） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pushState-和-replaceState-了解一下"><span class="nav-number">2.</span> <span class="nav-text">pushState 和 replaceState 了解一下</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#history-pushState"><span class="nav-number">2.1.</span> <span class="nav-text">history.pushState</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#history-replaceState"><span class="nav-number">2.2.</span> <span class="nav-text">history.replaceState</span></a></li></ol></li></ol></div>
             
 
           </div>

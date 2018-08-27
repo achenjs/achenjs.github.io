@@ -280,6 +280,394 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/27/react-router解读（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="狗要日天">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狗日天">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/react-router解读（二）/" itemprop="url">
+                  react-router解读（二）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 20:58:02 / 修改时间：21:21:11" itemprop="dateCreated datePublished" datetime="2018-08-27T20:58:02+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="react-router-的路由实现"><a href="#react-router-的路由实现" class="headerlink" title="react-router 的路由实现"></a>react-router 的路由实现</h3><p>既然知道了这个原理，我们来看下 react-router 的实现，我们打开 <a href="https://github.com/ReactTraining/react-router" target="_blank" rel="noopener">react-router 项目地址</a>,把项目克隆下来，或则直接在 github 上预览，在 React 开发的项目里，我们通过 router.push(‘home’) 来实现页面的跳转，所以我们检索下，push 方法的实现</p>
+<p><img src="/images/router/1.jpg" alt="push方法检索"></p>
+<p>我们检索到了 46个 js 文件，😂，一般到这个时候，我们会放弃源码阅读，那么我们今天的文章就到这结束，谢谢大家！</p>
+<p>开个玩笑，源码阅读不能这么粗糙，react-router 4.x用法，我们只需要安装 react-router-dom。所以我们找到 package 下的 react-router-dom/modules 目录，点开 <code>index.js</code> 文件。</p>
+<pre>
+  export BrowserRouter from "./BrowserRouter";
+  export HashRouter from "./HashRouter";
+  export Link from "./Link";
+  export MemoryRouter from "./MemoryRouter";
+  export NavLink from "./NavLink";
+  export Prompt from "./Prompt";
+  export Redirect from "./Redirect";
+  export Route from "./Route";
+  export Router from "./Router";
+  export StaticRouter from "./StaticRouter";
+  export Switch from "./Switch";
+  export generatePath from "./generatePath";
+  export matchPath from "./matchPath";
+  export withRouter from "./withRouter";
+</pre>
+
+<p>看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 <code>createBrowserHistory</code> 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里react-router-dom 将BrowserRouter、HashRouter、Link拆分为一个个组件实现，也是react-router 3之中的区别之一。<br><a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">详细文档</a><br>我们来看 react-router-dom 中的 BrowserRouter 源码：</p>
+<pre>
+    import warning from "warning";
+    import React from "react";
+    import PropTypes from "prop-types";
+    import { createBrowserHistory as createHistory } from "history";
+    import Router from "./Router";
+
+    /**
+    * The public API for a <router> that uses HTML5 history.
+    */
+    class BrowserRouter extends React.Component {
+      static propTypes = {
+        basename: PropTypes.string,
+        forceRefresh: PropTypes.bool,
+        getUserConfirmation: PropTypes.func,
+        keyLength: PropTypes.number,
+        children: PropTypes.node
+      };
+
+      history = createHistory(this.props);
+
+      componentWillMount() {
+        warning(
+          !this.props.history,
+          "<browserrouter> ignores the history prop. To use a custom history, " +
+            "use `import { Router }` instead of `import { BrowserRouter as Router }`."
+        );
+      }
+
+      render() {
+        return <router history="{this.history}" children="{this.props.children}">;
+      }
+    }
+
+    export default BrowserRouter;
+</router></browserrouter></router></pre>
+
+<p>在使用 React 开发的过程中，我们一定用到过 push 和 replace 来改变路由，和视图。</p>
+<p>router 实例调用的 push 实际是 history 的方法，通过 mode 来确定匹配 history 的实现方案，从代码中我们看到，push 调用了 src/util/push-state.js 中被改写过的 pushState 的方法，改写过的方法会根据传入的参数 <code>replace?: boolean</code>来进行判断调用 pushState 还是 replaceState ，同时做了错误捕获，如果，history 无刷新修改访问路径失败，则调用  <code>window.location.replace(url)</code> ,有刷新的切换用户访问地址 ，同理 <code>pushState</code> 也是这样。这里的 transitionTo 方法主要的作用是做视图的跟新及路由跳转监测，如果 url 没有变化（访问地址切换失败的情况），在 transitionTo 方法内部还会调用一个 ensureURL 方法，来修改 url。 transitionTo 方法中应用的父方法比较多，这里不做长篇赘述。</p>
+<h3 id="模拟单页面路由"><a href="#模拟单页面路由" class="headerlink" title="模拟单页面路由"></a>模拟单页面路由</h3><p>通过上面的学习，我们知道了，单页面应用路由的实现原理，我们也尝试去实现一个。在做管理系统的时候，我们通常会在页面的左侧放置一个固定的导航 sidebar，页面的右侧放与之匹配的内容 main 。点击导航时，我们只希望内容进行更新，如果刷新了整个页面，到时导航和通用的头部底部也进行重绘重排的话，十分浪费资源，体验也会不好。这个时候，我们就能用到我们今天学习到的内容，通过使用 HTML5 的 pushState 方法和 replaceState 方法来实现，</p>
+<p>思路：首先绑定 click 事件。当用户点击一个链接时，通过 preventDefault 函数防止默认的行为（页面跳转），同时读取链接的地址（如果有 jQuery，可以写成$(this).attr(‘href’)），把这个地址通过pushState塞入浏览器历史记录中，再利用 AJAX 技术拉取（如果有 jQuery，可以使用$.get方法）这个地址中真正的内容，同时替换当前网页的内容。</p>
+<p>为了处理用户前进、后退，我们监听 popstate 事件。当用户点击前进或后退按钮时，浏览器地址自动被转换成相应的地址，同时popstate事件发生。在事件处理函数中，我们根据当前的地址抓取相应的内容，然后利用 AJAX 拉取这个地址的真正内容，呈现，即可。</p>
+<p>最后，整个过程是不会改变页面标题的，可以通过直接对 document.title 赋值来更改页面标题。</p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>好了,我们今天通过多个方面来讲了 pushState 方法和 replaceState 的应用，你应该对这个两个方法能有一个比较深刻的印象，如果想要了解更多，你可以参考以下链接</p>
+<p><a href="http://javascript.ruanyifeng.com/bom/history.html" target="_blank" rel="noopener">history对象 – JavaScript 标准参考教程（alpha）</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/27/react-router解读（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="狗要日天">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狗日天">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/react-router解读（一）/" itemprop="url">
+                  react-router解读(一)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 20:10:45 / 修改时间：20:58:29" itemprop="dateCreated datePublished" datetime="2018-08-27T20:10:45+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。<br>目前在浏览器环境中这一功能的实现主要有2种:</p>
+<ul>
+<li>利用URL中的hash</li>
+<li>利用H5中history</li>
+</ul>
+<h3 id="pushState-和-replaceState-了解一下"><a href="#pushState-和-replaceState-了解一下" class="headerlink" title="pushState 和 replaceState 了解一下"></a>pushState 和 replaceState 了解一下</h3><blockquote>
+<p>history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问记录， replaceState 则是直接替换了当前访问记录</p>
+</blockquote>
+<p>history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结，我们引用阮老师的教程介绍，<a href="http://javascript.ruanyifeng.com/bom/history.html" target="_blank" rel="noopener">history对象 – JavaScript 标准参考教程（alpha）</a></p>
+<h4 id="history-pushState"><a href="#history-pushState" class="headerlink" title="history.pushState"></a>history.pushState</h4><p>history.pushState方法接受三个参数，依次为：</p>
+<blockquote>
+<p>state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。<br>title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。<br>url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。<br>假定当前网址是example.com/1.html，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
+</blockquote>
+<pre>
+    var stateObj = { foo: 'bar' };
+    history.pushState(stateObj, 'page 2', '2.html');
+</pre>
+
+<p>添加上面这个新记录后，浏览器地址栏立刻显示 example.com/2.html，但并不会跳转到 2.html，甚至也不会检查2.html 是否存在，它只是成为浏览历史中的最新记录。这时，你在地址栏输入一个新的地址(比如访问 google.com )，然后点击了倒退按钮，页面的 URL 将显示 2.html；你再点击一次倒退按钮，URL 将显示 1.html。</p>
+<p>总之，pushState 方法不会触发页面刷新，只是导致 history 对象发生变化，地址栏会有反应。</p>
+<p>如果 pushState 的 url参数，设置了一个新的锚点值（即hash），并不会触发 hashchange 事件。如果设置了一个跨域网址，则会报错。</p>
+<pre>
+    // 报错
+    history.pushState(null, null, 'https://twitter.com/hello');
+
+    上面代码中，pushState想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。
+</pre>
+
+<h4 id="history-replaceState"><a href="#history-replaceState" class="headerlink" title="history.replaceState"></a>history.replaceState</h4><p>history.replaceState 方法的参数与 pushState 方法一模一样，区别是它修改浏览历史中当前纪录,假定当前网页是 example.com/example.html。</p>
+<pre>
+    history.pushState({page: 1}, 'title 1', '?page=1');
+    history.pushState({page: 2}, 'title 2', '?page=2');
+    history.replaceState({page: 3}, 'title 3', '?page=3');
+
+    history.back()
+    // url显示为http://example.com/example.html?page=1
+
+    history.back()
+    // url显示为http://example.com/example.html
+
+    history.go(2)
+    // url显示为http://example.com/example.html?page=3
+
+</pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/24/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -472,7 +860,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
