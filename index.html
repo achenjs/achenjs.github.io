@@ -280,6 +280,408 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/28/react-router解读（三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="狗要日天">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狗日天">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/28/react-router解读（三）/" itemprop="url">
+                  react-router解读（三）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-28 20:37:33 / 修改时间：21:00:53" itemprop="dateCreated datePublished" datetime="2018-08-28T20:37:33+08:00">2018-08-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="history-methods-createBrowserHistory"><a href="#history-methods-createBrowserHistory" class="headerlink" title="history methods createBrowserHistory"></a>history methods createBrowserHistory</h3><p>通过之前我们已经知道了react-router-dom的<browserrouter> history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。</browserrouter></p>
+<pre>
+  var createBrowserHistory = function createBrowserHistory() {
+    //  arguments[0], 由上一节可知它是一个非必传的object
+    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
+    //  之前将history赋值给变量globalHistory
+    var globalHistory = window.history;
+    //  _DOMUtils.js 中处理一些浏览器兼容性 和 浏览器内核、机型判断的方法
+    //  判断是否非主流机型以及浏览器
+    var canUseHistory = (0, _DOMUtils.supportsHistory)();
+    //  是否为IE浏览器
+    var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
+    //  forceRefresh为true，代表将在页面导航时使用完整页面刷新。其他参数请自行参考官网文档
+    var _props$forceRefresh = props.forceRefresh,
+        forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
+        _props$getUserConfirm = props.getUserConfirmation,
+        getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
+        _props$keyLength = props.keyLength,
+        keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
+
+    var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
+
+    var getDOMLocation = function getDOMLocation(historyState) {
+      var _ref = historyState || {},
+          key = _ref.key,
+          state = _ref.state;
+
+      var _window$location = window.location,
+          pathname = _window$location.pathname,
+          search = _window$location.search,
+          hash = _window$location.hash;
+
+      var path = pathname + search + hash;
+
+      (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
+
+      if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
+
+      return (0, _LocationUtils.createLocation)(path, state, key);
+    };
+
+    var createKey = function createKey() {
+      return Math.random().toString(36).substr(2, keyLength);
+    };
+
+    var transitionManager = (0, _createTransitionManager2.default)();
+
+    var setState = function setState(nextState) {
+      _extends(history, nextState);
+
+      history.length = globalHistory.length;
+
+      transitionManager.notifyListeners(history.location, history.action);
+    };
+
+    var handlePopState = function handlePopState(event) {
+      if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
+
+      handlePop(getDOMLocation(event.state));
+    };
+
+    var handleHashChange = function handleHashChange() {
+      handlePop(getDOMLocation(getHistoryState()));
+    };
+
+    var forceNextPop = false;
+
+    var handlePop = function handlePop(location) {
+      if (forceNextPop) {
+        forceNextPop = false;
+        setState();
+      } else {
+        var action = 'POP';
+
+        transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+          if (ok) {
+            setState({ action: action, location: location });
+          } else {
+            revertPop(location);
+          }
+        });
+      }
+    };
+
+    var revertPop = function revertPop(fromLocation) {
+      var toLocation = history.location;
+
+      // TODO: We could probably make this more reliable by
+      // keeping a list of keys we've seen in sessionStorage.
+      // Instead, we just default to 0 for keys we don't know.
+
+      var toIndex = allKeys.indexOf(toLocation.key);
+
+      if (toIndex === -1) toIndex = 0;
+
+      var fromIndex = allKeys.indexOf(fromLocation.key);
+
+      if (fromIndex === -1) fromIndex = 0;
+
+      var delta = toIndex - fromIndex;
+
+      if (delta) {
+        forceNextPop = true;
+        go(delta);
+      }
+    };
+
+    var initialLocation = getDOMLocation(getHistoryState());
+    var allKeys = [initialLocation.key];
+
+    var createHref = function createHref(location) {
+      return basename + (0, _PathUtils.createPath)(location);
+    };
+
+    var push = function push(path, state) {
+      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+      var action = 'PUSH';
+      //  重写location对象
+      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (!ok) return;
+
+        var href = createHref(location);
+        var key = location.key,
+            state = location.state;
+
+        if (canUseHistory) {
+          globalHistory.pushState({ key: key, state: state }, null, href);
+
+          if (forceRefresh) {
+            window.location.href = href;
+          } else {
+            var prevIndex = allKeys.indexOf(history.location.key);
+            var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+            nextKeys.push(location.key);
+            allKeys = nextKeys;
+
+            setState({ action: action, location: location });
+          }
+        } else {
+          (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
+
+          window.location.href = href;
+        }
+      });
+    };
+
+    var replace = function replace(path, state) {
+      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+      var action = 'REPLACE';
+      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (!ok) return;
+
+        var href = createHref(location);
+        var key = location.key,
+            state = location.state;
+
+
+        if (canUseHistory) {
+          globalHistory.replaceState({ key: key, state: state }, null, href);
+
+          if (forceRefresh) {
+            window.location.replace(href);
+          } else {
+            var prevIndex = allKeys.indexOf(history.location.key);
+
+            if (prevIndex !== -1) allKeys[prevIndex] = location.key;
+
+            setState({ action: action, location: location });
+          }
+        } else {
+          (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
+
+          window.location.replace(href);
+        }
+      });
+    };
+
+    var go = function go(n) {
+      globalHistory.go(n);
+    };
+
+    var goBack = function goBack() {
+      return go(-1);
+    };
+
+    var goForward = function goForward() {
+      return go(1);
+    };
+
+    var listenerCount = 0;
+
+    var checkDOMListeners = function checkDOMListeners(delta) {
+      listenerCount += delta;
+
+      if (listenerCount === 1) {
+        (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
+
+        if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
+      } else if (listenerCount === 0) {
+        (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
+
+        if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
+      }
+    };
+
+    var isBlocked = false;
+
+    var block = function block() {
+      var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      var unblock = transitionManager.setPrompt(prompt);
+
+      if (!isBlocked) {
+        checkDOMListeners(1);
+        isBlocked = true;
+      }
+
+      return function () {
+        if (isBlocked) {
+          isBlocked = false;
+          checkDOMListeners(-1);
+        }
+
+        return unblock();
+      };
+    };
+
+    var listen = function listen(listener) {
+      var unlisten = transitionManager.appendListener(listener);
+      checkDOMListeners(1);
+
+      return function () {
+        checkDOMListeners(-1);
+        unlisten();
+      };
+    };
+
+    var history = {
+      length: globalHistory.length,
+      action: 'POP',
+      location: initialLocation,
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      goBack: goBack,
+      goForward: goForward,
+      block: block,
+      listen: listen
+    };
+
+    return history;
+  };
+</pre>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/27/react-router解读（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -326,12 +728,24 @@
                 
               
 
-              <time title="创建时间：2018-08-27 20:58:02 / 修改时间：21:21:11" itemprop="dateCreated datePublished" datetime="2018-08-27T20:58:02+08:00">2018-08-27</time>
+              <time title="创建时间：2018-08-27 20:58:02" itemprop="dateCreated datePublished" datetime="2018-08-27T20:58:02+08:00">2018-08-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-28 21:02:54" itemprop="dateModified" datetime="2018-08-28T21:02:54+08:00">2018-08-28</time>
               
             
           </span>
@@ -387,7 +801,7 @@
   export withRouter from "./withRouter";
 </pre>
 
-<p>看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 <code>createBrowserHistory</code> 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里react-router-dom 将BrowserRouter、HashRouter、Link拆分为一个个组件实现，也是react-router 3之中的区别之一。<br><a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">详细文档</a><br>我们来看 react-router-dom 中的 BrowserRouter 源码：</p>
+<p>看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 <code>createBrowserHistory</code> 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里 react-router-dom 将 BrowserRouter、HashRouter、Link 拆分为单独组件实现，也是与 react-router 3 之间的区别之一。<br><a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">详细文档</a><br>我们来看 react-router-dom 中的 BrowserRouter 源码：</p>
 <pre>
     import warning from "warning";
     import React from "react";
@@ -425,14 +839,13 @@
     export default BrowserRouter;
 </router></browserrouter></router></pre>
 
-<p>在使用 React 开发的过程中，我们一定用到过 push 和 replace 来改变路由，和视图。</p>
-<p>router 实例调用的 push 实际是 history 的方法，通过 mode 来确定匹配 history 的实现方案，从代码中我们看到，push 调用了 src/util/push-state.js 中被改写过的 pushState 的方法，改写过的方法会根据传入的参数 <code>replace?: boolean</code>来进行判断调用 pushState 还是 replaceState ，同时做了错误捕获，如果，history 无刷新修改访问路径失败，则调用  <code>window.location.replace(url)</code> ,有刷新的切换用户访问地址 ，同理 <code>pushState</code> 也是这样。这里的 transitionTo 方法主要的作用是做视图的跟新及路由跳转监测，如果 url 没有变化（访问地址切换失败的情况），在 transitionTo 方法内部还会调用一个 ensureURL 方法，来修改 url。 transitionTo 方法中应用的父方法比较多，这里不做长篇赘述。</p>
+<p>由上可知我们在项目中使用的<browserrouter>组件，history方式是使用了一个叫<a href="https://github.com/ReactTraining/history" target="_blank" rel="noopener">history</a>库中的 createBrowserHistory 方法。</browserrouter></p>
 <h3 id="模拟单页面路由"><a href="#模拟单页面路由" class="headerlink" title="模拟单页面路由"></a>模拟单页面路由</h3><p>通过上面的学习，我们知道了，单页面应用路由的实现原理，我们也尝试去实现一个。在做管理系统的时候，我们通常会在页面的左侧放置一个固定的导航 sidebar，页面的右侧放与之匹配的内容 main 。点击导航时，我们只希望内容进行更新，如果刷新了整个页面，到时导航和通用的头部底部也进行重绘重排的话，十分浪费资源，体验也会不好。这个时候，我们就能用到我们今天学习到的内容，通过使用 HTML5 的 pushState 方法和 replaceState 方法来实现，</p>
 <p>思路：首先绑定 click 事件。当用户点击一个链接时，通过 preventDefault 函数防止默认的行为（页面跳转），同时读取链接的地址（如果有 jQuery，可以写成$(this).attr(‘href’)），把这个地址通过pushState塞入浏览器历史记录中，再利用 AJAX 技术拉取（如果有 jQuery，可以使用$.get方法）这个地址中真正的内容，同时替换当前网页的内容。</p>
 <p>为了处理用户前进、后退，我们监听 popstate 事件。当用户点击前进或后退按钮时，浏览器地址自动被转换成相应的地址，同时popstate事件发生。在事件处理函数中，我们根据当前的地址抓取相应的内容，然后利用 AJAX 拉取这个地址的真正内容，呈现，即可。</p>
 <p>最后，整个过程是不会改变页面标题的，可以通过直接对 document.title 赋值来更改页面标题。</p>
 <h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>好了,我们今天通过多个方面来讲了 pushState 方法和 replaceState 的应用，你应该对这个两个方法能有一个比较深刻的印象，如果想要了解更多，你可以参考以下链接</p>
-<p><a href="http://javascript.ruanyifeng.com/bom/history.html" target="_blank" rel="noopener">history对象 – JavaScript 标准参考教程（alpha）</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener">history对象</a></p>
 
           
         
@@ -549,7 +962,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-28 09:12:06" itemprop="dateModified" datetime="2018-08-28T09:12:06+08:00">2018-08-28</time>
+                <time title="修改时间：2018-08-28 19:46:24" itemprop="dateModified" datetime="2018-08-28T19:46:24+08:00">2018-08-28</time>
               
             
           </span>
@@ -592,7 +1005,7 @@
 <h3 id="pushState-和-replaceState-了解一下"><a href="#pushState-和-replaceState-了解一下" class="headerlink" title="pushState 和 replaceState 了解一下"></a>pushState 和 replaceState 了解一下</h3><blockquote>
 <p>history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问记录， replaceState 则是直接替换了当前访问记录</p>
 </blockquote>
-<p>history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结，我们引用阮老师的教程介绍，<a href="http://javascript.ruanyifeng.com/bom/history.html" target="_blank" rel="noopener">history对象 – JavaScript 标准参考教程（alpha）</a></p>
+<p>history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener">history对象</a></p>
 <h4 id="history-pushState"><a href="#history-pushState" class="headerlink" title="history.pushState"></a>history.pushState</h4><p>history.pushState方法接受三个参数，依次为：</p>
 <blockquote>
 <p>state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。<br>title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。<br>url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。<br>假定当前网址是example.com/1.html，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
@@ -872,7 +1285,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

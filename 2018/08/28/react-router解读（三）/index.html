@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.0',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="history methods createBrowserHistory通过之前我们已经知道了react-router-dom的 history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。    var createBrowserHistory = function createBrowserHistory() {     //  a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-router解读（三）">
+<meta property="og:url" content="https://achenjs.github.io/2018/08/28/react-router解读（三）/index.html">
+<meta property="og:site_name" content="狗日天">
+<meta property="og:description" content="history methods createBrowserHistory通过之前我们已经知道了react-router-dom的 history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。    var createBrowserHistory = function createBrowserHistory() {     //  a">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-28T13:00:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-router解读（三）">
+<meta name="twitter:description" content="history methods createBrowserHistory通过之前我们已经知道了react-router-dom的 history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。    var createBrowserHistory = function createBrowserHistory() {     //  a">
+
+
+
+
+
+
+  <link rel="canonical" href="https://achenjs.github.io/2018/08/28/react-router解读（三）/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>react-router解读（三） | 狗日天</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">狗日天</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/28/react-router解读（三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="狗要日天">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="狗日天">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">react-router解读（三）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-28 20:37:33 / 修改时间：21:00:53" itemprop="dateCreated datePublished" datetime="2018-08-28T20:37:33+08:00">2018-08-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="history-methods-createBrowserHistory"><a href="#history-methods-createBrowserHistory" class="headerlink" title="history methods createBrowserHistory"></a>history methods createBrowserHistory</h3><p>通过之前我们已经知道了react-router-dom的<browserrouter> history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。</browserrouter></p>
+<pre>
+  var createBrowserHistory = function createBrowserHistory() {
+    //  arguments[0], 由上一节可知它是一个非必传的object
+    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
+    //  之前将history赋值给变量globalHistory
+    var globalHistory = window.history;
+    //  _DOMUtils.js 中处理一些浏览器兼容性 和 浏览器内核、机型判断的方法
+    //  判断是否非主流机型以及浏览器
+    var canUseHistory = (0, _DOMUtils.supportsHistory)();
+    //  是否为IE浏览器
+    var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
+    //  forceRefresh为true，代表将在页面导航时使用完整页面刷新。其他参数请自行参考官网文档
+    var _props$forceRefresh = props.forceRefresh,
+        forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
+        _props$getUserConfirm = props.getUserConfirmation,
+        getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
+        _props$keyLength = props.keyLength,
+        keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
+
+    var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
+
+    var getDOMLocation = function getDOMLocation(historyState) {
+      var _ref = historyState || {},
+          key = _ref.key,
+          state = _ref.state;
+
+      var _window$location = window.location,
+          pathname = _window$location.pathname,
+          search = _window$location.search,
+          hash = _window$location.hash;
+
+      var path = pathname + search + hash;
+
+      (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
+
+      if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
+
+      return (0, _LocationUtils.createLocation)(path, state, key);
+    };
+
+    var createKey = function createKey() {
+      return Math.random().toString(36).substr(2, keyLength);
+    };
+
+    var transitionManager = (0, _createTransitionManager2.default)();
+
+    var setState = function setState(nextState) {
+      _extends(history, nextState);
+
+      history.length = globalHistory.length;
+
+      transitionManager.notifyListeners(history.location, history.action);
+    };
+
+    var handlePopState = function handlePopState(event) {
+      if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
+
+      handlePop(getDOMLocation(event.state));
+    };
+
+    var handleHashChange = function handleHashChange() {
+      handlePop(getDOMLocation(getHistoryState()));
+    };
+
+    var forceNextPop = false;
+
+    var handlePop = function handlePop(location) {
+      if (forceNextPop) {
+        forceNextPop = false;
+        setState();
+      } else {
+        var action = 'POP';
+
+        transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+          if (ok) {
+            setState({ action: action, location: location });
+          } else {
+            revertPop(location);
+          }
+        });
+      }
+    };
+
+    var revertPop = function revertPop(fromLocation) {
+      var toLocation = history.location;
+
+      // TODO: We could probably make this more reliable by
+      // keeping a list of keys we've seen in sessionStorage.
+      // Instead, we just default to 0 for keys we don't know.
+
+      var toIndex = allKeys.indexOf(toLocation.key);
+
+      if (toIndex === -1) toIndex = 0;
+
+      var fromIndex = allKeys.indexOf(fromLocation.key);
+
+      if (fromIndex === -1) fromIndex = 0;
+
+      var delta = toIndex - fromIndex;
+
+      if (delta) {
+        forceNextPop = true;
+        go(delta);
+      }
+    };
+
+    var initialLocation = getDOMLocation(getHistoryState());
+    var allKeys = [initialLocation.key];
+
+    var createHref = function createHref(location) {
+      return basename + (0, _PathUtils.createPath)(location);
+    };
+
+    var push = function push(path, state) {
+      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+      var action = 'PUSH';
+      //  重写location对象
+      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (!ok) return;
+
+        var href = createHref(location);
+        var key = location.key,
+            state = location.state;
+
+        if (canUseHistory) {
+          globalHistory.pushState({ key: key, state: state }, null, href);
+
+          if (forceRefresh) {
+            window.location.href = href;
+          } else {
+            var prevIndex = allKeys.indexOf(history.location.key);
+            var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+            nextKeys.push(location.key);
+            allKeys = nextKeys;
+
+            setState({ action: action, location: location });
+          }
+        } else {
+          (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
+
+          window.location.href = href;
+        }
+      });
+    };
+
+    var replace = function replace(path, state) {
+      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+      var action = 'REPLACE';
+      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (!ok) return;
+
+        var href = createHref(location);
+        var key = location.key,
+            state = location.state;
+
+
+        if (canUseHistory) {
+          globalHistory.replaceState({ key: key, state: state }, null, href);
+
+          if (forceRefresh) {
+            window.location.replace(href);
+          } else {
+            var prevIndex = allKeys.indexOf(history.location.key);
+
+            if (prevIndex !== -1) allKeys[prevIndex] = location.key;
+
+            setState({ action: action, location: location });
+          }
+        } else {
+          (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
+
+          window.location.replace(href);
+        }
+      });
+    };
+
+    var go = function go(n) {
+      globalHistory.go(n);
+    };
+
+    var goBack = function goBack() {
+      return go(-1);
+    };
+
+    var goForward = function goForward() {
+      return go(1);
+    };
+
+    var listenerCount = 0;
+
+    var checkDOMListeners = function checkDOMListeners(delta) {
+      listenerCount += delta;
+
+      if (listenerCount === 1) {
+        (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
+
+        if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
+      } else if (listenerCount === 0) {
+        (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
+
+        if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
+      }
+    };
+
+    var isBlocked = false;
+
+    var block = function block() {
+      var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      var unblock = transitionManager.setPrompt(prompt);
+
+      if (!isBlocked) {
+        checkDOMListeners(1);
+        isBlocked = true;
+      }
+
+      return function () {
+        if (isBlocked) {
+          isBlocked = false;
+          checkDOMListeners(-1);
+        }
+
+        return unblock();
+      };
+    };
+
+    var listen = function listen(listener) {
+      var unlisten = transitionManager.appendListener(listener);
+      checkDOMListeners(1);
+
+      return function () {
+        checkDOMListeners(-1);
+        unlisten();
+      };
+    };
+
+    var history = {
+      length: globalHistory.length,
+      action: 'POP',
+      location: initialLocation,
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      goBack: goBack,
+      goForward: goForward,
+      block: block,
+      listen: listen
+    };
+
+    return history;
+  };
+</pre>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/react-router解读（二）/" rel="next" title="react-router解读（二）">
+                <i class="fa fa-chevron-left"></i> react-router解读（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="achenjs" />
+            
+              <p class="site-author-name" itemprop="name">achenjs</p>
+              <p class="site-description motion-element" itemprop="description">狗要日天</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/achenjs" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:hellowwc@aliyun.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#history-methods-createBrowserHistory"><span class="nav-number">1.</span> <span class="nav-text">history methods createBrowserHistory</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">achenjs</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
