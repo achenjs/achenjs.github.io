@@ -13,7 +13,7 @@ date: 2018-08-27 20:10:45
 
 >history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问记录， replaceState 则是直接替换了当前访问记录
 
-history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结，我们引用阮老师的教程介绍，[history对象 -- JavaScript 标准参考教程（alpha）](http://javascript.ruanyifeng.com/bom/history.html)
+history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结[history对象](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API)
 
 #### history.pushState
 

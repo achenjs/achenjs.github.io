@@ -31,7 +31,7 @@ tags:
   export withRouter from "./withRouter";
 </pre>
 
-看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 `createBrowserHistory` 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里react-router-dom 将BrowserRouter、HashRouter、Link拆分为一个个组件实现，也是react-router 3之中的区别之一。
+看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 `createBrowserHistory` 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里 react-router-dom 将 BrowserRouter、HashRouter、Link 拆分为单独组件实现，也是与 react-router 3 之间的区别之一。
 [详细文档](https://github.com/ReactTraining/history#blocking-transitions)
 我们来看 react-router-dom 中的 BrowserRouter 源码：
 
@@ -72,9 +72,7 @@ tags:
     export default BrowserRouter;
 </pre>
 
-在使用 React 开发的过程中，我们一定用到过 push 和 replace 来改变路由，和视图。
-
-router 实例调用的 push 实际是 history 的方法，通过 mode 来确定匹配 history 的实现方案，从代码中我们看到，push 调用了 src/util/push-state.js 中被改写过的 pushState 的方法，改写过的方法会根据传入的参数 `replace?: boolean`来进行判断调用 pushState 还是 replaceState ，同时做了错误捕获，如果，history 无刷新修改访问路径失败，则调用  `window.location.replace(url)` ,有刷新的切换用户访问地址 ，同理 `pushState` 也是这样。这里的 transitionTo 方法主要的作用是做视图的跟新及路由跳转监测，如果 url 没有变化（访问地址切换失败的情况），在 transitionTo 方法内部还会调用一个 ensureURL 方法，来修改 url。 transitionTo 方法中应用的父方法比较多，这里不做长篇赘述。
+由上可知我们在项目中使用的<BrowserRouter>组件，history方式是使用了一个叫[history](https://github.com/ReactTraining/history)库中的 createBrowserHistory 方法。
 
 ### 模拟单页面路由
 
@@ -86,10 +84,9 @@ router 实例调用的 push 实际是 history 的方法，通过 mode 来确定�
 
 最后，整个过程是不会改变页面标题的，可以通过直接对 document.title 赋值来更改页面标题。
 
-
 ### 扩展
 
 好了,我们今天通过多个方面来讲了 pushState 方法和 replaceState 的应用，你应该对这个两个方法能有一个比较深刻的印象，如果想要了解更多，你可以参考以下链接
 
-[history对象 -- JavaScript 标准参考教程（alpha）](http://javascript.ruanyifeng.com/bom/history.html)
+[history对象](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API)
 
