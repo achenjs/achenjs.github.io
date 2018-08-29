@@ -1,7 +1,7 @@
 ---
 title: react-router解读（二）
 date: 2018-08-27 20:58:02
-tags:
+tags: react
 ---
 
 ### react-router 的路由实现
