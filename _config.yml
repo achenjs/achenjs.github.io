@@ -4,12 +4,12 @@
 
 # Site
 title: 狗日天
-subtitle:
+subtitle: 狗要日天
 description: "狗要日天"
 keywords:
 author: achenjs
 language: zh-CN
-timezone:
+timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
