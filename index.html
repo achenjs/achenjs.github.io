@@ -424,17 +424,271 @@
       
         
           
-          history methods createBrowserHistory通过之前我们已经知道了react-router-dom的 history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。
+            <h2 id="history-methods-createBrowserHistory"><a href="#history-methods-createBrowserHistory" class="headerlink" title="history methods createBrowserHistory"></a>history methods createBrowserHistory</h2><p>通过之前我们已经知道了react-router-dom的<browserrouter> history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。</browserrouter></p>
+<pre>
+  var createBrowserHistory = function createBrowserHistory() {
+    //  arguments[0], 由上一节可知它是一个非必传的object
+    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var createBrowserHis
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/28/react-router解读（三）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+    (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
+    //  之前将history赋值给变量globalHistory
+    var globalHistory = window.history;
+    //  _DOMUtils.js 中处理一些浏览器兼容性 和 浏览器内核、机型判断的方法
+    //  判断是否非主流机型以及浏览器
+    var canUseHistory = (0, _DOMUtils.supportsHistory)();
+    //  是否为IE浏览器
+    var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
+    //  forceRefresh为true，代表将在页面导航时使用完整页面刷新。其他参数请自行参考官网文档
+    var _props$forceRefresh = props.forceRefresh,
+        forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
+        _props$getUserConfirm = props.getUserConfirmation,
+        getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
+        _props$keyLength = props.keyLength,
+        keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
+
+    var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
+
+    var getDOMLocation = function getDOMLocation(historyState) {
+      var _ref = historyState || {},
+          key = _ref.key,
+          state = _ref.state;
+
+      var _window$location = window.location,
+          pathname = _window$location.pathname,
+          search = _window$location.search,
+          hash = _window$location.hash;
+
+      var path = pathname + search + hash;
+
+      (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
+
+      if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
+
+      return (0, _LocationUtils.createLocation)(path, state, key);
+    };
+
+    var createKey = function createKey() {
+      return Math.random().toString(36).substr(2, keyLength);
+    };
+
+    var transitionManager = (0, _createTransitionManager2.default)();
+
+    var setState = function setState(nextState) {
+      _extends(history, nextState);
+
+      history.length = globalHistory.length;
+
+      transitionManager.notifyListeners(history.location, history.action);
+    };
+
+    var handlePopState = function handlePopState(event) {
+      if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
+
+      handlePop(getDOMLocation(event.state));
+    };
+
+    var handleHashChange = function handleHashChange() {
+      handlePop(getDOMLocation(getHistoryState()));
+    };
+
+    var forceNextPop = false;
+
+    var handlePop = function handlePop(location) {
+      if (forceNextPop) {
+        forceNextPop = false;
+        setState();
+      } else {
+        var action = 'POP';
+
+        transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+          if (ok) {
+            setState({ action: action, location: location });
+          } else {
+            revertPop(location);
+          }
+        });
+      }
+    };
+
+    var revertPop = function revertPop(fromLocation) {
+      var toLocation = history.location;
+
+      // TODO: We could probably make this more reliable by
+      // keeping a list of keys we've seen in sessionStorage.
+      // Instead, we just default to 0 for keys we don't know.
+
+      var toIndex = allKeys.indexOf(toLocation.key);
+
+      if (toIndex === -1) toIndex = 0;
+
+      var fromIndex = allKeys.indexOf(fromLocation.key);
+
+      if (fromIndex === -1) fromIndex = 0;
+
+      var delta = toIndex - fromIndex;
+
+      if (delta) {
+        forceNextPop = true;
+        go(delta);
+      }
+    };
+
+    var initialLocation = getDOMLocation(getHistoryState());
+    var allKeys = [initialLocation.key];
+
+    var createHref = function createHref(location) {
+      return basename + (0, _PathUtils.createPath)(location);
+    };
+
+    var push = function push(path, state) {
+      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+      var action = 'PUSH';
+      //  重写location对象
+      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (!ok) return;
+
+        var href = createHref(location);
+        var key = location.key,
+            state = location.state;
+
+        if (canUseHistory) {
+          globalHistory.pushState({ key: key, state: state }, null, href);
+
+          if (forceRefresh) {
+            window.location.href = href;
+          } else {
+            var prevIndex = allKeys.indexOf(history.location.key);
+            var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+            nextKeys.push(location.key);
+            allKeys = nextKeys;
+
+            setState({ action: action, location: location });
+          }
+        } else {
+          (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
+
+          window.location.href = href;
+        }
+      });
+    };
+
+    var replace = function replace(path, state) {
+      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+      var action = 'REPLACE';
+      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (!ok) return;
+
+        var href = createHref(location);
+        var key = location.key,
+            state = location.state;
+
+
+        if (canUseHistory) {
+          globalHistory.replaceState({ key: key, state: state }, null, href);
+
+          if (forceRefresh) {
+            window.location.replace(href);
+          } else {
+            var prevIndex = allKeys.indexOf(history.location.key);
+
+            if (prevIndex !== -1) allKeys[prevIndex] = location.key;
+
+            setState({ action: action, location: location });
+          }
+        } else {
+          (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
+
+          window.location.replace(href);
+        }
+      });
+    };
+
+    var go = function go(n) {
+      globalHistory.go(n);
+    };
+
+    var goBack = function goBack() {
+      return go(-1);
+    };
+
+    var goForward = function goForward() {
+      return go(1);
+    };
+
+    var listenerCount = 0;
+
+    var checkDOMListeners = function checkDOMListeners(delta) {
+      listenerCount += delta;
+
+      if (listenerCount === 1) {
+        (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
+
+        if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
+      } else if (listenerCount === 0) {
+        (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
+
+        if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
+      }
+    };
+
+    var isBlocked = false;
+
+    var block = function block() {
+      var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      var unblock = transitionManager.setPrompt(prompt);
+
+      if (!isBlocked) {
+        checkDOMListeners(1);
+        isBlocked = true;
+      }
+
+      return function () {
+        if (isBlocked) {
+          isBlocked = false;
+          checkDOMListeners(-1);
+        }
+
+        return unblock();
+      };
+    };
+
+    var listen = function listen(listener) {
+      var unlisten = transitionManager.appendListener(listener);
+      checkDOMListeners(1);
+
+      return function () {
+        checkDOMListeners(-1);
+        unlisten();
+      };
+    };
+
+    var history = {
+      length: globalHistory.length,
+      action: 'POP',
+      location: initialLocation,
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      goBack: goBack,
+      goForward: goForward,
+      block: block,
+      listen: listen
+    };
+
+    return history;
+  };
+</pre>
+
+          
         
       
     </div>
@@ -584,15 +838,74 @@
       
         
           
-          react-router 的路由实现既然知道了这个原理，我们来看下 react-router 的实现，我们打开 react-router 项目地址,把项目克隆下来，或则直接在 github 上预览，在 React 开发的项目里，我们通过 router.push(‘home’) 来实现页面的跳转，所以
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/react-router解读（二）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h3 id="react-router-的路由实现"><a href="#react-router-的路由实现" class="headerlink" title="react-router 的路由实现"></a>react-router 的路由实现</h3><p>既然知道了这个原理，我们来看下 react-router 的实现，我们打开 <a href="https://github.com/ReactTraining/react-router" target="_blank" rel="noopener">react-router 项目地址</a>,把项目克隆下来，或则直接在 github 上预览，在 React 开发的项目里，我们通过 router.push(‘home’) 来实现页面的跳转，所以我们检索下，push 方法的实现</p>
+<p><img src="/images/router/1.jpg" alt="push方法检索"></p>
+<p>我们检索到了 46个 js 文件，😂，一般到这个时候，我们会放弃源码阅读，那么我们今天的文章就到这结束，谢谢大家！</p>
+<p>开个玩笑，源码阅读不能这么粗糙，react-router 4.x用法，我们只需要安装 react-router-dom。所以我们找到 package 下的 react-router-dom/modules 目录，点开 <code>index.js</code> 文件。</p>
+<pre>
+  export BrowserRouter from "./BrowserRouter";
+  export HashRouter from "./HashRouter";
+  export Link from "./Link";
+  export MemoryRouter from "./MemoryRouter";
+  export NavLink from "./NavLink";
+  export Prompt from "./Prompt";
+  export Redirect from "./Redirect";
+  export Route from "./Route";
+  export Router from "./Router";
+  export StaticRouter from "./StaticRouter";
+  export Switch from "./Switch";
+  export generatePath from "./generatePath";
+  export matchPath from "./matchPath";
+  export withRouter from "./withRouter";
+</pre>
+
+<p>看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 <code>createBrowserHistory</code> 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里 react-router-dom 将 BrowserRouter、HashRouter、Link 拆分为单独组件实现，也是与 react-router 3 之间的区别之一。<br><a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">详细文档</a><br>我们来看 react-router-dom 中的 BrowserRouter 源码：</p>
+<pre>
+    import warning from "warning";
+    import React from "react";
+    import PropTypes from "prop-types";
+    import { createBrowserHistory as createHistory } from "history";
+    import Router from "./Router";
+
+    /**
+    * The public API for a <router> that uses HTML5 history.
+    */
+    class BrowserRouter extends React.Component {
+      static propTypes = {
+        basename: PropTypes.string,
+        forceRefresh: PropTypes.bool,
+        getUserConfirmation: PropTypes.func,
+        keyLength: PropTypes.number,
+        children: PropTypes.node
+      };
+
+      history = createHistory(this.props);
+
+      componentWillMount() {
+        warning(
+          !this.props.history,
+          "<browserrouter> ignores the history prop. To use a custom history, " +
+            "use `import { Router }` instead of `import { BrowserRouter as Router }`."
+        );
+      }
+
+      render() {
+        return <router history="{this.history}" children="{this.props.children}">;
+      }
+    }
+
+    export default BrowserRouter;
+</router></browserrouter></router></pre>
+
+<p>由上可知我们在项目中使用的<browserrouter>组件，history方式是使用了一个叫<a href="https://github.com/ReactTraining/history" target="_blank" rel="noopener">history</a>库中的 createBrowserHistory 方法。</browserrouter></p>
+<h3 id="模拟单页面路由"><a href="#模拟单页面路由" class="headerlink" title="模拟单页面路由"></a>模拟单页面路由</h3><p>通过上面的学习，我们知道了，单页面应用路由的实现原理，我们也尝试去实现一个。在做管理系统的时候，我们通常会在页面的左侧放置一个固定的导航 sidebar，页面的右侧放与之匹配的内容 main 。点击导航时，我们只希望内容进行更新，如果刷新了整个页面，到时导航和通用的头部底部也进行重绘重排的话，十分浪费资源，体验也会不好。这个时候，我们就能用到我们今天学习到的内容，通过使用 HTML5 的 pushState 方法和 replaceState 方法来实现，</p>
+<p>思路：首先绑定 click 事件。当用户点击一个链接时，通过 preventDefault 函数防止默认的行为（页面跳转），同时读取链接的地址（如果有 jQuery，可以写成$(this).attr(‘href’)），把这个地址通过pushState塞入浏览器历史记录中，再利用 AJAX 技术拉取（如果有 jQuery，可以使用$.get方法）这个地址中真正的内容，同时替换当前网页的内容。</p>
+<p>为了处理用户前进、后退，我们监听 popstate 事件。当用户点击前进或后退按钮时，浏览器地址自动被转换成相应的地址，同时popstate事件发生。在事件处理函数中，我们根据当前的地址抓取相应的内容，然后利用 AJAX 拉取这个地址的真正内容，呈现，即可。</p>
+<p>最后，整个过程是不会改变页面标题的，可以通过直接对 document.title 赋值来更改页面标题。</p>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>好了,我们今天通过多个方面来讲了 pushState 方法和 replaceState 的应用，你应该对这个两个方法能有一个比较深刻的印象，如果想要了解更多，你可以参考以下链接</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener">history对象</a></p>
+
+          
         
       
     </div>
@@ -742,21 +1055,51 @@
       
         
           
-          前言前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。目前在浏览器环境中这一功能的实现主要有2种:
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。<br>目前在浏览器环境中这一功能的实现主要有2种:</p>
+<ul>
+<li>利用URL中的hash</li>
+<li>利用H5中history</li>
+</ul>
+<h3 id="pushState-和-replaceState-了解一下"><a href="#pushState-和-replaceState-了解一下" class="headerlink" title="pushState 和 replaceState 了解一下"></a>pushState 和 replaceState 了解一下</h3><blockquote>
+<p>history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问记录， replaceState 则是直接替换了当前访问记录</p>
+</blockquote>
+<p>history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener">history对象</a></p>
+<h4 id="history-pushState"><a href="#history-pushState" class="headerlink" title="history.pushState"></a>history.pushState</h4><p>history.pushState方法接受三个参数，依次为：</p>
+<blockquote>
+<p>state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。<br>title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。<br>url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。<br>假定当前网址是example.com/1.html，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
+</blockquote>
+<pre>
+    var stateObj = { foo: 'bar' };
+    history.pushState(stateObj, 'page 2', '2.html');
+</pre>
 
-利用URL中的hash
-利用H5中history
+<p>添加上面这个新记录后，浏览器地址栏立刻显示 example.com/2.html，但并不会跳转到 2.html，甚至也不会检查2.html 是否存在，它只是成为浏览历史中的最新记录。这时，你在地址栏输入一个新的地址(比如访问 google.com )，然后点击了倒退按钮，页面的 URL 将显示 2.html；你再点击一次倒退按钮，URL 将显示 1.html。</p>
+<p>总之，pushState 方法不会触发页面刷新，只是导致 history 对象发生变化，地址栏会有反应。</p>
+<p>如果 pushState 的 url参数，设置了一个新的锚点值（即hash），并不会触发 hashchange 事件。如果设置了一个跨域网址，则会报错。</p>
+<pre>
+    // 报错
+    history.pushState(null, null, 'https://twitter.com/hello');
 
-pushState 和 replaceState 了解一下
-history 提供了两个方法，能够无刷新的修改用户的浏览记录，pus
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/react-router解读（一）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+    上面代码中，pushState想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。
+</pre>
+
+<h4 id="history-replaceState"><a href="#history-replaceState" class="headerlink" title="history.replaceState"></a>history.replaceState</h4><p>history.replaceState 方法的参数与 pushState 方法一模一样，区别是它修改浏览历史中当前纪录,假定当前网页是 example.com/example.html。</p>
+<pre>
+    history.pushState({page: 1}, 'title 1', '?page=1');
+    history.pushState({page: 2}, 'title 2', '?page=2');
+    history.replaceState({page: 3}, 'title 3', '?page=3');
+
+    history.back()
+    // url显示为http://example.com/example.html?page=1
+
+    history.back()
+    // url显示为http://example.com/example.html
+
+    history.go(2)
+    // url显示为http://example.com/example.html?page=3
+
+</pre>
+          
         
       
     </div>
@@ -871,7 +1214,7 @@ history 提供了两个方法，能够无刷新的修改用户的浏览记录，
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-27 15:02:11" itemprop="dateModified" datetime="2018-08-27T15:02:11+08:00">2018-08-27</time>
+                <time title="修改时间：2018-08-29 20:52:02" itemprop="dateModified" datetime="2018-08-29T20:52:02+08:00">2018-08-29</time>
               
             
           </span>
@@ -906,15 +1249,17 @@ history 提供了两个方法，能够无刷新的修改用户的浏览记录，
       
         
           
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/24/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+          
         
       
     </div>
