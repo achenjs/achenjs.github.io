@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="狗日天">
 <meta property="og:description" content="FileReaderFileReader 对象允许Web应用程序异步读取存储在用户计算机上的文件(或原始数据缓冲区)的内容,使用 File 或 Blob 对象指定要读取的文件或数据。 首先创建一个FileReader实例：1var reader = new FileReader(); 方法    方法 描述     abort() 中止读取操作。在返回时，readyState属性为DONE。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-09T03:27:34.000Z">
+<meta property="og:updated_time" content="2018-10-09T03:54:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fileReader读取文件，实现图片本地预览">
 <meta name="twitter:description" content="FileReaderFileReader 对象允许Web应用程序异步读取存储在用户计算机上的文件(或原始数据缓冲区)的内容,使用 File 或 Blob 对象指定要读取的文件或数据。 首先创建一个FileReader实例：1var reader = new FileReader(); 方法    方法 描述     abort() 中止读取操作。在返回时，readyState属性为DONE。">
@@ -369,7 +369,7 @@
                 
               
 
-              <time title="创建时间：2018-10-09 11:14:34 / 修改时间：11:27:34" itemprop="dateCreated datePublished" datetime="2018-10-09T11:14:34+08:00">2018-10-09</time>
+              <time title="创建时间：2018-10-09 11:14:34 / 修改时间：11:54:51" itemprop="dateCreated datePublished" datetime="2018-10-09T11:14:34+08:00">2018-10-09</time>
             
 
             
@@ -449,7 +449,7 @@
 </tbody>
 </table>
 <h4 id="具体事例"><a href="#具体事例" class="headerlink" title="具体事例"></a>具体事例</h4><p>input file实现本地图片预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var inputBox = document.getElementById(&quot;inputBox&quot;);</span><br><span class="line">inputBox.addEventListener(&quot;change&quot;,function()&#123;</span><br><span class="line">  var reader = new FileReader();</span><br><span class="line">  reader.readAsDataURL(inputBox.files[0]);//发起异步请求</span><br><span class="line">  reader.onload = function()&#123;</span><br><span class="line">    // 读取完成后，base64数据保存在对象的result属性中</span><br><span class="line">    console.log(this.result)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h5 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h5><ul>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="noopener">FileReader详解</a></li>
 </ul>
 
@@ -636,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FileReader"><span class="nav-number">1.</span> <span class="nav-text">FileReader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体事例"><span class="nav-number">1.2.</span> <span class="nav-text">具体事例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引用"><span class="nav-number">1.2.1.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FileReader"><span class="nav-number">1.</span> <span class="nav-text">FileReader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体事例"><span class="nav-number">1.2.</span> <span class="nav-text">具体事例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引用"><span class="nav-number">1.3.</span> <span class="nav-text">引用</span></a></li></ol></li></ol></div>
             
 
           </div>
