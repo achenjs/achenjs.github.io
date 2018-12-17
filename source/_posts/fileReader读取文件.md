@@ -13,8 +13,8 @@ var reader = new FileReader();
 ```
 
 #### 方法
-| 方法 | 描述 |
-----|---
+方法 | 描述
+---- | ----
 abort()|中止读取操作。在返回时，readyState属性为DONE。
 readAsArrayBuffer()|开始读取指定的 Blob中的内容, 一旦完成, result 属性中保存的将是被读取文件的 ArrayBuffer 数据对象.
 readAsBinaryString() |开始读取指定的Blob中的内容。一旦完成，result属性中将包含所读取文件的原始二进制数据。
@@ -35,5 +35,5 @@ inputBox.addEventListener("change",function(){
 })
 ```
 
-##### 引用
+#### 引用
 * [FileReader详解](https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader)
