@@ -110,16 +110,16 @@
 
 
 
-  <meta name="description" content="狗要日天">
+  <meta name="description" content="日常复制粘贴">
 <meta property="og:type" content="website">
-<meta property="og:title" content="狗日天">
+<meta property="og:title" content="achen的个人博客">
 <meta property="og:url" content="https://achenjs.github.io/index.html">
-<meta property="og:site_name" content="狗日天">
-<meta property="og:description" content="狗要日天">
+<meta property="og:site_name" content="achen的个人博客">
+<meta property="og:description" content="日常复制粘贴">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="狗日天">
-<meta name="twitter:description" content="狗要日天">
+<meta name="twitter:title" content="achen的个人博客">
+<meta name="twitter:description" content="日常复制粘贴">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>狗日天</title>
+  <title>achen的个人博客</title>
   
 
 
@@ -196,13 +196,13 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">狗日天</span>
+        <span class="site-title">achen的个人博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
     
       
-        <p class="site-subtitle">狗要日天</p>
+        <p class="site-subtitle">一个能力有限的前端</p>
       
     
   </div>
@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">5</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">25</span></a>
   </li>
         
         
@@ -326,16 +326,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/10/09/fileReader读取文件/">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/02/2020/3月/0302/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achenjs">
-      <meta itemprop="description" content="狗要日天">
+      <meta itemprop="description" content="日常复制粘贴">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狗日天">
+      <meta itemprop="name" content="achen的个人博客">
     </span>
 
     
@@ -345,8 +345,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/09/fileReader读取文件/" itemprop="url">
-                  fileReader读取文件，实现图片本地预览
+                <a class="post-title-link" href="/2020/03/02/2020/3月/0302/" itemprop="url">
+                  什么是babel?
                 </a>
               
             
@@ -372,7 +372,7 @@
                 
               
 
-              <time title="创建时间：2018-10-09 11:14:34" itemprop="dateCreated datePublished" datetime="2018-10-09T11:14:34+08:00">2018-10-09</time>
+              <time title="创建时间：2020-03-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-02T00:00:00+08:00">2020-03-02</time>
             
 
             
@@ -389,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-17 15:48:10" itemprop="dateModified" datetime="2018-12-17T15:48:10+08:00">2018-12-17</time>
+                <time title="修改时间：2020-03-05 14:30:01" itemprop="dateModified" datetime="2020-03-05T14:30:01+08:00">2020-03-05</time>
               
             
           </span>
@@ -424,868 +424,89 @@
       
         
           
-            <h3 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h3><p>FileReader 对象允许Web应用程序异步读取存储在用户计算机上的文件(或原始数据缓冲区)的内容,使用 File 或 Blob 对象指定要读取的文件或数据。</p>
-<p>首先创建一个FileReader实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var reader = new FileReader();</span><br></pre></td></tr></table></figure></p>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>abort()</td>
-<td>中止读取操作。在返回时，readyState属性为DONE。</td>
-</tr>
-<tr>
-<td>readAsArrayBuffer()</td>
-<td>开始读取指定的 Blob中的内容, 一旦完成, result 属性中保存的将是被读取文件的 ArrayBuffer 数据对象.</td>
-</tr>
-<tr>
-<td>readAsBinaryString()</td>
-<td>开始读取指定的Blob中的内容。一旦完成，result属性中将包含所读取文件的原始二进制数据。</td>
-</tr>
-<tr>
-<td>readAsDataURL()</td>
-<td>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容</td>
-</tr>
-<tr>
-<td>readAsText()</td>
-<td>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个字符串以表示所读取的文件内容。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="具体事例"><a href="#具体事例" class="headerlink" title="具体事例"></a>具体事例</h4><p>input file实现本地图片预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var inputBox = document.getElementById(&quot;inputBox&quot;);</span><br><span class="line">inputBox.addEventListener(&quot;change&quot;,function()&#123;</span><br><span class="line">  var reader = new FileReader();</span><br><span class="line">  reader.readAsDataURL(inputBox.files[0]);//发起异步请求</span><br><span class="line">  reader.onload = function()&#123;</span><br><span class="line">    // 读取完成后，base64数据保存在对象的result属性中</span><br><span class="line">    console.log(this.result)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="noopener">FileReader详解</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/28/react-router解读（三）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achenjs">
-      <meta itemprop="description" content="狗要日天">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狗日天">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/28/react-router解读（三）/" itemprop="url">
-                  react-router解读（三）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-28 20:37:33" itemprop="dateCreated datePublished" datetime="2018-08-28T20:37:33+08:00">2018-08-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-29 20:06:10" itemprop="dateModified" datetime="2018-08-29T20:06:10+08:00">2018-08-29</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="history-methods-createBrowserHistory"><a href="#history-methods-createBrowserHistory" class="headerlink" title="history methods createBrowserHistory"></a>history methods createBrowserHistory</h2><p>通过之前我们已经知道了react-router-dom的<browserrouter> history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。</browserrouter></p>
-<pre>
-  var createBrowserHistory = function createBrowserHistory() {
-    //  arguments[0], 由上一节可知它是一个非必传的object
-    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
-    //  之前将history赋值给变量globalHistory
-    var globalHistory = window.history;
-    //  _DOMUtils.js 中处理一些浏览器兼容性 和 浏览器内核、机型判断的方法
-    //  判断是否非主流机型以及浏览器
-    var canUseHistory = (0, _DOMUtils.supportsHistory)();
-    //  是否为IE浏览器
-    var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
-    //  forceRefresh为true，代表将在页面导航时使用完整页面刷新。其他参数请自行参考官网文档
-    var _props$forceRefresh = props.forceRefresh,
-        forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
-        _props$getUserConfirm = props.getUserConfirmation,
-        getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
-        _props$keyLength = props.keyLength,
-        keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
-
-    var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
-
-    var getDOMLocation = function getDOMLocation(historyState) {
-      var _ref = historyState || {},
-          key = _ref.key,
-          state = _ref.state;
-
-      var _window$location = window.location,
-          pathname = _window$location.pathname,
-          search = _window$location.search,
-          hash = _window$location.hash;
-
-      var path = pathname + search + hash;
-
-      (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
-
-      if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
-
-      return (0, _LocationUtils.createLocation)(path, state, key);
-    };
-
-    var createKey = function createKey() {
-      return Math.random().toString(36).substr(2, keyLength);
-    };
-
-    var transitionManager = (0, _createTransitionManager2.default)();
-
-    var setState = function setState(nextState) {
-      _extends(history, nextState);
-
-      history.length = globalHistory.length;
-
-      transitionManager.notifyListeners(history.location, history.action);
-    };
-
-    var handlePopState = function handlePopState(event) {
-      if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
-
-      handlePop(getDOMLocation(event.state));
-    };
-
-    var handleHashChange = function handleHashChange() {
-      handlePop(getDOMLocation(getHistoryState()));
-    };
-
-    var forceNextPop = false;
-
-    var handlePop = function handlePop(location) {
-      if (forceNextPop) {
-        forceNextPop = false;
-        setState();
-      } else {
-        var action = 'POP';
-
-        transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-          if (ok) {
-            setState({ action: action, location: location });
-          } else {
-            revertPop(location);
-          }
-        });
-      }
-    };
-
-    var revertPop = function revertPop(fromLocation) {
-      var toLocation = history.location;
-
-      // TODO: We could probably make this more reliable by
-      // keeping a list of keys we've seen in sessionStorage.
-      // Instead, we just default to 0 for keys we don't know.
-
-      var toIndex = allKeys.indexOf(toLocation.key);
-
-      if (toIndex === -1) toIndex = 0;
-
-      var fromIndex = allKeys.indexOf(fromLocation.key);
-
-      if (fromIndex === -1) fromIndex = 0;
-
-      var delta = toIndex - fromIndex;
-
-      if (delta) {
-        forceNextPop = true;
-        go(delta);
-      }
-    };
-
-    var initialLocation = getDOMLocation(getHistoryState());
-    var allKeys = [initialLocation.key];
-
-    var createHref = function createHref(location) {
-      return basename + (0, _PathUtils.createPath)(location);
-    };
-
-    var push = function push(path, state) {
-      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-      var action = 'PUSH';
-      //  重写location对象
-      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (!ok) return;
-
-        var href = createHref(location);
-        var key = location.key,
-            state = location.state;
-
-        if (canUseHistory) {
-          globalHistory.pushState({ key: key, state: state }, null, href);
-
-          if (forceRefresh) {
-            window.location.href = href;
-          } else {
-            var prevIndex = allKeys.indexOf(history.location.key);
-            var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-            nextKeys.push(location.key);
-            allKeys = nextKeys;
-
-            setState({ action: action, location: location });
-          }
-        } else {
-          (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
-
-          window.location.href = href;
-        }
-      });
-    };
-
-    var replace = function replace(path, state) {
-      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-      var action = 'REPLACE';
-      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (!ok) return;
-
-        var href = createHref(location);
-        var key = location.key,
-            state = location.state;
-
-
-        if (canUseHistory) {
-          globalHistory.replaceState({ key: key, state: state }, null, href);
-
-          if (forceRefresh) {
-            window.location.replace(href);
-          } else {
-            var prevIndex = allKeys.indexOf(history.location.key);
-
-            if (prevIndex !== -1) allKeys[prevIndex] = location.key;
-
-            setState({ action: action, location: location });
-          }
-        } else {
-          (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
-
-          window.location.replace(href);
-        }
-      });
-    };
-
-    var go = function go(n) {
-      globalHistory.go(n);
-    };
-
-    var goBack = function goBack() {
-      return go(-1);
-    };
-
-    var goForward = function goForward() {
-      return go(1);
-    };
-
-    var listenerCount = 0;
-
-    var checkDOMListeners = function checkDOMListeners(delta) {
-      listenerCount += delta;
-
-      if (listenerCount === 1) {
-        (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
-
-        if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
-      } else if (listenerCount === 0) {
-        (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
-
-        if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
-      }
-    };
-
-    var isBlocked = false;
-
-    var block = function block() {
-      var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-      var unblock = transitionManager.setPrompt(prompt);
-
-      if (!isBlocked) {
-        checkDOMListeners(1);
-        isBlocked = true;
-      }
-
-      return function () {
-        if (isBlocked) {
-          isBlocked = false;
-          checkDOMListeners(-1);
-        }
-
-        return unblock();
-      };
-    };
-
-    var listen = function listen(listener) {
-      var unlisten = transitionManager.appendListener(listener);
-      checkDOMListeners(1);
-
-      return function () {
-        checkDOMListeners(-1);
-        unlisten();
-      };
-    };
-
-    var history = {
-      length: globalHistory.length,
-      action: 'POP',
-      location: initialLocation,
-      createHref: createHref,
-      push: push,
-      replace: replace,
-      go: go,
-      goBack: goBack,
-      goForward: goForward,
-      block: block,
-      listen: listen
-    };
-
-    return history;
-  };
-</pre>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/27/react-router解读（二）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achenjs">
-      <meta itemprop="description" content="狗要日天">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狗日天">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/react-router解读（二）/" itemprop="url">
-                  react-router解读（二）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 20:58:02" itemprop="dateCreated datePublished" datetime="2018-08-27T20:58:02+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-29 20:07:41" itemprop="dateModified" datetime="2018-08-29T20:07:41+08:00">2018-08-29</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="react-router-的路由实现"><a href="#react-router-的路由实现" class="headerlink" title="react-router 的路由实现"></a>react-router 的路由实现</h3><p>既然知道了这个原理，我们来看下 react-router 的实现，我们打开 <a href="https://github.com/ReactTraining/react-router" target="_blank" rel="noopener">react-router 项目地址</a>,把项目克隆下来，或则直接在 github 上预览，在 React 开发的项目里，我们通过 router.push(‘home’) 来实现页面的跳转，所以我们检索下，push 方法的实现</p>
-<p><img src="/images/router/1.jpg" alt="push方法检索"></p>
-<p>我们检索到了 46个 js 文件，😂，一般到这个时候，我们会放弃源码阅读，那么我们今天的文章就到这结束，谢谢大家！</p>
-<p>开个玩笑，源码阅读不能这么粗糙，react-router 4.x用法，我们只需要安装 react-router-dom。所以我们找到 package 下的 react-router-dom/modules 目录，点开 <code>index.js</code> 文件。</p>
-<pre>
-  export BrowserRouter from "./BrowserRouter";
-  export HashRouter from "./HashRouter";
-  export Link from "./Link";
-  export MemoryRouter from "./MemoryRouter";
-  export NavLink from "./NavLink";
-  export Prompt from "./Prompt";
-  export Redirect from "./Redirect";
-  export Route from "./Route";
-  export Router from "./Router";
-  export StaticRouter from "./StaticRouter";
-  export Switch from "./Switch";
-  export generatePath from "./generatePath";
-  export matchPath from "./matchPath";
-  export withRouter from "./withRouter";
-</pre>
-
-<p>看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 <code>createBrowserHistory</code> 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里 react-router-dom 将 BrowserRouter、HashRouter、Link 拆分为单独组件实现，也是与 react-router 3 之间的区别之一。<br><a href="https://github.com/ReactTraining/history#blocking-transitions" target="_blank" rel="noopener">详细文档</a><br>我们来看 react-router-dom 中的 BrowserRouter 源码：</p>
-<pre>
-    import warning from "warning";
-    import React from "react";
-    import PropTypes from "prop-types";
-    import { createBrowserHistory as createHistory } from "history";
-    import Router from "./Router";
-
-    /**
-    * The public API for a <router> that uses HTML5 history.
-    */
-    class BrowserRouter extends React.Component {
-      static propTypes = {
-        basename: PropTypes.string,
-        forceRefresh: PropTypes.bool,
-        getUserConfirmation: PropTypes.func,
-        keyLength: PropTypes.number,
-        children: PropTypes.node
-      };
-
-      history = createHistory(this.props);
-
-      componentWillMount() {
-        warning(
-          !this.props.history,
-          "<browserrouter> ignores the history prop. To use a custom history, " +
-            "use `import { Router }` instead of `import { BrowserRouter as Router }`."
-        );
-      }
-
-      render() {
-        return <router history="{this.history}" children="{this.props.children}">;
-      }
-    }
-
-    export default BrowserRouter;
-</router></browserrouter></router></pre>
-
-<p>由上可知我们在项目中使用的<browserrouter>组件，history方式是使用了一个叫<a href="https://github.com/ReactTraining/history" target="_blank" rel="noopener">history</a>库中的 createBrowserHistory 方法。</browserrouter></p>
-<h3 id="模拟单页面路由"><a href="#模拟单页面路由" class="headerlink" title="模拟单页面路由"></a>模拟单页面路由</h3><p>通过上面的学习，我们知道了，单页面应用路由的实现原理，我们也尝试去实现一个。在做管理系统的时候，我们通常会在页面的左侧放置一个固定的导航 sidebar，页面的右侧放与之匹配的内容 main 。点击导航时，我们只希望内容进行更新，如果刷新了整个页面，到时导航和通用的头部底部也进行重绘重排的话，十分浪费资源，体验也会不好。这个时候，我们就能用到我们今天学习到的内容，通过使用 HTML5 的 pushState 方法和 replaceState 方法来实现，</p>
-<p>思路：首先绑定 click 事件。当用户点击一个链接时，通过 preventDefault 函数防止默认的行为（页面跳转），同时读取链接的地址（如果有 jQuery，可以写成$(this).attr(‘href’)），把这个地址通过pushState塞入浏览器历史记录中，再利用 AJAX 技术拉取（如果有 jQuery，可以使用$.get方法）这个地址中真正的内容，同时替换当前网页的内容。</p>
-<p>为了处理用户前进、后退，我们监听 popstate 事件。当用户点击前进或后退按钮时，浏览器地址自动被转换成相应的地址，同时popstate事件发生。在事件处理函数中，我们根据当前的地址抓取相应的内容，然后利用 AJAX 拉取这个地址的真正内容，呈现，即可。</p>
-<p>最后，整个过程是不会改变页面标题的，可以通过直接对 document.title 赋值来更改页面标题。</p>
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p>好了,我们今天通过多个方面来讲了 pushState 方法和 replaceState 的应用，你应该对这个两个方法能有一个比较深刻的印象，如果想要了解更多，你可以参考以下链接</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener">history对象</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/27/react-router解读（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achenjs">
-      <meta itemprop="description" content="狗要日天">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狗日天">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/react-router解读（一）/" itemprop="url">
-                  react-router解读（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 20:10:45" itemprop="dateCreated datePublished" datetime="2018-08-27T20:10:45+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-29 20:07:36" itemprop="dateModified" datetime="2018-08-29T20:07:36+08:00">2018-08-29</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。<br>目前在浏览器环境中这一功能的实现主要有2种:</p>
+            <h3 id="什么是babel"><a href="#什么是babel" class="headerlink" title="什么是babel?"></a>什么是babel?</h3><p>官方的解释 Babel 是一个 JavaScript 编译器，用于将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前版本和旧版本的浏览器或其他环境中。简单来说 Babel 的工作就是：</p>
 <ul>
-<li>利用URL中的hash</li>
-<li>利用H5中history</li>
+<li>语法转换</li>
+<li>通过Polyfill的方式在目标环境中添加缺失的特性</li>
+<li>JS源码转换</li>
 </ul>
-<h3 id="pushState-和-replaceState-了解一下"><a href="#pushState-和-replaceState-了解一下" class="headerlink" title="pushState 和 replaceState 了解一下"></a>pushState 和 replaceState 了解一下</h3><blockquote>
-<p>history 提供了两个方法，能够无刷新的修改用户的浏览记录，pushSate，和 replaceState，区别的 pushState 在用户访问页面后面添加一个访问记录， replaceState 则是直接替换了当前访问记录</p>
-</blockquote>
-<p>history 对象的详细信息已经有很多很好很详细的介绍文献，这里不再做总结<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History_API" target="_blank" rel="noopener">history对象</a></p>
-<h4 id="history-pushState"><a href="#history-pushState" class="headerlink" title="history.pushState"></a>history.pushState</h4><p>history.pushState方法接受三个参数，依次为：</p>
-<blockquote>
-<p>state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。<br>title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。<br>url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。<br>假定当前网址是example.com/1.html，我们使用pushState方法在浏览记录（history对象）中添加一个新记录。</p>
-</blockquote>
-<pre>
-    var stateObj = { foo: 'bar' };
-    history.pushState(stateObj, 'page 2', '2.html');
-</pre>
+<h3 id="babel的基本原理"><a href="#babel的基本原理" class="headerlink" title="babel的基本原理"></a>babel的基本原理</h3><p>原理很简单，核心就是 AST (抽象语法树)。首先将源码转成抽象语法树，然后对语法树进行处理生成新的语法树，最后将新语法树生成新的 JS 代码，整个编译过程可以分为 3 个阶段 parsing (解析)、transforming (转换)、generating (生成)，都是在围绕着 AST 去做文章，话不多说上图：</p>
+<p>Babel 只负责编译新标准引入的新语法，比如 Arrow function、Class、ES Module 等，它不会编译原生对象新引入的方法和 API，比如 Array.includes，Map，Set 等，这些需要通过 Polyfill 来解决</p>
+<h3 id="babel的使用"><a href="#babel的使用" class="headerlink" title="babel的使用"></a>babel的使用</h3><h5 id="运行babel所需的基本环境"><a href="#运行babel所需的基本环境" class="headerlink" title="运行babel所需的基本环境"></a>运行babel所需的基本环境</h5><ol>
+<li><p>babel/cli</p>
+</li>
+<li><p>babel/core</p>
+</li>
+</ol>
+<h5 id="配置babel"><a href="#配置babel" class="headerlink" title="配置babel"></a>配置babel</h5><ol>
+<li><p>babel.config.js</p>
+</li>
+<li><p>.babelrc</p>
+</li>
+<li><p>babelrc.js</p>
+</li>
+<li><p>package.json</p>
+</li>
+</ol>
+<p>四种配置方式作用都一样，你就合着自己的口味来，那种看着顺眼，你就翻它。</p>
+<h3 id="插件-Plugins"><a href="#插件-Plugins" class="headerlink" title="插件(Plugins)"></a>插件(Plugins)</h3><p>插件使用来定义如何转换你的代码的。在babel的配置项中填写需要使用的插件名称，babel在编译的时候就会去加载node_modules中对应的npm包，然后编译插件对应的语法。</p>
+<p>.babelrc</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    <span class="string">"transform-decorators-legacy"</span>,</span><br><span class="line">    <span class="string">"transform-class-properties"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="插件执行顺序"><a href="#插件执行顺序" class="headerlink" title="插件执行顺序"></a>插件执行顺序</h5><p>插件在预设(persets)前运行。</p>
+<p>插件的执行顺序是从左往右执行。也就是说在上面的示例中，babel在进行AST遍历的时候会先调用transform-decorators-legacy插件中定义的转换方法，然后再调用transform-class-properties中的方法。</p>
+<h5 id="插件传参"><a href="#插件传参" class="headerlink" title="插件传参"></a>插件传参</h5><p>参数是由插件名称和参数对象组成的一个数组</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"import"</span>,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"libraryName"</span>: <span class="string">"antd"</span>,</span><br><span class="line">            <span class="attr">"libraryDirectory"</span>: <span class="string">"es"</span>,</span><br><span class="line">            <span class="attr">"style"</span>: <span class="string">"css"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="插件名称"><a href="#插件名称" class="headerlink" title="插件名称"></a>插件名称</h5><p>插件名称如果为 @babel/plugin-xxx，可以使用短名称@babel/xx，如果为babel-plugin-xx，可以直接使用xx。</p>
+<h5 id="自定义插件"><a href="#自定义插件" class="headerlink" title="自定义插件"></a>自定义插件</h5><h3 id="预设-Presets"><a href="#预设-Presets" class="headerlink" title="预设(Presets)"></a>预设(Presets)</h3><p>预设就是一堆插件(Plugin)的组合，从而达到某种转译的能力，就比如react中使用到的@babel/perset-react，他就是下面几种插件的组合。</p>
+<ul>
+<li>@babel/plugin-syntax-jsx</li>
+<li>@babel/plugin-transform-react-jsx</li>
+<li>@babel/plugin-transform-react-display-name</li>
+</ul>
+<p>当然我们也可以手动的在plugins中配置一系列的plugin来达到目的，就像这样：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    <span class="string">"@babel/plugin-syntax-jsx"</span>,</span><br><span class="line">    <span class="string">"@babel/plugin-transform-react-jsx"</span>,</span><br><span class="line">    <span class="string">"@babel/plugin-transform-react-display-name"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是这样一方面显得不那么优雅，另一方面增加了使用者的使用难度。如果直接使用预设就清新脱俗多了~</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"persets"</span>: [</span><br><span class="line">    <span class="string">"@babel/preset-react"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="预设-Presets-的执行顺序"><a href="#预设-Presets-的执行顺序" class="headerlink" title="预设(Presets)的执行顺序"></a>预设(Presets)的执行顺序</h5><p>前面提到插件的执行顺序是从左往右，而预设的执行顺序恰好反其道行之，它是从右往左。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>: [</span><br><span class="line">    <span class="string">"a"</span>,</span><br><span class="line">    <span class="string">"b"</span>,</span><br><span class="line">    <span class="string">"c"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它的执行顺序是 c、b、a，是不是有点奇怪，这主要是为了确保向后兼容，因为大多数用户将 “es2015” 放在 “stage-0” 之前。</p>
+<h5 id="自定义预设-Presets"><a href="#自定义预设-Presets" class="headerlink" title="自定义预设(Presets)"></a>自定义预设(Presets)</h5><h5 id="那些她认识你而你不认识她的预设-Presets"><a href="#那些她认识你而你不认识她的预设-Presets" class="headerlink" title="那些她认识你而你不认识她的预设(Presets)"></a>那些她认识你而你不认识她的预设(Presets)</h5><ol>
+<li>@babel/preset-stage-xxx</li>
+</ol>
+<p>@babel/perset-stage-xxx 是ES在不同阶段语法提案的转码规则而产生的预设，随着被批准为ES新版本的组成部分而进行相应的改变（例如ES6/ES2015）。</p>
+<p>提案分为以下几个阶段：</p>
+<ul>
+<li>stage-0，设想：只是一个想法，可能有babel插件，stage-0的功能范围最广，包含stage-1，stage-2，stage-3的所有功能</li>
+<li>stage-1，建议：这是值得跟进的</li>
+<li>stage-2，草案：初始规范</li>
+<li>stage-3，候选：完成规范并在浏览器上初步实现</li>
+<li>stage-4，完成：将添加到下一个年度版本发布中</li>
+</ul>
+<ol start="2">
+<li>@babel-preset-es2015</li>
+</ol>
+<p>preset-es2015是仅包含ES6功能的Babel预设。</p>
+<p>实际上在babel7出来后上面提到的这些预设stage-x，preset-es2015都可以废弃了，因为@bael/preset-env出来一统江湖了。</p>
+<ol start="3">
+<li>@babel/preset-env</li>
+</ol>
+<p>前面两个预设是从ES标准的维度来确定转码规则的，而@babel/preset-env是根据浏览器的不同版本中缺失的功能确定转换规则的，在配置的时候我们只需要配置需要支持的浏览器版本就好了，@babel/preset-env会<br>根据目标浏览器生成对应的插件列表然后进行编译：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"presets"</span>: [</span><br><span class="line">   [<span class="string">"env"</span>, &#123;</span><br><span class="line">     <span class="attr">"targets"</span>: &#123;</span><br><span class="line">       <span class="attr">"browser"</span>: [<span class="string">"last 10 versions"</span>, <span class="string">"ie &gt;= 9"</span>]</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;],</span><br><span class="line"> ],</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在默认情况下@babel/preset-env支持将JS目前最新的语法转成ES5，但需要注意的是，如果你代码中用到了还没有成为JS标准的语法，该语法暂时还处于stage阶段，这个时候还是需要安装对应的stage预设，不然编译会报错。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"presets"</span>: [</span><br><span class="line">   [<span class="string">"env"</span>, &#123;</span><br><span class="line">     <span class="attr">"targets"</span>: &#123;</span><br><span class="line">       <span class="attr">"browsers"</span>: [<span class="string">"last 10 versions"</span>, <span class="string">"ie &gt;= 9"</span>]</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;],</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"stage-0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然可以采用默认配置，但如果不需要照顾所有的浏览器，还是建议你配置目标浏览器和环境，这样可以保证编译后的代码体积足够小，因为在有的版本浏览器中，新语法本身就能执行，不需要编译。@babel/preset-env 在默认情况下和 preset-stage-x 一样只编译语法，不会对新方法和新的原生对象进行转译，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arrFun = <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.includes(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>转换后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arrFun = <span class="function"><span class="keyword">function</span> <span class="title">arrFun</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(arr.includes(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+<p>箭头函数被转换了，但是 Array.includes 方法，并没有被处理，这个时候要是程序跑在低版本的浏览器上，就会出现 includes is not function 的错误。这个时候就需要 polyfill 闪亮登场了。</p>
+<h3 id="Polyfill"><a href="#Polyfill" class="headerlink" title="Polyfill"></a>Polyfill</h3><p>polyfill 的翻译过来就是垫片，垫片就是垫平不同浏览器环境的差异，让大家都一样。</p>
+<h5 id="babel-polyfill-模块可以模拟完整的ES5环境。-babel7-4以上版本已经弃用，可以用core-js代替"><a href="#babel-polyfill-模块可以模拟完整的ES5环境。-babel7-4以上版本已经弃用，可以用core-js代替" class="headerlink" title="@babel/polyfill 模块可以模拟完整的ES5环境。 babel7.4以上版本已经弃用，可以用core-js代替"></a>@babel/polyfill 模块可以模拟完整的ES5环境。 babel7.4以上版本已经弃用，可以用core-js代替</h5><p>注意 @babel/polyfill 不是在 Babel 配置文件中配置，而是在我们的代码中引入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'@babel/polyfill'</span>;</span><br><span class="line"><span class="keyword">const</span> arrFun = <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.includes(<span class="number">1</span>))</span><br><span class="line"><span class="built_in">Promise</span>.resolve(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<p>这样在低版本的浏览器中也能正常运行了。</p>
+<p>使用core-js代替，不需要在文件中引入@babel/polyfill</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>: [</span><br><span class="line">    <span class="string">"@babel/preset-flow"</span>,</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"@babel/preset-env"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"targets"</span>: &#123;</span><br><span class="line">          <span class="attr">"node"</span>: <span class="string">"8.10"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        "corejs": "3", // 声明 corejs 版本</span><br><span class="line">        "useBuiltIns": "usage"</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ECMAScript-和-JavaScript-的关系"><a href="#ECMAScript-和-JavaScript-的关系" class="headerlink" title="ECMAScript 和 JavaScript 的关系"></a>ECMAScript 和 JavaScript 的关系</h4><p>ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现。</p>
 
-<p>添加上面这个新记录后，浏览器地址栏立刻显示 example.com/2.html，但并不会跳转到 2.html，甚至也不会检查2.html 是否存在，它只是成为浏览历史中的最新记录。这时，你在地址栏输入一个新的地址(比如访问 google.com )，然后点击了倒退按钮，页面的 URL 将显示 2.html；你再点击一次倒退按钮，URL 将显示 1.html。</p>
-<p>总之，pushState 方法不会触发页面刷新，只是导致 history 对象发生变化，地址栏会有反应。</p>
-<p>如果 pushState 的 url参数，设置了一个新的锚点值（即hash），并不会触发 hashchange 事件。如果设置了一个跨域网址，则会报错。</p>
-<pre>
-    // 报错
-    history.pushState(null, null, 'https://twitter.com/hello');
-
-    上面代码中，pushState想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上。
-</pre>
-
-<h4 id="history-replaceState"><a href="#history-replaceState" class="headerlink" title="history.replaceState"></a>history.replaceState</h4><p>history.replaceState 方法的参数与 pushState 方法一模一样，区别是它修改浏览历史中当前纪录,假定当前网页是 example.com/example.html。</p>
-<pre>
-    history.pushState({page: 1}, 'title 1', '?page=1');
-    history.pushState({page: 2}, 'title 2', '?page=2');
-    history.replaceState({page: 3}, 'title 3', '?page=3');
-
-    history.back()
-    // url显示为http://example.com/example.html?page=1
-
-    history.back()
-    // url显示为http://example.com/example.html
-
-    history.go(2)
-    // url显示为http://example.com/example.html?page=3
-
-</pre>
           
         
       
@@ -1338,16 +559,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/24/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/28/2020/2月/0228/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achenjs">
-      <meta itemprop="description" content="狗要日天">
+      <meta itemprop="description" content="日常复制粘贴">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="狗日天">
+      <meta itemprop="name" content="achen的个人博客">
     </span>
 
     
@@ -1357,8 +578,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/24/hello-world/" itemprop="url">
-                  Hello Hexo
+                <a class="post-title-link" href="/2020/02/28/2020/2月/0228/" itemprop="url">
+                  判断数据类型的几种方式
                 </a>
               
             
@@ -1384,7 +605,7 @@
                 
               
 
-              <time title="创建时间：2018-08-24 14:49:36" itemprop="dateCreated datePublished" datetime="2018-08-24T14:49:36+08:00">2018-08-24</time>
+              <time title="创建时间：2020-02-28 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-28T00:00:00+08:00">2020-02-28</time>
             
 
             
@@ -1401,7 +622,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 20:52:02" itemprop="dateModified" datetime="2018-08-29T20:52:02+08:00">2018-08-29</time>
+                <time title="修改时间：2020-03-05 14:29:43" itemprop="dateModified" datetime="2020-03-05T14:29:43+08:00">2020-03-05</time>
               
             
           </span>
@@ -1436,15 +657,1540 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <h3 id="判断数据类型"><a href="#判断数据类型" class="headerlink" title="判断数据类型"></a>判断数据类型</h3><h4 id="1-typeof"><a href="#1-typeof" class="headerlink" title="1. typeof"></a>1. typeof</h4><p>返回数据类型，包含这7种： number、boolean、symbol、string、object、undefined、function。</p>
+<p>引用类型，除了function返回function类型外，其他均返回object。</p>
+<p>其中，null 有属于自己的数据类型 Null ， 引用类型中的 数组、日期、正则 也都有属于自己的具体类型，而 typeof 对于这些类型的处理，只返回了处于其原型链最顶端的 Object 类型，没有错，但不是我们想要的结果。</p>
+<h4 id="2-Object-prototype-toString-call"><a href="#2-Object-prototype-toString-call" class="headerlink" title="2. Object.prototype.toString.call()"></a>2. Object.prototype.toString.call()</h4><p>toString() 是 Object 的原型方法，调用该方法，默认返回当前对象的 [[Class]] 。这是一个内部属性，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。</p>
+<p>对于 Object 对象，直接调用 toString()  就能返回 [object Object] 。而对于其他对象，则需要通过 call / apply 来调用才能返回正确的类型信息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="string">''</span>) ;   <span class="comment">// [object String]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">1</span>) ;    <span class="comment">// [object Number]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">true</span>) ; <span class="comment">// [object Boolean]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">Symbol</span>()); <span class="comment">//[object Symbol]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">undefined</span>) ; <span class="comment">// [object Undefined]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>) ; <span class="comment">// [object Null]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">Function</span>()) ; <span class="comment">// [object Function]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">Date</span>()) ; <span class="comment">// [object Date]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call([]) ; <span class="comment">// [object Array]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">RegExp</span>()) ; <span class="comment">// [object RegExp]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">Error</span>()) ; <span class="comment">// [object Error]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">document</span>) ; <span class="comment">// [object HTMLDocument]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">window</span>) ; <span class="comment">//[object global] window 是全局对象 global 的引用</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-constructor"><a href="#3-constructor" class="headerlink" title="3. constructor"></a>3. constructor</h4><p>constructor是原型prototype的一个属性，当函数被定义时候，js引擎会为函数添加原型prototype，并且这个prototype中constructor属性指向函数引用， 因此重写prototype会丢失原来的constructor。</p>
+<h5 id="不过这种方法有问题："><a href="#不过这种方法有问题：" class="headerlink" title="不过这种方法有问题："></a>不过这种方法有问题：</h5><p>1：null 和 undefined 无constructor，这种方法判断不了。</p>
+<p>2：还有，如果自定义对象，开发者重写prototype之后，原有的constructor会丢失，因此，为了规范开发，在重写对象原型时一般都需要重新给 constructor 赋值，以保证对象实例的类型不被篡改。</p>
+<p><img src="./img/constructor.png" alt="avatar"></p>
+<h4 id="4-instanceof"><a href="#4-instanceof" class="headerlink" title="4. instanceof"></a>4. instanceof</h4><p>instanceof 是用来判断 A 是否为 B 的实例，表达式为：A instanceof B，如果 A 是 B 的实例，则返回 true,否则返回 false。 在这里需要特别注意的是：instanceof 检测的是原型，</p>
+<p><img src="./img/instanceof.png" alt="avatar"></p>
+<p>由上图可以看出[]的原型指向Array.prototype，间接指向Object.prototype, 因此 [] instanceof Array 返回true， [] instanceof Object 也返回true。</p>
+<p>instanceof 只能用来判断两个对象是否属于实例关系， 而不能判断一个对象实例具体属于哪种类型。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/27/2020/2月/0227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/27/2020/2月/0227/" itemprop="url">
+                  前端有哪些页面优化方法?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-27 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-27T00:00:00+08:00">2020-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:29:26" itemprop="dateModified" datetime="2020-03-05T14:29:26+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="前端有哪些页面优化方法"><a href="#前端有哪些页面优化方法" class="headerlink" title="前端有哪些页面优化方法?"></a>前端有哪些页面优化方法?</h4><ul>
+<li><p>减少http请求数</p>
+</li>
+<li><p>从设计实现层面简化页面，减少元素的使用</p>
+</li>
+<li><p>合理设置http缓存</p>
+</li>
+<li><p>资源合并与压缩</p>
+</li>
+<li><p>合并css图片，减少请求数的又一个好办法</p>
+</li>
+<li><p>将外部脚本置底（页面信息加载后在加载）</p>
+</li>
+<li><p>多图页面使用图片懒加载</p>
+</li>
+<li><p>在js中尽量减少闭包的使用</p>
+</li>
+<li><p>尽量合并css和js文件</p>
+</li>
+<li><p>尽量使用字体图标或者svg图标，来代替传统的png等格式图片</p>
+</li>
+<li><p>减少对dom的操作</p>
+</li>
+<li><p>尽可能使用事件委托（事件代理）来处理事件绑定的操作</p>
+</li>
+</ul>
+<h4 id="移动端的兼容问题"><a href="#移动端的兼容问题" class="headerlink" title="移动端的兼容问题"></a>移动端的兼容问题</h4><ul>
+<li><p>给移动端添加点击事件会有300S的延迟 如果用点击事件，需要引一个fastclick.js文件，解决300s的延迟 一般在移动端用ontouchstart、ontouchmove、ontouchend</p>
+</li>
+<li><p>移动端点透问题,touchstart 早于 touchend 早于click,click的触发是有延迟的，这个时间大概在300ms左右，也就是说我们tap触发之后蒙层隐藏， 此时 click还没有触发，300ms之后由于蒙层隐藏，我们的click触发到了下面的a链接上<br>尽量都使用touch事件来替换click事件。例如用touchend事件(推荐)。<br>用fastclick，github.com/ftlabs/fast…<br>用preventDefault阻止a标签的click<br>消除 IE10 里面的那个叉号<br>input:-ms-clear{display:none;}</p>
+</li>
+<li><p>设置缓存 手机页面通常在第一次加载后会进行缓存，然后每次刷新会使用缓存而不是去重新向服务器发送请求。如果不希望使用缓存可以设置no-cache。</p>
+</li>
+<li><p>圆角BUG 某些Android手机圆角失效 background-clip: padding-box; 防止手机中网页放大和缩小 这点是最基本的，做为手机网站开发者来说应该都知道的，就是设置meta中的viewport</p>
+</li>
+<li><p>设置用户截止缩放，一般写视口的时候就已经写好了。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/25/2020/2月/0226/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/25/2020/2月/0226/" itemprop="url">
+                  call bind apply的区别？js垃圾回收
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-25 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-25T00:00:00+08:00">2020-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:29:07" itemprop="dateModified" datetime="2020-03-05T14:29:07+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="call-bind-apply的区别？"><a href="#call-bind-apply的区别？" class="headerlink" title="call bind apply的区别？"></a>call bind apply的区别？</h4><blockquote>
+<p>call() 和 apply()的第一个参数相同，就是指定的对象。这个对象就是该函数的执行上下文。</p>
+</blockquote>
+<blockquote>
+<p>call()和apply()的区别就在于，两者之间的参数。</p>
+</blockquote>
+<blockquote>
+<p>call()在第一个参数之后的后续所有参数就是传入该函数的值</p>
+</blockquote>
+<blockquote>
+<p>apply()只有两个参数，第一个是对象，第二个是数组，这个数组就是该函数的参数。<br>bind()方法和前两者不同在于：bind()方法会返回执行上下文被改变的函数而不会立即执行，而前两者是直接执行该函数。他的参数和call()相同.</p>
+</blockquote>
+<h4 id="js垃圾回收"><a href="#js垃圾回收" class="headerlink" title="js垃圾回收"></a>js垃圾回收</h4><p>JavaScript中的内存管理是自动执行的，而且是不可见的。我们创建基本类型、对象、函数….所有这些都需要内存.<br>当不再需要某样东西时会发生什么? JavaScript 引擎是如何发现并清理它?</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/25/2020/2月/0225/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/25/2020/2月/0225/" itemprop="url">
+                  css问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-25 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-25T00:00:00+08:00">2020-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:28:45" itemprop="dateModified" datetime="2020-03-05T14:28:45+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="css问题"><a href="#css问题" class="headerlink" title="css问题"></a>css问题</h4><h5 id="用纯css创建一个三角形"><a href="#用纯css创建一个三角形" class="headerlink" title="用纯css创建一个三角形"></a>用纯css创建一个三角形</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    div &#123;</span></span><br><span class="line"><span class="undefined">        width: 0;</span></span><br><span class="line"><span class="undefined">        height: 0;</span></span><br><span class="line"><span class="undefined">        border-top: 40px solid transparent;</span></span><br><span class="line"><span class="undefined">        border-left: 40px solid transparent;</span></span><br><span class="line"><span class="undefined">        border-right: 40px solid transparent;</span></span><br><span class="line"><span class="undefined">        border-bottom: 40px solid #ff0000;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="如何理解css的盒模型"><a href="#如何理解css的盒模型" class="headerlink" title="如何理解css的盒模型"></a>如何理解css的盒模型</h5><blockquote>
+<p>标准盒子模型：宽度=内容的宽度（content）+ border + padding<br>低版本IE盒子模型：宽度=内容宽度（content+border+padding)</p>
+</blockquote>
+<p>box-sizing属性</p>
+<ul>
+<li>content-box：默认值。这是 CSS2.1 指定的宽度和高度的行为。指定元素的宽度和高度（最小/最大属性）适用于box的宽度和高度。元素的填充和边框布局和绘制指定宽度和高度除外。</li>
+<li>border-box： 指定宽度和高度（最小/最大属性）确定元素边框。也就是说，对元素指定宽度和高度包括了 padding 和 border 。通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。</li>
+<li>inherit： 指定 box-sizing 属性的值，应该从父元素继承</li>
+</ul>
+<p>浏览器的兼容性问题<br>大多数浏览器都会按照上面的图示来呈现内容。然而 IE 5 和 6 的呈现却是不正确的。根据 W3C 的规范，元素内容占据的空间是由 width 属性设置的，而内容周围的 padding 和 border 值是另外计算的。不幸的是，IE5.X 和 6 在怪异模式中使用自己的非标准模型。这些浏览器的 width 属性不是内容的宽度，而是内容、内边距和边框的宽度的总和。</p>
+<h5 id="如何清除浮动？"><a href="#如何清除浮动？" class="headerlink" title="如何清除浮动？"></a>如何清除浮动？</h5><blockquote>
+<p>clear清除浮动（添加空div法）在浮动元素下方添加空div,并给该元素写css样式 {clear:both;height:0;overflow:hidden;}</p>
+</blockquote>
+<blockquote>
+<p>给浮动元素父级设置高度</p>
+</blockquote>
+<blockquote>
+<p>父级同时浮动（需要给父级同级元素添加浮动）</p>
+</blockquote>
+<blockquote>
+<p>父级设置成inline-block，其margin: 0 auto居中方式失效</p>
+</blockquote>
+<blockquote>
+<p>给父级添加overflow:hidden 清除浮动方法</p>
+</blockquote>
+<blockquote>
+<p>万能清除法 after伪类 清浮动（现在主流方法，推荐使用）</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">zoom</span>: <span class="number">1</span>;</span><br><span class="line">  &amp;:after &#123;</span><br><span class="line">    content: '';</span><br><span class="line">    <span class="selector-tag">clear</span>: <span class="selector-tag">both</span>;</span><br><span class="line">    <span class="selector-tag">display</span>: <span class="selector-tag">block</span>;</span><br><span class="line">    <span class="selector-tag">height</span>: 0;</span><br><span class="line">    <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">    <span class="selector-tag">visibility</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/24/2020/2月/0224/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/24/2020/2月/0224/" itemprop="url">
+                  谈谈你对Redux的理解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-24 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-24T00:00:00+08:00">2020-02-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:28:35" itemprop="dateModified" datetime="2020-03-05T14:28:35+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="谈谈你对Redux的理解"><a href="#谈谈你对Redux的理解" class="headerlink" title="谈谈你对Redux的理解"></a>谈谈你对Redux的理解</h4><p>使用Redux应该遵循的原则：</p>
+<ol>
+<li>整个应用共享的state应该存储在store的状态树中，store是唯一的</li>
+<li>state不能直接修改，只能通过action表达修改的意图，调用dispatch()修改state</li>
+<li>state的修改规则reducers必须是一个纯函数，不能有副作用</li>
+</ol>
+<h5 id="Redux提供的API"><a href="#Redux提供的API" class="headerlink" title="Redux提供的API"></a>Redux提供的API</h5><ol>
+<li><p>createStore<br>createStore的作用就是创建一个Redux，store用来存放应用中所有的state<br>createStore(reducer, [perloadState], [enhancer])<br>createStore方法接受3个参数，后面两个是可选参数<br>reducer: 参数的类型必须是function<br>perloadState: 这个参数代表初始化的state(initialState), 可以是任意类型的参数<br>enhancer: 这个参数代表添加的各种中间件，参数的类型必须是function</p>
+</li>
+<li><p>combineReducers<br>combineReducers主要是把多个reducer合并成一个，并且返回一个新的reducer函数，该函数接收的参数也是两个state和action</p>
+</li>
+<li><p>compose<br>主要是在中间件时候使用，合成函数<br>compose(applyMiddleware(thunk),<br> window.devToolsExtension ?<br> window.devToolsExtension() : undefined<br>)</p>
+</li>
+<li><p>applyMiddleware</p>
+</li>
+<li><p>bindActionCreator<br>bindActionCreator的主要作用就是将aciton与dispatch函数绑定，生成直接可以出发action的函数</p>
+</li>
+</ol>
+<h4 id="从输入URL到页面加载的全过程"><a href="#从输入URL到页面加载的全过程" class="headerlink" title="从输入URL到页面加载的全过程"></a>从输入URL到页面加载的全过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 首先，在浏览器地址中输入url</span><br><span class="line">2. 浏览器先查看**浏览器缓存**-系统缓存-路由器缓存，如果缓存中有，会直接在屏幕中显示页面内容。若没有，则跳到第三步操作</span><br><span class="line">3. 浏览器向DNS（Domain Name System）服务器请求解析该URL中的域名对应的IP地址</span><br><span class="line">4. 解析出IP地址后，根据该IP地址和默认端口80，和服务器建立TCP连接</span><br><span class="line">5. 浏览器发出读取文件（URL中域名后面部分对应的文件）的HTTP请求，该请求报文作为TCP三次握手的第三个报文的数据发送给服务器</span><br><span class="line">6. 服务器对浏览器请求做出响应，并把对应的html文本发送给浏览器</span><br><span class="line">7. 释放TCP连接</span><br><span class="line">8. 浏览器将该html文本并显示内容</span><br></pre></td></tr></table></figure>
+<h4 id="重绘（Repaint）-amp-回流（重排Reflow）"><a href="#重绘（Repaint）-amp-回流（重排Reflow）" class="headerlink" title="重绘（Repaint） &amp; 回流（重排Reflow）"></a>重绘（Repaint） &amp; 回流（重排Reflow）</h4><ol>
+<li><p>重绘(repaint)：当我们对DOM的修改导致的样式变化，但未影响几何属性时，浏览器不需要重新计算元素的几何属性，直接可以为该元素绘制新的样式，跳过了回流环节，这个过程就叫重绘。</p>
+</li>
+<li><p>回流（重排 reflow）：对DOM树进行渲染，只要修改DOM或修改元素的形状大小，就会触发reflow，reflow的时候，浏览器会使已渲染好受到影响的部分失效，并重新构造这部分，完成reflow后，浏览器会重新绘制受影响的部分到屏幕中</p>
+</li>
+</ol>
+<p><strong>回流必定会发生重绘，重绘不一定发生回流</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//  触发Reflow</span><br><span class="line">增加、删除、修改DOM节点时，会导致Reflow或Repaint</span><br><span class="line">移动DOM的位置，或是搞个动画的时候</span><br><span class="line">修改CSS样式的时候（宽、高、内外边距、边框等）</span><br><span class="line">Resize窗口的时候（移动端没有这个问题），或是滚动的时候</span><br><span class="line">改变元素内容（文本或图片等）</span><br><span class="line">修改网页的默认字体时</span><br><span class="line">// 触发Repaint</span><br><span class="line">DOM改动</span><br><span class="line">CSS改动</span><br></pre></td></tr></table></figure>
+<h5 id="如何减少回流、重绘？"><a href="#如何减少回流、重绘？" class="headerlink" title="如何减少回流、重绘？"></a>如何减少回流、重绘？</h5><p>减少回流、重绘就是减少对DOM的操作</p>
+<p>1.直接改变className，如果动态改变样式，则使用cssText（减少设置多项内联样式）</p>
+<p>2.让要操作的元素进行“离线处理”，处理完后一起更新</p>
+<p>当使用DocumentFragment进行缓存操作，引发一次回流和重绘</p>
+<p>使用display:none 技术，只引发两次回流和重绘</p>
+<p>使用cloneNode(true or false)和replaceChild技术，引发一次回流和重绘</p>
+<p>3.不要经常访问会引起浏览器flush队列的属性，如果你确实要访问，利用缓存</p>
+<p>4.让元素脱离动画流，减少render 树的规模</p>
+<p>5.牺牲平滑度换取速度</p>
+<p>6.避免使用table布局</p>
+<p>7.IE中避免使用javascript表达式</p>
+<h4 id="跨域通信的几种方式"><a href="#跨域通信的几种方式" class="headerlink" title="跨域通信的几种方式"></a>跨域通信的几种方式</h4><ol>
+<li>JSONP（只支持get请求）</li>
+<li>window + hash</li>
+<li>window + domain</li>
+<li>window + name</li>
+<li>postMessage</li>
+<li>WebSocket</li>
+<li>CORS（Cross-origin resource sharing）跨域资源共享（所有的HTTP请求）</li>
+<li>nginx反向代理</li>
+<li>http-proxy服务端代理请求</li>
+</ol>
+<h4 id="前端错误类"><a href="#前端错误类" class="headerlink" title="前端错误类"></a>前端错误类</h4><ol>
+<li><p>即时运行错误：代码错误；捕获方式：try…catch…、window.onerror</p>
+</li>
+<li><p>资源加载错误；object.onerror（不会冒泡 ）、performance.getEntries、Error事件捕获</p>
+</li>
+</ol>
+<h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><ul>
+<li>循环遍历</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, [<span class="string">'ming'</span>, <span class="string">'abc'</span>], <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> shallowClone = <span class="function">(<span class="params">arr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> dst = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> arr) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr.hasOwnProperty(prop)) &#123;</span><br><span class="line">        dst[prop] = arr[prop];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr2 = shallowClone(arr1);</span><br><span class="line">arr2[<span class="number">2</span>].push(<span class="string">'wuhan'</span>);</span><br><span class="line">arr2[<span class="number">3</span>] = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr1);  [<span class="number">1</span>, <span class="number">2</span>, [<span class="string">'ming'</span>, <span class="string">'abc'</span>, <span class="string">'wuhan'</span>], <span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr2);  [<span class="number">1</span>, <span class="number">2</span>, [<span class="string">'ming'</span>, <span class="string">'abc'</span>, <span class="string">'wuhan'</span>], <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>object.assign()</li>
+<li>Array.prototype.concat()</li>
+<li>Array.prototype.slice()</li>
+<li>obj展开运算符</li>
+</ul>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><ul>
+<li>手动递归</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span> (<span class="params">sourceObj, targetObj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> cloneObj = targetObj || &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span>(!sourceObj || <span class="keyword">typeof</span> sourceObj !== <span class="string">"object"</span> || sourceObj.length === <span class="literal">undefined</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> sourceObj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(sourceObj <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">        cloneObj = sourceObj.concat()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> sourceObj)&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> sourceObj[i] === <span class="string">'object'</span>) &#123;</span><br><span class="line">                cloneObj[i] = deepClone(sourceObj[i], &#123;&#125;)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cloneObj[i] = sourceObj[i]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cloneObj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> sourceObj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  c: &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: &#123;</span><br><span class="line">      a: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  d: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello world'</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  e: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> targetObj = deepClone(sourceObj, &#123;&#125;)</span><br><span class="line">targetObj.c.b.a = <span class="number">9</span></span><br><span class="line"><span class="built_in">console</span>.log(sourceObj)</span><br><span class="line"><span class="built_in">console</span>.log(targetObj)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>JSON.parse(JSON.stringify())</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.如果json里面有时间对象，则序列化结果：时间对象=&gt;字符串的形式；</span><br><span class="line">2.如果json里有RegExp、Error对象，则序列化的结果将只得到空对象 RegExp、Error =&gt; &#123;&#125;；</span><br><span class="line">3.如果json里有 function,undefined，则序列化的结果会把 function,undefined 丢失；</span><br><span class="line">4.如果json里有NaN、Infinity和-Infinity，则序列化的结果会变成null；</span><br><span class="line">5.如果json里有对象是由构造函数生成的，则序列化的结果会丢弃对象的 constructor；</span><br><span class="line">6.如果对象中存在循环引用的情况也无法实现深拷贝</span><br></pre></td></tr></table></figure>
+<ul>
+<li>lodash函数库</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _= <span class="built_in">require</span>(<span class="string">'lodash'</span>);</span><br><span class="line"><span class="keyword">const</span> obj1 = [</span><br><span class="line">  <span class="number">1</span>,</span><br><span class="line">  <span class="string">'Hello!'</span>,</span><br><span class="line">  &#123; <span class="attr">name</span>:<span class="string">'ming1'</span> &#125;,</span><br><span class="line">  [</span><br><span class="line">    &#123;</span><br><span class="line">      name:<span class="string">'meng1'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">]</span><br><span class="line"><span class="keyword">const</span> obj2 = _.cloneDeep(obj1);</span><br><span class="line">obj2[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">obj2[<span class="number">1</span>] = <span class="string">'Hi!'</span>;</span><br><span class="line">obj2[<span class="number">2</span>].name = <span class="string">'ming2'</span></span><br><span class="line">obj2[<span class="number">3</span>][<span class="number">0</span>].name = <span class="string">'meng2'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(obj2);</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/20/2020/2月/0220/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/20/2020/2月/0220/" itemprop="url">
+                  Symbol的应用场景
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-20T00:00:00+08:00">2020-02-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:28:24" itemprop="dateModified" datetime="2020-03-05T14:28:24+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Symbol的应用场景"><a href="#Symbol的应用场景" class="headerlink" title="Symbol的应用场景"></a>Symbol的应用场景</h3><h5 id="应用场景1：使用Symbol来作为对象属性名（key）"><a href="#应用场景1：使用Symbol来作为对象属性名（key）" class="headerlink" title="应用场景1：使用Symbol来作为对象属性名（key）"></a>应用场景1：使用Symbol来作为对象属性名（key）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>()]: <span class="string">'test'</span>,</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(obj); <span class="comment">// ['a', 'b']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> p <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(p);   <span class="comment">//  分别输出: a 和 b</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj);  <span class="comment">//   ['a', 'b']</span></span><br></pre></td></tr></table></figure>
+<p>由上代码可知，Symbol类型的key是不能通过Object.keys()或者for…in来枚举的，它未被包含对象自身的属性名集合（property names）之中。所以，利用该特性，我们可以把一些不需要对外操作和访问的属性使用Symbol来定义。</p>
+<h5 id="应用场景2：使用Symbol来替代常量"><a href="#应用场景2：使用Symbol来替代常量" class="headerlink" title="应用场景2：使用Symbol来替代常量"></a>应用场景2：使用Symbol来替代常量</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TYPE_AUDIO = <span class="string">'AUDIO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_VIDEO = <span class="string">'VIDEO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_IMAGE = <span class="string">'IMAGE'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileResource</span>(<span class="params">resource</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(resource.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> TYPE_AUDIO:</span><br><span class="line">      playAudio(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_VIDEO:</span><br><span class="line">      playVideo(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_IMAGE:</span><br><span class="line">      previewImage(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Unknown type of resource'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上面的代码中那样，我们经常定义一组常量来代表一种业务逻辑下的几个不同类型，我们通常希望这几个常量之间是唯一的关系，常量少的时候还算好，但是常量一多，你可能还得花点脑子好好为他们取个好点的名字。</p>
+<p>现在有了Symbol，我们大可不必这么麻烦了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TYPE_AUDIO = <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> TYPE_VIDEO = <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> TYPE_IMAGE = <span class="built_in">Symbol</span>()</span><br></pre></td></tr></table></figure>
+<h5 id="应用场景3：使用Symbol定义类的私有属性-方法"><a href="#应用场景3：使用Symbol定义类的私有属性-方法" class="headerlink" title="应用场景3：使用Symbol定义类的私有属性/方法"></a>应用场景3：使用Symbol定义类的私有属性/方法</h5><p>使用的少</p>
+<h3 id="彻底搞懂浏览器Event-loop"><a href="#彻底搞懂浏览器Event-loop" class="headerlink" title="彻底搞懂浏览器Event-loop"></a>彻底搞懂浏览器Event-loop</h3><h4 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaScript的运行机制</span><br></pre></td></tr></table></figure>
+<p>(1) 所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。<br>(2) 主线程之外，还存在”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。<br>(3) 一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。<br>(4) 主线程不断重复上面的第三步</p>
+<p>概况就是：调用栈中的同步任务都执行完毕，栈内被清空了，就代表主线程空闲了，这个时候就会去任务队列中按照顺序读取一个任务放入到栈中执行。每次栈内被清空，都会去读取任务队列有没有任务，有就读取执行，一直循环读取-执行的操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaScript中有两种异步任务：</span><br></pre></td></tr></table></figure>
+<ol>
+<li>宏任务：script（整体代码），setTimeout、setInterval、setImmediate、I/O、UI rendering</li>
+<li>微任务：process.nextTick（Nodejs）、Promise、Object.observe、MutationObServer</li>
+</ol>
+<h4 id="2-事件循环（event-loop）是什么？"><a href="#2-事件循环（event-loop）是什么？" class="headerlink" title="2. 事件循环（event-loop）是什么？"></a>2. 事件循环（event-loop）是什么？</h4><p>主线程从”任务队列”中读取执行事件，这个过程是循环不断的，这个机制被称为事件循环。此机制具体如下：主线程会不断从任务队列中按顺序读取任务执行，每执行一个任务都会检查microtask队列是否为空（执行完一个任务的具体标志是函数执行栈为空），如果不为空则会一次性执行完所有microtask。然后进入下一个循环去任务队列中取下一个任务执行。</p>
+<p><strong>当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件, 然后再去宏任务队列中取出一个事件。同一次事件循环中, 微任务永远在宏任务之前执行。</strong></p>
+<h4 id="3-为什么会需要event-loop"><a href="#3-为什么会需要event-loop" class="headerlink" title="3. 为什么会需要event-loop?"></a>3. 为什么会需要event-loop?</h4><p>因为 JavaScript 是单线程的。单线程就意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。如果前一个任务耗时很长，后一个任务就不得不一直等着。为了协调事件（event），用户交互（user interaction），脚本（script），渲染（rendering），网络（networking）等，用户代理（user agent）必须使用事件循环（event loops）。</p>
+<h4 id="node中的event-loop与浏览器之间的差异"><a href="#node中的event-loop与浏览器之间的差异" class="headerlink" title="node中的event-loop与浏览器之间的差异"></a>node中的event-loop与浏览器之间的差异</h4><p>浏览器和 Node 环境下，microtask 任务队列的执行时机不同</p>
+<ul>
+<li>Node 端，microtask 在事件循环的各个阶段之间执行</li>
+<li>浏览器端，microtask 在事件循环的 macrotask 执行完之后执行</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'timer1'</span>)</span><br><span class="line">  <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'timer2'</span>)</span><br><span class="line">  <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise3'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 浏览器 start=&gt;end=&gt;promise3=&gt;timer1=&gt;promise1=&gt;timer2=&gt;promise2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// node start=&gt;end=&gt;promise3=&gt;timer1=&gt;timer2=&gt;promise1=&gt;promise2</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/10/09/2019/浅谈iframe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/09/2019/浅谈iframe/" itemprop="url">
+                  iframe的优缺点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-09 11:14:34" itemprop="dateCreated datePublished" datetime="2019-10-09T11:14:34+08:00">2019-10-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:14:23" itemprop="dateModified" datetime="2020-03-05T14:14:23+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="iframe的优缺点"><a href="#iframe的优缺点" class="headerlink" title="iframe的优缺点"></a>iframe的优缺点</h1><h2 id="iframe的优点："><a href="#iframe的优点：" class="headerlink" title="iframe的优点："></a>iframe的优点：</h2><ol>
+<li><p>iframe能够原封不动的把嵌入的网页展现出来。</p>
+</li>
+<li><p>如果有多个网页引用iframe，那么你只需要修改iframe的内容，就可以实现调用的每一个页面内容的更改，方便快捷。</p>
+</li>
+<li><p>网页如果为了统一风格，头部和版本都是一样的，就可以写成一个页面，用iframe来嵌套，可以增加代码的可重用。</p>
+</li>
+<li><p>如果遇到加载缓慢的第三方内容如图标和广告，这些问题可以由iframe来解决。</p>
+</li>
+</ol>
+<h2 id="iframe的缺点："><a href="#iframe的缺点：" class="headerlink" title="iframe的缺点："></a>iframe的缺点：</h2><ol>
+<li><p>会产生很多页面，不容易管理。</p>
+</li>
+<li><p>iframe框架结构有时会让人感到迷惑，如果框架个数多的话，可能会出现上下、左右滚动条，会分散访问者的注意力，用户体验度差。</p>
+</li>
+<li><p>代码复杂，无法被一些搜索引擎索引到，这一点很关键，现在的搜索引擎爬虫还不能很好的处理iframe中的内容，所以使用iframe会不利于搜索引擎优化。</p>
+</li>
+<li><p>很多的移动设备（PDA 手机）无法完全显示框架，设备兼容性差。</p>
+</li>
+<li><p>iframe框架页面会增加服务器的http请求，对于大型网站不是可取的。</p>
+</li>
+</ol>
+<h3 id="iframe迁移问题以及解决方案"><a href="#iframe迁移问题以及解决方案" class="headerlink" title="iframe迁移问题以及解决方案"></a>iframe迁移问题以及解决方案</h3><ol>
+<li>import React, { propTypes } from ‘react’;</li>
+</ol>
+<p>error: PropTypes is undefined;</p>
+<p>出现原因: React在新版本中废弃了集成类似propTypes这种第三方库方案。</p>
+<p>解决方案: 新仓库使用的react版本较高，以上方式已被废弃，应使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>import ‘./style.less’;</li>
+</ol>
+<p>error: 样式失效问题。</p>
+<p>出现原因: 新项目中开启了css-module，需要通过配置:global来声明一个全局class，使其在全局起作用。</p>
+<p>解决方案1:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### <span class="selector-tag">style</span><span class="selector-class">.less</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">    <span class="selector-pseudo">:global</span> &#123;</span><br><span class="line">        <span class="selector-class">.items</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./style.less'</span>;</span><br><span class="line"></span><br><span class="line">&lt;div className=&#123;styles.content&#125;&gt;</span><br><span class="line">    &lt;div className=<span class="string">"items"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>解决方案2:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># <span class="selector-tag">style</span><span class="selector-class">.less</span></span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">:global</span> &#123;</span><br><span class="line">    <span class="selector-class">.content</span> &#123;</span><br><span class="line">        <span class="selector-class">.items</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./style.less'</span>;</span><br><span class="line">&lt;div className=<span class="string">"content"</span>&gt;</span><br><span class="line">    &lt;div className=<span class="string">"items"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>推荐使用方案1，可以利用css-module的命名规则减少项目中样式的冲突问题。方案2改动小但是太暴力，非常可能产生样式冲突问题。</p>
+<ol start="3">
+<li>comm和components中组件出现不可用情况。</li>
+</ol>
+<p>error: 功能不可用情况。</p>
+<p>解决方案: 建议直接使用antd替换，需要花上一点时间对应antd api做一定代码重构。(!这块需要仔细效验功能是否正常)</p>
+<ol start="4">
+<li>ec_fe中使用了Component.contextTypes。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Manage.contextTypes = &#123;</span><br><span class="line">    history: PropTypes.object.isRequired,</span><br><span class="line">    store: PropTypes.object.isRequired</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Warning: Failed context type: The context <code>history</code> is marked as required in <code>Connect(ContractReview)</code>, but its value is <code>undefined</code>.</p>
+<p>解决方案：拆分出去的仓库，react-router版本使用的是4.x，已经不需要像老版本一样一层层传递history或者绑定在Context上共享的方式。</p>
+<ol start="5">
+<li>ec_fe中使用了this.props.router等路由api</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props.router.replace(&#123;</span><br><span class="line">    pathname: <span class="string">`/admin/web/packageconfig/function.html`</span>,</span><br><span class="line">    query: &#123;</span><br><span class="line">        id: moduleList[<span class="number">0</span>].f_id,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>错误：index.jsx:59 Uncaught TypeError: Cannot read property ‘replace’ of undefined</p>
+<p>解决方案：拆分出去的仓库，react-router版本使用的是4.x，请使用react-router-dom提供的api修改。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props.history.replace(&#123;</span><br><span class="line">    pathname: <span class="string">`/packageconfig/funModule`</span>,</span><br><span class="line">    search: <span class="string">`id=<span class="subst">$&#123;moduleList[<span class="number">0</span>].f_id&#125;</span>`</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://www.jianshu.com/p/8fbee843437c" target="_blank" rel="noopener">浅谈iframe</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/history/history-is-mutable" target="_blank" rel="noopener">react-router-dom</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/06/13/2019/June/NextTick/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/13/2019/June/NextTick/README/" itemprop="url">
+                  NextTick 原理分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-13T00:00:00+08:00">2019-06-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:25:02" itemprop="dateModified" datetime="2020-03-05T14:25:02+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="NextTick-原理分析"><a href="#NextTick-原理分析" class="headerlink" title="NextTick 原理分析"></a>NextTick 原理分析</h1><p>nextTick可以让我们在下次DOM更新循环结束之后执行延迟回调，用于获得更新后的DOM。</p>
+<p>在Vue2.4之前都是使用的microtasks，但是microtasks的优先级过高，在某些情况下可能会出现比事件冒泡更快的情况，但如果都是macrotasks又可能会出现渲染的性能问题。所以在新版本中，会默认使用microtasks，但在特殊情况下会使用macrotasks，比如v-on。</p>
+<p>对于实现macrotasks，会先判断是否能使用setImmediate，不能的话降级为MessageChannel，以上都不行的话就使用setTimeout。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> setImmediate !== <span class="string">'undefined'</span> &amp;&amp; isNative(setImmediate)) &#123;</span><br><span class="line">  macroTimerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setImmediate(flushCallbacks)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (</span><br><span class="line">  <span class="keyword">typeof</span> MessageChannel !== <span class="string">'undefined'</span> &amp;&amp;</span><br><span class="line">  (isNative(MessageChannel) ||</span><br><span class="line">    <span class="comment">// PhantomJS</span></span><br><span class="line">    MessageChannel.toString() === <span class="string">'[object MessageChannelConstructor]'</span>)</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">const</span> channel = <span class="keyword">new</span> MessageChannel()</span><br><span class="line">  <span class="keyword">const</span> port = channel.port2</span><br><span class="line">  channel.port1.onmessage = flushCallbacks</span><br><span class="line">  macroTimerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    port.postMessage(<span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  macroTimerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(flushCallbacks, <span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码用来判断能不能使用相应的API。</p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><ul>
+<li>macrotasks（宏任务）： setTimeout, setInterval, setImmediate, I/O, UI rendering</li>
+<li>microtasks（微任务）： process.nextTick, Promise, MutationObserver</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/06/09/2019/June/git/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achenjs">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/09/2019/June/git/README/" itemprop="url">
+                  git的基本操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-09T00:00:00+08:00">2019-06-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:24:32" itemprop="dateModified" datetime="2020-03-05T14:24:32+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><ul>
+<li><a href="#rebase-%E5%90%88%E5%B9%B6">Rebase 合并</a></li>
+<li><a href="#stash">stash</a></li>
+<li><a href="#reflog">reflog</a></li>
+<li><a href="#reset">Reset</a></li>
+</ul>
+<h2 id="Rebase-合并"><a href="#Rebase-合并" class="headerlink" title="Rebase 合并"></a>Rebase 合并</h2><p>该命令可以让和 <code>merge</code> 命令得到的结果基本是一致的。</p>
+<p>通常使用 <code>merge</code> 操作将分支上的代码合并到 <code>master</code> 中，分支样子如下所示</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f109db27be054?w=505&amp;h=461&amp;f=png&amp;s=22796" alt=""></p>
+<p>使用 <code>rebase</code> 后，会将 <code>develop</code> 上的 <code>commit</code> 按顺序移到 <code>master</code> 的第三个 <code>commit</code> 后面，分支样子如下所示</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f11cc2cb8b332?w=505&amp;h=563&amp;f=png&amp;s=26514" alt=""></p>
+<p>Rebase 对比 merge，优势在于合并后的结果很清晰，只有一条线，劣势在于如果一旦出现冲突，解决冲突很麻烦，可能要解决多个冲突，但是 merge 出现冲突只需要解决一次。</p>
+<p>使用 rebase 应该在需要被 rebase 的分支上操作，并且该分支是本地分支。如果 <code>develop</code> 分支需要 rebase 到 <code>master</code> 上去，那么应该如下操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># branch develop</span></span></span><br><span class="line">git rebase master</span><br><span class="line">get checkout master</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 用于将 `master` 上的 HEAD 移动到最新的 commit</span></span></span><br><span class="line">get merge develop</span><br></pre></td></tr></table></figure>
+<h2 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h2><p><code>stash</code> 用于临时报错工作目录的改动。开发中可能会遇到代码写一半需要切分支打包的问题，如果这时候你不想 <code>commit</code> 的话，就可以使用该命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+<p>使用该命令可以暂存你的工作目录，后面想恢复工作目录，只需要使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+<p>这样你之前临时保存的代码又回来了</p>
+<h2 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h2><p><code>reflog</code> 可以看到 HEAD 的移动记录，假如之前误删了一个分支，可以通过 <code>git reflog</code> 看到移动 HEAD 的哈希值</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f14df98ce3d83?w=950&amp;h=118&amp;f=png&amp;s=77151" alt=""></p>
+<p>从图中可以看出，HEAD 的最后一次移动行为是 <code>merge</code> 后，接下来分支 <code>new</code> 就被删除了，那么我们可以通过以下命令找回 <code>new</code> 分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout 37d9aca</span><br><span class="line">git checkout -b new</span><br></pre></td></tr></table></figure>
+<p>PS：<code>reflog</code> 记录是时效的，只会保存一段时间内的记录。</p>
+<h2 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h2><p>如果你想删除刚写的 commit，就可以通过以下命令实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+<p>但是 <code>reset</code> 的本质并不是删除了 commit，而是重新设置了 HEAD 和它指向的 branch。</p>
+<h1 id="git-常用操作"><a href="#git-常用操作" class="headerlink" title="git 常用操作"></a>git 常用操作</h1><p>$ git ch(checkout) -b develop  创建开发分支develop</p>
+<p>$ git push  推送当前分支到远端仓库</p>
+<p>$ git st(status)  查看当前分支工作区、暂存区的工作状态</p>
+<p>$ git diff   diff文件的修改</p>
+<p>$ git ci(commit) .  提交本次修改</p>
+<p>$ git fetch –all  拉取所有远端的最新代码 </p>
+<p>$ git merge origin/develop  如果是多人协作，merge同事的修改到当前分支（先人后己原则）</p>
+<p>$ git merge origin/master   上线之前保证当前分支不落后于远端origin/master，一定要merge远端origin/master到当前分支 </p>
+<p>$ git push  推送当前分支到远端仓库 </p>
+<p>$ git merge –no-ff origin/develop  同事review code之后管理员合并origin/develop到远端主干origin/master</p>
+<hr>
+<p>👉 HEAD：当前commit引用$ git version  git版本</p>
+<p>$ git branch  查看本地所有的分支</p>
+<p>$ git branch -r 查看所有远程的分支</p>
+<p>$ git branch -a 查看所有远程分支和本地分支</p>
+<p>$ git branch -d <branchname> 删除本地branchname分支</branchname></p>
+<p>$ git branch -m brancholdname  branchnewname 重命名分支</p>
+<p>$ git branch <branchname>   创建branchname分支</branchname></p>
+<p>$ git checkout <branchname> 切换分支到branchname</branchname></p>
+<p>$ git checkout -b <branchname> 等同于执行上两步，即创建新的分支并切换到该分支</branchname></p>
+<p>$ git checkout – xx/xx  撤销本文件的更改</p>
+<p>$ git pull origin master:master 将远程origin主机的master分支合并到当前master分支,冒号后面的部分表示当前本地所在的分支</p>
+<p>$ git pull origin master –allow-unrelated-histories  允许合并两个不同项目的历史记录</p>
+<p>$ git push origin -d <branchname>   删除远程branchname分支</branchname></p>
+<p>$ git fetch –p  更新分支</p>
+<p>$ git status 查看本地工作区、暂存区文件的修改状态</p>
+<p>$ git add xx  把xx文件添加到暂存区去</p>
+<p>$ git commit -m ‘ ‘  提交文件 -m 后面的是注释</p>
+<p>$ git commit -am(-a -m) 提交所有的修改，等同于上两步</p>
+<p>$ git commit ./xx   等同于git add ./xx + git commit</p>
 
           
         
@@ -1486,6 +2232,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1520,7 +2270,7 @@
                 alt="achenjs" />
             
               <p class="site-author-name" itemprop="name">achenjs</p>
-              <p class="site-description motion-element" itemprop="description">狗要日天</p>
+              <p class="site-description motion-element" itemprop="description">日常复制粘贴</p>
           </div>
 
           
@@ -1530,7 +2280,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1603,7 +2353,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
