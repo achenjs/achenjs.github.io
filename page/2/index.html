@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">25</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">26</span></a>
   </li>
         
         
@@ -310,6 +310,214 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/06/09/2019/June/git/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/09/2019/June/git/README/" itemprop="url">
+                  git的基本操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-09T00:00:00+08:00">2019-06-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:24:32" itemprop="dateModified" datetime="2020-03-05T14:24:32+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><ul>
+<li><a href="#rebase-%E5%90%88%E5%B9%B6">Rebase 合并</a></li>
+<li><a href="#stash">stash</a></li>
+<li><a href="#reflog">reflog</a></li>
+<li><a href="#reset">Reset</a></li>
+</ul>
+<h2 id="Rebase-合并"><a href="#Rebase-合并" class="headerlink" title="Rebase 合并"></a>Rebase 合并</h2><p>该命令可以让和 <code>merge</code> 命令得到的结果基本是一致的。</p>
+<p>通常使用 <code>merge</code> 操作将分支上的代码合并到 <code>master</code> 中，分支样子如下所示</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f109db27be054?w=505&amp;h=461&amp;f=png&amp;s=22796" alt=""></p>
+<p>使用 <code>rebase</code> 后，会将 <code>develop</code> 上的 <code>commit</code> 按顺序移到 <code>master</code> 的第三个 <code>commit</code> 后面，分支样子如下所示</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f11cc2cb8b332?w=505&amp;h=563&amp;f=png&amp;s=26514" alt=""></p>
+<p>Rebase 对比 merge，优势在于合并后的结果很清晰，只有一条线，劣势在于如果一旦出现冲突，解决冲突很麻烦，可能要解决多个冲突，但是 merge 出现冲突只需要解决一次。</p>
+<p>使用 rebase 应该在需要被 rebase 的分支上操作，并且该分支是本地分支。如果 <code>develop</code> 分支需要 rebase 到 <code>master</code> 上去，那么应该如下操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># branch develop</span></span></span><br><span class="line">git rebase master</span><br><span class="line">get checkout master</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 用于将 `master` 上的 HEAD 移动到最新的 commit</span></span></span><br><span class="line">get merge develop</span><br></pre></td></tr></table></figure>
+<h2 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h2><p><code>stash</code> 用于临时报错工作目录的改动。开发中可能会遇到代码写一半需要切分支打包的问题，如果这时候你不想 <code>commit</code> 的话，就可以使用该命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+<p>使用该命令可以暂存你的工作目录，后面想恢复工作目录，只需要使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+<p>这样你之前临时保存的代码又回来了</p>
+<h2 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h2><p><code>reflog</code> 可以看到 HEAD 的移动记录，假如之前误删了一个分支，可以通过 <code>git reflog</code> 看到移动 HEAD 的哈希值</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f14df98ce3d83?w=950&amp;h=118&amp;f=png&amp;s=77151" alt=""></p>
+<p>从图中可以看出，HEAD 的最后一次移动行为是 <code>merge</code> 后，接下来分支 <code>new</code> 就被删除了，那么我们可以通过以下命令找回 <code>new</code> 分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout 37d9aca</span><br><span class="line">git checkout -b new</span><br></pre></td></tr></table></figure>
+<p>PS：<code>reflog</code> 记录是时效的，只会保存一段时间内的记录。</p>
+<h2 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h2><p>如果你想删除刚写的 commit，就可以通过以下命令实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+<p>但是 <code>reset</code> 的本质并不是删除了 commit，而是重新设置了 HEAD 和它指向的 branch。</p>
+<h1 id="git-常用操作"><a href="#git-常用操作" class="headerlink" title="git 常用操作"></a>git 常用操作</h1><p>$ git ch(checkout) -b develop  创建开发分支develop</p>
+<p>$ git push  推送当前分支到远端仓库</p>
+<p>$ git st(status)  查看当前分支工作区、暂存区的工作状态</p>
+<p>$ git diff   diff文件的修改</p>
+<p>$ git ci(commit) .  提交本次修改</p>
+<p>$ git fetch –all  拉取所有远端的最新代码 </p>
+<p>$ git merge origin/develop  如果是多人协作，merge同事的修改到当前分支（先人后己原则）</p>
+<p>$ git merge origin/master   上线之前保证当前分支不落后于远端origin/master，一定要merge远端origin/master到当前分支 </p>
+<p>$ git push  推送当前分支到远端仓库 </p>
+<p>$ git merge –no-ff origin/develop  同事review code之后管理员合并origin/develop到远端主干origin/master</p>
+<hr>
+<p>👉 HEAD：当前commit引用$ git version  git版本</p>
+<p>$ git branch  查看本地所有的分支</p>
+<p>$ git branch -r 查看所有远程的分支</p>
+<p>$ git branch -a 查看所有远程分支和本地分支</p>
+<p>$ git branch -d <branchname> 删除本地branchname分支</branchname></p>
+<p>$ git branch -m brancholdname  branchnewname 重命名分支</p>
+<p>$ git branch <branchname>   创建branchname分支</branchname></p>
+<p>$ git checkout <branchname> 切换分支到branchname</branchname></p>
+<p>$ git checkout -b <branchname> 等同于执行上两步，即创建新的分支并切换到该分支</branchname></p>
+<p>$ git checkout – xx/xx  撤销本文件的更改</p>
+<p>$ git pull origin master:master 将远程origin主机的master分支合并到当前master分支,冒号后面的部分表示当前本地所在的分支</p>
+<p>$ git pull origin master –allow-unrelated-histories  允许合并两个不同项目的历史记录</p>
+<p>$ git push origin -d <branchname>   删除远程branchname分支</branchname></p>
+<p>$ git fetch –p  更新分支</p>
+<p>$ git status 查看本地工作区、暂存区文件的修改状态</p>
+<p>$ git add xx  把xx文件添加到暂存区去</p>
+<p>$ git commit -m ‘ ‘  提交文件 -m 后面的是注释</p>
+<p>$ git commit -am(-a -m) 提交所有的修改，等同于上两步</p>
+<p>$ git commit ./xx   等同于git add ./xx + git commit</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1972,172 +2180,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/01/2019/May/Bind/README/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/01/2019/May/Bind/README/" itemprop="url">
-                  call、apply有什么区别？call、apply和bind的内部实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-01T00:00:00+08:00">2019-05-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-05 14:15:37" itemprop="dateModified" datetime="2020-03-05T14:15:37+08:00">2020-03-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="call、apply有什么区别？call、apply和bind的内部实现"><a href="#call、apply有什么区别？call、apply和bind的内部实现" class="headerlink" title="call、apply有什么区别？call、apply和bind的内部实现"></a>call、apply有什么区别？call、apply和bind的内部实现</h1><p>call、apply的功能相同，区别在于传参的方式不一样：</p>
-<ul>
-<li>fn.call(obj, arg1, arg2, …)，调用一个函数，具有一个指定的this值和分别提供的参数（参数的列表）。</li>
-<li>fn.apply(obj, [argsArray])，调用一个函数，具有一个指定的this值，以及作为一个数组（或类数组对象）提供参数。</li>
-</ul>
-<h2 id="call核心"><a href="#call核心" class="headerlink" title="call核心"></a>call核心</h2><ul>
-<li>将函数设为传入参数的属性</li>
-<li>指定this到函数并传入给定参数执行函数</li>
-<li>如果不传入参数或者参数为null，默认指向为 window/global</li>
-<li>删除参数上的函数</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.call = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的是 null 或者 undefined，那么this指向 window/global</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的不是 null 或者 undefined，那么必须是一个对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">if</span> (!context) &#123;</span><br><span class="line">    <span class="comment">//  context为null或者是undefined</span></span><br><span class="line">    <span class="comment">//  判断是浏览器环境还是node环境</span></span><br><span class="line">    context = <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">'undefined'</span> ? global : <span class="built_in">window</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  context.fn = <span class="keyword">this</span>;  <span class="comment">//  this指向是当前的函数（Function的实例）</span></span><br><span class="line">  <span class="keyword">let</span> rest = [...arguments].slice(<span class="number">1</span>); <span class="comment">//  获取除了this指向对象以外的参数，空数组slice后返回的仍然是空数组</span></span><br><span class="line">  <span class="keyword">let</span> result = context.fn(...rest); <span class="comment">//  隐式绑定，当前函数的this指向了context</span></span><br><span class="line">  <span class="keyword">delete</span> context.fn;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test code</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  name: <span class="string">'Selina'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Chirs'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">job, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">  <span class="built_in">console</span>.log(job, age);</span><br><span class="line">&#125;</span><br><span class="line">bar.call(foo, <span class="string">'programmer'</span>, <span class="number">20</span>);</span><br><span class="line"><span class="comment">//  Selina programmer, 20</span></span><br><span class="line">bar.call(<span class="literal">null</span>, <span class="string">'teacher'</span>, <span class="number">25</span>);</span><br><span class="line"><span class="comment">//  brower环境： Chirs teacher, 25； node环境： undefined teacher, 25</span></span><br></pre></td></tr></table></figure>
-<h2 id="apply核心"><a href="#apply核心" class="headerlink" title="apply核心"></a>apply核心</h2><p>apply的实现和call很类似，但是需要注意他们的参数不一样，apply的第二个参数是数组或类数组。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.apply = <span class="function"><span class="keyword">function</span>(<span class="params">context, rest</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的是 null 或者 undefined，那么this指向 window/global</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的不是 null 或者 undefined，那么必须是一个对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">if</span> (!context) &#123;</span><br><span class="line">    <span class="comment">//  context为null或者是undefined</span></span><br><span class="line">    <span class="comment">//  判断是浏览器环境还是node环境</span></span><br><span class="line">    context = <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">'undefined'</span> ? global : <span class="built_in">window</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  context.fn = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (rest == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">//  undefined 或者 null 不是 Iterator 对象，不能被...</span></span><br><span class="line">    result = context.fn(rest);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> rest === <span class="string">'object'</span>) &#123;</span><br><span class="line">    result = context.fn(...rest);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> result.fn;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test code</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  name: <span class="string">'Selina'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Chirs'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">job, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">  <span class="built_in">console</span>.log(job, age);</span><br><span class="line">&#125;</span><br><span class="line">bar.apply(foo, [<span class="string">'programmer'</span>, <span class="number">20</span>]);</span><br><span class="line"><span class="comment">//  Selina programmer, 20</span></span><br><span class="line">bar.apply(<span class="literal">null</span>, [<span class="string">'teacher'</span>, <span class="number">25</span>]);</span><br><span class="line"><span class="comment">// brower环境： Chirs teacher, 25； node环境： undefined teacher, 25</span></span><br></pre></td></tr></table></figure>
-<h2 id="bind核心"><a href="#bind核心" class="headerlink" title="bind核心"></a>bind核心</h2><p>bind 和 call/apply 有一个很重要的区别，一个函数被 call/apply 的时候，会直接调用，但是 bind会创建一个新函数。当这个新函数被调用时，bind()的第一个参数将<br>作为它运行时的this，之后的一系列参数将会在传递的实参前传入作为它的参数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'not a function'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">  Fn.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">  <span class="keyword">let</span> bound = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [...args, ...arguments];  <span class="comment">//  bind传递的参数和函数调用时传递的参数拼接</span></span><br><span class="line">    context = <span class="keyword">this</span> <span class="keyword">instanceof</span> Fn ? <span class="keyword">this</span> : context || <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> self.apply(context, res);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//  原型链</span></span><br><span class="line">  bound.prototype = <span class="keyword">new</span> Fn();</span><br><span class="line">  <span class="keyword">return</span> bound;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Jack'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">person</span>(<span class="params">age, job, gender</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name , age, job, gender);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Yve = &#123;<span class="attr">name</span> : <span class="string">'Yvette'</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> result = person.bind(Yve, <span class="number">22</span>, <span class="string">'enginner'</span>)(<span class="string">'female'</span>);</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2189,7 +2231,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
