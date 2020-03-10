@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title><![CDATA[如何实现ajax]]></title>
     <url>%2F2020%2F03%2F10%2F2020%2F3%E6%9C%88%2F0310%2F</url>
-    <content type="text"><![CDATA[ajax ajax是异步的JavaScript和XML。ajax是一种通过在后台与服务器进行少量数据交换，在无需重新加载整个网页的情况下，更新部分网页的技术 如何实现ajax 创建XMLHttpRequest实例。通过创建一个XMLHttpRequest对象得到一个实例，调用实例的open()方法为这次ajax请求设定相应的HTTP方法，相应的地址以及是否异步。 发送http请求。调用spen()方法发送请求，其可以接收一个参数，既要作为请求主体所发送的数据。 接收服务器相应数据。监听readystatechange事件，通过该实例的readystate属性来判断请求状态，其分为0，1，2，3，4，五种状态 属性 描述 onreadystatechange 存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。 readyState 存有XMLHttpRequest的状态。从0到4发生变化。 0: 请求未初始化 1: 已建立连接 2: 请求已接收 3: 请求处理中 * 4: 请求已完成，且响应已就绪 status 200: “OK”404: 未找到页面 12345678910111213var xhr;if (window.XMLHttpRequest) &#123; xhr = new XMLHttpRequest();&#125; else &#123; xhr = new ActiveXObject('Microsoft.XMLHTTP');&#125;xhr.onreadystatechange(function() &#123; if (xhr.redayState === 4 &amp;&amp; xhr.status === 200) &#123; console.log(xhr.responseText); &#125;&#125;)xhr.open('GET', 'www.xxxx.com/xxx/xxx', true);xhr.send(null);]]></content>
+    <content type="text"><![CDATA[ajax ajax是异步的JavaScript和XML。ajax是一种通过在后台与服务器进行少量数据交换，在无需重新加载整个网页的情况下，更新部分网页的技术 如何实现ajax 创建XMLHttpRequest实例。通过创建一个XMLHttpRequest对象得到一个实例，调用实例的open()方法为这次ajax请求设定相应的HTTP方法，相应的地址以及是否异步。 发送http请求。调用spen()方法发送请求，其可以接收一个参数，既要作为请求主体所发送的数据。 接收服务器相应数据。监听readystatechange事件，通过该实例的readystate属性来判断请求状态，其分为0，1，2，3，4五种状态 属性 描述 onreadystatechange 存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。 readyState 存有XMLHttpRequest的状态。从0到4发生变化。 0: 请求未初始化 1: 已建立连接 2: 请求已接收 3: 请求处理中 * 4: 请求已完成，且响应已就绪 status 200: “OK”404: 未找到页面 1234567891011121314var xhr;if (window.XMLHttpRequest) &#123; xhr = new XMLHttpRequest();&#125; else &#123; xhr = new ActiveXObject('Microsoft.XMLHTTP');&#125;xhr.onreadystatechange(function() &#123; if (xhr.redayState === 4 &amp;&amp; xhr.status === 200) &#123; console.log(xhr.responseText); console.log(xhr.responseXml); &#125;&#125;)xhr.open('GET', 'www.xxxx.com/xxx/xxx', true);xhr.send(null);]]></content>
+      <tags>
+        <tag>js</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[JavaScript 观察者模式与发布订阅模式]]></title>
