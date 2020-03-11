@@ -110,16 +110,16 @@
 
 
 
-  <meta name="description" content="日常复制粘贴">
+  <meta name="description" content="日常复制粘贴,问啥啥不会">
 <meta property="og:type" content="website">
 <meta property="og:title" content="achen的个人博客">
 <meta property="og:url" content="https://achenjs.github.io/index.html">
 <meta property="og:site_name" content="achen的个人博客">
-<meta property="og:description" content="日常复制粘贴">
+<meta property="og:description" content="日常复制粘贴,问啥啥不会">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="achen的个人博客">
-<meta name="twitter:description" content="日常复制粘贴">
+<meta name="twitter:description" content="日常复制粘贴,问啥啥不会">
 
 
 
@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">27</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">28</span></a>
   </li>
         
         
@@ -326,11 +326,246 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/10/2020/3月/0310-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/10/2020/3月/0310-01/" itemprop="url">
+                  面经
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-10 22:26:00" itemprop="dateCreated datePublished" datetime="2020-03-10T22:26:00+08:00">2020-03-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-11 13:35:45" itemprop="dateModified" datetime="2020-03-11T13:35:45+08:00">2020-03-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="说说你对JS模块化的理解"><a href="#说说你对JS模块化的理解" class="headerlink" title="说说你对JS模块化的理解"></a>说说你对JS模块化的理解</h4><p>模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。</p>
+<p>那么模块化的好处也就显然易见了</p>
+<ul>
+<li>解决命名冲突</li>
+<li>依赖管理</li>
+<li>代码更加可读</li>
+<li>提高复用性</li>
+</ul>
+<p>js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = (<span class="function"><span class="keyword">function</span>(<span class="params">window</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//  private</span></span><br><span class="line">  <span class="keyword">var</span> moduleName = <span class="string">'module'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//  public</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setModuleName</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    moduleName = name;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">//  public</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getModuleName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> moduleName;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;setModuleName, getModuleName&#125;;</span><br><span class="line">&#125;)(<span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
+<p>它通过闭包的特性打开了一个新的作用域，缓解了全局作用域命名冲突和安全性的问题。但是，开发者并不能够用它来组织和拆分代码，于是乎便出现了以此为基石的模块化规范。</p>
+<h5 id="1-CommonJs规范（同步加载模块）"><a href="#1-CommonJs规范（同步加载模块）" class="headerlink" title="1. CommonJs规范（同步加载模块）"></a>1. CommonJs规范（同步加载模块）</h5><ul>
+<li>允许模块通过require的方法来同步加载所要依赖的其他模块，然后通过exports或module.exports来导出需要暴露的接口</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  a.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">exports.a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  b.js</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">module</span>.a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// require函数同步加载了a.js，并且返回了module.exports输出字面量的拷贝值。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>优点：</li>
+</ul>
+<blockquote>
+<ol>
+<li>简单容易使用</li>
+<li>服务器端模块便于复用</li>
+</ol>
+</blockquote>
+<ul>
+<li>缺点：</li>
+</ul>
+<blockquote>
+<ol>
+<li>同步加载的方式不适合在浏览器环境中使用，同步意味着阻塞加载，浏览器资源是异步加载</li>
+<li>不能非阻塞的并行加载多个模块</li>
+</ol>
+</blockquote>
+<h5 id="2-AMD（异步加载模块）"><a href="#2-AMD（异步加载模块）" class="headerlink" title="2. AMD（异步加载模块）"></a>2. AMD（异步加载模块）</h5><p>区别于CommonJS，AMD规范的被依赖模块是异步加载的，而定义的模块是被当作回调函数来执行的，依赖于require.js模块管理工具库。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./a'</span>, <span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    a.do();</span><br><span class="line">    b.do();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="3-CMD（异步加载模块）"><a href="#3-CMD（异步加载模块）" class="headerlink" title="3. CMD（异步加载模块）"></a>3. CMD（异步加载模块）</h5><p>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。AMD 推崇依赖前置，CMD 推崇依赖就近。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, exports, module</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span><br><span class="line">  a.doSomething();</span><br><span class="line">  <span class="comment">// 异步加载一个模块，在加载完成时，执行回调</span></span><br><span class="line">  <span class="built_in">require</span>.async([<span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">    b.doSomething();</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 对外暴露成员</span></span><br><span class="line">  exports.doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 使用模块</span></span><br><span class="line">seajs.use(<span class="string">'path'</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="4-ES6-module"><a href="#4-ES6-module" class="headerlink" title="4. ES6 module"></a>4. ES6 module</h5><p>ES6的模块化已经不是规范了，而是JS语言的特性。随着ES6的推出，AMD和CMD也随之成为了历史。ES6模块与模块化规范相比，有两大特点：</p>
+<ul>
+<li>模块化规范输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>模块化规范是运行时加载，ES6 模块是编译时输出接口。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入的语法就这样 import，XXX 这里有很多语法变化</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="comment">// 导出也有很多语法变化的写法，基本的就这两个，反正语法没什么难得</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="如何理解原型？如何理解原型链？"><a href="#如何理解原型？如何理解原型链？" class="headerlink" title="如何理解原型？如何理解原型链？"></a>如何理解原型？如何理解原型链？</h4><ul>
+<li>prototype<br>这是一个显式原型属性，任何一个对象都有原型，但是有一个例外</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun = <span class="built_in">Function</span>.prototype.bind();</span><br></pre></td></tr></table></figure>
+<p>如果你已上述方法创建一个函数，那么可以发现这个函数不具有prototype属性。</p>
+<p><strong>prototype 如何产生的</strong><br>当我们声明一个函数时，这个属性就被自动创建了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>并且这个属性的值是一个对象（也就是原型），只有一个属性constructor</p>
+<ul>
+<li><p>constructor<br>constructor 是一个公有且不可枚举的属性。一旦我们改变了函数的prototype，那么新对象就没有这个属性了（当然可以通过原型链取到constructor）</p>
+</li>
+<li><p>__proto__<br>这是每个对象都有的隐式原型属性，指向了创建该对象的构造函数的原型。其实这个属性指向了 [[prototype]]，但是 [[prototype]] 是内部属性，我们并不能访问到，所以使用 __proto__ 来访问。</p>
+</li>
+</ul>
+<p>**实例对象的 __proto__ 如何产生的</p>
+<p>当我们使用 new 操作符时，生成的实例对象拥有了 <em>proto</em>属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">//  这个函数是 Function的实例对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  纯对象的原型</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;.__proto__); <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stu = <span class="keyword">new</span> Student(<span class="string">'wang'</span>);</span><br><span class="line"><span class="comment">//  Student 类型实例的原型，默认也是一个对象</span></span><br><span class="line"><span class="built_in">console</span>.log(stu.__proto__); <span class="comment">//  &#123; constructor: f &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(stu.__proto__.constructor); <span class="comment">//  Student(name, age) &#123; this.name = name &#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="new做了什么，new的模拟实现"><a href="#new做了什么，new的模拟实现" class="headerlink" title="new做了什么，new的模拟实现"></a>new做了什么，new的模拟实现</h4><ol>
+<li>创建了一个全新的对象。</li>
+<li>这个对象会被执行[[Prototype]]（也就是<strong>proto</strong>）链接。</li>
+<li>生成的新对象会绑定到函数调用的this。</li>
+<li>通过new创建的每个对象将最终被[[Prototype]]链接到这个函数的prototype对象上。</li>
+<li>如果函数没有返回对象类型Object(包含Functoin, Array, Date, RegExg, Error)，那么new表达式中的函数调用会自动返回这个新的对象。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟实现 new 操作符</span></span><br><span class="line"><span class="comment"> * @param  &#123;Function&#125; ctor [构造函数]</span></span><br><span class="line"><span class="comment"> * @return &#123;Object|Function|Regex|Date|Error&#125;      [返回结果]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个空的对象</span></span><br><span class="line">    <span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">    <span class="comment">// 获得构造函数</span></span><br><span class="line">    <span class="keyword">let</span> Con = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">    <span class="comment">// 链接到原型</span></span><br><span class="line">    obj.__proto__ = Con.prototype</span><br><span class="line">    <span class="comment">// 绑定 this，执行构造函数</span></span><br><span class="line">    <span class="keyword">let</span> result = Con.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">    <span class="comment">// 确保 new 出来的是个对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">'object'</span> ? result : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="谈谈小程序的登录授权"><a href="#谈谈小程序的登录授权" class="headerlink" title="谈谈小程序的登录授权"></a>谈谈小程序的登录授权</h4><p>1.调用 wx.login() 获取 临时登录凭证code ，并回传到开发者服务器。</p>
+<p>2.调用 code2Session 接口，换取 用户唯一标识 OpenID 和 会话密钥 session_key。</p>
+<h4 id="vue的几种传参方式"><a href="#vue的几种传参方式" class="headerlink" title="vue的几种传参方式"></a>vue的几种传参方式</h4><ul>
+<li><p>props</p>
+</li>
+<li><p>vuex</p>
+</li>
+<li><p>$parent</p>
+</li>
+<li><p>$children</p>
+</li>
+<li><p>provide-inject</p>
+</li>
+</ul>
+<p>…项目相关</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/10/2020/3月/0310/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -503,7 +738,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -676,7 +911,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -909,7 +1144,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1074,7 +1309,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1263,7 +1498,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1431,7 +1666,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1612,7 +1847,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1840,7 +2075,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1996,221 +2231,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/10/09/2019/浅谈iframe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/09/2019/浅谈iframe/" itemprop="url">
-                  iframe的优缺点
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-09 11:14:34" itemprop="dateCreated datePublished" datetime="2019-10-09T11:14:34+08:00">2019-10-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-05 14:14:23" itemprop="dateModified" datetime="2020-03-05T14:14:23+08:00">2020-03-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="iframe的优缺点"><a href="#iframe的优缺点" class="headerlink" title="iframe的优缺点"></a>iframe的优缺点</h1><h2 id="iframe的优点："><a href="#iframe的优点：" class="headerlink" title="iframe的优点："></a>iframe的优点：</h2><ol>
-<li><p>iframe能够原封不动的把嵌入的网页展现出来。</p>
-</li>
-<li><p>如果有多个网页引用iframe，那么你只需要修改iframe的内容，就可以实现调用的每一个页面内容的更改，方便快捷。</p>
-</li>
-<li><p>网页如果为了统一风格，头部和版本都是一样的，就可以写成一个页面，用iframe来嵌套，可以增加代码的可重用。</p>
-</li>
-<li><p>如果遇到加载缓慢的第三方内容如图标和广告，这些问题可以由iframe来解决。</p>
-</li>
-</ol>
-<h2 id="iframe的缺点："><a href="#iframe的缺点：" class="headerlink" title="iframe的缺点："></a>iframe的缺点：</h2><ol>
-<li><p>会产生很多页面，不容易管理。</p>
-</li>
-<li><p>iframe框架结构有时会让人感到迷惑，如果框架个数多的话，可能会出现上下、左右滚动条，会分散访问者的注意力，用户体验度差。</p>
-</li>
-<li><p>代码复杂，无法被一些搜索引擎索引到，这一点很关键，现在的搜索引擎爬虫还不能很好的处理iframe中的内容，所以使用iframe会不利于搜索引擎优化。</p>
-</li>
-<li><p>很多的移动设备（PDA 手机）无法完全显示框架，设备兼容性差。</p>
-</li>
-<li><p>iframe框架页面会增加服务器的http请求，对于大型网站不是可取的。</p>
-</li>
-</ol>
-<h3 id="iframe迁移问题以及解决方案"><a href="#iframe迁移问题以及解决方案" class="headerlink" title="iframe迁移问题以及解决方案"></a>iframe迁移问题以及解决方案</h3><ol>
-<li>import React, { propTypes } from ‘react’;</li>
-</ol>
-<p>error: PropTypes is undefined;</p>
-<p>出现原因: React在新版本中废弃了集成类似propTypes这种第三方库方案。</p>
-<p>解决方案: 新仓库使用的react版本较高，以上方式已被废弃，应使用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>import ‘./style.less’;</li>
-</ol>
-<p>error: 样式失效问题。</p>
-<p>出现原因: 新项目中开启了css-module，需要通过配置:global来声明一个全局class，使其在全局起作用。</p>
-<p>解决方案1:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### <span class="selector-tag">style</span><span class="selector-class">.less</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">    <span class="selector-pseudo">:global</span> &#123;</span><br><span class="line">        <span class="selector-class">.items</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./style.less'</span>;</span><br><span class="line"></span><br><span class="line">&lt;div className=&#123;styles.content&#125;&gt;</span><br><span class="line">    &lt;div className=<span class="string">"items"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
-<p>解决方案2:</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># <span class="selector-tag">style</span><span class="selector-class">.less</span></span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">:global</span> &#123;</span><br><span class="line">    <span class="selector-class">.content</span> &#123;</span><br><span class="line">        <span class="selector-class">.items</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./style.less'</span>;</span><br><span class="line">&lt;div className=<span class="string">"content"</span>&gt;</span><br><span class="line">    &lt;div className=<span class="string">"items"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
-<p>推荐使用方案1，可以利用css-module的命名规则减少项目中样式的冲突问题。方案2改动小但是太暴力，非常可能产生样式冲突问题。</p>
-<ol start="3">
-<li>comm和components中组件出现不可用情况。</li>
-</ol>
-<p>error: 功能不可用情况。</p>
-<p>解决方案: 建议直接使用antd替换，需要花上一点时间对应antd api做一定代码重构。(!这块需要仔细效验功能是否正常)</p>
-<ol start="4">
-<li>ec_fe中使用了Component.contextTypes。</li>
-</ol>
-<p>例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Manage.contextTypes = &#123;</span><br><span class="line">    history: PropTypes.object.isRequired,</span><br><span class="line">    store: PropTypes.object.isRequired</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Warning: Failed context type: The context <code>history</code> is marked as required in <code>Connect(ContractReview)</code>, but its value is <code>undefined</code>.</p>
-<p>解决方案：拆分出去的仓库，react-router版本使用的是4.x，已经不需要像老版本一样一层层传递history或者绑定在Context上共享的方式。</p>
-<ol start="5">
-<li>ec_fe中使用了this.props.router等路由api</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props.router.replace(&#123;</span><br><span class="line">    pathname: <span class="string">`/admin/web/packageconfig/function.html`</span>,</span><br><span class="line">    query: &#123;</span><br><span class="line">        id: moduleList[<span class="number">0</span>].f_id,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>错误：index.jsx:59 Uncaught TypeError: Cannot read property ‘replace’ of undefined</p>
-<p>解决方案：拆分出去的仓库，react-router版本使用的是4.x，请使用react-router-dom提供的api修改。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props.history.replace(&#123;</span><br><span class="line">    pathname: <span class="string">`/packageconfig/funModule`</span>,</span><br><span class="line">    search: <span class="string">`id=<span class="subst">$&#123;moduleList[<span class="number">0</span>].f_id&#125;</span>`</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><a href="https://www.jianshu.com/p/8fbee843437c" target="_blank" rel="noopener">浅谈iframe</a></li>
-<li><a href="https://reacttraining.com/react-router/web/api/history/history-is-mutable" target="_blank" rel="noopener">react-router-dom</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2252,7 +2272,7 @@
                 alt="achen" />
             
               <p class="site-author-name" itemprop="name">achen</p>
-              <p class="site-description motion-element" itemprop="description">日常复制粘贴</p>
+              <p class="site-description motion-element" itemprop="description">日常复制粘贴,问啥啥不会</p>
           </div>
 
           
@@ -2262,7 +2282,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2281,7 +2301,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

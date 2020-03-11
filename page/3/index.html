@@ -110,16 +110,16 @@
 
 
 
-  <meta name="description" content="日常复制粘贴">
+  <meta name="description" content="日常复制粘贴,问啥啥不会">
 <meta property="og:type" content="website">
 <meta property="og:title" content="achen的个人博客">
 <meta property="og:url" content="https://achenjs.github.io/page/3/index.html">
 <meta property="og:site_name" content="achen的个人博客">
-<meta property="og:description" content="日常复制粘贴">
+<meta property="og:description" content="日常复制粘贴,问啥啥不会">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="achen的个人博客">
-<meta name="twitter:description" content="日常复制粘贴">
+<meta name="twitter:description" content="日常复制粘贴,问啥啥不会">
 
 
 
@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">27</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">28</span></a>
   </li>
         
         
@@ -326,11 +326,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/05/2019/May/Compatible/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/05/2019/May/Compatible/README/" itemprop="url">
+                  常见的浏览器兼容问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-05 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-05T00:00:00+08:00">2019-05-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:17:22" itemprop="dateModified" datetime="2020-03-05T14:17:22+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="常见的浏览器兼容问题"><a href="#常见的浏览器兼容问题" class="headerlink" title="常见的浏览器兼容问题"></a>常见的浏览器兼容问题</h1><h2 id="html中的兼容问题"><a href="#html中的兼容问题" class="headerlink" title="html中的兼容问题"></a>html中的兼容问题</h2><h3 id="不同浏览器的标签默认的外补丁和内补丁不同"><a href="#不同浏览器的标签默认的外补丁和内补丁不同" class="headerlink" title="不同浏览器的标签默认的外补丁和内补丁不同"></a>不同浏览器的标签默认的外补丁和内补丁不同</h3><ul>
+<li>场景：随便写几个标签，不加样式控制的情况下，各自的margin和padding差异较大。</li>
+<li>解决方法：上来先消除默认样式* {margin: 0, padding: 0}</li>
+</ul>
+<h3 id="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"><a href="#块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）" class="headerlink" title="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"></a>块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）</h3><ul>
+<li>场景：常见症状是IE6后面的一块被顶到下一行;</li>
+<li>解决方法：在float的标签样式控制中加入display: inline-block; 将其转化为行内属性</li>
+</ul>
+<h3 id="IE6-中z-index失效"><a href="#IE6-中z-index失效" class="headerlink" title="IE6 中z-index失效"></a>IE6 中z-index失效</h3><ul>
+<li>场景：元素的父级元素设置的z-index为1，那么其子级元素再设置z-index时会失效，其层级会继承父级元素的设置，造成某些层级调整上的bug</li>
+<li>原因：z-index起作用有个前提，就是元素的position属性要是relative、absolute或者fixed。</li>
+<li>解决方案：1. position: relative 改为 position: absolute; 2. 去除浮动; 3. 浮动元素添加position属性（如relative，absolute等）。</li>
+</ul>
+<h3 id="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"><a href="#在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了" class="headerlink" title="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"></a>在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了</h3><ul>
+<li>正确的a标签顺序：link/visited/hover/active</li>
+</ul>
+<h3 id="24位png图片，IE6中不兼容透明底儿"><a href="#24位png图片，IE6中不兼容透明底儿" class="headerlink" title="24位png图片，IE6中不兼容透明底儿"></a>24位png图片，IE6中不兼容透明底儿</h3><ul>
+<li>解决方式：1. 使用8位png图片; 2. 为ie6准备一套特殊的图片</li>
+</ul>
+<h2 id="js在不同浏览器中的兼容问题"><a href="#js在不同浏览器中的兼容问题" class="headerlink" title="js在不同浏览器中的兼容问题"></a>js在不同浏览器中的兼容问题</h2><h3 id="事件监听的兼容"><a href="#事件监听的兼容" class="headerlink" title="事件监听的兼容"></a>事件监听的兼容</h3><ul>
+<li>IE不支持addEventListener;</li>
+<li>解决：给IE使用attachEvent</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addHandler = <span class="function"><span class="keyword">function</span>(<span class="params">e, type, handler</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.addEventListener) &#123;</span><br><span class="line">    e.addEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.attachEvent) &#123;</span><br><span class="line">    e.attachEvent(<span class="string">'on'</span> + type, handler);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    e[<span class="string">'on'</span> + type] = handler;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> removeHandler = <span class="function"><span class="keyword">function</span>(<span class="params">e, type, handler</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.removeEventListener) &#123;</span><br><span class="line">    e.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.detachEvent) &#123;</span><br><span class="line">    e.detachEvent(<span class="string">'on'</span> + type, handler);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    on[<span class="string">'on'</span> + type] = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="event-targey的兼容，引发事件的DOM元素。"><a href="#event-targey的兼容，引发事件的DOM元素。" class="headerlink" title="event.targey的兼容，引发事件的DOM元素。"></a>event.targey的兼容，引发事件的DOM元素。</h3><ul>
+<li>IE 6789不支持event.target</li>
+<li>解决方法：event.srcElement;</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target = event.target || event.srcElement;</span><br></pre></td></tr></table></figure>
+<h3 id="阻止系统默认的兼容"><a href="#阻止系统默认的兼容" class="headerlink" title="阻止系统默认的兼容"></a>阻止系统默认的兼容</h3><ul>
+<li>IE 6789不支持event.preventDefault;</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.preventDefault ? event.preventDefault() : event.returnValue = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="阻止事件冒泡的兼容"><a href="#阻止事件冒泡的兼容" class="headerlink" title="阻止事件冒泡的兼容"></a>阻止事件冒泡的兼容</h3><ul>
+<li>IE 6789不支持event.stopPropagation;</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.stopPropagation ? event.stopPropagation() : event.cancelBubble = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/03/2019/May/Classes/README/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -516,7 +703,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -682,7 +869,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -869,7 +1056,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1283,7 +1470,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1500,7 +1687,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1694,7 +1881,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
@@ -1876,7 +2063,7 @@
                 alt="achen" />
             
               <p class="site-author-name" itemprop="name">achen</p>
-              <p class="site-description motion-element" itemprop="description">日常复制粘贴</p>
+              <p class="site-description motion-element" itemprop="description">日常复制粘贴,问啥啥不会</p>
           </div>
 
           
@@ -1886,7 +2073,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1905,7 +2092,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
