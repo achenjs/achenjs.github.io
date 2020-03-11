@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="TCP传输控制协议（TCP，Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层通信协议。TCP 基本是和 UDP 反着来，建立连接断开连接都需要先需要进行握手。在传输数据的过程中，通过各种算法保证数据的可靠性，当然带来的问题就是相比 UDP 来说不那么的高效。 三次握手首先假设主动发起请求的一端称为客户端，被动连接的一端称为服务端。不管是客户端">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-11T06:48:24.512Z">
+<meta property="og:updated_time" content="2020-03-11T06:56:23.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP">
 <meta name="twitter:description" content="TCP传输控制协议（TCP，Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层通信协议。TCP 基本是和 UDP 反着来，建立连接断开连接都需要先需要进行握手。在传输数据的过程中，通过各种算法保证数据的可靠性，当然带来的问题就是相比 UDP 来说不那么的高效。 三次握手首先假设主动发起请求的一端称为客户端，被动连接的一端称为服务端。不管是客户端">
@@ -369,7 +369,7 @@
                 
               
 
-              <time title="创建时间：2020-03-11 14:30:00 / 修改时间：14:48:24" itemprop="dateCreated datePublished" datetime="2020-03-11T14:30:00+08:00">2020-03-11</time>
+              <time title="创建时间：2020-03-11 14:30:00 / 修改时间：14:56:23" itemprop="dateCreated datePublished" datetime="2020-03-11T14:30:00+08:00">2020-03-11</time>
             
 
             
@@ -437,12 +437,17 @@
 <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p>1、ACK 是TCP报头的控制位之一，对数据进行确认。确认由目的端发出， 用它来告诉发送端这个序列号之前的数据段都收到了。 比如确认号为X，则表示前X-1个数据段都收到了，只有当ACK=1时,确认号才有效，当ACK=0时，确认号无效，这时会要求重传数据，保证数据的完整性。</p>
 <p>2、SYN 同步序列号，TCP建立连接时将这个位置1。</p>
 <p>3、FIN 发送端完成发送任务位，当TCP完成数据传输需要断开时， 提出断开连接的一方将这位置1。</p>
-<h2 id="小结TCP与UDP的区别："><a href="#小结TCP与UDP的区别：" class="headerlink" title="小结TCP与UDP的区别："></a>小结TCP与UDP的区别：</h2><p>1、基于连接与无连接；</p>
-<p>2、对系统资源的要求（TCP较多，UDP少）；</p>
-<p>3、UDP程序结构较简单；</p>
-<p>4、流模式与数据报模式；</p>
-<p>5、TCP保证数据正确性，UDP可能丢包；</p>
-<p>6、TCP保证数据顺序，UDP不保证。</p>
+<h2 id="小结TCP与UDP的区别："><a href="#小结TCP与UDP的区别：" class="headerlink" title="小结TCP与UDP的区别："></a>小结TCP与UDP的区别：</h2><p>1.（基于连接vs无连接）tcp是面向连接的（三次握手；四次挥手）；udp不是面向连接的<br>2.（重量级vs轻量级）tcp是一个重量级的协议；udp则是轻量级的协议。一个tcp数据报的报头大小最少20字节，udp数据报的包头固定8个字节<br>3.（可靠性）tcp交付保证：如果消息在传输中丢失，那么它将重发；udp没有交付保证，一个数据包在运输过程中可能丢失。<br>4.（有序性）消息到达网络的另一端可能是无序的，tcp协议将为你拍好序。Udp不提供任何有序性的保证。<br>5.（速度）tcp慢，适合传输大量数据；udp快，适合传输少量数据。<br>6.（流量控制和拥塞控制）TCP有流量控制和拥塞控制，udp没有。</p>
+<ol start="7">
+<li>tcp面向字节流，udp面向报文</li>
+<li>tcp只能单播，不能发送广播和组播；udp可以广播和组播。</li>
+</ol>
+<h3 id="流量控制和拥塞控制："><a href="#流量控制和拥塞控制：" class="headerlink" title="流量控制和拥塞控制："></a>流量控制和拥塞控制：</h3><ul>
+<li><p>流量控制：就是让发送方发送速率不要太快，要让接收方来的及接收。</p>
+</li>
+<li><p>拥塞控制：防止过多的数据注入到网络中，这样可以使网络中的路由器或链路不致过载。拥塞控制所要做的都有一个前提：网络能够承受现有的网络负荷。拥塞控制是一个全局性的过程，涉及到所有的主机、路由器，以及与降低网络传输性能有关的所有因素。</p>
+</li>
+</ul>
 
       
     </div>
@@ -631,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">1.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三次握手"><span class="nav-number">1.1.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四次挥手"><span class="nav-number">1.2.</span> <span class="nav-text">四次挥手</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释"><span class="nav-number"></span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结TCP与UDP的区别："><span class="nav-number"></span> <span class="nav-text">小结TCP与UDP的区别：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">1.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三次握手"><span class="nav-number">1.1.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四次挥手"><span class="nav-number">1.2.</span> <span class="nav-text">四次挥手</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#名词解释"><span class="nav-number"></span> <span class="nav-text">名词解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结TCP与UDP的区别："><span class="nav-number"></span> <span class="nav-text">小结TCP与UDP的区别：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流量控制和拥塞控制："><span class="nav-number">1.</span> <span class="nav-text">流量控制和拥塞控制：</span></a></li></ol></div>
             
 
           </div>
