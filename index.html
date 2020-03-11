@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">28</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">30</span></a>
   </li>
         
         
@@ -310,6 +310,338 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/11/2020/3月/0311-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/11/2020/3月/0311-02/" itemprop="url">
+                  TCP
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-11 14:30:00 / 修改时间：14:48:24" itemprop="dateCreated datePublished" datetime="2020-03-11T14:30:00+08:00">2020-03-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>传输控制协议（TCP，Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层通信协议。<br>TCP 基本是和 UDP 反着来，建立连接断开连接都需要先需要进行握手。在传输数据的过程中，通过各种算法保证数据的可靠性，当然带来的问题就是相比 UDP 来说不那么的高效。</p>
+<h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>首先假设主动发起请求的一端称为客户端，被动连接的一端称为服务端。不管是客户端还是服务端，TCP 连接建立完后都能发送和接收数据，所以 TCP 是一个全双工的协议。<br>起初，两端都为 CLOSED 状态。在通信开始前，双方都会创建 TCB。 服务器创建完 TCB 后便进入 LISTEN 状态，此时开始等待客户端发送数据。</p>
+<ul>
+<li>第一次握手</li>
+</ul>
+<p>客户端向服务端发送连接请求报文段。该报文段中包含自身的数据通讯初始序号。请求发送后，客户端便进入 SYN-SENT 状态。</p>
+<ul>
+<li>第二次握手</li>
+</ul>
+<p>服务端收到连接请求报文段后，如果同意连接，则会发送一个应答，该应答中也会包含自身的数据通讯初始序号，发送完成后便进入 SYN-RECEIVED 状态。</p>
+<ul>
+<li>第三次握手</li>
+</ul>
+<p>当客户端收到连接同意的应答后，还要向服务端发送一个确认报文。客户端发完这个报文段后便进入 ESTABLISHED 状态，服务端收到这个应答后也进入 ESTABLISHED 状态，此时连接建立成功。</p>
+<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><p>TCP 是全双工的，在断开连接时两端都需要发送 FIN 和 ACK。</p>
+<p>第一次： 当主机A完成数据传输后,将控制位FIN置1，提出停止TCP连接的请求 ；</p>
+<p>第二次： 主机B收到FIN后对其作出响应，确认这一方向上的TCP连接将关闭,将ACK置1；</p>
+<p>第三次： 由B 端再提出反方向的关闭请求,将FIN置1 ；</p>
+<p>第四次： 主机A对主机B的请求进行确认，将ACK置1，双方向的关闭结束。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p>1、ACK 是TCP报头的控制位之一，对数据进行确认。确认由目的端发出， 用它来告诉发送端这个序列号之前的数据段都收到了。 比如确认号为X，则表示前X-1个数据段都收到了，只有当ACK=1时,确认号才有效，当ACK=0时，确认号无效，这时会要求重传数据，保证数据的完整性。</p>
+<p>2、SYN 同步序列号，TCP建立连接时将这个位置1。</p>
+<p>3、FIN 发送端完成发送任务位，当TCP完成数据传输需要断开时， 提出断开连接的一方将这位置1。</p>
+<h2 id="小结TCP与UDP的区别："><a href="#小结TCP与UDP的区别：" class="headerlink" title="小结TCP与UDP的区别："></a>小结TCP与UDP的区别：</h2><p>1、基于连接与无连接；</p>
+<p>2、对系统资源的要求（TCP较多，UDP少）；</p>
+<p>3、UDP程序结构较简单；</p>
+<p>4、流模式与数据报模式；</p>
+<p>5、TCP保证数据正确性，UDP可能丢包；</p>
+<p>6、TCP保证数据顺序，UDP不保证。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/11/2020/3月/0311-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/11/2020/3月/0311-01/" itemprop="url">
+                  UDP
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-11 13:40:00 / 修改时间：14:47:50" itemprop="dateCreated datePublished" datetime="2020-03-11T13:40:00+08:00">2020-03-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><p>UDP协议是面向无连接的，也就是说不需要在正式传递数据之前先连接起双方。然后UDP协议只是数据报文的搬运工，不保证有序且不丢失的传递到对端，并且UDP协议也没有任何控制流量的算法，总的来说UDP相较于TCP更加的轻便。</p>
+<p>我们经常使用“ping”命令来测试两台主机之间TCP/IP通信是否正常， 其实“ping”命令的原理就是向对方主机发送UDP数据包，然后对方主机确认收到数据包， 如果数据包是否到达的消息及时反馈回来，那么网络就是通的。</p>
+<h4 id="面向无连接"><a href="#面向无连接" class="headerlink" title="面向无连接"></a>面向无连接</h4><p>UDP是不需要和TCP一样在发送数据前进行3次握手建立连接的，想发数据就可以发送了。<br>并且也只是数据报文的搬运工，不会对数据报文进行任何拆分和拼接操作。</p>
+<p>具体来说：</p>
+<ul>
+<li>在发送端，应用层将数据传递给传输层的UDP协议，UDP只会给数据增加一个UDP头标识下是UDP协议，然后就传递给网络层</li>
+<li>在接收端，网络层将数据传递给传输层，UDP只去除IP报文头就传递给应用层，不会任何拼接操作</li>
+</ul>
+<h4 id="不可靠性"><a href="#不可靠性" class="headerlink" title="不可靠性"></a>不可靠性</h4><p>首先不可靠性体现在无连接上，通信都不需要建立连接，想发就发，这样的情况肯定不可靠。<br>并且收到什么数据就传递什么数据，并且也不会备份数据，发送数据也不会关心对方是否已经正确接收到数据了。<br>再者网络环境时好时坏，但是 UDP 因为没有拥塞控制，一直会以恒定的速度发送数据。即使网络条件不好，也不会对发送速率进行调整。这样实现的弊端就是在网络条件不好的情况下可能会导致丢包，但是优点也很明显，在某些实时性要求高的场景（比如电话会议）就需要使用 UDP 而不是 TCP。</p>
+<h4 id="高效"><a href="#高效" class="headerlink" title="高效"></a>高效</h4><p>虽然 UDP 协议不是那么的可靠，但是正是因为它不是那么的可靠，所以也就没有 TCP 那么复杂了，需要保证数据不丢失且有序到达。<br>因此 UDP 的头部开销小，只有八字节，相比 TCP 的至少二十字节要少得多，在传输数据报文时是很高效的。</p>
+<h4 id="传输方式"><a href="#传输方式" class="headerlink" title="传输方式"></a>传输方式</h4><p>UDP 不止支持一对一的传输方式，同样支持一对多，多对多，多对一的方式，也就是说 UDP 提供了单播，多播，广播的功能。</p>
+<h4 id="适合使用的场景"><a href="#适合使用的场景" class="headerlink" title="适合使用的场景"></a>适合使用的场景</h4><ul>
+<li>直播</li>
+</ul>
+<p>想必大家都看过直播吧，大家可以考虑下如果直播使用了基于 TCP 的协议会发生什么事情？</p>
+<p>TCP 会严格控制传输的正确性，一旦有某一个数据对端没有收到，就会停止下来直到对端收到这个数据。这种问题在网络条件不错的情况下可能并不会发生什么事情，但是在网络情况差的时候就会变成画面卡住，然后再继续播放下一帧的情况。</p>
+<p>但是对于直播来说，用户肯定关注的是最新的画面，而不是因为网络条件差而丢失的老旧画面，所以 TCP 在这种情况下无用武之地，只会降低用户体验。</p>
+<ul>
+<li>王者荣耀</li>
+</ul>
+<p>为什么这样说呢？首先对于王者荣耀来说，用户体量是相当大的，如果使用 TCP 连接的话，就可能会出现服务器不够用的情况，因为每台服务器可供支撑的 TCP 连接数量是有限制的。</p>
+<p>再者，因为 TCP 会严格控制传输的正确性，如果因为用户网络条件不好就造成页面卡顿然后再传输旧的游戏画面是肯定不能接受的，毕竟对于这类实时性要求很高的游戏来说，最新的游戏画面才是最需要的，而不是老旧的画面，否则角色都不知道死多少次了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>UDP 相比 TCP 简单的多，不需要建立连接，不需要验证数据报文，不需要流量控制，只会把想发的数据报文一股脑的丢给对端</li>
+<li>虽然 UDP 并没有 TCP 传输来的准确，但是也能在很多实时性要求高的地方有所作为</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1828,409 +2160,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/24/2020/2月/0224/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/24/2020/2月/0224/" itemprop="url">
-                  谈谈你对Redux的理解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-24 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-24T00:00:00+08:00">2020-02-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-05 14:28:35" itemprop="dateModified" datetime="2020-03-05T14:28:35+08:00">2020-03-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="谈谈你对Redux的理解"><a href="#谈谈你对Redux的理解" class="headerlink" title="谈谈你对Redux的理解"></a>谈谈你对Redux的理解</h4><p>使用Redux应该遵循的原则：</p>
-<ol>
-<li>整个应用共享的state应该存储在store的状态树中，store是唯一的</li>
-<li>state不能直接修改，只能通过action表达修改的意图，调用dispatch()修改state</li>
-<li>state的修改规则reducers必须是一个纯函数，不能有副作用</li>
-</ol>
-<h5 id="Redux提供的API"><a href="#Redux提供的API" class="headerlink" title="Redux提供的API"></a>Redux提供的API</h5><ol>
-<li><p>createStore<br>createStore的作用就是创建一个Redux，store用来存放应用中所有的state<br>createStore(reducer, [perloadState], [enhancer])<br>createStore方法接受3个参数，后面两个是可选参数<br>reducer: 参数的类型必须是function<br>perloadState: 这个参数代表初始化的state(initialState), 可以是任意类型的参数<br>enhancer: 这个参数代表添加的各种中间件，参数的类型必须是function</p>
-</li>
-<li><p>combineReducers<br>combineReducers主要是把多个reducer合并成一个，并且返回一个新的reducer函数，该函数接收的参数也是两个state和action</p>
-</li>
-<li><p>compose<br>主要是在中间件时候使用，合成函数<br>compose(applyMiddleware(thunk),<br> window.devToolsExtension ?<br> window.devToolsExtension() : undefined<br>)</p>
-</li>
-<li><p>applyMiddleware</p>
-</li>
-<li><p>bindActionCreator<br>bindActionCreator的主要作用就是将aciton与dispatch函数绑定，生成直接可以出发action的函数</p>
-</li>
-</ol>
-<h4 id="从输入URL到页面加载的全过程"><a href="#从输入URL到页面加载的全过程" class="headerlink" title="从输入URL到页面加载的全过程"></a>从输入URL到页面加载的全过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 首先，在浏览器地址中输入url</span><br><span class="line">2. 浏览器先查看**浏览器缓存**-系统缓存-路由器缓存，如果缓存中有，会直接在屏幕中显示页面内容。若没有，则跳到第三步操作</span><br><span class="line">3. 浏览器向DNS（Domain Name System）服务器请求解析该URL中的域名对应的IP地址</span><br><span class="line">4. 解析出IP地址后，根据该IP地址和默认端口80，和服务器建立TCP连接</span><br><span class="line">5. 浏览器发出读取文件（URL中域名后面部分对应的文件）的HTTP请求，该请求报文作为TCP三次握手的第三个报文的数据发送给服务器</span><br><span class="line">6. 服务器对浏览器请求做出响应，并把对应的html文本发送给浏览器</span><br><span class="line">7. 释放TCP连接</span><br><span class="line">8. 浏览器将该html文本并显示内容</span><br></pre></td></tr></table></figure>
-<h4 id="重绘（Repaint）-amp-回流（重排Reflow）"><a href="#重绘（Repaint）-amp-回流（重排Reflow）" class="headerlink" title="重绘（Repaint） &amp; 回流（重排Reflow）"></a>重绘（Repaint） &amp; 回流（重排Reflow）</h4><ol>
-<li><p>重绘(repaint)：当我们对DOM的修改导致的样式变化，但未影响几何属性时，浏览器不需要重新计算元素的几何属性，直接可以为该元素绘制新的样式，跳过了回流环节，这个过程就叫重绘。</p>
-</li>
-<li><p>回流（重排 reflow）：对DOM树进行渲染，只要修改DOM或修改元素的形状大小，就会触发reflow，reflow的时候，浏览器会使已渲染好受到影响的部分失效，并重新构造这部分，完成reflow后，浏览器会重新绘制受影响的部分到屏幕中</p>
-</li>
-</ol>
-<p><strong>回流必定会发生重绘，重绘不一定发生回流</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//  触发Reflow</span><br><span class="line">增加、删除、修改DOM节点时，会导致Reflow或Repaint</span><br><span class="line">移动DOM的位置，或是搞个动画的时候</span><br><span class="line">修改CSS样式的时候（宽、高、内外边距、边框等）</span><br><span class="line">Resize窗口的时候（移动端没有这个问题），或是滚动的时候</span><br><span class="line">改变元素内容（文本或图片等）</span><br><span class="line">修改网页的默认字体时</span><br><span class="line">// 触发Repaint</span><br><span class="line">DOM改动</span><br><span class="line">CSS改动</span><br></pre></td></tr></table></figure>
-<h5 id="如何减少回流、重绘？"><a href="#如何减少回流、重绘？" class="headerlink" title="如何减少回流、重绘？"></a>如何减少回流、重绘？</h5><p>减少回流、重绘就是减少对DOM的操作</p>
-<p>1.直接改变className，如果动态改变样式，则使用cssText（减少设置多项内联样式）</p>
-<p>2.让要操作的元素进行“离线处理”，处理完后一起更新</p>
-<p>当使用DocumentFragment进行缓存操作，引发一次回流和重绘</p>
-<p>使用display:none 技术，只引发两次回流和重绘</p>
-<p>使用cloneNode(true or false)和replaceChild技术，引发一次回流和重绘</p>
-<p>3.不要经常访问会引起浏览器flush队列的属性，如果你确实要访问，利用缓存</p>
-<p>4.让元素脱离动画流，减少render 树的规模</p>
-<p>5.牺牲平滑度换取速度</p>
-<p>6.避免使用table布局</p>
-<p>7.IE中避免使用javascript表达式</p>
-<h4 id="跨域通信的几种方式"><a href="#跨域通信的几种方式" class="headerlink" title="跨域通信的几种方式"></a>跨域通信的几种方式</h4><ol>
-<li>JSONP（只支持get请求）</li>
-<li>window + hash</li>
-<li>window + domain</li>
-<li>window + name</li>
-<li>postMessage</li>
-<li>WebSocket</li>
-<li>CORS（Cross-origin resource sharing）跨域资源共享（所有的HTTP请求）</li>
-<li>nginx反向代理</li>
-<li>http-proxy服务端代理请求</li>
-</ol>
-<h4 id="前端错误类"><a href="#前端错误类" class="headerlink" title="前端错误类"></a>前端错误类</h4><ol>
-<li><p>即时运行错误：代码错误；捕获方式：try…catch…、window.onerror</p>
-</li>
-<li><p>资源加载错误；object.onerror（不会冒泡 ）、performance.getEntries、Error事件捕获</p>
-</li>
-</ol>
-<h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><ul>
-<li>循环遍历</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, [<span class="string">'ming'</span>, <span class="string">'abc'</span>], <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> shallowClone = <span class="function">(<span class="params">arr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> dst = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">in</span> arr) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr.hasOwnProperty(prop)) &#123;</span><br><span class="line">        dst[prop] = arr[prop];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr2 = shallowClone(arr1);</span><br><span class="line">arr2[<span class="number">2</span>].push(<span class="string">'wuhan'</span>);</span><br><span class="line">arr2[<span class="number">3</span>] = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr1);  [<span class="number">1</span>, <span class="number">2</span>, [<span class="string">'ming'</span>, <span class="string">'abc'</span>, <span class="string">'wuhan'</span>], <span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr2);  [<span class="number">1</span>, <span class="number">2</span>, [<span class="string">'ming'</span>, <span class="string">'abc'</span>, <span class="string">'wuhan'</span>], <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>object.assign()</li>
-<li>Array.prototype.concat()</li>
-<li>Array.prototype.slice()</li>
-<li>obj展开运算符</li>
-</ul>
-<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><ul>
-<li>手动递归</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span> (<span class="params">sourceObj, targetObj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> cloneObj = targetObj || &#123;&#125;</span><br><span class="line">    <span class="keyword">if</span>(!sourceObj || <span class="keyword">typeof</span> sourceObj !== <span class="string">"object"</span> || sourceObj.length === <span class="literal">undefined</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> sourceObj</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(sourceObj <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">        cloneObj = sourceObj.concat()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> sourceObj)&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> sourceObj[i] === <span class="string">'object'</span>) &#123;</span><br><span class="line">                cloneObj[i] = deepClone(sourceObj[i], &#123;&#125;)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cloneObj[i] = sourceObj[i]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cloneObj</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> sourceObj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  c: &#123;</span><br><span class="line">    a: <span class="number">1</span>,</span><br><span class="line">    b: &#123;</span><br><span class="line">      a: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  d: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello world'</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  e: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> targetObj = deepClone(sourceObj, &#123;&#125;)</span><br><span class="line">targetObj.c.b.a = <span class="number">9</span></span><br><span class="line"><span class="built_in">console</span>.log(sourceObj)</span><br><span class="line"><span class="built_in">console</span>.log(targetObj)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>JSON.parse(JSON.stringify())</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.如果json里面有时间对象，则序列化结果：时间对象=&gt;字符串的形式；</span><br><span class="line">2.如果json里有RegExp、Error对象，则序列化的结果将只得到空对象 RegExp、Error =&gt; &#123;&#125;；</span><br><span class="line">3.如果json里有 function,undefined，则序列化的结果会把 function,undefined 丢失；</span><br><span class="line">4.如果json里有NaN、Infinity和-Infinity，则序列化的结果会变成null；</span><br><span class="line">5.如果json里有对象是由构造函数生成的，则序列化的结果会丢弃对象的 constructor；</span><br><span class="line">6.如果对象中存在循环引用的情况也无法实现深拷贝</span><br></pre></td></tr></table></figure>
-<ul>
-<li>lodash函数库</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _= <span class="built_in">require</span>(<span class="string">'lodash'</span>);</span><br><span class="line"><span class="keyword">const</span> obj1 = [</span><br><span class="line">  <span class="number">1</span>,</span><br><span class="line">  <span class="string">'Hello!'</span>,</span><br><span class="line">  &#123; <span class="attr">name</span>:<span class="string">'ming1'</span> &#125;,</span><br><span class="line">  [</span><br><span class="line">    &#123;</span><br><span class="line">      name:<span class="string">'meng1'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">]</span><br><span class="line"><span class="keyword">const</span> obj2 = _.cloneDeep(obj1);</span><br><span class="line">obj2[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">obj2[<span class="number">1</span>] = <span class="string">'Hi!'</span>;</span><br><span class="line">obj2[<span class="number">2</span>].name = <span class="string">'ming2'</span></span><br><span class="line">obj2[<span class="number">3</span>][<span class="number">0</span>].name = <span class="string">'meng2'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(obj2);</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/20/2020/2月/0220/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/20/2020/2月/0220/" itemprop="url">
-                  Symbol的应用场景
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-20 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-20T00:00:00+08:00">2020-02-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-05 14:28:24" itemprop="dateModified" datetime="2020-03-05T14:28:24+08:00">2020-03-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Symbol的应用场景"><a href="#Symbol的应用场景" class="headerlink" title="Symbol的应用场景"></a>Symbol的应用场景</h3><h5 id="应用场景1：使用Symbol来作为对象属性名（key）"><a href="#应用场景1：使用Symbol来作为对象属性名（key）" class="headerlink" title="应用场景1：使用Symbol来作为对象属性名（key）"></a>应用场景1：使用Symbol来作为对象属性名（key）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>()]: <span class="string">'test'</span>,</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(obj); <span class="comment">// ['a', 'b']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> p <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(p);   <span class="comment">//  分别输出: a 和 b</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj);  <span class="comment">//   ['a', 'b']</span></span><br></pre></td></tr></table></figure>
-<p>由上代码可知，Symbol类型的key是不能通过Object.keys()或者for…in来枚举的，它未被包含对象自身的属性名集合（property names）之中。所以，利用该特性，我们可以把一些不需要对外操作和访问的属性使用Symbol来定义。</p>
-<h5 id="应用场景2：使用Symbol来替代常量"><a href="#应用场景2：使用Symbol来替代常量" class="headerlink" title="应用场景2：使用Symbol来替代常量"></a>应用场景2：使用Symbol来替代常量</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TYPE_AUDIO = <span class="string">'AUDIO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_VIDEO = <span class="string">'VIDEO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_IMAGE = <span class="string">'IMAGE'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileResource</span>(<span class="params">resource</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(resource.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> TYPE_AUDIO:</span><br><span class="line">      playAudio(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_VIDEO:</span><br><span class="line">      playVideo(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_IMAGE:</span><br><span class="line">      previewImage(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Unknown type of resource'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如上面的代码中那样，我们经常定义一组常量来代表一种业务逻辑下的几个不同类型，我们通常希望这几个常量之间是唯一的关系，常量少的时候还算好，但是常量一多，你可能还得花点脑子好好为他们取个好点的名字。</p>
-<p>现在有了Symbol，我们大可不必这么麻烦了：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TYPE_AUDIO = <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> TYPE_VIDEO = <span class="built_in">Symbol</span>()</span><br><span class="line"><span class="keyword">const</span> TYPE_IMAGE = <span class="built_in">Symbol</span>()</span><br></pre></td></tr></table></figure>
-<h5 id="应用场景3：使用Symbol定义类的私有属性-方法"><a href="#应用场景3：使用Symbol定义类的私有属性-方法" class="headerlink" title="应用场景3：使用Symbol定义类的私有属性/方法"></a>应用场景3：使用Symbol定义类的私有属性/方法</h5><p>使用的少</p>
-<h3 id="彻底搞懂浏览器Event-loop"><a href="#彻底搞懂浏览器Event-loop" class="headerlink" title="彻底搞懂浏览器Event-loop"></a>彻底搞懂浏览器Event-loop</h3><h4 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaScript的运行机制</span><br></pre></td></tr></table></figure>
-<p>(1) 所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。<br>(2) 主线程之外，还存在”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。<br>(3) 一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。<br>(4) 主线程不断重复上面的第三步</p>
-<p>概况就是：调用栈中的同步任务都执行完毕，栈内被清空了，就代表主线程空闲了，这个时候就会去任务队列中按照顺序读取一个任务放入到栈中执行。每次栈内被清空，都会去读取任务队列有没有任务，有就读取执行，一直循环读取-执行的操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JavaScript中有两种异步任务：</span><br></pre></td></tr></table></figure>
-<ol>
-<li>宏任务：script（整体代码），setTimeout、setInterval、setImmediate、I/O、UI rendering</li>
-<li>微任务：process.nextTick（Nodejs）、Promise、Object.observe、MutationObServer</li>
-</ol>
-<h4 id="2-事件循环（event-loop）是什么？"><a href="#2-事件循环（event-loop）是什么？" class="headerlink" title="2. 事件循环（event-loop）是什么？"></a>2. 事件循环（event-loop）是什么？</h4><p>主线程从”任务队列”中读取执行事件，这个过程是循环不断的，这个机制被称为事件循环。此机制具体如下：主线程会不断从任务队列中按顺序读取任务执行，每执行一个任务都会检查microtask队列是否为空（执行完一个任务的具体标志是函数执行栈为空），如果不为空则会一次性执行完所有microtask。然后进入下一个循环去任务队列中取下一个任务执行。</p>
-<p><strong>当前执行栈执行完毕时会立刻先处理所有微任务队列中的事件, 然后再去宏任务队列中取出一个事件。同一次事件循环中, 微任务永远在宏任务之前执行。</strong></p>
-<h4 id="3-为什么会需要event-loop"><a href="#3-为什么会需要event-loop" class="headerlink" title="3. 为什么会需要event-loop?"></a>3. 为什么会需要event-loop?</h4><p>因为 JavaScript 是单线程的。单线程就意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。如果前一个任务耗时很长，后一个任务就不得不一直等着。为了协调事件（event），用户交互（user interaction），脚本（script），渲染（rendering），网络（networking）等，用户代理（user agent）必须使用事件循环（event loops）。</p>
-<h4 id="node中的event-loop与浏览器之间的差异"><a href="#node中的event-loop与浏览器之间的差异" class="headerlink" title="node中的event-loop与浏览器之间的差异"></a>node中的event-loop与浏览器之间的差异</h4><p>浏览器和 Node 环境下，microtask 任务队列的执行时机不同</p>
-<ul>
-<li>Node 端，microtask 在事件循环的各个阶段之间执行</li>
-<li>浏览器端，microtask 在事件循环的 macrotask 执行完之后执行</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'timer1'</span>)</span><br><span class="line">  <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'timer2'</span>)</span><br><span class="line">  <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'promise3'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 浏览器 start=&gt;end=&gt;promise3=&gt;timer1=&gt;promise1=&gt;timer2=&gt;promise2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// node start=&gt;end=&gt;promise3=&gt;timer1=&gt;timer2=&gt;promise1=&gt;promise2</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2282,7 +2211,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2303,7 +2232,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
