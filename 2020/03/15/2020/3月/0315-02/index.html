@@ -110,25 +110,25 @@
 
 
 
-  <meta name="description" content="观察者模式观察者模式定义了对象间一种一对多的依赖关系，当目标对象Subject的状态发生改变时，所有依赖它的对象ObServe都会得到通知。 模式特征： 一个目标者对象Subject，拥有方法：添加/删除/通知ObServer； 多个观察者对象ObServe，拥有方法：接收Subject状态变更通知并处理； 目标对象Subject状态变更时，通知所有ObServer。 Subject添加一系列Ob">
+  <meta name="description" content="深浅拷贝浅拷贝 Object.assign 展开运算符… Array.slice();  首先可以通过 Object.assign 来解决这个问题，很多人认为这个函数是用来深拷贝的。其实并不是，Object.assign 只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。 123456let a = &amp;#123;  age: 1&amp;#125;let b = Ob">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript 观察者模式与发布订阅模式">
-<meta property="og:url" content="https://achenjs.github.io/2020/03/06/2020/3月/0306/index.html">
+<meta property="og:title" content="js实现深拷贝">
+<meta property="og:url" content="https://achenjs.github.io/2020/03/15/2020/3月/0315-02/index.html">
 <meta property="og:site_name" content="achen的个人博客">
-<meta property="og:description" content="观察者模式观察者模式定义了对象间一种一对多的依赖关系，当目标对象Subject的状态发生改变时，所有依赖它的对象ObServe都会得到通知。 模式特征： 一个目标者对象Subject，拥有方法：添加/删除/通知ObServer； 多个观察者对象ObServe，拥有方法：接收Subject状态变更通知并处理； 目标对象Subject状态变更时，通知所有ObServer。 Subject添加一系列Ob">
+<meta property="og:description" content="深浅拷贝浅拷贝 Object.assign 展开运算符… Array.slice();  首先可以通过 Object.assign 来解决这个问题，很多人认为这个函数是用来深拷贝的。其实并不是，Object.assign 只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。 123456let a = &amp;#123;  age: 1&amp;#125;let b = Ob">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-09T02:49:56.276Z">
+<meta property="og:updated_time" content="2020-03-15T16:36:43.121Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript 观察者模式与发布订阅模式">
-<meta name="twitter:description" content="观察者模式观察者模式定义了对象间一种一对多的依赖关系，当目标对象Subject的状态发生改变时，所有依赖它的对象ObServe都会得到通知。 模式特征： 一个目标者对象Subject，拥有方法：添加/删除/通知ObServer； 多个观察者对象ObServe，拥有方法：接收Subject状态变更通知并处理； 目标对象Subject状态变更时，通知所有ObServer。 Subject添加一系列Ob">
+<meta name="twitter:title" content="js实现深拷贝">
+<meta name="twitter:description" content="深浅拷贝浅拷贝 Object.assign 展开运算符… Array.slice();  首先可以通过 Object.assign 来解决这个问题，很多人认为这个函数是用来深拷贝的。其实并不是，Object.assign 只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。 123456let a = &amp;#123;  age: 1&amp;#125;let b = Ob">
 
 
 
 
 
 
-  <link rel="canonical" href="https://achenjs.github.io/2020/03/06/2020/3月/0306/"/>
+  <link rel="canonical" href="https://achenjs.github.io/2020/03/15/2020/3月/0315-02/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>JavaScript 观察者模式与发布订阅模式 | achen的个人博客</title>
+  <title>js实现深拷贝 | achen的个人博客</title>
   
 
 
@@ -327,7 +327,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/06/2020/3月/0306/">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/15/2020/3月/0315-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
@@ -344,7 +344,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript 观察者模式与发布订阅模式
+          <h1 class="post-title" itemprop="name headline">js实现深拷贝
               
             
           </h1>
@@ -369,7 +369,7 @@
                 
               
 
-              <time title="创建时间：2020-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-06T00:00:00+08:00">2020-03-06</time>
+              <time title="创建时间：2020-03-15 22:40:00" itemprop="dateCreated datePublished" datetime="2020-03-15T22:40:00+08:00">2020-03-15</time>
             
 
             
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-09 10:49:56" itemprop="dateModified" datetime="2020-03-09T10:49:56+08:00">2020-03-09</time>
+                <time title="修改时间：2020-03-16 00:36:43" itemprop="dateModified" datetime="2020-03-16T00:36:43+08:00">2020-03-16</time>
               
             
           </span>
@@ -427,28 +427,35 @@
       
 
       
-        <h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><p>观察者模式定义了对象间一种一对多的依赖关系，当目标对象Subject的状态发生改变时，所有依赖它的对象ObServe都会得到通知。</p>
-<p>模式特征：</p>
-<p>一个目标者对象Subject，拥有方法：添加/删除/通知ObServer；</p>
-<p>多个观察者对象ObServe，拥有方法：接收Subject状态变更通知并处理；</p>
-<p>目标对象Subject状态变更时，通知所有ObServer。</p>
-<p>Subject添加一系列ObServer，Subject负责维护与这些ObServe之间的联系，</p>
-<p>代码实现：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.observers = [];  <span class="comment">//  观察者列表</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//  添加</span></span><br><span class="line">  add(observer) &#123;</span><br><span class="line">    <span class="keyword">this</span>.observers.push(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//  删除</span></span><br><span class="line">  remove(observer) &#123;</span><br><span class="line">    <span class="keyword">let</span> idx = <span class="keyword">this</span>.observers.findIndex(<span class="function"><span class="params">item</span> =&gt;</span> item === observer);</span><br><span class="line">    idx &gt; <span class="number">-1</span> &amp;&amp; <span class="keyword">this</span>.observers.splice(idx, <span class="number">1</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//  通知</span></span><br><span class="line">  notify() &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> observer <span class="keyword">of</span> observers) &#123;</span><br><span class="line">      observer.update();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ObServer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  update() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`收到通知：<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  实例化目标者</span></span><br><span class="line"><span class="keyword">let</span> subject = <span class="keyword">new</span> Subject();</span><br><span class="line"><span class="comment">//  实例化两个观察者</span></span><br><span class="line"><span class="keyword">let</span> obs1 = <span class="keyword">new</span> ObServer(<span class="string">'前端开发者'</span>);</span><br><span class="line"><span class="keyword">let</span> obs2 = <span class="keyword">new</span> ObServer(<span class="string">'后端开发者'</span>);</span><br><span class="line"><span class="comment">//  向目标者添加观察者</span></span><br><span class="line">subject.add(obs1);</span><br><span class="line">subject.add(obs2);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  目标者通知更新</span></span><br><span class="line">subject.notify();</span><br><span class="line"></span><br><span class="line"><span class="comment">//  输出：</span></span><br><span class="line"><span class="comment">//  收到通知：前端开发者</span></span><br><span class="line"><span class="comment">//  收到通知：后端开发者</span></span><br></pre></td></tr></table></figure>
-<p>优势：目标者与观察者，功能耦合度降低，专注自身功能逻辑；观察者被动接收更新，时间上解耦，实时接收目标者更新状态。<br>缺点：观察者模式虽然实现了对象间依赖关系的低耦合，但却不能对事件通知进行细分管控，如”筛选通知“，”指定主题事件通知“。</p>
-<h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><p>发布订阅模式基于一个事件（主题）通道，希望接收通知的对象Subscriber通过自定义事件订阅主题，被激活事件的对象Publisher通过发布主题事件的方式通知各个订阅该主题的subscriber对象。</p>
-<p>代码实现：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  事件中心</span></span><br><span class="line"><span class="keyword">let</span> pubSub = &#123;</span><br><span class="line">  list: &#123;&#125;,</span><br><span class="line">  <span class="comment">//  订阅</span></span><br><span class="line">  subscribe: <span class="function"><span class="keyword">function</span>(<span class="params">key, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.list[key]) &#123;</span><br><span class="line">      <span class="keyword">this</span>.list[key] = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.list[key].push(fn);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//  发布</span></span><br><span class="line">  publish: <span class="function"><span class="keyword">function</span>(<span class="params">key, ...arg</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> fn <span class="keyword">of</span> <span class="keyword">this</span>.list[key]) &#123;</span><br><span class="line">      fn.call(<span class="keyword">this</span>, ...arg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//  取消订阅</span></span><br><span class="line">  unSubscribe: <span class="function"><span class="keyword">function</span>(<span class="params">key, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fnList = <span class="keyword">this</span>.list[key];</span><br><span class="line">    <span class="keyword">if</span> (!fnList) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">      <span class="comment">//  不传入指定取消的订阅方法，则清空所有key下的订阅</span></span><br><span class="line">      fnList &amp;&amp; (fnList.length === <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fnList.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === fn) &#123;</span><br><span class="line">          fnList.splice(index, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  订阅</span></span><br><span class="line">pubSub.subscribe(<span class="string">'onwork'</span>, time =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`上班了：<span class="subst">$&#123;time&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line">pubSub.subscribe(<span class="string">'offwork'</span>, time =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`下班了：<span class="subst">$&#123;time&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//  发布</span></span><br><span class="line">pubSub.publish(<span class="string">'onwork'</span>, <span class="string">'9:00:00'</span>);</span><br><span class="line">pubSub.publish(<span class="string">'offwork'</span>, <span class="string">'18:00:00'</span>);</span><br><span class="line"><span class="comment">//  取消订阅</span></span><br><span class="line">pubSub.unSubscribe(<span class="string">'onwork'</span>);</span><br></pre></td></tr></table></figure>
-<p>发布订阅模式中，订阅者各自实现不同的逻辑，且只接受自己对应的事件通知。实现你想要的 “不一样”。</p>
-<p>DOM 事件监听也是 “发布订阅模式” 的应用：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> loginBtn = <span class="built_in">document</span>.getElementById(<span class="string">'#loginBtn'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  监听回调函数（指定事件）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">notifyClick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'点击'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  添加事件监听</span></span><br><span class="line">loginBtn.addEventListener(<span class="string">'click'</span>, notifyClick);</span><br><span class="line"><span class="comment">//  触发点击，事件中心派发指定事件</span></span><br><span class="line">loginBtn.click();</span><br><span class="line"></span><br><span class="line"><span class="comment">//  取消事件监听</span></span><br><span class="line">loginBtn.removeEventListener(<span class="string">'click'</span>, notifyClick);</span><br></pre></td></tr></table></figure>
-<p>发布订阅的通知顺序：</p>
-<p>先订阅后发布时才通知（常规）</p>
-<p>订阅后可获取过往以后的发布通知 （QQ离线消息，上线后获取之前的信息）</p>
-<p>流行库的应用</p>
-<p>jQuery 的 on 和 trigger，$.callback();</p>
-<p>Vue 的双向数据绑定；</p>
-<p>Vue 的父子组件通信 $on/$emit</p>
+        <h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><h4 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h4><ol>
+<li>Object.assign</li>
+<li>展开运算符…</li>
+<li>Array.slice();</li>
+</ol>
+<p>首先可以通过 Object.assign 来解决这个问题，很多人认为这个函数是用来深拷贝的。其实并不是，Object.assign 只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">Object</span>.assign(&#123;&#125;, a)</span><br><span class="line">a.age = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(b.age) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>另外我们还可以通过展开运算符 … 来实现浅拷贝</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = &#123; ...a &#125;</span><br><span class="line">a.age = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(b.age) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>通常浅拷贝就能解决大部分问题了，但是当我们遇到如下情况就可能需要使用到深拷贝了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span>,</span><br><span class="line">  jobs: &#123;</span><br><span class="line">    first: <span class="string">'FE'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = &#123; ...a &#125;</span><br><span class="line">a.jobs.first = <span class="string">'native'</span></span><br><span class="line"><span class="built_in">console</span>.log(b.jobs.first) <span class="comment">// native</span></span><br></pre></td></tr></table></figure>
+<p>浅拷贝只解决了第一层的问题，如果接下去的值中还有对象的话，那么就又回到最开始的话题了，两者享有相同的地址。要解决这个问题，我们就得使用深拷贝了。</p>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><p>这个问题通常可以通过 JSON.parse(JSON.stringify(object)) 来解决。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span>,</span><br><span class="line">  jobs: &#123;</span><br><span class="line">    first: <span class="string">'FE'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(a))</span><br><span class="line">a.jobs.first = <span class="string">'native'</span></span><br><span class="line"><span class="built_in">console</span>.log(b.jobs.first) <span class="comment">// FE</span></span><br></pre></td></tr></table></figure>
+<p>但是该方法也是有局限性的：</p>
+<ul>
+<li>会忽略 undefined</li>
+<li>会忽略 symbol</li>
+<li>不能序列化函数</li>
+<li>不能解决循环引用的对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    c: <span class="number">2</span>,</span><br><span class="line">    d: <span class="number">3</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">obj.c = obj.b</span><br><span class="line">obj.e = obj.a</span><br><span class="line">obj.b.c = obj.c</span><br><span class="line">obj.b.d = obj.b</span><br><span class="line">obj.b.e = obj.b.c</span><br><span class="line"><span class="keyword">let</span> newObj = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj))</span><br><span class="line"><span class="built_in">console</span>.log(newObj)</span><br></pre></td></tr></table></figure>
+<p>如果你有这么一个循环引用对象，你会发现并不能通过该方法实现深拷贝<br>在遇到函数、 undefined 或者 symbol 的时候，该对象也不能正常的序列化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="literal">undefined</span>,</span><br><span class="line">  sex: <span class="built_in">Symbol</span>(<span class="string">'male'</span>),</span><br><span class="line">  jobs: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  name: <span class="string">'yck'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(a))</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// &#123;name: "yck"&#125;</span></span><br></pre></td></tr></table></figure>
+<p>你会发现在上述情况中，该方法会忽略掉函数和 undefined 。</p>
+<p>但是在通常情况下，复杂数据都是可以序列化的，所以这个函数可以解决大部分问题。</p>
+<p>如果你所需拷贝的对象含有内置类型并且不包含函数，可以使用 MessageChannel</p>
+<p>当然你可能想自己来实现一个深拷贝，但是其实实现一个深拷贝是很困难的，需要我们考虑好多种边界情况，比如原型链如何处理、DOM 如何处理等等，所以这里我们实现的深拷贝只是简易版，并且我其实更推荐使用 lodash 的深拷贝函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">typeof</span> o === <span class="string">'object'</span> || <span class="keyword">typeof</span> o === <span class="string">'function'</span>) &amp;&amp; o !== <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!isObject(obj)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'非对象'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> isArray = <span class="built_in">Array</span>.isArray(obj);</span><br><span class="line">  <span class="keyword">let</span> newObj = isArray ? [...obj] : &#123;...obj&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Reflect</span>.hasOwn(newObj).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    newObj[key] = isObject(obj[key]) ? deepClone(newObj[key]) : obj[key];</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -482,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/02/2020/3月/0302/" rel="next" title="什么是babel?">
-                <i class="fa fa-chevron-left"></i> 什么是babel?
+              <a href="/2020/03/15/2020/3月/0315-01/" rel="next" title="前端安全问题">
+                <i class="fa fa-chevron-left"></i> 前端安全问题
               </a>
             
           </div>
@@ -491,10 +498,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/03/10/2020/3月/0310/" rel="prev" title="如何实现ajax">
-                如何实现ajax <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -641,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#观察者模式"><span class="nav-number">1.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布订阅模式"><span class="nav-number">2.</span> <span class="nav-text">发布订阅模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#深浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">深浅拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浅拷贝"><span class="nav-number">1.1.</span> <span class="nav-text">浅拷贝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深拷贝"><span class="nav-number">1.2.</span> <span class="nav-text">深拷贝</span></a></li></ol></li></ol></div>
             
 
           </div>
