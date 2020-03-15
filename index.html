@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">30</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">32</span></a>
   </li>
         
         
@@ -310,6 +310,383 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/15/2020/3月/0315-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/15/2020/3月/0315-01/" itemprop="url">
+                  前端安全问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-15 19:35:00 / 修改时间：20:33:25" itemprop="dateCreated datePublished" datetime="2020-03-15T19:35:00+08:00">2020-03-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p>XSS 简单点来说，就是攻击者想尽一切办法将可以执行的代码注入到网页中。<br>XSS 可以分为多种类型，但是总体上我认为分为两类：持久型和非持久型。</p>
+<p>持久型也就是攻击的代码被服务端写入进数据库中，这种攻击危害性很大，因为如果网站访问量很大的话，就会导致大量正常访问页面的用户都受到攻击。</p>
+<p>举个例子，对于评论功能来说，就得防范持久型 XSS 攻击，因为我可以在评论中输入以下内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(<span class="number">1</span>);<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>非持久型相比于前者危害就小的多了，一般通过修改 URL 参数的方式加入攻击代码，诱导用户访问链接从而进行攻击。</p>
+<p>举个例子，如果页面需要从 URL 中获取某些参数作为内容的话，不经过过滤就会导致攻击代码被执行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- http://www.domain.com?name=&lt;script&gt;alert(1)&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>但是对于这种攻击方式来说，如果用户使用 Chrome 这类浏览器的话，浏览器就能自动帮助用户防御攻击。但是我们不能因此就不防御此类攻击了，因为我不能确保用户都使用了该类浏览器。</p>
+<p>对于 XSS 攻击来说，通常有两种方式可以用来防御。</p>
+<h5 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h5><p>首先，对于用户的输入应该是永远不信任的。最普遍的做法就是转义输入输出的内容，对于引号、尖括号、斜杠进行转义</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">escape</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  str = str.replace(<span class="regexp">/&amp;/g</span>, <span class="string">'&amp;amp;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/&lt;/g</span>, <span class="string">'&amp;lt;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/&gt;/g</span>, <span class="string">'&amp;gt;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/"/g</span>, <span class="string">'&amp;quto;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/'/g</span>, <span class="string">'&amp;#39;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/`/g</span>, <span class="string">'&amp;#96;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/\//g</span>, <span class="string">'&amp;#x2F;'</span>)</span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h5><p>CSP 本质上就是建立白名单，开发者明确告诉浏览器哪些外部资源可以加载和执行。我们只需要配置规则，如何拦截是由浏览器自己实现的。我们可以通过这种方式来尽量减少 XSS 攻击。</p>
+<p>通常可以通过两种方式来开启 CSP：</p>
+<ol>
+<li>设置 HTTP Header 中的 Content-Security-Policy</li>
+<li>设置 meta 标签的方式 <meta http-equiv="Content-Security-Policy"></li>
+</ol>
+<hr>
+<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>CSRF 中文名为跨站请求伪造。原理就是攻击者构造出一个后端请求地址，诱导用户点击或者通过某些途径自动发起请求。如果用户是在登录状态下的话，后端就以为是用户在操作，从而进行相应的逻辑。</p>
+<p>举个例子，假设网站中有一个通过 GET 请求提交用户评论的接口，那么攻击者就可以在钓鱼网站中加入一个图片，图片的地址就是评论接口</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://www.domain.com/xxx?comment='attack'"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>那么你是否会想到使用 POST 方式提交请求是不是就没有这个问题了呢？其实并不是，使用这种方式也不是百分百安全的，攻击者同样可以诱导用户进入某个页面，在页面中通过表单提交 POST 请求。</p>
+<h5 id="如何防御"><a href="#如何防御" class="headerlink" title="如何防御"></a>如何防御</h5><p>防范 CSRF 攻击可以遵循以下几种规则：</p>
+<ol>
+<li>Get 请求不对数据进行修改</li>
+<li>不让第三方网站访问到用户 Cookie</li>
+<li>阻止第三方网站请求接口</li>
+<li>请求时附带验证信息，比如验证码或者 Token</li>
+</ol>
+<h5 id="SameSite"><a href="#SameSite" class="headerlink" title="SameSite"></a>SameSite</h5><p>可以对 Cookie 设置 SameSite 属性。该属性表示 Cookie 不随着跨域请求发送，可以很大程度减少 CSRF 的攻击，但是该属性目前并不是所有浏览器都兼容。</p>
+<h5 id="验证-Referer"><a href="#验证-Referer" class="headerlink" title="验证 Referer"></a>验证 Referer</h5><p>对于需要防范 CSRF 的请求，我们可以通过验证 Referer 来判断该请求是否为第三方网站发起的。</p>
+<h5 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h5><p>服务器下发一个随机 Token，每次发起请求时将 Token 携带上，服务器验证 Token 是否有效。</p>
+<hr>
+<h3 id="点击劫持"><a href="#点击劫持" class="headerlink" title="点击劫持"></a>点击劫持</h3><p>点击劫持是一种视觉欺骗的攻击手段。攻击者将需要攻击的网站通过 iframe 嵌套的方式嵌入自己的网页中，并将 iframe 设置为透明，在页面中透出一个按钮诱导用户点击。</p>
+<p>对于这种攻击方式，推荐防御的方法有两种。</p>
+<h5 id="X-FRAME-OPTIONS"><a href="#X-FRAME-OPTIONS" class="headerlink" title="X-FRAME-OPTIONS"></a>X-FRAME-OPTIONS</h5><p>X-FRAME-OPTIONS 是一个 HTTP 响应头，在现代浏览器有一个很好的支持。这个 HTTP 响应头 就是为了防御用 iframe 嵌套的点击劫持攻击。</p>
+<p>该响应头有三个值可选，分别是</p>
+<ul>
+<li>DENY，表示页面不允许通过 iframe 的方式展示</li>
+<li>SAMEORIGIN，表示页面可以在相同域名下通过 iframe 的方式展示</li>
+<li>ALLOW-FROM，表示页面可以在指定来源的 iframe 中展示</li>
+</ul>
+<h5 id="JS-防御"><a href="#JS-防御" class="headerlink" title="JS 防御"></a>JS 防御</h5><p>对于某些远古浏览器来说，并不能支持上面的这种方式，那我们只有通过 JS 的方式来防御点击劫持了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">id</span>=<span class="string">"click-jack"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    html &#123;</span></span><br><span class="line"><span class="undefined">      display: none !important;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (self == top) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> style = <span class="built_in">document</span>.getElementById(<span class="string">'click-jack'</span>)</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.body.removeChild(style)</span></span><br><span class="line"><span class="javascript">    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="undefined">      top.location = self.location</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以上代码的作用就是当通过 iframe 的方式加载页面时，攻击者的网页直接不显示所有内容了。</p>
+<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击是攻击方同时与服务端和客户端建立起了连接，并让对方认为连接是安全的，但是实际上整个通信过程都被攻击者控制了。攻击者不仅能获得双方的通信信息，还能修改通信信息。</p>
+<p>通常来说不建议使用公共的 Wi-Fi，因为很可能就会发生中间人攻击的情况。如果你在通信的过程中涉及到了某些敏感信息，就完全暴露给攻击方了。</p>
+<p>当然防御中间人攻击其实并不难，只需要增加一个安全通道来传输信息。HTTPS 就可以用来防御中间人攻击，但是并不是说使用了 HTTPS 就可以高枕无忧了，因为如果你没有完全关闭 HTTP 访问的话，攻击方可以通过某些方式将 HTTPS 降级为 HTTP 从而实现中间人攻击。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/13/2020/3月/0313-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/13/2020/3月/0313-01/" itemprop="url">
+                  JS数据类型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-13 14:30:00" itemprop="dateCreated datePublished" datetime="2020-03-13T14:30:00+08:00">2020-03-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-15 20:36:16" itemprop="dateModified" datetime="2020-03-15T20:36:16+08:00">2020-03-15</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="原始-Primitive-类型"><a href="#原始-Primitive-类型" class="headerlink" title="原始(Primitive)类型"></a>原始(Primitive)类型</h2><p>在JS中，存在6种原始值，分别是：</p>
+<ul>
+<li>number</li>
+<li>string</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+<li>symbol</li>
+<li>bigInt</li>
+</ul>
+<p>首先原始类型存储的都是值，是没有函数可以调用的，比如undefined.toString()</p>
+<p>此时你肯定会有疑问，这不对啊，明明’1’.toString()是可以使用的。其实在这种情况下，’1’已经不是原始类型了，而是被强制转换成了String类型也就是对象类型，所以可以调用tostring函数。</p>
+<p>另外对于null来说，很多人会认为它是个对象类型，其实这是错的。虽然typeof null会输出object，但是这是JS存在的一个历史bug。在 JS 的最初版本中使用的是 32 位系统，为了性能考虑使用低位存储变量的类型信息，000 开头代表是对象，然而 null 表示为全零，所以将它错误的判断为 object。虽然现在的内部类型判断代码已经改变了，但是对于这个 Bug 却是一直流传下来。</p>
+<h2 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h2><p>在JS中，除了原始类型就是对象类型了。对象类型和原始类型的不同的是，原始类型存储的是值，对象类型存储的地址（指针）。当你创建了一个对象类型的时候，计算机会在内存中帮我们开辟一个空间来存放值，但是我们需要找到这个空间，这个空间会拥有一个地址（指针）。</p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>首先我们要知道，在 JS 中类型转换只有三种情况，分别是：</p>
+<ul>
+<li>转换为布尔值</li>
+<li>转换为数字</li>
+<li>转换为字符串</li>
+</ul>
+<h4 id="转Boolean"><a href="#转Boolean" class="headerlink" title="转Boolean"></a>转Boolean</h4><p>在条件判断时，除了 undefined， null， false， NaN， ‘’， 0， -0，其他所有值都转为 true，包括所有对象。</p>
+<h4 id="对象转原始类型"><a href="#对象转原始类型" class="headerlink" title="对象转原始类型"></a>对象转原始类型</h4><p>对象在转换类型的时候，会调用内置的 [[ToPrimitive]] 函数，对于该函数来说，算法逻辑一般来说如下：</p>
+<ul>
+<li>如果是原始类型，那就不需要转换</li>
+<li>如果需要转字符串类型那就调用x.toString()，转换为基础类型的话就会返回转换的值。不是字符串类型的话就先调用valueOf，如果不是基础类型的话在调用toString。</li>
+<li>调用x.valueOf()，如果转换为基础类型，就返回基础类型。</li>
+<li>如果都没有返回原始类型，就会报错。</li>
+</ul>
+<p>当然你也可以重写 Symbol.toPrimitive，该方法在转原始类型时调用优先级最高。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  valueOf() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'1'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  [<span class="built_in">Symbol</span>.toPrimitive]() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span> + a);  <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如何实现 a == 1 &amp;&amp; a == 2 &amp;&amp; a == 3返回true</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  value: <span class="number">1</span>,</span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">return</span> a.value++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">a == <span class="number">1</span> &amp;&amp; a == <span class="number">2</span> &amp;&amp; a == <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><ul>
+<li>如果是对象，就通过 toPrimitive 转成原始类型</li>
+<li>如果是字符串，就通过 unicode 字符索引来比较</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  valueOf() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'1'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">a &gt; <span class="number">-1</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1816,360 +2193,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/26/2020/2月/0226/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/26/2020/2月/0226/" itemprop="url">
-                  call bind apply的区别？js垃圾回收
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-26 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-26T00:00:00+08:00">2020-02-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-05 14:45:54" itemprop="dateModified" datetime="2020-03-05T14:45:54+08:00">2020-03-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="call-bind-apply的区别？"><a href="#call-bind-apply的区别？" class="headerlink" title="call bind apply的区别？"></a>call bind apply的区别？</h4><blockquote>
-<p>call() 和 apply()的第一个参数相同，就是指定的对象。这个对象就是该函数的执行上下文。</p>
-</blockquote>
-<blockquote>
-<p>call()和apply()的区别就在于，两者之间的参数。</p>
-</blockquote>
-<blockquote>
-<p>call()在第一个参数之后的后续所有参数就是传入该函数的值</p>
-</blockquote>
-<blockquote>
-<p>apply()只有两个参数，第一个是对象，第二个是数组，这个数组就是该函数的参数。<br>bind()方法和前两者不同在于：bind()方法会返回执行上下文被改变的函数而不会立即执行，而前两者是直接执行该函数。他的参数和call()相同.</p>
-</blockquote>
-<h4 id="js垃圾回收"><a href="#js垃圾回收" class="headerlink" title="js垃圾回收"></a>js垃圾回收</h4><p>JavaScript中的内存管理是自动执行的，而且是不可见的。我们创建基本类型、对象、函数….所有这些都需要内存.<br>当不再需要某样东西时会发生什么? JavaScript 引擎是如何发现并清理它?</p>
-<p>1）问什么是垃圾</p>
-<p>一般来说没有被引用的对象就是垃圾，就是要被清除， 有个例外如果几个对象引用形成一个环，互相引用，但根访问不到它们，这几个对象也是垃圾，也要被清除。</p>
-<p>2）如何检垃圾</p>
-<p>一种算法是标记 标记-清除 算法</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/02/25/2020/2月/0225/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/25/2020/2月/0225/" itemprop="url">
-                  css问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-02-25 00:00:00" itemprop="dateCreated datePublished" datetime="2020-02-25T00:00:00+08:00">2020-02-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-05 14:28:45" itemprop="dateModified" datetime="2020-03-05T14:28:45+08:00">2020-03-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="css问题"><a href="#css问题" class="headerlink" title="css问题"></a>css问题</h4><h5 id="用纯css创建一个三角形"><a href="#用纯css创建一个三角形" class="headerlink" title="用纯css创建一个三角形"></a>用纯css创建一个三角形</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    div &#123;</span></span><br><span class="line"><span class="undefined">        width: 0;</span></span><br><span class="line"><span class="undefined">        height: 0;</span></span><br><span class="line"><span class="undefined">        border-top: 40px solid transparent;</span></span><br><span class="line"><span class="undefined">        border-left: 40px solid transparent;</span></span><br><span class="line"><span class="undefined">        border-right: 40px solid transparent;</span></span><br><span class="line"><span class="undefined">        border-bottom: 40px solid #ff0000;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="如何理解css的盒模型"><a href="#如何理解css的盒模型" class="headerlink" title="如何理解css的盒模型"></a>如何理解css的盒模型</h5><blockquote>
-<p>标准盒子模型：宽度=内容的宽度（content）+ border + padding<br>低版本IE盒子模型：宽度=内容宽度（content+border+padding)</p>
-</blockquote>
-<p>box-sizing属性</p>
-<ul>
-<li>content-box：默认值。这是 CSS2.1 指定的宽度和高度的行为。指定元素的宽度和高度（最小/最大属性）适用于box的宽度和高度。元素的填充和边框布局和绘制指定宽度和高度除外。</li>
-<li>border-box： 指定宽度和高度（最小/最大属性）确定元素边框。也就是说，对元素指定宽度和高度包括了 padding 和 border 。通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。</li>
-<li>inherit： 指定 box-sizing 属性的值，应该从父元素继承</li>
-</ul>
-<p>浏览器的兼容性问题<br>大多数浏览器都会按照上面的图示来呈现内容。然而 IE 5 和 6 的呈现却是不正确的。根据 W3C 的规范，元素内容占据的空间是由 width 属性设置的，而内容周围的 padding 和 border 值是另外计算的。不幸的是，IE5.X 和 6 在怪异模式中使用自己的非标准模型。这些浏览器的 width 属性不是内容的宽度，而是内容、内边距和边框的宽度的总和。</p>
-<h5 id="如何清除浮动？"><a href="#如何清除浮动？" class="headerlink" title="如何清除浮动？"></a>如何清除浮动？</h5><blockquote>
-<p>clear清除浮动（添加空div法）在浮动元素下方添加空div,并给该元素写css样式 {clear:both;height:0;overflow:hidden;}</p>
-</blockquote>
-<blockquote>
-<p>给浮动元素父级设置高度</p>
-</blockquote>
-<blockquote>
-<p>父级同时浮动（需要给父级同级元素添加浮动）</p>
-</blockquote>
-<blockquote>
-<p>父级设置成inline-block，其margin: 0 auto居中方式失效</p>
-</blockquote>
-<blockquote>
-<p>给父级添加overflow:hidden 清除浮动方法</p>
-</blockquote>
-<blockquote>
-<p>万能清除法 after伪类 清浮动（现在主流方法，推荐使用）</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">zoom</span>: <span class="number">1</span>;</span><br><span class="line">  &amp;:after &#123;</span><br><span class="line">    content: '';</span><br><span class="line">    <span class="selector-tag">clear</span>: <span class="selector-tag">both</span>;</span><br><span class="line">    <span class="selector-tag">display</span>: <span class="selector-tag">block</span>;</span><br><span class="line">    <span class="selector-tag">height</span>: 0;</span><br><span class="line">    <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">    <span class="selector-tag">visibility</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2216,7 +2244,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
