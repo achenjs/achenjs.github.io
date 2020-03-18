@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">33</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">34</span></a>
   </li>
         
         
@@ -326,6 +326,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/17/2019/May/This/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/17/2019/May/This/README/" itemprop="url">
+                  This
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-17 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-17T00:00:00+08:00">2019-05-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:20:52" itemprop="dateModified" datetime="2020-03-05T14:20:52+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><ol>
+<li>默认绑定</li>
+<li>隐式绑定</li>
+<li>硬绑定</li>
+<li>new绑定</li>
+</ol>
+<h2 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h2><p>默认绑定，在不能应用其他绑定规则时使用的默认规则，通常是独立函数调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'achen'</span>;</span><br><span class="line">sayHi();</span><br></pre></td></tr></table></figure>
+<p>在调用sayHi()时，应用了默认绑定，this指向全局对象（非严格模式下），严格模式下，this指向undefined，undefined上没有this对象，会抛出错误。<br>上面的代码，如果在浏览器环境中运行，那么结果是 Hello, achen<br>但是如果在node环境中运行，结果就是Hello, undefined，这是因为node中name并不是挂在全局对象上的。</p>
+<h2 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h2><p>函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的形式为 XXX.fun()。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">'achen'</span>,</span><br><span class="line">  sayHi: sayHi</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'achenjs'</span>;</span><br><span class="line">persin.sayHi();</span><br></pre></td></tr></table></figure>
+<h2 id="硬绑定（显示绑定）"><a href="#硬绑定（显示绑定）" class="headerlink" title="硬绑定（显示绑定）"></a>硬绑定（显示绑定）</h2><p>通过call，apply，bind的方式，显示的指定this所指向的对象。<br>call，apply，bind的第一个参数，就是对应函数的this所指向的对象。call和apply的作用一样，只是传参方式不同。call和apply都会执行对应的函数，而bind方法不会。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">'YvetteLau'</span>,</span><br><span class="line">    sayHi: sayHi</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Wiliam'</span>;</span><br><span class="line"><span class="keyword">var</span> Hi = person.sayHi;</span><br><span class="line">Hi.call(person);  <span class="comment">// Hi.apply(person)</span></span><br></pre></td></tr></table></figure>
+<h2 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h2><blockquote>
+<p>使用new来调用函数，会自动执行下面的操作：</p>
+</blockquote>
+<ol>
+<li>创建一个新对象</li>
+<li>将构造函数的作用域赋值给新对象，即this指向这个新对象</li>
+<li>执行构造函数中的代码</li>
+<li>返回新对象</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SayHi</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Hi = <span class="keyword">new</span> SayHi(<span class="string">'achen'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(Hi.name);   <span class="comment">//  achen</span></span><br></pre></td></tr></table></figure>
+<p>输出结果为achen，原因是因为在var Hi = new SayHi(‘achen’); 这一步，会将SayHi中的this绑定到Hi对象上。</p>
+<h3 id="绑定优先级"><a href="#绑定优先级" class="headerlink" title="绑定优先级"></a>绑定优先级</h3><p>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
+<h3 id="绑定另外"><a href="#绑定另外" class="headerlink" title="绑定另外"></a>绑定另外</h3><p>如果我们将null或者undefined作为this的绑定对象传入call、apply或者是bind，这些值在调用时会被忽略，实际应用的是默认绑定规则。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  name: <span class="string">'Selina'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Chirs'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line">bar.call(<span class="literal">null</span>);   <span class="comment">//  Chirs</span></span><br></pre></td></tr></table></figure>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数是ES6中新增的，它和普通函数有一些区别，箭头函数没有自己的this，它的this继承于外层代码库中的this。箭头函数在使用中，需要注意以下几点：</p>
+<ol>
+<li>函数体内的this对象，继承的是外层代码块的this。</li>
+<li>不可以当做构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。</li>
+<li>不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用rest参数代替。</li>
+<li>不可以使用yield命令，因此箭头函数不能用作Generator函数。</li>
+<li>箭头函数没有自己的this，所以不能用call、apply、bind这些方法改变this的指向。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  hi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  say: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> hi = obj.hi();          <span class="comment">//  obj</span></span><br><span class="line">hi();                       <span class="comment">//  obj</span></span><br><span class="line"><span class="keyword">let</span> sayHi = obj.sayHi();</span><br><span class="line"><span class="keyword">let</span> fun1 = sayHi();         <span class="comment">//  window</span></span><br><span class="line">fun1();                     <span class="comment">//  window</span></span><br><span class="line">obj.say();                  <span class="comment">//  window</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/15/2019/May/Promise/myPromise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,7 +576,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:20:35" itemprop="dateModified" datetime="2020-03-05T14:20:35+08:00">2020-03-05</time>
+                <time title="修改时间：2020-03-18 10:25:10" itemprop="dateModified" datetime="2020-03-18T10:25:10+08:00">2020-03-18</time>
               
             
           </span>
@@ -424,7 +611,8 @@
       
         
           
-            <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PENDING = <span class="string">'PENDING'</span>;</span><br><span class="line"><span class="keyword">const</span> RESOLVED = <span class="string">'RESOLVED'</span>;</span><br><span class="line"><span class="keyword">const</span> REJECTED = <span class="string">'REJECTED'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyPromise</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> that = <span class="keyword">this</span>;</span><br><span class="line">  </span><br><span class="line">  that.value = <span class="literal">null</span>;</span><br><span class="line">  that.state = PENDING;</span><br><span class="line"></span><br><span class="line">  that.resolvedCallbacks = [];</span><br><span class="line">  that.rejectedCallbacks = [];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> MyPromise) &#123;</span><br><span class="line">      <span class="keyword">return</span> value.then(resolve, reject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (that.state === PENDING) &#123;</span><br><span class="line">      that.state = RESOLVED;</span><br><span class="line">      that.value = value;</span><br><span class="line">      that.resolvedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(that.value));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (that.state === PENDING) &#123;</span><br><span class="line">      that.state = REJECTED;</span><br><span class="line">      that.value = value;</span><br><span class="line">      that.rejectedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(that.value));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    fn(resolve, reject);</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    reject(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyPromise.prototype.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled, onRejected</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> that = <span class="keyword">this</span>;</span><br><span class="line">  onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">'function'</span> ? onFulfilled : <span class="function"><span class="params">v</span> =&gt;</span> v;</span><br><span class="line">  onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">'function'</span> ? onRejected : <span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> r</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (that.state === PENDING) &#123;</span><br><span class="line">    that.resolvedCallbacks.push(onFulfilled);</span><br><span class="line">    that.rejectedCallbacks.push(onRejected);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (that.state === RESOLVED) &#123;</span><br><span class="line">    onFulfilled(that.value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (that.state === REJECTED) &#123;</span><br><span class="line">    onRejected(that.value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> that;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="number">111</span>);</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">  <span class="built_in">console</span>.log(resolve);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+            <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PENDING = <span class="string">'PENDING'</span>;</span><br><span class="line"><span class="keyword">const</span> RESOLVED = <span class="string">'RESOLVED'</span>;</span><br><span class="line"><span class="keyword">const</span> REJECTED = <span class="string">'REJECTED'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyPromise</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> that = <span class="keyword">this</span>;</span><br><span class="line">  </span><br><span class="line">  that.value = <span class="literal">null</span>;</span><br><span class="line">  that.state = PENDING;</span><br><span class="line"></span><br><span class="line">  that.resolvedCallbacks = [];</span><br><span class="line">  that.rejectedCallbacks = [];</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> MyPromise) &#123;</span><br><span class="line">      <span class="keyword">return</span> value.then(resolve, reject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (that.state === PENDING) &#123;</span><br><span class="line">      that.state = RESOLVED;</span><br><span class="line">      that.value = value;</span><br><span class="line">      that.resolvedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(that.value));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (that.state === PENDING) &#123;</span><br><span class="line">      that.state = REJECTED;</span><br><span class="line">      that.value = value;</span><br><span class="line">      that.rejectedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(that.value));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    fn(resolve, reject);</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    reject(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyPromise.prototype.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled, onRejected</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> that = <span class="keyword">this</span>;</span><br><span class="line">  onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">'function'</span> ? onFulfilled : <span class="function"><span class="params">v</span> =&gt;</span> v;</span><br><span class="line">  onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">'function'</span> ? onRejected : <span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> r</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (that.state === PENDING) &#123;</span><br><span class="line">    that.resolvedCallbacks.push(onFulfilled);</span><br><span class="line">    that.rejectedCallbacks.push(onRejected);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (that.state === RESOLVED) &#123;</span><br><span class="line">    onFulfilled(that.value);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (that.state === REJECTED) &#123;</span><br><span class="line">    onRejected(that.value);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> that;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="number">111</span>);</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -1909,420 +2097,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/08/28/react-router解读（三）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/28/react-router解读（三）/" itemprop="url">
-                  react-router解读（三）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-28 20:37:33" itemprop="dateCreated datePublished" datetime="2018-08-28T20:37:33+08:00">2018-08-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-29 20:06:10" itemprop="dateModified" datetime="2018-08-29T20:06:10+08:00">2018-08-29</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="history-methods-createBrowserHistory"><a href="#history-methods-createBrowserHistory" class="headerlink" title="history methods createBrowserHistory"></a>history methods createBrowserHistory</h2><p>通过之前我们已经知道了react-router-dom的<browserrouter> history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。</browserrouter></p>
-<pre>
-  var createBrowserHistory = function createBrowserHistory() {
-    //  arguments[0], 由上一节可知它是一个非必传的object
-    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
-    //  之前将history赋值给变量globalHistory
-    var globalHistory = window.history;
-    //  _DOMUtils.js 中处理一些浏览器兼容性 和 浏览器内核、机型判断的方法
-    //  判断是否非主流机型以及浏览器
-    var canUseHistory = (0, _DOMUtils.supportsHistory)();
-    //  是否为IE浏览器
-    var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
-    //  forceRefresh为true，代表将在页面导航时使用完整页面刷新。其他参数请自行参考官网文档
-    var _props$forceRefresh = props.forceRefresh,
-        forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
-        _props$getUserConfirm = props.getUserConfirmation,
-        getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
-        _props$keyLength = props.keyLength,
-        keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
-
-    var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
-
-    var getDOMLocation = function getDOMLocation(historyState) {
-      var _ref = historyState || {},
-          key = _ref.key,
-          state = _ref.state;
-
-      var _window$location = window.location,
-          pathname = _window$location.pathname,
-          search = _window$location.search,
-          hash = _window$location.hash;
-
-      var path = pathname + search + hash;
-
-      (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
-
-      if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
-
-      return (0, _LocationUtils.createLocation)(path, state, key);
-    };
-
-    var createKey = function createKey() {
-      return Math.random().toString(36).substr(2, keyLength);
-    };
-
-    var transitionManager = (0, _createTransitionManager2.default)();
-
-    var setState = function setState(nextState) {
-      _extends(history, nextState);
-
-      history.length = globalHistory.length;
-
-      transitionManager.notifyListeners(history.location, history.action);
-    };
-
-    var handlePopState = function handlePopState(event) {
-      if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
-
-      handlePop(getDOMLocation(event.state));
-    };
-
-    var handleHashChange = function handleHashChange() {
-      handlePop(getDOMLocation(getHistoryState()));
-    };
-
-    var forceNextPop = false;
-
-    var handlePop = function handlePop(location) {
-      if (forceNextPop) {
-        forceNextPop = false;
-        setState();
-      } else {
-        var action = 'POP';
-
-        transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-          if (ok) {
-            setState({ action: action, location: location });
-          } else {
-            revertPop(location);
-          }
-        });
-      }
-    };
-
-    var revertPop = function revertPop(fromLocation) {
-      var toLocation = history.location;
-
-      // TODO: We could probably make this more reliable by
-      // keeping a list of keys we've seen in sessionStorage.
-      // Instead, we just default to 0 for keys we don't know.
-
-      var toIndex = allKeys.indexOf(toLocation.key);
-
-      if (toIndex === -1) toIndex = 0;
-
-      var fromIndex = allKeys.indexOf(fromLocation.key);
-
-      if (fromIndex === -1) fromIndex = 0;
-
-      var delta = toIndex - fromIndex;
-
-      if (delta) {
-        forceNextPop = true;
-        go(delta);
-      }
-    };
-
-    var initialLocation = getDOMLocation(getHistoryState());
-    var allKeys = [initialLocation.key];
-
-    var createHref = function createHref(location) {
-      return basename + (0, _PathUtils.createPath)(location);
-    };
-
-    var push = function push(path, state) {
-      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-      var action = 'PUSH';
-      //  重写location对象
-      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (!ok) return;
-
-        var href = createHref(location);
-        var key = location.key,
-            state = location.state;
-
-        if (canUseHistory) {
-          globalHistory.pushState({ key: key, state: state }, null, href);
-
-          if (forceRefresh) {
-            window.location.href = href;
-          } else {
-            var prevIndex = allKeys.indexOf(history.location.key);
-            var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-            nextKeys.push(location.key);
-            allKeys = nextKeys;
-
-            setState({ action: action, location: location });
-          }
-        } else {
-          (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
-
-          window.location.href = href;
-        }
-      });
-    };
-
-    var replace = function replace(path, state) {
-      (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-      var action = 'REPLACE';
-      var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (!ok) return;
-
-        var href = createHref(location);
-        var key = location.key,
-            state = location.state;
-
-
-        if (canUseHistory) {
-          globalHistory.replaceState({ key: key, state: state }, null, href);
-
-          if (forceRefresh) {
-            window.location.replace(href);
-          } else {
-            var prevIndex = allKeys.indexOf(history.location.key);
-
-            if (prevIndex !== -1) allKeys[prevIndex] = location.key;
-
-            setState({ action: action, location: location });
-          }
-        } else {
-          (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
-
-          window.location.replace(href);
-        }
-      });
-    };
-
-    var go = function go(n) {
-      globalHistory.go(n);
-    };
-
-    var goBack = function goBack() {
-      return go(-1);
-    };
-
-    var goForward = function goForward() {
-      return go(1);
-    };
-
-    var listenerCount = 0;
-
-    var checkDOMListeners = function checkDOMListeners(delta) {
-      listenerCount += delta;
-
-      if (listenerCount === 1) {
-        (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
-
-        if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
-      } else if (listenerCount === 0) {
-        (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
-
-        if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
-      }
-    };
-
-    var isBlocked = false;
-
-    var block = function block() {
-      var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-      var unblock = transitionManager.setPrompt(prompt);
-
-      if (!isBlocked) {
-        checkDOMListeners(1);
-        isBlocked = true;
-      }
-
-      return function () {
-        if (isBlocked) {
-          isBlocked = false;
-          checkDOMListeners(-1);
-        }
-
-        return unblock();
-      };
-    };
-
-    var listen = function listen(listener) {
-      var unlisten = transitionManager.appendListener(listener);
-      checkDOMListeners(1);
-
-      return function () {
-        checkDOMListeners(-1);
-        unlisten();
-      };
-    };
-
-    var history = {
-      length: globalHistory.length,
-      action: 'POP',
-      location: initialLocation,
-      createHref: createHref,
-      push: push,
-      replace: replace,
-      go: go,
-      goBack: goBack,
-      goForward: goForward,
-      block: block,
-      listen: listen
-    };
-
-    return history;
-  };
-</pre>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2374,7 +2148,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2397,7 +2171,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
