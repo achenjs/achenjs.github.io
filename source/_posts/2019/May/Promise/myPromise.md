@@ -30,7 +30,7 @@ function MyPromise(fn) {
     }
   }
 
-  function reject() {
+  function reject(value) {
     if (that.state === PENDING) {
       that.state = REJECTED;
       that.value = value;
@@ -72,7 +72,6 @@ new MyPromise((resolve, reject) => {
   }, 0);
 }).then(value => {
   console.log(value);
-  console.log(resolve);
 }).then(value => {
   console.log(value);
 })
