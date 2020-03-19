@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">34</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">35</span></a>
   </li>
         
         
@@ -326,6 +326,155 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/19/2020/3月/0319-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/19/2020/3月/0319-01/" itemprop="url">
+                  常见数据结构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-19 12:00:00 / 修改时间：17:49:32" itemprop="dateCreated datePublished" datetime="2020-03-19T12:00:00+08:00">2020-03-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>通常使用最差的时间复杂度来衡量一个算法的好坏。<br>常数时间O(1)代表这个操作和数据量没有关系，是一个固定时间的操作，比如说四则运算。</p>
+<p>对于一个算法来说，可能会计算出操作次数为 aN + 1，N代表数据量。那么该算法的时间复杂度就是O(N)。因为我们在计算时间复杂度的时候，数据量通常是非常大的，这时候低阶项和常数项可以忽略不计。</p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。<br>栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则。</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>每种数据结构都可以用很多种方式来实现，其实可以把栈当做一个数组的子集，所以这里使用数组来实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack = [];</span><br><span class="line">  &#125;</span><br><span class="line">  push(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.push(item);</span><br><span class="line">  &#125;</span><br><span class="line">  pop() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.pop();</span><br><span class="line">  &#125;</span><br><span class="line">  getCount() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack.length;</span><br><span class="line">  &#125;</span><br><span class="line">  peek() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack[<span class="keyword">this</span>.getCount - <span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getCount() === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>匹配括号，可以通过栈的特性来完成</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> map = &#123;</span><br><span class="line">    <span class="string">'('</span>: <span class="number">-1</span>,</span><br><span class="line">    <span class="string">')'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'['</span>: <span class="number">-2</span>,</span><br><span class="line">    <span class="string">']'</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">'&#123;'</span>: <span class="number">-3</span>,</span><br><span class="line">    <span class="string">'&#125;'</span>: <span class="number">3</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">let</span> stack = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> s) &#123;</span><br><span class="line">    <span class="keyword">if</span> (map[i] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      stack.push(i);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> last = stack.pop();</span><br><span class="line">      <span class="keyword">if</span> (map[last] + map[i] !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (stack.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>队列是一个线性结构，特点是在某一端添加数据，在另一端删除数据，遵循先进先出的原则。</p>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><p>单链队列和循环队列</p>
+<h4 id="单链队列"><a href="#单链队列" class="headerlink" title="单链队列"></a>单链队列</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.queue = [];</span><br><span class="line">  &#125;</span><br><span class="line">  enQueue(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.queue.push(item);</span><br><span class="line">  &#125;</span><br><span class="line">  deQueue() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue.shift();</span><br><span class="line">  &#125;</span><br><span class="line">  getHeader() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  getLength() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue.length;</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue.length === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h4><h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/17/2020/3月/0317-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,7 +538,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-18 17:57:44" itemprop="dateModified" datetime="2020-03-18T17:57:44+08:00">2020-03-18</time>
+                <time title="修改时间：2020-03-19 11:55:42" itemprop="dateModified" datetime="2020-03-19T11:55:42+08:00">2020-03-19</time>
               
             
           </span>
@@ -454,7 +603,30 @@
 <li>destroy</li>
 <li>errorCaptured</li>
 </ul>
-<h4 id="react"><a href="#react" class="headerlink" title="react"></a>react</h4><hr>
+<h4 id="react"><a href="#react" class="headerlink" title="react"></a>react</h4><p>calss编程生命周期</p>
+<h5 id="初始阶段"><a href="#初始阶段" class="headerlink" title="初始阶段"></a>初始阶段</h5><ul>
+<li>constructor</li>
+</ul>
+<h5 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h5><ul>
+<li>componentWillMount</li>
+<li>render</li>
+<li>componentDidMount</li>
+</ul>
+<h5 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h5><ul>
+<li>componentWillReceiveProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ul>
+<h5 id="卸载阶段"><a href="#卸载阶段" class="headerlink" title="卸载阶段"></a>卸载阶段</h5><ul>
+<li>componentWillUnmount</li>
+</ul>
+<p>到了React v16.3，大改动来了，引入了两个新的生命周期函数： getDerivedStateFromProps，getSnapshotBeforeUpdate</p>
+<p>static getDerivedStateFromProps(props, state) 在组件创建时和更新时的render方法之前调用，它应该返回一个对象来更新状态，或者返回null来不更新任何内容。</p>
+<p>getSnapshotBeforeUpdate() 被调用于render之后，可以读取但无法使用DOM的时候。它使您的组件可以在可能更改之前从DOM捕获一些信息（例如滚动位置）。此生命周期返回的任何值都将作为参数传递给componentDidUpdate（）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrollingList</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.listRef = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getSnapshotBeforeUpdate(prevProps, prevState) &#123;</span><br><span class="line">    <span class="comment">//我们是否要添加新的 items 到列表?</span></span><br><span class="line">    <span class="comment">// 捕捉滚动位置，以便我们可以稍后调整滚动.</span></span><br><span class="line">    <span class="keyword">if</span> (prevProps.list.length &lt; <span class="keyword">this</span>.props.list.length) &#123;</span><br><span class="line">      <span class="keyword">const</span> list = <span class="keyword">this</span>.listRef.current;</span><br><span class="line">      <span class="keyword">return</span> list.scrollHeight - list.scrollTop;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidUpdate(prevProps, prevState, snapshot) &#123;</span><br><span class="line">    <span class="comment">//如果我们有snapshot值, 我们已经添加了 新的items.</span></span><br><span class="line">    <span class="comment">// 调整滚动以至于这些新的items 不会将旧items推出视图。</span></span><br><span class="line">    <span class="comment">// (这边的snapshot是 getSnapshotBeforeUpdate方法的返回值)</span></span><br><span class="line">    <span class="keyword">if</span> (snapshot !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> list = <span class="keyword">this</span>.listRef.current;</span><br><span class="line">      list.scrollTop = list.scrollHeight - snapshot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div ref=&#123;<span class="keyword">this</span>.listRef&#125;&gt;&#123;<span class="comment">/* ...contents... */</span>&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
 <h2 id="redux和rematch"><a href="#redux和rematch" class="headerlink" title="redux和rematch"></a>redux和rematch</h2><hr>
 <h2 id="webpack性能优化"><a href="#webpack性能优化" class="headerlink" title="webpack性能优化"></a>webpack性能优化</h2><h6 id="减少webpack打包时间"><a href="#减少webpack打包时间" class="headerlink" title="减少webpack打包时间"></a>减少webpack打包时间</h6><ul>
 <li>优化 Loader</li>
@@ -1544,7 +1716,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-11 13:35:45" itemprop="dateModified" datetime="2020-03-11T13:35:45+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-19 09:20:34" itemprop="dateModified" datetime="2020-03-19T09:20:34+08:00">2020-03-19</time>
               
             
           </span>
@@ -1616,12 +1788,17 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./a'</span>, <span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    a.do();</span><br><span class="line">    b.do();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h5 id="3-CMD（异步加载模块）"><a href="#3-CMD（异步加载模块）" class="headerlink" title="3. CMD（异步加载模块）"></a>3. CMD（异步加载模块）</h5><p>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。AMD 推崇依赖前置，CMD 推崇依赖就近。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, exports, module</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span><br><span class="line">  a.doSomething();</span><br><span class="line">  <span class="comment">// 异步加载一个模块，在加载完成时，执行回调</span></span><br><span class="line">  <span class="built_in">require</span>.async([<span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">    b.doSomething();</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 对外暴露成员</span></span><br><span class="line">  exports.doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 使用模块</span></span><br><span class="line">seajs.use(<span class="string">'path'</span>);</span><br></pre></td></tr></table></figure>
-<h5 id="4-ES6-module"><a href="#4-ES6-module" class="headerlink" title="4. ES6 module"></a>4. ES6 module</h5><p>ES6的模块化已经不是规范了，而是JS语言的特性。随着ES6的推出，AMD和CMD也随之成为了历史。ES6模块与模块化规范相比，有两大特点：</p>
+<h5 id="4-ES6-module"><a href="#4-ES6-module" class="headerlink" title="4. ES6 module"></a>4. ES6 module</h5><p>ES6的模块化已经不是规范了，而是JS语言的特性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入的语法就这样 import，XXX 这里有很多语法变化</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="comment">// 导出也有很多语法变化的写法，基本的就这两个，反正语法没什么难得</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>随着ES6的推出，AMD和CMD也随之成为了历史。ES6模块与模块化规范相比，有两大特点：</p>
 <ul>
 <li>模块化规范输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
 <li>模块化规范是运行时加载，ES6 模块是编译时输出接口。</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入的语法就这样 import，XXX 这里有很多语法变化</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="comment">// 导出也有很多语法变化的写法，基本的就这两个，反正语法没什么难得</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>commonJs</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  count,</span><br><span class="line">  add,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="built_in">require</span>(<span class="string">'./common'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">// 1</span></span><br><span class="line">v.add();</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  1</span></span><br></pre></td></tr></table></figure>
+<p>ES6</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  count,</span><br><span class="line">  add</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> v <span class="keyword">from</span> <span class="string">'./common'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  1</span></span><br><span class="line">v.add();</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  2</span></span><br></pre></td></tr></table></figure>
 <h4 id="如何理解原型？如何理解原型链？"><a href="#如何理解原型？如何理解原型链？" class="headerlink" title="如何理解原型？如何理解原型链？"></a>如何理解原型？如何理解原型链？</h4><ul>
 <li>prototype<br>这是一个显式原型属性，任何一个对象都有原型，但是有一个例外</li>
 </ul>
@@ -2047,239 +2224,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/02/2020/3月/0302/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/02/2020/3月/0302/" itemprop="url">
-                  什么是babel?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-02T00:00:00+08:00">2020-03-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-05 14:30:01" itemprop="dateModified" datetime="2020-03-05T14:30:01+08:00">2020-03-05</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="什么是babel"><a href="#什么是babel" class="headerlink" title="什么是babel?"></a>什么是babel?</h3><p>官方的解释 Babel 是一个 JavaScript 编译器，用于将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前版本和旧版本的浏览器或其他环境中。简单来说 Babel 的工作就是：</p>
-<ul>
-<li>语法转换</li>
-<li>通过Polyfill的方式在目标环境中添加缺失的特性</li>
-<li>JS源码转换</li>
-</ul>
-<h3 id="babel的基本原理"><a href="#babel的基本原理" class="headerlink" title="babel的基本原理"></a>babel的基本原理</h3><p>原理很简单，核心就是 AST (抽象语法树)。首先将源码转成抽象语法树，然后对语法树进行处理生成新的语法树，最后将新语法树生成新的 JS 代码，整个编译过程可以分为 3 个阶段 parsing (解析)、transforming (转换)、generating (生成)，都是在围绕着 AST 去做文章，话不多说上图：</p>
-<p>Babel 只负责编译新标准引入的新语法，比如 Arrow function、Class、ES Module 等，它不会编译原生对象新引入的方法和 API，比如 Array.includes，Map，Set 等，这些需要通过 Polyfill 来解决</p>
-<h3 id="babel的使用"><a href="#babel的使用" class="headerlink" title="babel的使用"></a>babel的使用</h3><h5 id="运行babel所需的基本环境"><a href="#运行babel所需的基本环境" class="headerlink" title="运行babel所需的基本环境"></a>运行babel所需的基本环境</h5><ol>
-<li><p>babel/cli</p>
-</li>
-<li><p>babel/core</p>
-</li>
-</ol>
-<h5 id="配置babel"><a href="#配置babel" class="headerlink" title="配置babel"></a>配置babel</h5><ol>
-<li><p>babel.config.js</p>
-</li>
-<li><p>.babelrc</p>
-</li>
-<li><p>babelrc.js</p>
-</li>
-<li><p>package.json</p>
-</li>
-</ol>
-<p>四种配置方式作用都一样，你就合着自己的口味来，那种看着顺眼，你就翻它。</p>
-<h3 id="插件-Plugins"><a href="#插件-Plugins" class="headerlink" title="插件(Plugins)"></a>插件(Plugins)</h3><p>插件使用来定义如何转换你的代码的。在babel的配置项中填写需要使用的插件名称，babel在编译的时候就会去加载node_modules中对应的npm包，然后编译插件对应的语法。</p>
-<p>.babelrc</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    <span class="string">"transform-decorators-legacy"</span>,</span><br><span class="line">    <span class="string">"transform-class-properties"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="插件执行顺序"><a href="#插件执行顺序" class="headerlink" title="插件执行顺序"></a>插件执行顺序</h5><p>插件在预设(persets)前运行。</p>
-<p>插件的执行顺序是从左往右执行。也就是说在上面的示例中，babel在进行AST遍历的时候会先调用transform-decorators-legacy插件中定义的转换方法，然后再调用transform-class-properties中的方法。</p>
-<h5 id="插件传参"><a href="#插件传参" class="headerlink" title="插件传参"></a>插件传参</h5><p>参数是由插件名称和参数对象组成的一个数组</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"import"</span>,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"libraryName"</span>: <span class="string">"antd"</span>,</span><br><span class="line">            <span class="attr">"libraryDirectory"</span>: <span class="string">"es"</span>,</span><br><span class="line">            <span class="attr">"style"</span>: <span class="string">"css"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="插件名称"><a href="#插件名称" class="headerlink" title="插件名称"></a>插件名称</h5><p>插件名称如果为 @babel/plugin-xxx，可以使用短名称@babel/xx，如果为babel-plugin-xx，可以直接使用xx。</p>
-<h5 id="自定义插件"><a href="#自定义插件" class="headerlink" title="自定义插件"></a>自定义插件</h5><h3 id="预设-Presets"><a href="#预设-Presets" class="headerlink" title="预设(Presets)"></a>预设(Presets)</h3><p>预设就是一堆插件(Plugin)的组合，从而达到某种转译的能力，就比如react中使用到的@babel/perset-react，他就是下面几种插件的组合。</p>
-<ul>
-<li>@babel/plugin-syntax-jsx</li>
-<li>@babel/plugin-transform-react-jsx</li>
-<li>@babel/plugin-transform-react-display-name</li>
-</ul>
-<p>当然我们也可以手动的在plugins中配置一系列的plugin来达到目的，就像这样：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    <span class="string">"@babel/plugin-syntax-jsx"</span>,</span><br><span class="line">    <span class="string">"@babel/plugin-transform-react-jsx"</span>,</span><br><span class="line">    <span class="string">"@babel/plugin-transform-react-display-name"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是这样一方面显得不那么优雅，另一方面增加了使用者的使用难度。如果直接使用预设就清新脱俗多了~</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"persets"</span>: [</span><br><span class="line">    <span class="string">"@babel/preset-react"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="预设-Presets-的执行顺序"><a href="#预设-Presets-的执行顺序" class="headerlink" title="预设(Presets)的执行顺序"></a>预设(Presets)的执行顺序</h5><p>前面提到插件的执行顺序是从左往右，而预设的执行顺序恰好反其道行之，它是从右往左。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>: [</span><br><span class="line">    <span class="string">"a"</span>,</span><br><span class="line">    <span class="string">"b"</span>,</span><br><span class="line">    <span class="string">"c"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>它的执行顺序是 c、b、a，是不是有点奇怪，这主要是为了确保向后兼容，因为大多数用户将 “es2015” 放在 “stage-0” 之前。</p>
-<h5 id="自定义预设-Presets"><a href="#自定义预设-Presets" class="headerlink" title="自定义预设(Presets)"></a>自定义预设(Presets)</h5><h5 id="那些她认识你而你不认识她的预设-Presets"><a href="#那些她认识你而你不认识她的预设-Presets" class="headerlink" title="那些她认识你而你不认识她的预设(Presets)"></a>那些她认识你而你不认识她的预设(Presets)</h5><ol>
-<li>@babel/preset-stage-xxx</li>
-</ol>
-<p>@babel/perset-stage-xxx 是ES在不同阶段语法提案的转码规则而产生的预设，随着被批准为ES新版本的组成部分而进行相应的改变（例如ES6/ES2015）。</p>
-<p>提案分为以下几个阶段：</p>
-<ul>
-<li>stage-0，设想：只是一个想法，可能有babel插件，stage-0的功能范围最广，包含stage-1，stage-2，stage-3的所有功能</li>
-<li>stage-1，建议：这是值得跟进的</li>
-<li>stage-2，草案：初始规范</li>
-<li>stage-3，候选：完成规范并在浏览器上初步实现</li>
-<li>stage-4，完成：将添加到下一个年度版本发布中</li>
-</ul>
-<ol start="2">
-<li>@babel-preset-es2015</li>
-</ol>
-<p>preset-es2015是仅包含ES6功能的Babel预设。</p>
-<p>实际上在babel7出来后上面提到的这些预设stage-x，preset-es2015都可以废弃了，因为@bael/preset-env出来一统江湖了。</p>
-<ol start="3">
-<li>@babel/preset-env</li>
-</ol>
-<p>前面两个预设是从ES标准的维度来确定转码规则的，而@babel/preset-env是根据浏览器的不同版本中缺失的功能确定转换规则的，在配置的时候我们只需要配置需要支持的浏览器版本就好了，@babel/preset-env会<br>根据目标浏览器生成对应的插件列表然后进行编译：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"presets"</span>: [</span><br><span class="line">   [<span class="string">"env"</span>, &#123;</span><br><span class="line">     <span class="attr">"targets"</span>: &#123;</span><br><span class="line">       <span class="attr">"browser"</span>: [<span class="string">"last 10 versions"</span>, <span class="string">"ie &gt;= 9"</span>]</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;],</span><br><span class="line"> ],</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在默认情况下@babel/preset-env支持将JS目前最新的语法转成ES5，但需要注意的是，如果你代码中用到了还没有成为JS标准的语法，该语法暂时还处于stage阶段，这个时候还是需要安装对应的stage预设，不然编译会报错。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"presets"</span>: [</span><br><span class="line">   [<span class="string">"env"</span>, &#123;</span><br><span class="line">     <span class="attr">"targets"</span>: &#123;</span><br><span class="line">       <span class="attr">"browsers"</span>: [<span class="string">"last 10 versions"</span>, <span class="string">"ie &gt;= 9"</span>]</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;],</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"stage-0"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>虽然可以采用默认配置，但如果不需要照顾所有的浏览器，还是建议你配置目标浏览器和环境，这样可以保证编译后的代码体积足够小，因为在有的版本浏览器中，新语法本身就能执行，不需要编译。@babel/preset-env 在默认情况下和 preset-stage-x 一样只编译语法，不会对新方法和新的原生对象进行转译，例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arrFun = <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.includes(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
-<p>转换后</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arrFun = <span class="function"><span class="keyword">function</span> <span class="title">arrFun</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(arr.includes(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
-<p>箭头函数被转换了，但是 Array.includes 方法，并没有被处理，这个时候要是程序跑在低版本的浏览器上，就会出现 includes is not function 的错误。这个时候就需要 polyfill 闪亮登场了。</p>
-<h3 id="Polyfill"><a href="#Polyfill" class="headerlink" title="Polyfill"></a>Polyfill</h3><p>polyfill 的翻译过来就是垫片，垫片就是垫平不同浏览器环境的差异，让大家都一样。</p>
-<h5 id="babel-polyfill-模块可以模拟完整的ES5环境。-babel7-4以上版本已经弃用，可以用core-js代替"><a href="#babel-polyfill-模块可以模拟完整的ES5环境。-babel7-4以上版本已经弃用，可以用core-js代替" class="headerlink" title="@babel/polyfill 模块可以模拟完整的ES5环境。 babel7.4以上版本已经弃用，可以用core-js代替"></a>@babel/polyfill 模块可以模拟完整的ES5环境。 babel7.4以上版本已经弃用，可以用core-js代替</h5><p>注意 @babel/polyfill 不是在 Babel 配置文件中配置，而是在我们的代码中引入。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'@babel/polyfill'</span>;</span><br><span class="line"><span class="keyword">const</span> arrFun = <span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.includes(<span class="number">1</span>))</span><br><span class="line"><span class="built_in">Promise</span>.resolve(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
-<p>这样在低版本的浏览器中也能正常运行了。</p>
-<p>使用core-js代替，不需要在文件中引入@babel/polyfill</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>: [</span><br><span class="line">    <span class="string">"@babel/preset-flow"</span>,</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"@babel/preset-env"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"targets"</span>: &#123;</span><br><span class="line">          <span class="attr">"node"</span>: <span class="string">"8.10"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        "corejs": "3", // 声明 corejs 版本</span><br><span class="line">        "useBuiltIns": "usage"</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="ECMAScript-和-JavaScript-的关系"><a href="#ECMAScript-和-JavaScript-的关系" class="headerlink" title="ECMAScript 和 JavaScript 的关系"></a>ECMAScript 和 JavaScript 的关系</h4><p>ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2331,7 +2275,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2356,7 +2300,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

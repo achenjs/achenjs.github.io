@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="说说你对JS模块化的理解模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。 那么模块化的好处也就显然易见了  解决命名冲突 依赖管理 代码更加可读 提高复用性  js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化 123456789101112131415var myModule = (function(window) &amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-11T05:35:45.031Z">
+<meta property="og:updated_time" content="2020-03-19T01:20:34.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面经">
 <meta name="twitter:description" content="说说你对JS模块化的理解模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。 那么模块化的好处也就显然易见了  解决命名冲突 依赖管理 代码更加可读 提高复用性  js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化 123456789101112131415var myModule = (function(window) &amp;">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">34</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">35</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-11 13:35:45" itemprop="dateModified" datetime="2020-03-11T13:35:45+08:00">2020-03-11</time>
+                <time title="修改时间：2020-03-19 09:20:34" itemprop="dateModified" datetime="2020-03-19T09:20:34+08:00">2020-03-19</time>
               
             
           </span>
@@ -464,12 +464,17 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./a'</span>, <span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    a.do();</span><br><span class="line">    b.do();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h5 id="3-CMD（异步加载模块）"><a href="#3-CMD（异步加载模块）" class="headerlink" title="3. CMD（异步加载模块）"></a>3. CMD（异步加载模块）</h5><p>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。AMD 推崇依赖前置，CMD 推崇依赖就近。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, exports, module</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span><br><span class="line">  a.doSomething();</span><br><span class="line">  <span class="comment">// 异步加载一个模块，在加载完成时，执行回调</span></span><br><span class="line">  <span class="built_in">require</span>.async([<span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">    b.doSomething();</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 对外暴露成员</span></span><br><span class="line">  exports.doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 使用模块</span></span><br><span class="line">seajs.use(<span class="string">'path'</span>);</span><br></pre></td></tr></table></figure>
-<h5 id="4-ES6-module"><a href="#4-ES6-module" class="headerlink" title="4. ES6 module"></a>4. ES6 module</h5><p>ES6的模块化已经不是规范了，而是JS语言的特性。随着ES6的推出，AMD和CMD也随之成为了历史。ES6模块与模块化规范相比，有两大特点：</p>
+<h5 id="4-ES6-module"><a href="#4-ES6-module" class="headerlink" title="4. ES6 module"></a>4. ES6 module</h5><p>ES6的模块化已经不是规范了，而是JS语言的特性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入的语法就这样 import，XXX 这里有很多语法变化</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="comment">// 导出也有很多语法变化的写法，基本的就这两个，反正语法没什么难得</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>随着ES6的推出，AMD和CMD也随之成为了历史。ES6模块与模块化规范相比，有两大特点：</p>
 <ul>
 <li>模块化规范输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
 <li>模块化规范是运行时加载，ES6 模块是编译时输出接口。</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入的语法就这样 import，XXX 这里有很多语法变化</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="comment">// 导出也有很多语法变化的写法，基本的就这两个，反正语法没什么难得</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>commonJs</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  count,</span><br><span class="line">  add,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="built_in">require</span>(<span class="string">'./common'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">// 1</span></span><br><span class="line">v.add();</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  1</span></span><br></pre></td></tr></table></figure>
+<p>ES6</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  count,</span><br><span class="line">  add</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> v <span class="keyword">from</span> <span class="string">'./common'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  1</span></span><br><span class="line">v.add();</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  2</span></span><br></pre></td></tr></table></figure>
 <h4 id="如何理解原型？如何理解原型链？"><a href="#如何理解原型？如何理解原型链？" class="headerlink" title="如何理解原型？如何理解原型链？"></a>如何理解原型？如何理解原型链？</h4><ul>
 <li>prototype<br>这是一个显式原型属性，任何一个对象都有原型，但是有一个例外</li>
 </ul>
@@ -630,7 +635,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -655,7 +660,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
