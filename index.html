@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">35</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">37</span></a>
   </li>
         
         
@@ -326,6 +326,317 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/24/2020/3月/0324-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/24/2020/3月/0324-02/" itemprop="url">
+                  HTTP----HTTP缓存机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-24 11:00:00" itemprop="dateCreated datePublished" datetime="2020-03-24T11:00:00+08:00">2020-03-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-25 16:52:01" itemprop="dateModified" datetime="2020-03-25T16:52:01+08:00">2020-03-25</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HTTP—-HTTP缓存机制"><a href="#HTTP—-HTTP缓存机制" class="headerlink" title="HTTP—-HTTP缓存机制"></a>HTTP—-HTTP缓存机制</h1><h2 id="缓存的规则"><a href="#缓存的规则" class="headerlink" title="缓存的规则"></a>缓存的规则</h2><p>我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。下面我将分别详细的介绍这两种缓存的缓存规则。</p>
+<h4 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h4><p>当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端的才会从服务端获取数据。</p>
+<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>又称对比缓存，客户端会先从缓存数据库中获取到一个缓存数据的标识，得到标识后请求服务端验证是否失效，如果没有失效服务端会返回304，此时客户端直接从缓存中获取所以请求的数据，如果标识失效，服务端会返回更新后的数据。</p>
+<p><strong>两类缓存机制可以同时存在，强制缓存的优先级高于协商缓存，当执行强制缓存时，如若缓存命中，则直接使用缓存数据库数据，不在进行缓存协商。</strong></p>
+<h2 id="缓存的方案"><a href="#缓存的方案" class="headerlink" title="缓存的方案"></a>缓存的方案</h2><h4 id="强制缓存-1"><a href="#强制缓存-1" class="headerlink" title="强制缓存"></a>强制缓存</h4><p>对于强制缓存，服务器响应的header中会用两个字段来表明 —– Expires和Cache-Control</p>
+<h5 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h5><p>Expires的值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。但由于服务端时间和客户端时间可能有误差，这也就导致缓存命中的误差，另一方面，Expires是HTTP1.0的产物，故现在大多数使用Cache-control替代。</p>
+<h5 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h5><p>Cache-control有很多属性，不同的属性代表的意义也不同。<br>private：客户端可以缓存<br>public：客户端和代理服务器都可以缓存<br>max-age：缓存内容将在t秒后失效<br>no-cache：需要使用协商缓存来验证数据<br>no-store：所有内容都不会缓存</p>
+<h4 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>协商缓存需要进行对比判断是否可以使用缓存。浏览器第一次请求数据时，服务器会降缓存标识与数据一起响应给客户端，客户端将它们备份至缓存中。再次请求时，客户端会将缓存中的标识发送给服务器，服务器根据此标识判断。</p>
+<h5 id="Last-midified"><a href="#Last-midified" class="headerlink" title="Last-midified"></a>Last-midified</h5><p>Last-midified: 服务器在响应请求时，会告诉浏览器资源的最后修改时间。</p>
+<p>Etag: 服务器响应请求时，通过此字段告诉浏览器当前资源在服务器生成的唯一标识（生成规则由服务器决定）</p>
+<h2 id="缓存的优点"><a href="#缓存的优点" class="headerlink" title="缓存的优点"></a>缓存的优点</h2><ol>
+<li>减少了冗余的数据传递，节省宽带流量</li>
+<li>减少了服务器的负担，大大提高了网站性能</li>
+<li>加快了客户端加载网页的速度</li>
+</ol>
+<h2 id="不同刷新的请求执行过程"><a href="#不同刷新的请求执行过程" class="headerlink" title="不同刷新的请求执行过程"></a>不同刷新的请求执行过程</h2><ol>
+<li>浏览器地址栏写入URL，回车，浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿。（最快）</li>
+<li>F5刷新，别偷懒好歹去服务器看看这个文件是否过期了。于是浏览器就在请求上带上一个if-modify-since。0</li>
+<li>Ctrl+F5告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端完成了强行更新的操作。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/24/2020/3月/0324-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/24/2020/3月/0324-01/" itemprop="url">
+                  css常见布局
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-24 09:45:00 / 修改时间：09:47:46" itemprop="dateCreated datePublished" datetime="2020-03-24T09:45:00+08:00">2020-03-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="双飞燕布局"><a href="#双飞燕布局" class="headerlink" title="双飞燕布局"></a>双飞燕布局</h2><h2 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span>圣杯布局<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span>main<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span>footer<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/19/2020/3月/0319-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -372,12 +683,24 @@
                 
               
 
-              <time title="创建时间：2020-03-19 12:00:00 / 修改时间：17:49:32" itemprop="dateCreated datePublished" datetime="2020-03-19T12:00:00+08:00">2020-03-19</time>
+              <time title="创建时间：2020-03-19 12:00:00" itemprop="dateCreated datePublished" datetime="2020-03-19T12:00:00+08:00">2020-03-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-20 16:58:04" itemprop="dateModified" datetime="2020-03-20T16:58:04+08:00">2020-03-20</time>
               
             
           </span>
@@ -414,6 +737,7 @@
           
             <h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>通常使用最差的时间复杂度来衡量一个算法的好坏。<br>常数时间O(1)代表这个操作和数据量没有关系，是一个固定时间的操作，比如说四则运算。</p>
 <p>对于一个算法来说，可能会计算出操作次数为 aN + 1，N代表数据量。那么该算法的时间复杂度就是O(N)。因为我们在计算时间复杂度的时候，数据量通常是非常大的，这时候低阶项和常数项可以忽略不计。</p>
+<p>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)</p>
 <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。<br>栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则。</p>
 <h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>每种数据结构都可以用很多种方式来实现，其实可以把栈当做一个数组的子集，所以这里使用数组来实现</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack = [];</span><br><span class="line">  &#125;</span><br><span class="line">  push(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.push(item);</span><br><span class="line">  &#125;</span><br><span class="line">  pop() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.pop();</span><br><span class="line">  &#125;</span><br><span class="line">  getCount() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack.length;</span><br><span class="line">  &#125;</span><br><span class="line">  peek() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack[<span class="keyword">this</span>.getCount - <span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getCount() === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -538,7 +862,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-19 11:55:42" itemprop="dateModified" datetime="2020-03-19T11:55:42+08:00">2020-03-19</time>
+                <time title="修改时间：2020-03-20 09:27:48" itemprop="dateModified" datetime="2020-03-20T09:27:48+08:00">2020-03-20</time>
               
             
           </span>
@@ -985,12 +1309,24 @@
                 
               
 
-              <time title="创建时间：2020-03-15 19:35:00 / 修改时间：20:33:25" itemprop="dateCreated datePublished" datetime="2020-03-15T19:35:00+08:00">2020-03-15</time>
+              <time title="创建时间：2020-03-15 19:35:00" itemprop="dateCreated datePublished" datetime="2020-03-15T19:35:00+08:00">2020-03-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-25 18:06:22" itemprop="dateModified" datetime="2020-03-25T18:06:22+08:00">2020-03-25</time>
               
             
           </span>
@@ -1878,352 +2214,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/10/2020/3月/0310/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/10/2020/3月/0310/" itemprop="url">
-                  如何实现ajax
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-10 00:00:00 / 修改时间：22:18:22" itemprop="dateCreated datePublished" datetime="2020-03-10T00:00:00+08:00">2020-03-10</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h4><blockquote>
-<p>ajax是异步的JavaScript和XML。ajax是一种通过在后台与服务器进行少量数据交换，在无需重新加载整个网页的情况下，更新部分网页的技术</p>
-</blockquote>
-<h4 id="如何实现ajax"><a href="#如何实现ajax" class="headerlink" title="如何实现ajax"></a>如何实现ajax</h4><ol>
-<li><p>创建XMLHttpRequest实例。通过创建一个XMLHttpRequest对象得到一个实例，调用实例的open()方法为这次ajax请求设定相应的HTTP方法，相应的地址以及是否异步。</p>
-</li>
-<li><p>发送http请求。调用spen()方法发送请求，其可以接收一个参数，既要作为请求主体所发送的数据。</p>
-</li>
-<li><p>接收服务器相应数据。监听readystatechange事件，通过该实例的readystate属性来判断请求状态，其分为0，1，2，3，4五种状态</p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>onreadystatechange</td>
-<td>存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</td>
-</tr>
-<tr>
-<td>readyState</td>
-<td>存有XMLHttpRequest的状态。从0到4发生变化。<br><em> 0: 请求未初始化<br></em> 1: 已建立连接 <br> <em> 2: 请求已接收<br> </em> 3: 请求处理中 <br> * 4: 请求已完成，且响应已就绪</td>
-</tr>
-<tr>
-<td>status</td>
-<td>200: “OK”<br>404: 未找到页面</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123;</span><br><span class="line">  xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  xhr = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">&#125;</span><br><span class="line">xhr.onreadystatechange(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.redayState === <span class="number">4</span> &amp;&amp; xhr.status === <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">    <span class="built_in">console</span>.log(xhr.responseXml);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'www.xxxx.com/xxx/xxx'</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/06/2020/3月/0306/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/06/2020/3月/0306/" itemprop="url">
-                  JavaScript 观察者模式与发布订阅模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-06T00:00:00+08:00">2020-03-06</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-09 10:49:56" itemprop="dateModified" datetime="2020-03-09T10:49:56+08:00">2020-03-09</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><p>观察者模式定义了对象间一种一对多的依赖关系，当目标对象Subject的状态发生改变时，所有依赖它的对象ObServe都会得到通知。</p>
-<p>模式特征：</p>
-<p>一个目标者对象Subject，拥有方法：添加/删除/通知ObServer；</p>
-<p>多个观察者对象ObServe，拥有方法：接收Subject状态变更通知并处理；</p>
-<p>目标对象Subject状态变更时，通知所有ObServer。</p>
-<p>Subject添加一系列ObServer，Subject负责维护与这些ObServe之间的联系，</p>
-<p>代码实现：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.observers = [];  <span class="comment">//  观察者列表</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//  添加</span></span><br><span class="line">  add(observer) &#123;</span><br><span class="line">    <span class="keyword">this</span>.observers.push(observer);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//  删除</span></span><br><span class="line">  remove(observer) &#123;</span><br><span class="line">    <span class="keyword">let</span> idx = <span class="keyword">this</span>.observers.findIndex(<span class="function"><span class="params">item</span> =&gt;</span> item === observer);</span><br><span class="line">    idx &gt; <span class="number">-1</span> &amp;&amp; <span class="keyword">this</span>.observers.splice(idx, <span class="number">1</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//  通知</span></span><br><span class="line">  notify() &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> observer <span class="keyword">of</span> observers) &#123;</span><br><span class="line">      observer.update();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ObServer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  update() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`收到通知：<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  实例化目标者</span></span><br><span class="line"><span class="keyword">let</span> subject = <span class="keyword">new</span> Subject();</span><br><span class="line"><span class="comment">//  实例化两个观察者</span></span><br><span class="line"><span class="keyword">let</span> obs1 = <span class="keyword">new</span> ObServer(<span class="string">'前端开发者'</span>);</span><br><span class="line"><span class="keyword">let</span> obs2 = <span class="keyword">new</span> ObServer(<span class="string">'后端开发者'</span>);</span><br><span class="line"><span class="comment">//  向目标者添加观察者</span></span><br><span class="line">subject.add(obs1);</span><br><span class="line">subject.add(obs2);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  目标者通知更新</span></span><br><span class="line">subject.notify();</span><br><span class="line"></span><br><span class="line"><span class="comment">//  输出：</span></span><br><span class="line"><span class="comment">//  收到通知：前端开发者</span></span><br><span class="line"><span class="comment">//  收到通知：后端开发者</span></span><br></pre></td></tr></table></figure>
-<p>优势：目标者与观察者，功能耦合度降低，专注自身功能逻辑；观察者被动接收更新，时间上解耦，实时接收目标者更新状态。<br>缺点：观察者模式虽然实现了对象间依赖关系的低耦合，但却不能对事件通知进行细分管控，如”筛选通知“，”指定主题事件通知“。</p>
-<h4 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h4><p>发布订阅模式基于一个事件（主题）通道，希望接收通知的对象Subscriber通过自定义事件订阅主题，被激活事件的对象Publisher通过发布主题事件的方式通知各个订阅该主题的subscriber对象。</p>
-<p>代码实现：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  事件中心</span></span><br><span class="line"><span class="keyword">let</span> pubSub = &#123;</span><br><span class="line">  list: &#123;&#125;,</span><br><span class="line">  <span class="comment">//  订阅</span></span><br><span class="line">  subscribe: <span class="function"><span class="keyword">function</span>(<span class="params">key, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.list[key]) &#123;</span><br><span class="line">      <span class="keyword">this</span>.list[key] = [];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.list[key].push(fn);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//  发布</span></span><br><span class="line">  publish: <span class="function"><span class="keyword">function</span>(<span class="params">key, ...arg</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> fn <span class="keyword">of</span> <span class="keyword">this</span>.list[key]) &#123;</span><br><span class="line">      fn.call(<span class="keyword">this</span>, ...arg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//  取消订阅</span></span><br><span class="line">  unSubscribe: <span class="function"><span class="keyword">function</span>(<span class="params">key, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fnList = <span class="keyword">this</span>.list[key];</span><br><span class="line">    <span class="keyword">if</span> (!fnList) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">      <span class="comment">//  不传入指定取消的订阅方法，则清空所有key下的订阅</span></span><br><span class="line">      fnList &amp;&amp; (fnList.length === <span class="number">0</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fnList.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (item === fn) &#123;</span><br><span class="line">          fnList.splice(index, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  订阅</span></span><br><span class="line">pubSub.subscribe(<span class="string">'onwork'</span>, time =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`上班了：<span class="subst">$&#123;time&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line">pubSub.subscribe(<span class="string">'offwork'</span>, time =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`下班了：<span class="subst">$&#123;time&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//  发布</span></span><br><span class="line">pubSub.publish(<span class="string">'onwork'</span>, <span class="string">'9:00:00'</span>);</span><br><span class="line">pubSub.publish(<span class="string">'offwork'</span>, <span class="string">'18:00:00'</span>);</span><br><span class="line"><span class="comment">//  取消订阅</span></span><br><span class="line">pubSub.unSubscribe(<span class="string">'onwork'</span>);</span><br></pre></td></tr></table></figure>
-<p>发布订阅模式中，订阅者各自实现不同的逻辑，且只接受自己对应的事件通知。实现你想要的 “不一样”。</p>
-<p>DOM 事件监听也是 “发布订阅模式” 的应用：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> loginBtn = <span class="built_in">document</span>.getElementById(<span class="string">'#loginBtn'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  监听回调函数（指定事件）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">notifyClick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'点击'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  添加事件监听</span></span><br><span class="line">loginBtn.addEventListener(<span class="string">'click'</span>, notifyClick);</span><br><span class="line"><span class="comment">//  触发点击，事件中心派发指定事件</span></span><br><span class="line">loginBtn.click();</span><br><span class="line"></span><br><span class="line"><span class="comment">//  取消事件监听</span></span><br><span class="line">loginBtn.removeEventListener(<span class="string">'click'</span>, notifyClick);</span><br></pre></td></tr></table></figure>
-<p>发布订阅的通知顺序：</p>
-<p>先订阅后发布时才通知（常规）</p>
-<p>订阅后可获取过往以后的发布通知 （QQ离线消息，上线后获取之前的信息）</p>
-<p>流行库的应用</p>
-<p>jQuery 的 on 和 trigger，$.callback();</p>
-<p>Vue 的双向数据绑定；</p>
-<p>Vue 的父子组件通信 $on/$emit</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2275,7 +2265,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2302,7 +2292,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
