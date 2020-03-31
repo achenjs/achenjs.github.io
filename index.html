@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">37</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">39</span></a>
   </li>
         
         
@@ -310,6 +310,400 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/31/2020/3月/0331/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/31/2020/3月/0331/" itemprop="url">
+                  知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-31 00:00:00 / 修改时间：13:36:19" itemprop="dateCreated datePublished" datetime="2020-03-31T00:00:00+08:00">2020-03-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染"><a href="#React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染" class="headerlink" title="React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染"></a>React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染</h2><h2 id="React-中-key-的用法，常用使用场景"><a href="#React-中-key-的用法，常用使用场景" class="headerlink" title="React 中 key 的用法，常用使用场景"></a>React 中 key 的用法，常用使用场景</h2><p><strong>key的概念</strong></p>
+<p>react 中的 key 属性是一个特殊的属性，它的出现不是给开发者用的，而是给 react 自身用的。<br>简单的来说，react 利用 key 来识别组件，他是一种身份标识，就像每个人的身份证一样。每个 key 对应一个组件，相同的 key, react 会认为是同一个组件，这样后续相同的 key 对应的组件都不会被创建。(经测试，16版本之后key重复也会渲染出来？)</p>
+<p><strong>key的使用场景</strong></p>
+<p>在项目开发中，key属性的使用场景最多的还是由数组动态创建的子组件情况，需要为每个子组件添加唯一的key属性值。那有的人会自然而然想到，key 和动态渲染的子元素获取的index的值很接近，是不是我们可以直接使用index值 赋值给key呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  data.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> (</span><br><span class="line">    &lt;div key=&#123;index&#125;&gt;item.name&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  ))</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在尝试后我们发现报错没了，渲染也没问题。但是这里我们强烈不推荐使用数组的index 值来作为key。<br>如果数据更新仅仅是数组重新排序或在其中间位置插入新元素，那么所有元素都将重新渲染。</p>
+<p>例如：<br>本来index=2 的元素向前移动后，那该元素的key 不也同样发生了改变，那这样改变，key 就没有任何存在的意义了，既然是作为身份证一样的存在，那就不容有失，当然，在你用key值创建子组件的时候，若数组的内容只是作为纯展示，而不涉及到数组的动态变更，其实是可以使用index 作为key的，</p>
+<p><strong>key的值必须保证唯一且稳定</strong></p>
+<p>我们在与key值打过几次交到以后，感觉key值就类似于数据库中的主键id一样，有且唯一。</p>
+<h2 id="React如何处理更新"><a href="#React如何处理更新" class="headerlink" title="React如何处理更新"></a>React如何处理更新</h2><h2 id="React-内部-setState-是如何批处理的"><a href="#React-内部-setState-是如何批处理的" class="headerlink" title="React 内部 setState 是如何批处理的"></a>React 内部 setState 是如何批处理的</h2><p>setState 的批量更新按照先进先出的原则，顺序更新。</p>
+<ol>
+<li>在 react 的 event handler 内部同步的多次 setState 会被 batch 为一次更新</li>
+<li>在一个异步的事件循环里面多次 setState，react 不会 batch</li>
+<li>可以使用React.unstable_batchedUpdates 来强制 batch</li>
+</ol>
+<p><strong>为什么在 setTimeout 中多次 setState，react 不会 batch？</strong></p>
+<p>因为 React 的更新是基于 Transaction（事务）的，Transacation 就是给目标执行的函数包裹一下，加上前置和后置的 hook （有点类似 koa 的 middleware），在开始执行之前先执行 initialize hook，结束之后再执行 close hook，这样搭配上 isBatchingUpdates 这样的布尔标志位就可以实现一整个函数调用栈内的多次 setState 全部入 pending 队列，结束后统一 apply 了。</p>
+<p>但是 setTimeout 这样的方法执行是脱离了事务的，react 管控不到，所以就没法 batch 了。 React没有控制权的函数 setTimeout</p>
+<p><strong>为什么 react 要这么设计？</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setCount(count + <span class="number">1</span>)&#125;&gt;</span><br><span class="line">      Parent clicked &#123;count&#125; times</span><br><span class="line">      &lt;Child /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">function Child() &#123;</span></span><br><span class="line"><span class="regexp">  let [count, setCount] = useState(0);</span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span></span><br><span class="line"><span class="regexp">      Child clicked &#123;count&#125; times</span></span><br><span class="line"><span class="regexp">    &lt;/</span>button&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这样的 demo，由于点击事件冒泡的缘故，我们假设如果 react 不 batch 立即更新的话，那么点了 child button 之后的逻辑会是如下这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">*** 进入 react click 的事件函数 ***</span><br><span class="line">Child (onClick) 触发点击</span><br><span class="line">  - setState 修改 state</span><br><span class="line">  - re-render Child 重新渲染 // 😞 不必要的</span><br><span class="line">Parent (onClick) 触发点击（冒泡）</span><br><span class="line">  - setState 修改 state</span><br><span class="line">  - re-render Parent 重新渲染</span><br><span class="line">  - re-render Child 重新渲染 （渲染是自顶向下的，父亲更新会导致儿子更新）</span><br><span class="line">*** 退出 react click 的事件函数  ***</span><br></pre></td></tr></table></figure>
+<p>从上面可以看出，第一次子组件的重新渲染完全是浪费的。</p>
+<p>所以 React 设计成 setState 不立即触发重新渲染，而是先执行完所有的 event handler，然后用一次重新渲染完成所有更新。</p>
+<p><strong>forceUpdate的说明</strong></p>
+<p>forceUpdate 从函数名上理解：“强制更新”。</p>
+<ol>
+<li>forceUpdate 是同步的吗？“强制”会保证调用然后直接dom-diff吗？</li>
+</ol>
+<p>forceUpdate在批量与否的表现上，和setState是一样的。在React有控制权的函数里，是批量的。</p>
+<ol start="2">
+<li>“强制”更新整个组件树吗？包括自己，子孙后代组件吗？</li>
+</ol>
+<p>forceUpdate只会强制本身组件的更新，即不调用“shouldComponentUpdate”直接更新，对于子孙后代组件还是要调用自己的“shouldComponentUpdate”来决定的。</p>
+<h2 id="React15如何去优化"><a href="#React15如何去优化" class="headerlink" title="React15如何去优化"></a>React15如何去优化</h2><h2 id="useCallback-useMemo的区别"><a href="#useCallback-useMemo的区别" class="headerlink" title="useCallback useMemo的区别"></a>useCallback useMemo的区别</h2><p><strong>useMemo</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedValue = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> computeExpensiveValue(a, b), [a, b]);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>把创建函数和依赖项数组作为参数传入useMemo，它仅会在某个依赖项改变时才重新计算memoized值。这种优化有助于避免在每次渲染时都进行高开销的计算。</p>
+</blockquote>
+<p><strong>useCallback</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedCallback = useCallback(</span><br><span class="line">  () =&gt; doSomething(a, b),</span><br><span class="line">  [a, b]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>把内联回调函数及依赖项数组作为参数传入useCallback, 它将返回该回调函数的 memoized 版本，该回调函数仅在某个依赖项改变时才会更新。当你把回调函数<br>传递给经过优化的并使用引用相等性去避免非必要的渲染的子组件时，它将非常有用</p>
+</blockquote>
+<p>看起来似乎和useMemo差不多，我们来看看有什么异同：</p>
+<p>useMemo 和 useCallback 接收的参数都是一样，都是在其依赖项发生变化后才执行，都是返回缓存的值，区别在于 useMemo 返回的是函数运行的结果，useCallback返回的函数。</p>
+<blockquote>
+<p>useCallback(fn, deps) 相当于 useMemo(() =&gt; fn, deps)</p>
+</blockquote>
+<h2 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h2><h4 id="没有破坏性改动"><a href="#没有破坏性改动" class="headerlink" title="没有破坏性改动"></a>没有破坏性改动</h4><ul>
+<li>完全是可选的。</li>
+<li>100%向后兼容的。</li>
+<li>现在可用，hook 发布于 v16.8.0</li>
+</ul>
+<p><strong>没有计划从React移除class。</strong><br><strong>Hook不会影响你对 React 概念的理解。</strong></p>
+<h4 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h4><p>Hook 解决了我们五年来编写和维护成千上万的组件时遇到的各种各样看起来不相关的问题。</p>
+<h5 id="在组件之间复用状态逻辑很难"><a href="#在组件之间复用状态逻辑很难" class="headerlink" title="在组件之间复用状态逻辑很难"></a>在组件之间复用状态逻辑很难</h5><p>你可以使用 Hook 从组件中提取状态逻辑，使得这些逻辑可以单独测试并复用。Hook 使你在无需修改组件结构的情况下复用状态逻辑。</p>
+<h5 id="复杂组件变得难以理解"><a href="#复杂组件变得难以理解" class="headerlink" title="复杂组件变得难以理解"></a>复杂组件变得难以理解</h5><p>我们经常维护一些组件，组件起初很简单，但是逐渐会被状态逻辑和副作用充斥。每个生命周期常常包含一些不相关的逻辑。例如，组件常常在 componentDidMount 和 componentDidUpdate 中获取数据。但是，同一个 componentDidMount 中可能也包含很多其它的逻辑，如设置事件监听，而之后需在 componentWillUnmount 中清除。相互关联且需要对照修改的代码被进行了拆分，而完全不相关的代码却在同一个方法中组合在一起。如此很容易产生 bug，并且导致逻辑不一致。</p>
+<p>为了解决这个问题，Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据），而并非强制按照生命周期划分。你还可以使用 reducer 来管理组件的内部状态，使其更加可预测。</p>
+<h5 id="难以理解的-class"><a href="#难以理解的-class" class="headerlink" title="难以理解的 class"></a>难以理解的 class</h5><p>除了代码复用和代码管理会遇到困难外，我们还发现 class 是学习 React 的一大屏障。你必须去理解 JavaScript 中 this 的工作方式，这与其他语言存在巨大差异。还不能忘记绑定事件处理器。没有稳定的语法提案，这些代码非常冗余。大家可以很好地理解 props，state 和自顶向下的数据流，但对 class 却一筹莫展。即便在有经验的 React 开发者之间，对于函数组件与 class 组件的差异也存在分歧，甚至还要区分两种组件的使用场景。class 也给目前的工具带来了一些问题。例如，class 不能很好的压缩，并且会使热重载出现不稳定的情况。因此，我们想提供一个使代码更易于优化的 API。</p>
+<p>为了解决这些问题，Hook 使你在非 class 的情况下可以使用更多的 React 特性。 从概念上讲，React 组件一直更像是函数。而 Hook 则拥抱了函数，同时也没有牺牲 React 的精神原则。Hook 提供了问题的解决方案，无需学习复杂的函数式或响应式编程技术。</p>
+<h2 id="React-Context-如何去使用"><a href="#React-Context-如何去使用" class="headerlink" title="React Context 如何去使用"></a>React Context 如何去使用</h2><ul>
+<li>React.createContext</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyContext = React.createContext(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Context.Provider</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;MyContext.Provider value=&#123;value&#125;&gt;</span><br></pre></td></tr></table></figure>
+<p>每个 Context 组件都会返回一个 Provider React组件，它允许消费组件订阅 context 的变化。</p>
+<ul>
+<li>Class.contextType</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Myclass</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> contextType = MyContext;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidUpdate() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>挂载在class上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。 这能让你使用<br>this.context 来消费最近 Context 上的值。你可以在任何生命周期中访问到它，包括render函数中。</p>
+<ul>
+<li>Context.Consumer</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;MyContext.Consumer&gt;</span><br><span class="line">  &#123;</span><br><span class="line">    value =&gt; <span class="comment">/* 基于context的值渲染 */</span></span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/MyContext.consumer&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="Redux-和-Mobx-的区别"><a href="#Redux-和-Mobx-的区别" class="headerlink" title="Redux 和 Mobx 的区别"></a>Redux 和 Mobx 的区别</h2><h2 id="React如何实现轮播图"><a href="#React如何实现轮播图" class="headerlink" title="React如何实现轮播图"></a>React如何实现轮播图</h2><h2 id="在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些"><a href="#在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些" class="headerlink" title="在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些"></a>在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些</h2><ol>
+<li>是否 key 值重复导致</li>
+<li>是否正确的引入数据, 或者传递props</li>
+<li>是否组件内部忘记connect</li>
+</ol>
+<h2 id="React16-函数式编程怎么去优化"><a href="#React16-函数式编程怎么去优化" class="headerlink" title="React16 函数式编程怎么去优化"></a>React16 函数式编程怎么去优化</h2><ul>
+<li>useMemo</li>
+<li>useCallback</li>
+<li>fragments</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/30/2020/3月/0330/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/30/2020/3月/0330/" itemprop="url">
+                  知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-30 22:50:00" itemprop="dateCreated datePublished" datetime="2020-03-30T22:50:00+08:00">2020-03-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-31 08:12:41" itemprop="dateModified" datetime="2020-03-31T08:12:41+08:00">2020-03-31</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h2><h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2><p>CDN 内容分发网络，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络阻塞，提高用户访问响应效率和命中率。<br>CDN 的关键技术有内容存储和分发技术。</p>
+<h2 id="打印一个树结构的对象"><a href="#打印一个树结构的对象" class="headerlink" title="打印一个树结构的对象"></a>打印一个树结构的对象</h2><h2 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h2><h2 id="js函数的4种调用方式"><a href="#js函数的4种调用方式" class="headerlink" title="js函数的4种调用方式"></a>js函数的4种调用方式</h2><ol>
+<li>作为函数直接调用</li>
+<li>作为对象的方法调用</li>
+<li>使用call、apply动态调用</li>
+<li>new命令间接调用</li>
+</ol>
+<h2 id="this的指向有哪几种情况？"><a href="#this的指向有哪几种情况？" class="headerlink" title="this的指向有哪几种情况？"></a>this的指向有哪几种情况？</h2><ol>
+<li>作为函数直接调用，非严格模式下，this指向window，严格模式下，this指向undefined</li>
+<li>作为某对象的方法调用，this指向这个对象</li>
+<li>使用apply、call、bind调用，this是第一个传递进去的值</li>
+<li>在构造函数中调用，this指向这个新创建的对象</li>
+<li>箭头函数中没有this，this在箭头函数创建时确定，它与声明所在的上下文相同。</li>
+</ol>
+<h2 id="regexp正则，讲讲贪婪模式"><a href="#regexp正则，讲讲贪婪模式" class="headerlink" title="regexp正则，讲讲贪婪模式"></a>regexp正则，讲讲贪婪模式</h2><p>正则默认是贪婪模式，默认的贪婪模式会尽可能多的匹配所搜索的字符串。</p>
+<h2 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h2><h2 id="面向对象和面向过程的区别，以及他们各自的优缺点"><a href="#面向对象和面向过程的区别，以及他们各自的优缺点" class="headerlink" title="面向对象和面向过程的区别，以及他们各自的优缺点"></a>面向对象和面向过程的区别，以及他们各自的优缺点</h2><h2 id="Css实现瀑布流"><a href="#Css实现瀑布流" class="headerlink" title="Css实现瀑布流"></a>Css实现瀑布流</h2><h2 id="Css-实现圆形进度条"><a href="#Css-实现圆形进度条" class="headerlink" title="Css 实现圆形进度条"></a>Css 实现圆形进度条</h2><h2 id="less-sass的区别"><a href="#less-sass的区别" class="headerlink" title="less sass的区别"></a>less sass的区别</h2><h2 id="链表和数组的区别"><a href="#链表和数组的区别" class="headerlink" title="链表和数组的区别"></a>链表和数组的区别</h2><h2 id="js为什么单线程"><a href="#js为什么单线程" class="headerlink" title="js为什么单线程"></a>js为什么单线程</h2><h2 id="说说-typescript-的特性，有什么好处"><a href="#说说-typescript-的特性，有什么好处" class="headerlink" title="说说 typescript 的特性，有什么好处"></a>说说 typescript 的特性，有什么好处</h2><h2 id="移动端适配怎么做"><a href="#移动端适配怎么做" class="headerlink" title="移动端适配怎么做"></a>移动端适配怎么做</h2>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1809,411 +2203,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/11/2020/3月/0311-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/11/2020/3月/0311-01/" itemprop="url">
-                  UDP
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-11 13:40:00 / 修改时间：14:47:50" itemprop="dateCreated datePublished" datetime="2020-03-11T13:40:00+08:00">2020-03-11</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><p>UDP协议是面向无连接的，也就是说不需要在正式传递数据之前先连接起双方。然后UDP协议只是数据报文的搬运工，不保证有序且不丢失的传递到对端，并且UDP协议也没有任何控制流量的算法，总的来说UDP相较于TCP更加的轻便。</p>
-<p>我们经常使用“ping”命令来测试两台主机之间TCP/IP通信是否正常， 其实“ping”命令的原理就是向对方主机发送UDP数据包，然后对方主机确认收到数据包， 如果数据包是否到达的消息及时反馈回来，那么网络就是通的。</p>
-<h4 id="面向无连接"><a href="#面向无连接" class="headerlink" title="面向无连接"></a>面向无连接</h4><p>UDP是不需要和TCP一样在发送数据前进行3次握手建立连接的，想发数据就可以发送了。<br>并且也只是数据报文的搬运工，不会对数据报文进行任何拆分和拼接操作。</p>
-<p>具体来说：</p>
-<ul>
-<li>在发送端，应用层将数据传递给传输层的UDP协议，UDP只会给数据增加一个UDP头标识下是UDP协议，然后就传递给网络层</li>
-<li>在接收端，网络层将数据传递给传输层，UDP只去除IP报文头就传递给应用层，不会任何拼接操作</li>
-</ul>
-<h4 id="不可靠性"><a href="#不可靠性" class="headerlink" title="不可靠性"></a>不可靠性</h4><p>首先不可靠性体现在无连接上，通信都不需要建立连接，想发就发，这样的情况肯定不可靠。<br>并且收到什么数据就传递什么数据，并且也不会备份数据，发送数据也不会关心对方是否已经正确接收到数据了。<br>再者网络环境时好时坏，但是 UDP 因为没有拥塞控制，一直会以恒定的速度发送数据。即使网络条件不好，也不会对发送速率进行调整。这样实现的弊端就是在网络条件不好的情况下可能会导致丢包，但是优点也很明显，在某些实时性要求高的场景（比如电话会议）就需要使用 UDP 而不是 TCP。</p>
-<h4 id="高效"><a href="#高效" class="headerlink" title="高效"></a>高效</h4><p>虽然 UDP 协议不是那么的可靠，但是正是因为它不是那么的可靠，所以也就没有 TCP 那么复杂了，需要保证数据不丢失且有序到达。<br>因此 UDP 的头部开销小，只有八字节，相比 TCP 的至少二十字节要少得多，在传输数据报文时是很高效的。</p>
-<h4 id="传输方式"><a href="#传输方式" class="headerlink" title="传输方式"></a>传输方式</h4><p>UDP 不止支持一对一的传输方式，同样支持一对多，多对多，多对一的方式，也就是说 UDP 提供了单播，多播，广播的功能。</p>
-<h4 id="适合使用的场景"><a href="#适合使用的场景" class="headerlink" title="适合使用的场景"></a>适合使用的场景</h4><ul>
-<li>直播</li>
-</ul>
-<p>想必大家都看过直播吧，大家可以考虑下如果直播使用了基于 TCP 的协议会发生什么事情？</p>
-<p>TCP 会严格控制传输的正确性，一旦有某一个数据对端没有收到，就会停止下来直到对端收到这个数据。这种问题在网络条件不错的情况下可能并不会发生什么事情，但是在网络情况差的时候就会变成画面卡住，然后再继续播放下一帧的情况。</p>
-<p>但是对于直播来说，用户肯定关注的是最新的画面，而不是因为网络条件差而丢失的老旧画面，所以 TCP 在这种情况下无用武之地，只会降低用户体验。</p>
-<ul>
-<li>王者荣耀</li>
-</ul>
-<p>为什么这样说呢？首先对于王者荣耀来说，用户体量是相当大的，如果使用 TCP 连接的话，就可能会出现服务器不够用的情况，因为每台服务器可供支撑的 TCP 连接数量是有限制的。</p>
-<p>再者，因为 TCP 会严格控制传输的正确性，如果因为用户网络条件不好就造成页面卡顿然后再传输旧的游戏画面是肯定不能接受的，毕竟对于这类实时性要求很高的游戏来说，最新的游戏画面才是最需要的，而不是老旧的画面，否则角色都不知道死多少次了。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>UDP 相比 TCP 简单的多，不需要建立连接，不需要验证数据报文，不需要流量控制，只会把想发的数据报文一股脑的丢给对端</li>
-<li>虽然 UDP 并没有 TCP 传输来的准确，但是也能在很多实时性要求高的地方有所作为</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/10/2020/3月/0310-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/10/2020/3月/0310-01/" itemprop="url">
-                  面经
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-10 22:26:00" itemprop="dateCreated datePublished" datetime="2020-03-10T22:26:00+08:00">2020-03-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-19 09:20:34" itemprop="dateModified" datetime="2020-03-19T09:20:34+08:00">2020-03-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="说说你对JS模块化的理解"><a href="#说说你对JS模块化的理解" class="headerlink" title="说说你对JS模块化的理解"></a>说说你对JS模块化的理解</h4><p>模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。</p>
-<p>那么模块化的好处也就显然易见了</p>
-<ul>
-<li>解决命名冲突</li>
-<li>依赖管理</li>
-<li>代码更加可读</li>
-<li>提高复用性</li>
-</ul>
-<p>js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = (<span class="function"><span class="keyword">function</span>(<span class="params">window</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//  private</span></span><br><span class="line">  <span class="keyword">var</span> moduleName = <span class="string">'module'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//  public</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setModuleName</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    moduleName = name;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">//  public</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getModuleName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> moduleName;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;setModuleName, getModuleName&#125;;</span><br><span class="line">&#125;)(<span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
-<p>它通过闭包的特性打开了一个新的作用域，缓解了全局作用域命名冲突和安全性的问题。但是，开发者并不能够用它来组织和拆分代码，于是乎便出现了以此为基石的模块化规范。</p>
-<h5 id="1-CommonJs规范（同步加载模块）"><a href="#1-CommonJs规范（同步加载模块）" class="headerlink" title="1. CommonJs规范（同步加载模块）"></a>1. CommonJs规范（同步加载模块）</h5><ul>
-<li>允许模块通过require的方法来同步加载所要依赖的其他模块，然后通过exports或module.exports来导出需要暴露的接口</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  a.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">exports.a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  b.js</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>(<span class="string">'./a.js'</span>);</span><br><span class="line"><span class="built_in">module</span>.a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// require函数同步加载了a.js，并且返回了module.exports输出字面量的拷贝值。</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>优点：</li>
-</ul>
-<blockquote>
-<ol>
-<li>简单容易使用</li>
-<li>服务器端模块便于复用</li>
-</ol>
-</blockquote>
-<ul>
-<li>缺点：</li>
-</ul>
-<blockquote>
-<ol>
-<li>同步加载的方式不适合在浏览器环境中使用，同步意味着阻塞加载，浏览器资源是异步加载</li>
-<li>不能非阻塞的并行加载多个模块</li>
-</ol>
-</blockquote>
-<h5 id="2-AMD（异步加载模块）"><a href="#2-AMD（异步加载模块）" class="headerlink" title="2. AMD（异步加载模块）"></a>2. AMD（异步加载模块）</h5><p>区别于CommonJS，AMD规范的被依赖模块是异步加载的，而定义的模块是被当作回调函数来执行的，依赖于require.js模块管理工具库。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./a'</span>, <span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    a.do();</span><br><span class="line">    b.do();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h5 id="3-CMD（异步加载模块）"><a href="#3-CMD（异步加载模块）" class="headerlink" title="3. CMD（异步加载模块）"></a>3. CMD（异步加载模块）</h5><p>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。AMD 推崇依赖前置，CMD 推崇依赖就近。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, exports, module</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span><br><span class="line">  a.doSomething();</span><br><span class="line">  <span class="comment">// 异步加载一个模块，在加载完成时，执行回调</span></span><br><span class="line">  <span class="built_in">require</span>.async([<span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">    b.doSomething();</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 对外暴露成员</span></span><br><span class="line">  exports.doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 使用模块</span></span><br><span class="line">seajs.use(<span class="string">'path'</span>);</span><br></pre></td></tr></table></figure>
-<h5 id="4-ES6-module"><a href="#4-ES6-module" class="headerlink" title="4. ES6 module"></a>4. ES6 module</h5><p>ES6的模块化已经不是规范了，而是JS语言的特性。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入的语法就这样 import，XXX 这里有很多语法变化</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="comment">// 导出也有很多语法变化的写法，基本的就这两个，反正语法没什么难得</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>随着ES6的推出，AMD和CMD也随之成为了历史。ES6模块与模块化规范相比，有两大特点：</p>
-<ul>
-<li>模块化规范输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
-<li>模块化规范是运行时加载，ES6 模块是编译时输出接口。</li>
-</ul>
-<p>commonJs</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  count,</span><br><span class="line">  add,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="built_in">require</span>(<span class="string">'./common'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">// 1</span></span><br><span class="line">v.add();</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  1</span></span><br></pre></td></tr></table></figure>
-<p>ES6</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  count,</span><br><span class="line">  add</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> v <span class="keyword">from</span> <span class="string">'./common'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  1</span></span><br><span class="line">v.add();</span><br><span class="line"><span class="built_in">console</span>.log(v.count); <span class="comment">//  2</span></span><br></pre></td></tr></table></figure>
-<h4 id="如何理解原型？如何理解原型链？"><a href="#如何理解原型？如何理解原型链？" class="headerlink" title="如何理解原型？如何理解原型链？"></a>如何理解原型？如何理解原型链？</h4><ul>
-<li>prototype<br>这是一个显式原型属性，任何一个对象都有原型，但是有一个例外</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun = <span class="built_in">Function</span>.prototype.bind();</span><br></pre></td></tr></table></figure>
-<p>如果你已上述方法创建一个函数，那么可以发现这个函数不具有prototype属性。</p>
-<p><strong>prototype 如何产生的</strong><br>当我们声明一个函数时，这个属性就被自动创建了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>并且这个属性的值是一个对象（也就是原型），只有一个属性constructor</p>
-<ul>
-<li><p>constructor<br>constructor 是一个公有且不可枚举的属性。一旦我们改变了函数的prototype，那么新对象就没有这个属性了（当然可以通过原型链取到constructor）</p>
-</li>
-<li><p>__proto__<br>这是每个对象都有的隐式原型属性，指向了创建该对象的构造函数的原型。其实这个属性指向了 [[prototype]]，但是 [[prototype]] 是内部属性，我们并不能访问到，所以使用 __proto__ 来访问。</p>
-</li>
-</ul>
-<p>**实例对象的 __proto__ 如何产生的</p>
-<p>当我们使用 new 操作符时，生成的实例对象拥有了 <em>proto</em>属性。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">//  这个函数是 Function的实例对象</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  纯对象的原型</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;.__proto__); <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stu = <span class="keyword">new</span> Student(<span class="string">'wang'</span>);</span><br><span class="line"><span class="comment">//  Student 类型实例的原型，默认也是一个对象</span></span><br><span class="line"><span class="built_in">console</span>.log(stu.__proto__); <span class="comment">//  &#123; constructor: f &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(stu.__proto__.constructor); <span class="comment">//  Student(name, age) &#123; this.name = name &#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="new做了什么，new的模拟实现"><a href="#new做了什么，new的模拟实现" class="headerlink" title="new做了什么，new的模拟实现"></a>new做了什么，new的模拟实现</h4><ol>
-<li>创建了一个全新的对象。</li>
-<li>这个对象会被执行[[Prototype]]（也就是<strong>proto</strong>）链接。</li>
-<li>生成的新对象会绑定到函数调用的this。</li>
-<li>通过new创建的每个对象将最终被[[Prototype]]链接到这个函数的prototype对象上。</li>
-<li>如果函数没有返回对象类型Object(包含Functoin, Array, Date, RegExg, Error)，那么new表达式中的函数调用会自动返回这个新的对象。</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟实现 new 操作符</span></span><br><span class="line"><span class="comment"> * @param  &#123;Function&#125; ctor [构造函数]</span></span><br><span class="line"><span class="comment"> * @return &#123;Object|Function|Regex|Date|Error&#125;      [返回结果]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个空的对象</span></span><br><span class="line">    <span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">    <span class="comment">// 获得构造函数</span></span><br><span class="line">    <span class="keyword">let</span> Con = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">    <span class="comment">// 链接到原型</span></span><br><span class="line">    obj.__proto__ = Con.prototype</span><br><span class="line">    <span class="comment">// 绑定 this，执行构造函数</span></span><br><span class="line">    <span class="keyword">let</span> result = Con.apply(obj, <span class="built_in">arguments</span>)</span><br><span class="line">    <span class="comment">// 确保 new 出来的是个对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> result === <span class="string">'object'</span> ? result : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="谈谈小程序的登录授权"><a href="#谈谈小程序的登录授权" class="headerlink" title="谈谈小程序的登录授权"></a>谈谈小程序的登录授权</h4><p>1.调用 wx.login() 获取 临时登录凭证code ，并回传到开发者服务器。</p>
-<p>2.调用 code2Session 接口，换取 用户唯一标识 OpenID 和 会话密钥 session_key。</p>
-<h4 id="vue的几种传参方式"><a href="#vue的几种传参方式" class="headerlink" title="vue的几种传参方式"></a>vue的几种传参方式</h4><ul>
-<li><p>props</p>
-</li>
-<li><p>vuex</p>
-</li>
-<li><p>$parent</p>
-</li>
-<li><p>$children</p>
-</li>
-<li><p>provide-inject</p>
-</li>
-</ul>
-<p>…项目相关</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2265,7 +2254,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
