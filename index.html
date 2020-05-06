@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">41</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">42</span></a>
   </li>
         
         
@@ -310,6 +310,205 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/04/21/2020/4月/0421/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/21/2020/4月/0421/" itemprop="url">
+                  知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-21 14:00:00" itemprop="dateCreated datePublished" datetime="2020-04-21T14:00:00+08:00">2020-04-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-04-29 14:42:37" itemprop="dateModified" datetime="2020-04-29T14:42:37+08:00">2020-04-29</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="img的src也可以跨域吗"><a href="#img的src也可以跨域吗" class="headerlink" title="img的src也可以跨域吗"></a>img的src也可以跨域吗</h4><p>原理上都是利用标签的src可绕过同源限制，跨域请求的特点，</p>
+<p>硬要说不同，那么区别在于：img只能单向发送get请求，不可访问响应内容（只是展现），而script可对其进行解析</p>
+<h4 id="实现斐波那契数列并利用缓存进行优化"><a href="#实现斐波那契数列并利用缓存进行优化" class="headerlink" title="实现斐波那契数列并利用缓存进行优化"></a>实现斐波那契数列并利用缓存进行优化</h4><h4 id="redux中connect-的作用"><a href="#redux中connect-的作用" class="headerlink" title="redux中connect()的作用"></a>redux中connect()的作用</h4><p>连接 React 组件与 Store 的作用。</p>
+<h4 id="redux-saga的作用"><a href="#redux-saga的作用" class="headerlink" title="redux-saga的作用"></a>redux-saga的作用</h4><h4 id="http中的option方法的应用场景"><a href="#http中的option方法的应用场景" class="headerlink" title="http中的option方法的应用场景"></a>http中的option方法的应用场景</h4><p>OPTIONS方法请求web服务器告知其支持的各种功能。可以询问服务器通常支持哪些方法，或者对某些特殊资源支持哪些方法。</p>
+<h4 id="前端预检的过程"><a href="#前端预检的过程" class="headerlink" title="前端预检的过程"></a>前端预检的过程</h4><p>一、为什么要发预检请求？</p>
+<p>出于安全考虑，浏览器会限制从脚本发起的跨域 http 请求，像 XMLHttpRequest 和 Fetch 都遵循同源策略。<br>浏览器限制跨域请求一般有两种方式：</p>
+<ol>
+<li>浏览器限制发起跨域请求</li>
+<li>跨域请求跨域正常发起，但是返回的结果被浏览器拦截</li>
+</ol>
+<p>一般浏览器都是第二种方式限制跨域请求，那就是说请求已到达服务器，并有可能对数据库里的数据进行了操作，但是返回的结果被浏览器拦截了，那么我们就获取不到返回结果，这是一次失败的请求，但是可能对数据库里的数据产生了影响。</p>
+<p>为了防止这种情况的发生，规范要求，对这种可能对服务器数据产生副作用的HTTP请求方法，浏览器必须先使用OPTIONS方法发起一个预检请求，从而获知服务器是否允许该跨域请求：如果允许，就发送带数据的真实请求；如果不允许，则阻止发送带数据的真实请求。</p>
+<p>二、什么时候发预检请求</p>
+<p>http请求包括：简单请求 和 复杂请求。</p>
+<ol>
+<li>简单请求</li>
+</ol>
+<p>简单请求不会触发 CORS 预检请求。<br>若满足以下条件，则可视为“简单请求”：</p>
+<ul>
+<li>get</li>
+<li>head</li>
+<li>post</li>
+</ul>
+<p>仅当 post 方法的 Content-Type 值等于下列之一才算简单请求</p>
+<blockquote>
+<p>text-plain<br>multipart/form-data<br>application/x-www-form-unlenceded</p>
+</blockquote>
+<ol start="2">
+<li>复杂请求（需预检的请求）</li>
+</ol>
+<p>“需预检的请求”要求必须首先使用OPTIONS方法发起一个预检请求到服务区，以获知服务器是否允许该实际请求。“预检请求”的使用，可以避免跨域请求对服务器的用户数据产生未预期的影响。</p>
+<p>当请求满足下述任一条件时，即应首先发送预检请求：<br>使用了下面任一 HTTP 方法：</p>
+<ul>
+<li>put</li>
+<li>delete</li>
+<li>connect</li>
+<li>options</li>
+<li>trace</li>
+<li>patch</li>
+</ul>
+<h4 id="移动端怎么解决12px字体的问题，怎么解决0-5px的线条"><a href="#移动端怎么解决12px字体的问题，怎么解决0-5px的线条" class="headerlink" title="移动端怎么解决12px字体的问题，怎么解决0.5px的线条"></a>移动端怎么解决12px字体的问题，怎么解决0.5px的线条</h4><h4 id="移动端手指触碰后的事件api触发顺序"><a href="#移动端手指触碰后的事件api触发顺序" class="headerlink" title="移动端手指触碰后的事件api触发顺序"></a>移动端手指触碰后的事件api触发顺序</h4><h4 id="react-的虚拟-dom-是怎么实现的"><a href="#react-的虚拟-dom-是怎么实现的" class="headerlink" title="react 的虚拟 dom 是怎么实现的"></a>react 的虚拟 dom 是怎么实现的</h4><h4 id="react-的渲染过程中，兄弟节点之间是怎么处理的？也就是-key-值不一样的时候。"><a href="#react-的渲染过程中，兄弟节点之间是怎么处理的？也就是-key-值不一样的时候。" class="headerlink" title="react 的渲染过程中，兄弟节点之间是怎么处理的？也就是 key 值不一样的时候。"></a>react 的渲染过程中，兄弟节点之间是怎么处理的？也就是 key 值不一样的时候。</h4><h4 id="你说一下-webpack-的一些-plugin，怎么使用-webpack-对项目进行优化"><a href="#你说一下-webpack-的一些-plugin，怎么使用-webpack-对项目进行优化" class="headerlink" title="你说一下 webpack 的一些 plugin，怎么使用 webpack 对项目进行优化"></a>你说一下 webpack 的一些 plugin，怎么使用 webpack 对项目进行优化</h4><h4 id="scoped是怎么实现的，追问为什么加deep能穿透样式？（可以说说-global-的实现）"><a href="#scoped是怎么实现的，追问为什么加deep能穿透样式？（可以说说-global-的实现）" class="headerlink" title="scoped是怎么实现的，追问为什么加deep能穿透样式？（可以说说 :global 的实现）"></a>scoped是怎么实现的，追问为什么加deep能穿透样式？（可以说说 :global 的实现）</h4><h4 id="为什么字体大小最小设置成12px？"><a href="#为什么字体大小最小设置成12px？" class="headerlink" title="为什么字体大小最小设置成12px？"></a>为什么字体大小最小设置成12px？</h4><p>因为 Chrome 这款任性的浏览器做了如下限制：</p>
+<ol>
+<li>font-size 有一个最小值 12px（不同操作系统、不同语言可能限制不一样），低于12px的，一律按12px显示。理由是 Chrome 认为低于12px的中文对人类是不友好的。</li>
+<li>但是允许你把 font-size 设置为0</li>
+<li>这个12px的限制用户是可以自行调整的，进入 chrome://setting/fonts 设置。</li>
+</ol>
+<p>如果一定要使用小于12px的字号，可以使用 transform: scale(0.9), 缩放的方式来解决。</p>
+<p>Mac 下测试 Chrome、Firefox、Safire 浏览器，只有 Chrome 有这个限制。</p>
+<h5 id="我现在有一个数组-1-2-3-4-，请实现算法，得到这个数组的全排列的数组，如-2-1-3-4-，"><a href="#我现在有一个数组-1-2-3-4-，请实现算法，得到这个数组的全排列的数组，如-2-1-3-4-，" class="headerlink" title="我现在有一个数组[1,2,3,4]，请实现算法，得到这个数组的全排列的数组，如[2,1,3,4]，"></a>我现在有一个数组[1,2,3,4]，请实现算法，得到这个数组的全排列的数组，如[2,1,3,4]，</h5><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><h4 id="我现在有一个背包，容量为-m，然后有-n-个货物，重量分别为-w1-w2-w3…wn，每个货物的价值是-v1-v2-v3…vn，w-和-v-没有任何关系，请求背包能装下的最大价值。"><a href="#我现在有一个背包，容量为-m，然后有-n-个货物，重量分别为-w1-w2-w3…wn，每个货物的价值是-v1-v2-v3…vn，w-和-v-没有任何关系，请求背包能装下的最大价值。" class="headerlink" title="我现在有一个背包，容量为 m，然后有 n 个货物，重量分别为 w1,w2,w3…wn，每个货物的价值是 v1,v2,v3…vn，w 和 v 没有任何关系，请求背包能装下的最大价值。"></a>我现在有一个背包，容量为 m，然后有 n 个货物，重量分别为 w1,w2,w3…wn，每个货物的价值是 v1,v2,v3…vn，w 和 v 没有任何关系，请求背包能装下的最大价值。</h4><h4 id="JS手写二分搜索算法"><a href="#JS手写二分搜索算法" class="headerlink" title="JS手写二分搜索算法"></a>JS手写二分搜索算法</h4><h4 id="实现一个Lazyman"><a href="#实现一个Lazyman" class="headerlink" title="实现一个Lazyman"></a>实现一个Lazyman</h4>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -540,7 +739,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-04-08 17:51:11" itemprop="dateModified" datetime="2020-04-08T17:51:11+08:00">2020-04-08</time>
+                <time title="修改时间：2020-05-06 13:46:22" itemprop="dateModified" datetime="2020-05-06T13:46:22+08:00">2020-05-06</time>
               
             
           </span>
@@ -1163,7 +1362,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-25 16:52:01" itemprop="dateModified" datetime="2020-03-25T16:52:01+08:00">2020-03-25</time>
+                <time title="修改时间：2020-05-06 14:42:22" itemprop="dateModified" datetime="2020-05-06T14:42:22+08:00">2020-05-06</time>
               
             
           </span>
@@ -1198,16 +1397,37 @@
       
         
           
-            <h1 id="HTTP—-HTTP缓存机制"><a href="#HTTP—-HTTP缓存机制" class="headerlink" title="HTTP—-HTTP缓存机制"></a>HTTP—-HTTP缓存机制</h1><h2 id="缓存的规则"><a href="#缓存的规则" class="headerlink" title="缓存的规则"></a>缓存的规则</h2><p>我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。下面我将分别详细的介绍这两种缓存的缓存规则。</p>
-<h4 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h4><p>当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端的才会从服务端获取数据。</p>
-<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>又称对比缓存，客户端会先从缓存数据库中获取到一个缓存数据的标识，得到标识后请求服务端验证是否失效，如果没有失效服务端会返回304，此时客户端直接从缓存中获取所以请求的数据，如果标识失效，服务端会返回更新后的数据。</p>
+            <h1 id="HTTP—-HTTP缓存机制"><a href="#HTTP—-HTTP缓存机制" class="headerlink" title="HTTP—-HTTP缓存机制"></a>HTTP—-HTTP缓存机制</h1><h2 id="缓存的规则"><a href="#缓存的规则" class="headerlink" title="缓存的规则"></a>缓存的规则</h2><p>我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。</p>
+<h3 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>强缓存中，当请求再次发出时，浏览器会根据其中的 expires 和 cache-control 判断目标资源是否“命中”强缓存，若命中则直接从缓存中获取资源，<strong>不会再与服务端发生通信。</strong></p>
+<p>命中强缓存的情况下，返回的 HTTP 状态码为 200 （如下图）。</p>
+<p><img src="./images/cache.jpg" alt="avatar"></p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>又称对比缓存，客户端会先从缓存数据库中获取到一个缓存数据的标识，得到标识后请求服务端验证是否失效，如果没有失效服务端会返回304，此时客户端直接从缓存中获取所以请求的数据，如果标识失效，服务端会返回更新后的数据。</p>
 <p><strong>两类缓存机制可以同时存在，强制缓存的优先级高于协商缓存，当执行强制缓存时，如若缓存命中，则直接使用缓存数据库数据，不在进行缓存协商。</strong></p>
-<h2 id="缓存的方案"><a href="#缓存的方案" class="headerlink" title="缓存的方案"></a>缓存的方案</h2><h4 id="强制缓存-1"><a href="#强制缓存-1" class="headerlink" title="强制缓存"></a>强制缓存</h4><p>对于强制缓存，服务器响应的header中会用两个字段来表明 —– Expires和Cache-Control</p>
-<h5 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h5><p>Expires的值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。但由于服务端时间和客户端时间可能有误差，这也就导致缓存命中的误差，另一方面，Expires是HTTP1.0的产物，故现在大多数使用Cache-control替代。</p>
-<h5 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h5><p>Cache-control有很多属性，不同的属性代表的意义也不同。<br>private：客户端可以缓存<br>public：客户端和代理服务器都可以缓存<br>max-age：缓存内容将在t秒后失效<br>no-cache：需要使用协商缓存来验证数据<br>no-store：所有内容都不会缓存</p>
-<h4 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>协商缓存需要进行对比判断是否可以使用缓存。浏览器第一次请求数据时，服务器会降缓存标识与数据一起响应给客户端，客户端将它们备份至缓存中。再次请求时，客户端会将缓存中的标识发送给服务器，服务器根据此标识判断。</p>
-<h5 id="Last-midified"><a href="#Last-midified" class="headerlink" title="Last-midified"></a>Last-midified</h5><p>Last-midified: 服务器在响应请求时，会告诉浏览器资源的最后修改时间。</p>
-<p>Etag: 服务器响应请求时，通过此字段告诉浏览器当前资源在服务器生成的唯一标识（生成规则由服务器决定）</p>
+<h2 id="缓存的方案"><a href="#缓存的方案" class="headerlink" title="缓存的方案"></a>缓存的方案</h2><h3 id="强制缓存-1"><a href="#强制缓存-1" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>对于强制缓存，服务器响应的header中会用两个字段来表明 —– Expires和Cache-Control</p>
+<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>Expires的值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。但由于服务端时间和客户端时间可能有误差，这也就导致缓存命中的误差，另一方面，Expires是HTTP1.0的产物，故现在大多数使用Cache-control替代。</p>
+<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>Cache-control有很多属性，不同的属性代表的意义也不同。<br>private：客户端可以缓存<br>public：客户端和代理服务器都可以缓存<br>max-age：缓存内容将在t秒后失效<br>no-cache：需要使用协商缓存来验证数据<br>no-store：所有内容都不会缓存</p>
+<h3 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存依赖于服务端与浏览器之间的通信。</p>
+<p>协商缓存机制下，浏览器需要向服务器去询问缓存的相关信息，进而判断是重新发起请求、下载完整的响应，还是从本地获取缓存的资源。</p>
+<p>如果服务端提示缓存资源未改动（Not Modified），资源会被重定向到浏览器缓存，这种情况下网络请求对应的状态码是 304（如下图）。</p>
+<p><img src="./images/304.jpg" alt="avatar"></p>
+<h4 id="协商缓存的实-从-Last-midified-到-Etag"><a href="#协商缓存的实-从-Last-midified-到-Etag" class="headerlink" title="协商缓存的实: 从 Last-midified 到 Etag"></a>协商缓存的实: 从 Last-midified 到 Etag</h4><p>Last-Modified 是一个时间戳，如果我们启用了协商缓存，它会在首次请求时随着 Response Headers 返回：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Last-Modified: Fri, 27 Oct 2020 06:35:57 GMT</span><br></pre></td></tr></table></figure>
+<p>随后我们每次请求时，会带上一个叫 If-Modified-Since 的时间戳字段，它的值正是上一次 response 返回给它的 last-modified 值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Modified-Since: Fri, 27 Oct 2020 06:35:57 GMT</span><br></pre></td></tr></table></figure>
+<p>服务器接收到这个时间戳后，会比对该时间戳和资源在服务器上的最后修改时间是否一致，从而判断资源是否发生了变化。如果发生了变化，就会返回一个完整的响应内容，并在 Response Headers 中添加新的 Last-Modified 值；否则，返回如上图的 304 响应，Response Headers 不会再添加 Last-Modified 字段。</p>
+<p>使用 Last-Modified 存在一些弊端，这其中最常见的就是这样两个场景：</p>
+<ul>
+<li><p>我们编辑了文件，但文件的内容没有改变。服务端并不清楚我们是否真正改变了文件，它仍然通过最后编辑时间进行判断。因此这个资源在再次被请求时，会被当做新资源，进而引发一次完整的响应——不该重新请求的时候，也会重新请求。</p>
+</li>
+<li><p>当我们修改文件的速度过快时（比如花了 100ms 完成了改动），由于 If-Modified-Since 只能检查到以秒为最小计量单位的时间差，所以它是感知不到这个改动的——该重新请求的时候，反而没有重新请求了。</p>
+</li>
+</ul>
+<p>这两个场景其实指向了同一个 bug ——服务器并没有正确感知文件的变化。为了解决这样的问题， Etag 作为 Last-Modified 的补充出现了。</p>
+<p>Etag: 是由服务器为每个资源生成的唯一的标识字符串，这个标识字符串是基于文件内容编码的，只要文件内容不同，它们对应的 Etag 就是不同的，反之亦然。因此 Etag 能够精准地感知文件的变化。</p>
+<p>Etag 和 Last-Modified 类似，当首次请求时，我们会在响应头里获取到一个最初的标识符字符串，举个🌰，它可以是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETag: W/&quot;wa3b-1231452&quot;</span><br></pre></td></tr></table></figure>
+<p>那么下一次请求时，请求头里就会带上一个值相同的、名为 if-None-Match 的字符串供服务端比对了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-None-Match: W/&quot;wa3b-1231452&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="缓存的优点"><a href="#缓存的优点" class="headerlink" title="缓存的优点"></a>缓存的优点</h2><ol>
 <li>减少了冗余的数据传递，节省宽带流量</li>
 <li>减少了服务器的负担，大大提高了网站性能</li>
@@ -1215,7 +1435,7 @@
 </ol>
 <h2 id="不同刷新的请求执行过程"><a href="#不同刷新的请求执行过程" class="headerlink" title="不同刷新的请求执行过程"></a>不同刷新的请求执行过程</h2><ol>
 <li>浏览器地址栏写入URL，回车，浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿。（最快）</li>
-<li>F5刷新，别偷懒好歹去服务器看看这个文件是否过期了。于是浏览器就在请求上带上一个if-modify-since。0</li>
+<li>F5刷新，别偷懒好歹去服务器看看这个文件是否过期了。于是浏览器就在请求上带上一个if-modify-since。</li>
 <li>Ctrl+F5告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端完成了强行更新的操作。</li>
 </ol>
 
@@ -2022,205 +2242,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/15/2020/3月/0315-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/15/2020/3月/0315-01/" itemprop="url">
-                  前端安全问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-15 19:35:00" itemprop="dateCreated datePublished" datetime="2020-03-15T19:35:00+08:00">2020-03-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-25 18:06:22" itemprop="dateModified" datetime="2020-03-25T18:06:22+08:00">2020-03-25</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p>XSS 简单点来说，就是攻击者想尽一切办法将可以执行的代码注入到网页中。<br>XSS 可以分为多种类型，但是总体上我认为分为两类：持久型和非持久型。</p>
-<p>持久型也就是攻击的代码被服务端写入进数据库中，这种攻击危害性很大，因为如果网站访问量很大的话，就会导致大量正常访问页面的用户都受到攻击。</p>
-<p>举个例子，对于评论功能来说，就得防范持久型 XSS 攻击，因为我可以在评论中输入以下内容</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(<span class="number">1</span>);<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>非持久型相比于前者危害就小的多了，一般通过修改 URL 参数的方式加入攻击代码，诱导用户访问链接从而进行攻击。</p>
-<p>举个例子，如果页面需要从 URL 中获取某些参数作为内容的话，不经过过滤就会导致攻击代码被执行</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- http://www.domain.com?name=&lt;script&gt;alert(1)&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>但是对于这种攻击方式来说，如果用户使用 Chrome 这类浏览器的话，浏览器就能自动帮助用户防御攻击。但是我们不能因此就不防御此类攻击了，因为我不能确保用户都使用了该类浏览器。</p>
-<p>对于 XSS 攻击来说，通常有两种方式可以用来防御。</p>
-<h5 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h5><p>首先，对于用户的输入应该是永远不信任的。最普遍的做法就是转义输入输出的内容，对于引号、尖括号、斜杠进行转义</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">escape</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  str = str.replace(<span class="regexp">/&amp;/g</span>, <span class="string">'&amp;amp;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/&lt;/g</span>, <span class="string">'&amp;lt;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/&gt;/g</span>, <span class="string">'&amp;gt;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/"/g</span>, <span class="string">'&amp;quto;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/'/g</span>, <span class="string">'&amp;#39;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/`/g</span>, <span class="string">'&amp;#96;'</span>)</span><br><span class="line">  str = str.replace(<span class="regexp">/\//g</span>, <span class="string">'&amp;#x2F;'</span>)</span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h5><p>CSP 本质上就是建立白名单，开发者明确告诉浏览器哪些外部资源可以加载和执行。我们只需要配置规则，如何拦截是由浏览器自己实现的。我们可以通过这种方式来尽量减少 XSS 攻击。</p>
-<p>通常可以通过两种方式来开启 CSP：</p>
-<ol>
-<li>设置 HTTP Header 中的 Content-Security-Policy</li>
-<li>设置 meta 标签的方式 <meta http-equiv="Content-Security-Policy"></li>
-</ol>
-<hr>
-<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>CSRF 中文名为跨站请求伪造。原理就是攻击者构造出一个后端请求地址，诱导用户点击或者通过某些途径自动发起请求。如果用户是在登录状态下的话，后端就以为是用户在操作，从而进行相应的逻辑。</p>
-<p>举个例子，假设网站中有一个通过 GET 请求提交用户评论的接口，那么攻击者就可以在钓鱼网站中加入一个图片，图片的地址就是评论接口</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://www.domain.com/xxx?comment='attack'"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>那么你是否会想到使用 POST 方式提交请求是不是就没有这个问题了呢？其实并不是，使用这种方式也不是百分百安全的，攻击者同样可以诱导用户进入某个页面，在页面中通过表单提交 POST 请求。</p>
-<h5 id="如何防御"><a href="#如何防御" class="headerlink" title="如何防御"></a>如何防御</h5><p>防范 CSRF 攻击可以遵循以下几种规则：</p>
-<ol>
-<li>Get 请求不对数据进行修改</li>
-<li>不让第三方网站访问到用户 Cookie</li>
-<li>阻止第三方网站请求接口</li>
-<li>请求时附带验证信息，比如验证码或者 Token</li>
-</ol>
-<h5 id="SameSite"><a href="#SameSite" class="headerlink" title="SameSite"></a>SameSite</h5><p>可以对 Cookie 设置 SameSite 属性。该属性表示 Cookie 不随着跨域请求发送，可以很大程度减少 CSRF 的攻击，但是该属性目前并不是所有浏览器都兼容。</p>
-<h5 id="验证-Referer"><a href="#验证-Referer" class="headerlink" title="验证 Referer"></a>验证 Referer</h5><p>对于需要防范 CSRF 的请求，我们可以通过验证 Referer 来判断该请求是否为第三方网站发起的。</p>
-<h5 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h5><p>服务器下发一个随机 Token，每次发起请求时将 Token 携带上，服务器验证 Token 是否有效。</p>
-<hr>
-<h3 id="点击劫持"><a href="#点击劫持" class="headerlink" title="点击劫持"></a>点击劫持</h3><p>点击劫持是一种视觉欺骗的攻击手段。攻击者将需要攻击的网站通过 iframe 嵌套的方式嵌入自己的网页中，并将 iframe 设置为透明，在页面中透出一个按钮诱导用户点击。</p>
-<p>对于这种攻击方式，推荐防御的方法有两种。</p>
-<h5 id="X-FRAME-OPTIONS"><a href="#X-FRAME-OPTIONS" class="headerlink" title="X-FRAME-OPTIONS"></a>X-FRAME-OPTIONS</h5><p>X-FRAME-OPTIONS 是一个 HTTP 响应头，在现代浏览器有一个很好的支持。这个 HTTP 响应头 就是为了防御用 iframe 嵌套的点击劫持攻击。</p>
-<p>该响应头有三个值可选，分别是</p>
-<ul>
-<li>DENY，表示页面不允许通过 iframe 的方式展示</li>
-<li>SAMEORIGIN，表示页面可以在相同域名下通过 iframe 的方式展示</li>
-<li>ALLOW-FROM，表示页面可以在指定来源的 iframe 中展示</li>
-</ul>
-<h5 id="JS-防御"><a href="#JS-防御" class="headerlink" title="JS 防御"></a>JS 防御</h5><p>对于某些远古浏览器来说，并不能支持上面的这种方式，那我们只有通过 JS 的方式来防御点击劫持了。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">id</span>=<span class="string">"click-jack"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    html &#123;</span></span><br><span class="line"><span class="undefined">      display: none !important;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (self == top) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> style = <span class="built_in">document</span>.getElementById(<span class="string">'click-jack'</span>)</span></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.body.removeChild(style)</span></span><br><span class="line"><span class="javascript">    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="undefined">      top.location = self.location</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>以上代码的作用就是当通过 iframe 的方式加载页面时，攻击者的网页直接不显示所有内容了。</p>
-<h3 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h3><p>中间人攻击是攻击方同时与服务端和客户端建立起了连接，并让对方认为连接是安全的，但是实际上整个通信过程都被攻击者控制了。攻击者不仅能获得双方的通信信息，还能修改通信信息。</p>
-<p>通常来说不建议使用公共的 Wi-Fi，因为很可能就会发生中间人攻击的情况。如果你在通信的过程中涉及到了某些敏感信息，就完全暴露给攻击方了。</p>
-<p>当然防御中间人攻击其实并不难，只需要增加一个安全通道来传输信息。HTTPS 就可以用来防御中间人攻击，但是并不是说使用了 HTTPS 就可以高枕无忧了，因为如果你没有完全关闭 HTTP 访问的话，攻击方可以通过某些方式将 HTTPS 降级为 HTTP 从而实现中间人攻击。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2272,7 +2293,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

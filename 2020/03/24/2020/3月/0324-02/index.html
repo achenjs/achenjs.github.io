@@ -110,18 +110,21 @@
 
 
 
-  <meta name="description" content="HTTP—-HTTP缓存机制缓存的规则我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。下面我将分别详细的介绍这两种缓存的缓存规则。 强制缓存当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端">
+  <meta name="description" content="HTTP—-HTTP缓存机制缓存的规则我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。 强制缓存强缓存中，当请求再次发出时，浏览器会根据其中的 expires 和 cache-control 判断目标资源是否“命中”强缓存，若命中则直接从缓存中获取">
 <meta name="keywords" content="http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP----HTTP缓存机制">
 <meta property="og:url" content="https://achenjs.github.io/2020/03/24/2020/3月/0324-02/index.html">
 <meta property="og:site_name" content="achen的个人博客">
-<meta property="og:description" content="HTTP—-HTTP缓存机制缓存的规则我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。下面我将分别详细的介绍这两种缓存的缓存规则。 强制缓存当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端">
+<meta property="og:description" content="HTTP—-HTTP缓存机制缓存的规则我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。 强制缓存强缓存中，当请求再次发出时，浏览器会根据其中的 expires 和 cache-control 判断目标资源是否“命中”强缓存，若命中则直接从缓存中获取">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-25T08:52:01.063Z">
+<meta property="og:image" content="https://achenjs.github.io/2020/03/24/2020/3月/0324-02/images/cache.jpg">
+<meta property="og:image" content="https://achenjs.github.io/2020/03/24/2020/3月/0324-02/images/304.jpg">
+<meta property="og:updated_time" content="2020-05-06T06:42:22.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP----HTTP缓存机制">
-<meta name="twitter:description" content="HTTP—-HTTP缓存机制缓存的规则我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。下面我将分别详细的介绍这两种缓存的缓存规则。 强制缓存当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端">
+<meta name="twitter:description" content="HTTP—-HTTP缓存机制缓存的规则我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。 强制缓存强缓存中，当请求再次发出时，浏览器会根据其中的 expires 和 cache-control 判断目标资源是否“命中”强缓存，若命中则直接从缓存中获取">
+<meta name="twitter:image" content="https://achenjs.github.io/2020/03/24/2020/3月/0324-02/images/cache.jpg">
 
 
 
@@ -237,7 +240,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">41</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">42</span></a>
   </li>
         
         
@@ -386,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-25 16:52:01" itemprop="dateModified" datetime="2020-03-25T16:52:01+08:00">2020-03-25</time>
+                <time title="修改时间：2020-05-06 14:42:22" itemprop="dateModified" datetime="2020-05-06T14:42:22+08:00">2020-05-06</time>
               
             
           </span>
@@ -427,16 +430,37 @@
       
 
       
-        <h1 id="HTTP—-HTTP缓存机制"><a href="#HTTP—-HTTP缓存机制" class="headerlink" title="HTTP—-HTTP缓存机制"></a>HTTP—-HTTP缓存机制</h1><h2 id="缓存的规则"><a href="#缓存的规则" class="headerlink" title="缓存的规则"></a>缓存的规则</h2><p>我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。下面我将分别详细的介绍这两种缓存的缓存规则。</p>
-<h4 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h4><p>当缓存数据库中已有所请求的数据时。客户端直接从缓存数据库中获取数据。当缓存数据库中没有所请求的数据时，客户端的才会从服务端获取数据。</p>
-<h4 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>又称对比缓存，客户端会先从缓存数据库中获取到一个缓存数据的标识，得到标识后请求服务端验证是否失效，如果没有失效服务端会返回304，此时客户端直接从缓存中获取所以请求的数据，如果标识失效，服务端会返回更新后的数据。</p>
+        <h1 id="HTTP—-HTTP缓存机制"><a href="#HTTP—-HTTP缓存机制" class="headerlink" title="HTTP—-HTTP缓存机制"></a>HTTP—-HTTP缓存机制</h1><h2 id="缓存的规则"><a href="#缓存的规则" class="headerlink" title="缓存的规则"></a>缓存的规则</h2><p>我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。</p>
+<h3 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>强缓存中，当请求再次发出时，浏览器会根据其中的 expires 和 cache-control 判断目标资源是否“命中”强缓存，若命中则直接从缓存中获取资源，<strong>不会再与服务端发生通信。</strong></p>
+<p>命中强缓存的情况下，返回的 HTTP 状态码为 200 （如下图）。</p>
+<p><img src="./images/cache.jpg" alt="avatar"></p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>又称对比缓存，客户端会先从缓存数据库中获取到一个缓存数据的标识，得到标识后请求服务端验证是否失效，如果没有失效服务端会返回304，此时客户端直接从缓存中获取所以请求的数据，如果标识失效，服务端会返回更新后的数据。</p>
 <p><strong>两类缓存机制可以同时存在，强制缓存的优先级高于协商缓存，当执行强制缓存时，如若缓存命中，则直接使用缓存数据库数据，不在进行缓存协商。</strong></p>
-<h2 id="缓存的方案"><a href="#缓存的方案" class="headerlink" title="缓存的方案"></a>缓存的方案</h2><h4 id="强制缓存-1"><a href="#强制缓存-1" class="headerlink" title="强制缓存"></a>强制缓存</h4><p>对于强制缓存，服务器响应的header中会用两个字段来表明 —– Expires和Cache-Control</p>
-<h5 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h5><p>Expires的值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。但由于服务端时间和客户端时间可能有误差，这也就导致缓存命中的误差，另一方面，Expires是HTTP1.0的产物，故现在大多数使用Cache-control替代。</p>
-<h5 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h5><p>Cache-control有很多属性，不同的属性代表的意义也不同。<br>private：客户端可以缓存<br>public：客户端和代理服务器都可以缓存<br>max-age：缓存内容将在t秒后失效<br>no-cache：需要使用协商缓存来验证数据<br>no-store：所有内容都不会缓存</p>
-<h4 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h4><p>协商缓存需要进行对比判断是否可以使用缓存。浏览器第一次请求数据时，服务器会降缓存标识与数据一起响应给客户端，客户端将它们备份至缓存中。再次请求时，客户端会将缓存中的标识发送给服务器，服务器根据此标识判断。</p>
-<h5 id="Last-midified"><a href="#Last-midified" class="headerlink" title="Last-midified"></a>Last-midified</h5><p>Last-midified: 服务器在响应请求时，会告诉浏览器资源的最后修改时间。</p>
-<p>Etag: 服务器响应请求时，通过此字段告诉浏览器当前资源在服务器生成的唯一标识（生成规则由服务器决定）</p>
+<h2 id="缓存的方案"><a href="#缓存的方案" class="headerlink" title="缓存的方案"></a>缓存的方案</h2><h3 id="强制缓存-1"><a href="#强制缓存-1" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>对于强制缓存，服务器响应的header中会用两个字段来表明 —– Expires和Cache-Control</p>
+<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>Expires的值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。但由于服务端时间和客户端时间可能有误差，这也就导致缓存命中的误差，另一方面，Expires是HTTP1.0的产物，故现在大多数使用Cache-control替代。</p>
+<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>Cache-control有很多属性，不同的属性代表的意义也不同。<br>private：客户端可以缓存<br>public：客户端和代理服务器都可以缓存<br>max-age：缓存内容将在t秒后失效<br>no-cache：需要使用协商缓存来验证数据<br>no-store：所有内容都不会缓存</p>
+<h3 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存依赖于服务端与浏览器之间的通信。</p>
+<p>协商缓存机制下，浏览器需要向服务器去询问缓存的相关信息，进而判断是重新发起请求、下载完整的响应，还是从本地获取缓存的资源。</p>
+<p>如果服务端提示缓存资源未改动（Not Modified），资源会被重定向到浏览器缓存，这种情况下网络请求对应的状态码是 304（如下图）。</p>
+<p><img src="./images/304.jpg" alt="avatar"></p>
+<h4 id="协商缓存的实-从-Last-midified-到-Etag"><a href="#协商缓存的实-从-Last-midified-到-Etag" class="headerlink" title="协商缓存的实: 从 Last-midified 到 Etag"></a>协商缓存的实: 从 Last-midified 到 Etag</h4><p>Last-Modified 是一个时间戳，如果我们启用了协商缓存，它会在首次请求时随着 Response Headers 返回：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Last-Modified: Fri, 27 Oct 2020 06:35:57 GMT</span><br></pre></td></tr></table></figure>
+<p>随后我们每次请求时，会带上一个叫 If-Modified-Since 的时间戳字段，它的值正是上一次 response 返回给它的 last-modified 值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Modified-Since: Fri, 27 Oct 2020 06:35:57 GMT</span><br></pre></td></tr></table></figure>
+<p>服务器接收到这个时间戳后，会比对该时间戳和资源在服务器上的最后修改时间是否一致，从而判断资源是否发生了变化。如果发生了变化，就会返回一个完整的响应内容，并在 Response Headers 中添加新的 Last-Modified 值；否则，返回如上图的 304 响应，Response Headers 不会再添加 Last-Modified 字段。</p>
+<p>使用 Last-Modified 存在一些弊端，这其中最常见的就是这样两个场景：</p>
+<ul>
+<li><p>我们编辑了文件，但文件的内容没有改变。服务端并不清楚我们是否真正改变了文件，它仍然通过最后编辑时间进行判断。因此这个资源在再次被请求时，会被当做新资源，进而引发一次完整的响应——不该重新请求的时候，也会重新请求。</p>
+</li>
+<li><p>当我们修改文件的速度过快时（比如花了 100ms 完成了改动），由于 If-Modified-Since 只能检查到以秒为最小计量单位的时间差，所以它是感知不到这个改动的——该重新请求的时候，反而没有重新请求了。</p>
+</li>
+</ul>
+<p>这两个场景其实指向了同一个 bug ——服务器并没有正确感知文件的变化。为了解决这样的问题， Etag 作为 Last-Modified 的补充出现了。</p>
+<p>Etag: 是由服务器为每个资源生成的唯一的标识字符串，这个标识字符串是基于文件内容编码的，只要文件内容不同，它们对应的 Etag 就是不同的，反之亦然。因此 Etag 能够精准地感知文件的变化。</p>
+<p>Etag 和 Last-Modified 类似，当首次请求时，我们会在响应头里获取到一个最初的标识符字符串，举个🌰，它可以是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETag: W/&quot;wa3b-1231452&quot;</span><br></pre></td></tr></table></figure>
+<p>那么下一次请求时，请求头里就会带上一个值相同的、名为 if-None-Match 的字符串供服务端比对了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-None-Match: W/&quot;wa3b-1231452&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="缓存的优点"><a href="#缓存的优点" class="headerlink" title="缓存的优点"></a>缓存的优点</h2><ol>
 <li>减少了冗余的数据传递，节省宽带流量</li>
 <li>减少了服务器的负担，大大提高了网站性能</li>
@@ -444,7 +468,7 @@
 </ol>
 <h2 id="不同刷新的请求执行过程"><a href="#不同刷新的请求执行过程" class="headerlink" title="不同刷新的请求执行过程"></a>不同刷新的请求执行过程</h2><ol>
 <li>浏览器地址栏写入URL，回车，浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿。（最快）</li>
-<li>F5刷新，别偷懒好歹去服务器看看这个文件是否过期了。于是浏览器就在请求上带上一个if-modify-since。0</li>
+<li>F5刷新，别偷懒好歹去服务器看看这个文件是否过期了。于是浏览器就在请求上带上一个if-modify-since。</li>
 <li>Ctrl+F5告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端完成了强行更新的操作。</li>
 </ol>
 
@@ -566,7 +590,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -647,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP—-HTTP缓存机制"><span class="nav-number">1.</span> <span class="nav-text">HTTP—-HTTP缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的规则"><span class="nav-number">1.1.</span> <span class="nav-text">缓存的规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#强制缓存"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">强制缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协商缓存"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">协商缓存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的方案"><span class="nav-number">1.2.</span> <span class="nav-text">缓存的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#强制缓存-1"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">强制缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Expires"><span class="nav-number">1.2.0.1.1.</span> <span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Cache-Control"><span class="nav-number">1.2.0.1.2.</span> <span class="nav-text">Cache-Control</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协商缓存-1"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Last-midified"><span class="nav-number">1.2.0.2.1.</span> <span class="nav-text">Last-midified</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的优点"><span class="nav-number">1.3.</span> <span class="nav-text">缓存的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同刷新的请求执行过程"><span class="nav-number">1.4.</span> <span class="nav-text">不同刷新的请求执行过程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP—-HTTP缓存机制"><span class="nav-number">1.</span> <span class="nav-text">HTTP—-HTTP缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的规则"><span class="nav-number">1.1.</span> <span class="nav-text">缓存的规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制缓存"><span class="nav-number">1.1.1.</span> <span class="nav-text">强制缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协商缓存"><span class="nav-number">1.1.2.</span> <span class="nav-text">协商缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的方案"><span class="nav-number">1.2.</span> <span class="nav-text">缓存的方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强制缓存-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">强制缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Expires"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Expires</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache-Control"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Cache-Control</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协商缓存-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协商缓存的实-从-Last-midified-到-Etag"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">协商缓存的实: 从 Last-midified 到 Etag</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存的优点"><span class="nav-number">1.3.</span> <span class="nav-text">缓存的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同刷新的请求执行过程"><span class="nav-number">1.4.</span> <span class="nav-text">不同刷新的请求执行过程</span></a></li></ol></li></ol></div>
             
 
           </div>
