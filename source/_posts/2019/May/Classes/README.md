@@ -4,7 +4,7 @@ date: 2019-05-03
 tags: js
 ---
 
-# 构造方法
+## 构造方法
 
 constructor是一种用于创建和初始化class创建的对象的特殊方法。
 **描述**
@@ -28,7 +28,7 @@ constructor(...args) {
 }
 ```
 
-## extends
+### extends
 
 extends关键字用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类。
 **描述**
@@ -36,7 +36,7 @@ extends关键字用于类声明或者类表达式中，以创建一个类，该�
 extends关键字用来创建一个普通类或者内建对象的子类
 继承的.prototype必须是一个Object或者null。
 
-## static
+### static
 
 类（class）通过static关键字定义静态方法。不能在类的实例上调用静态方法，而应该通过类本身调用。这些通常是实用程序方法，例如创建或克隆对象的功能
 
@@ -49,7 +49,7 @@ class ClassWithStaticMethod {
 ClassWithStaticMethod.staticMethod();
 ```
 
-## 调用静态方法
+### 调用静态方法
 
 * 从另一个静态方法，静态方法调用同一个类中的其他静态方法，可使用this关键字
 
@@ -81,7 +81,7 @@ class StaticMethodCall {
 }
 ```
 
-### 补充
+#### 补充
 
 1. 目前ECMAScript，class中还没有定义Private（私有属性）的能力，所以我们通过约定，用下划线来标记它们。
 

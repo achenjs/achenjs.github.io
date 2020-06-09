@@ -4,14 +4,14 @@ date: 2019-05-17
 tags: js
 ---
 
-# this
+## this
 
 1. 默认绑定
 2. 隐式绑定
 3. 硬绑定
 4. new绑定
 
-## 默认绑定
+### 默认绑定
 
 默认绑定，在不能应用其他绑定规则时使用的默认规则，通常是独立函数调用。
 
@@ -27,7 +27,7 @@ sayHi();
 上面的代码，如果在浏览器环境中运行，那么结果是 Hello, achen
 但是如果在node环境中运行，结果就是Hello, undefined，这是因为node中name并不是挂在全局对象上的。
 
-## 隐式绑定
+### 隐式绑定
 
 函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的形式为 XXX.fun()。
 
@@ -43,7 +43,7 @@ var name = 'achenjs';
 persin.sayHi();
 ```
 
-## 硬绑定（显示绑定）
+### 硬绑定（显示绑定）
 
 通过call，apply，bind的方式，显示的指定this所指向的对象。
 call，apply，bind的第一个参数，就是对应函数的this所指向的对象。call和apply的作用一样，只是传参方式不同。call和apply都会执行对应的函数，而bind方法不会。
@@ -61,7 +61,7 @@ var Hi = person.sayHi;
 Hi.call(person);  // Hi.apply(person)
 ```
 
-## new绑定
+### new绑定
 
 > 使用new来调用函数，会自动执行下面的操作：
 
@@ -80,11 +80,11 @@ console.log(Hi.name);   //  achen
 
 输出结果为achen，原因是因为在var Hi = new SayHi('achen'); 这一步，会将SayHi中的this绑定到Hi对象上。
 
-### 绑定优先级
+#### 绑定优先级
 
 new绑定 > 显示绑定 > 隐式绑定 > 默认绑定
 
-### 绑定另外
+#### 绑定另外
 
 如果我们将null或者undefined作为this的绑定对象传入call、apply或者是bind，这些值在调用时会被忽略，实际应用的是默认绑定规则。
 
@@ -99,7 +99,7 @@ function bar() {
 bar.call(null);   //  Chirs
 ```
 
-#### 箭头函数
+##### 箭头函数
 
 箭头函数是ES6中新增的，它和普通函数有一些区别，箭头函数没有自己的this，它的this继承于外层代码库中的this。箭头函数在使用中，需要注意以下几点：
 

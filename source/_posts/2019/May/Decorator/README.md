@@ -35,13 +35,16 @@ function testable(isTestable) {
 
 @testabel(false)
 class MyTestabelClass {}
+
 ```
 以上代码，告诉我们@testable何如传递参数，并且如何为类添加原型属性或者方法。
 
 ### 2. 方法修饰器（有三个参数）
+
 target: 方法所在的类
 name: 方法名称
 descriptor: 描述对象
+
 ``` js
 class Math {
   @log
@@ -68,7 +71,9 @@ math.add(2, 4);
 ```
 
 #### 为什么修饰器不能用于函数？
+
 修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升
+
 ``` js
 var conuter = 0;
 

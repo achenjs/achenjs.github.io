@@ -4,9 +4,9 @@ date: 2019-05-13
 tags: js
 ---
 
-# 如何写一个jQuery插件
+## 如何写一个jQuery插件
 
-## jQuery 插件开发模式
+### jQuery 插件开发模式
 
 jQuery的插件开发模式主要有三种：
 
@@ -14,7 +14,7 @@ jQuery的插件开发模式主要有三种：
 * 通过$.fn向jQuery添加新的方法
 * 通过$.widget()应用jQuery UI的部件工厂方式创建
 
-### $.extend()
+#### $.extend()
 
 ``` js
 $.fn.extend({
@@ -33,7 +33,7 @@ $.fn.extend({
 $("input[type='checkbox']").check();
 ```
 
-### $.fn
+#### $.fn
 
 ``` js
 function myPlugin($ele, options) {};

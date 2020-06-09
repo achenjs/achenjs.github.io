@@ -30,9 +30,9 @@ Rebase 对比 merge，优势在于合并后的结果很清晰，只有一条线�
 ```shell
 ## branch develop
 git rebase master
-get checkout master
+git checkout master
 ## 用于将 `master` 上的 HEAD 移动到最新的 commit
-get merge develop
+git merge develop
 ```
 
 ## stash
@@ -45,11 +45,23 @@ git stash
 
 使用该命令可以暂存你的工作目录，后面想恢复工作目录，只需要使用
 
+``` shell
+git stash apply
+```
+
+使用apply命令恢复，stash列表中的信息是会继续保留的
+
 ```shell
 git stash pop
 ```
 
-这样你之前临时保存的代码又回来了
+使用pop恢复，并且会删除暂存列表
+
+``` shell
+git stash list
+```
+
+查看暂存列表
 
 ## reflog
 
@@ -88,13 +100,13 @@ $ git diff   diff文件的修改
 
 $ git ci(commit) .  提交本次修改
 
-$ git fetch --all  拉取所有远端的最新代码 
+$ git fetch --all  拉取所有远端的最新代码
 
 $ git merge origin/develop  如果是多人协作，merge同事的修改到当前分支（先人后己原则）
 
-$ git merge origin/master   上线之前保证当前分支不落后于远端origin/master，一定要merge远端origin/master到当前分支 
+$ git merge origin/master   上线之前保证当前分支不落后于远端origin/master，一定要merge远端origin/master到当前分支
 
-$ git push  推送当前分支到远端仓库 
+$ git push  推送当前分支到远端仓库
 
 $ git merge --no-ff origin/develop  同事review code之后管理员合并origin/develop到远端主干origin/master
 
