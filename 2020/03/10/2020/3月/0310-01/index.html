@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="说说你对JS模块化的理解模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。 那么模块化的好处也就显然易见了  解决命名冲突 依赖管理 代码更加可读 提高复用性  js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化 123456789101112131415var myModule = (function(window) &amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-19T01:20:34.448Z">
+<meta property="og:updated_time" content="2020-05-14T10:42:28.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面经">
 <meta name="twitter:description" content="说说你对JS模块化的理解模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。 那么模块化的好处也就显然易见了  解决命名冲突 依赖管理 代码更加可读 提高复用性  js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化 123456789101112131415var myModule = (function(window) &amp;">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-19 09:20:34" itemprop="dateModified" datetime="2020-03-19T09:20:34+08:00">2020-03-19</time>
+                <time title="修改时间：2020-05-14 18:42:28" itemprop="dateModified" datetime="2020-05-14T18:42:28+08:00">2020-05-14</time>
               
             
           </span>
@@ -484,7 +484,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>并且这个属性的值是一个对象（也就是原型），只有一个属性constructor</p>
 <ul>
-<li><p>constructor<br>constructor 是一个公有且不可枚举的属性。一旦我们改变了函数的prototype，那么新对象就没有这个属性了（当然可以通过原型链取到constructor）</p>
+<li><p>constructor<br>constructor 是一个公有且不可枚举的tag_release_20200514_003属性。一旦我们改变了函数的prototype，那么新对象就没有这个属性了（当然可以通过原型链取到constructor）</p>
 </li>
 <li><p>__proto__<br>这是每个对象都有的隐式原型属性，指向了创建该对象的构造函数的原型。其实这个属性指向了 [[prototype]]，但是 [[prototype]] 是内部属性，我们并不能访问到，所以使用 __proto__ 来访问。</p>
 </li>
@@ -635,7 +635,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -668,7 +668,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

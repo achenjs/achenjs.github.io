@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="由于使用了decorator, node不用正常识别，需要使用babel转换 1$ babel-node test.js 1. 类修饰器（只有一个参数）target: 指向类，如果是类型是function，则指向MyFunction.prototype 123456function testable(target) &amp;#123;  target.isTestable = false;&amp;#125;@">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-05T06:19:13.196Z">
+<meta property="og:updated_time" content="2020-05-25T02:50:50.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="修饰器的使用">
 <meta name="twitter:description" content="由于使用了decorator, node不用正常识别，需要使用babel转换 1$ babel-node test.js 1. 类修饰器（只有一个参数）target: 指向类，如果是类型是function，则指向MyFunction.prototype 123456function testable(target) &amp;#123;  target.isTestable = false;&amp;#125;@">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:19:13" itemprop="dateModified" datetime="2020-03-05T14:19:13+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:50:50" itemprop="dateModified" datetime="2020-05-25T10:50:50+08:00">2020-05-25</time>
               
             
           </span>
@@ -434,8 +434,10 @@
 <p>以上代码，@testable就是一个装饰器，它为MyTestableClass这个类添加了一个静态属性isTestable</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">isTestable</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">    target.isTestable = isTestable;</span><br><span class="line">    target.prototype.name = <span class="string">'achen'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@testabel(<span class="literal">false</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestabelClass</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>以上代码，告诉我们@testable何如传递参数，并且如何为类添加原型属性或者方法。</p>
-<h3 id="2-方法修饰器（有三个参数）"><a href="#2-方法修饰器（有三个参数）" class="headerlink" title="2. 方法修饰器（有三个参数）"></a>2. 方法修饰器（有三个参数）</h3><p>target: 方法所在的类<br>name: 方法名称<br>descriptor: 描述对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line">  @log</span><br><span class="line">  add(a, b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">target, name, descriptor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> oldValue = descriptor.value;</span><br><span class="line"></span><br><span class="line">  descriptor.value = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Calling <span class="subst">$&#123;name&#125;</span> with`</span>, <span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> oldValue.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> descriptor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> math = <span class="keyword">new</span> <span class="built_in">Math</span>();</span><br><span class="line"></span><br><span class="line">math.add(<span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure></p>
-<h4 id="为什么修饰器不能用于函数？"><a href="#为什么修饰器不能用于函数？" class="headerlink" title="为什么修饰器不能用于函数？"></a>为什么修饰器不能用于函数？</h4><p>修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conuter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  counter++;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@add</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-方法修饰器（有三个参数）"><a href="#2-方法修饰器（有三个参数）" class="headerlink" title="2. 方法修饰器（有三个参数）"></a>2. 方法修饰器（有三个参数）</h3><p>target: 方法所在的类<br>name: 方法名称<br>descriptor: 描述对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line">  @log</span><br><span class="line">  add(a, b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">target, name, descriptor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> oldValue = descriptor.value;</span><br><span class="line"></span><br><span class="line">  descriptor.value = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Calling <span class="subst">$&#123;name&#125;</span> with`</span>, <span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> oldValue.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> descriptor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> math = <span class="keyword">new</span> <span class="built_in">Math</span>();</span><br><span class="line"></span><br><span class="line">math.add(<span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="为什么修饰器不能用于函数？"><a href="#为什么修饰器不能用于函数？" class="headerlink" title="为什么修饰器不能用于函数？"></a>为什么修饰器不能用于函数？</h4><p>修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conuter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  counter++;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@add</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -555,7 +557,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -588,7 +590,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

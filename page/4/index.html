@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
   </li>
         
         
@@ -326,6 +326,235 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/25/2019/May/Webpack/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/25/2019/May/Webpack/README/" itemprop="url">
+                  从零配置webpack（基于webpack 4 和 babel 7版本）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-25 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-25T00:00:00+08:00">2019-05-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:27:56" itemprop="dateModified" datetime="2020-03-05T14:27:56+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="从零配置webpack（基于webpack-4-和-babel-7版本）"><a href="#从零配置webpack（基于webpack-4-和-babel-7版本）" class="headerlink" title="从零配置webpack（基于webpack 4 和 babel 7版本）"></a>从零配置webpack（基于webpack 4 和 babel 7版本）</h1><h2 id="webpack-核心概念"><a href="#webpack-核心概念" class="headerlink" title="webpack 核心概念"></a>webpack 核心概念</h2><ul>
+<li>Entry: 入口</li>
+<li>Module: 模块，webpack中一切皆是模块</li>
+<li>Chunk: 代码库，一个chunk由十多个模块组合而成，用于代码合并与分割</li>
+<li>Loader: 模块转换器，用于把模块原内容按照需求转换成新内容</li>
+<li>Plugin: 扩展插件，在webpack构建流程中的特定时机注入扩展逻辑来改变构建结果或做你想要的事情</li>
+<li>Output: 输出结果</li>
+</ul>
+<h2 id="webpack-流程"><a href="#webpack-流程" class="headerlink" title="webpack 流程"></a>webpack 流程</h2><p>webpack启动后会从Entry里配置的Module开始递归解析Entry依赖的所有Module。每找到一个Module，就会根据配置的Loader去找出对应的转换规则，对<br>Module进行转换后，再解析出当前的Module依赖的Module。这些模块会以Entry为单位进行分组，一个Entry和其所有依赖的Module被分到一个组也就是一个<br>Chunk。最好Webpack会把所有Chunk转换成文件输出。在整个流程中Webpack会在恰当的时机执行Plugin里定义的逻辑。</p>
+<h2 id="最简webpack配置"><a href="#最简webpack配置" class="headerlink" title="最简webpack配置"></a>最简webpack配置</h2><p>首先初始化npm和安装webpack的依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br><span class="line">yarn add webpack webpack-cli --dev</span><br></pre></td></tr></table></figure>
+<p>配置webpack.config.js文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.export = &#123;</span><br><span class="line">  entry: path.resolve(__dirname, <span class="string">'src/index.js'</span>),</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    filename: <span class="string">'bundle.js'</span>,    <span class="comment">//  此处不设置，默认为 main.js</span></span><br><span class="line">    publicPath: <span class="string">'/'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明: publicPath上线时配置的是cdn的地址。</p>
+<p>使用命令进行打包：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack --mode production</span><br></pre></td></tr></table></figure>
+<p>也可以将其配置到package.json中的 scripts 字段。<br>入口文件为src/index.js，打包输出到dist/bundle.js。</p>
+<h2 id="使用模板html"><a href="#使用模板html" class="headerlink" title="使用模板html"></a>使用模板html</h2><p>html-webpack-plugin 可以指定 template 模板文件，将会在 output 目录下，生成 html 文件，并引入打包后的js。<br>安装依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add html-webpack-plugin --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 增加 plugins 配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ... other code</span></span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.resolve(__dirname, <span class="string">'src/index.html'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HtmlWebpackPlugin 还有一些其他的参数，如title（html的title），minify（是否要压缩），filename（dist中生成的html文件名）等。</p>
+<h2 id="配置-webpack-dev-server"><a href="#配置-webpack-dev-server" class="headerlink" title="配置 webpack-dev-server"></a>配置 webpack-dev-server</h2><p>webpack-dev-server 提供了一个简单的Web服务器和实时热更新的能力。<br>安装依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add webpack-dev-server --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpck.config.js 增加 devServer 配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> WebpackDevServer = <span class="built_in">require</span>(<span class="string">'webpack-dev-server'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//  ... other code</span></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    contentBase: <span class="string">'./dist'</span>,</span><br><span class="line">    port: <span class="string">'8080'</span>,</span><br><span class="line">    host: <span class="string">'localhost'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 package.json 的 scripts 字段中增加：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dev: <span class="string">'webpack-dev-server --mode development'</span></span><br></pre></td></tr></table></figure>
+<p>之后，我们就可以通过 npm run dev，来启动服务。<br>更多关于 <a href="https://webpack.js.org/configuration/dev-server/" target="_blank" rel="noopener">webpack-dev-server</a></p>
+<h2 id="支持加载-css-文件"><a href="#支持加载-css-文件" class="headerlink" title="支持加载 css 文件"></a>支持加载 css 文件</h2><p>通过使用不同的 style-loader 和 css-loader，可以将 css 文件转换成js文件类型。<br>安装依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add style-loader css-loader --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加 loader 的配置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//  ...other code</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css/</span>,</span><br><span class="line">        use: [<span class="string">'style-loader'</span>, <span class="string">'css-loader'</span>],</span><br><span class="line">        exclude: <span class="regexp">/node_module/</span>,</span><br><span class="line">        include: path.resolve(__dirname, <span class="string">'src'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>loader 可以配置以下参数：</p>
+<ul>
+<li>test: 匹配处理文件的扩展名的正则表达式</li>
+<li>use: loader的名称</li>
+<li>include/exclude: 手动指定必须处理的文件夹或屏蔽不需要处理的文件夹</li>
+<li>query: 为loader提供额外的设置选项</li>
+</ul>
+<p>如果需要给loader传参，那么可以使用use + loading的方式，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//  other code</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'style-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              insertAt: <span class="string">'top'</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="string">'css-loader'</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="支持加载图片"><a href="#支持加载图片" class="headerlink" title="支持加载图片"></a>支持加载图片</h2><ul>
+<li>file-loader: 解决css等文件中的引入图片路径问题</li>
+<li>url-loader: 当图片小于limit的时候会把图片base64编码，大于limit参数的时候还是使用file-loader进行拷贝</li>
+</ul>
+<p><strong>如果希望图片存放在单独的目录下，那么需要制定outputPath</strong></p>
+<p>安装依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add url-loader file-loader --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加loader的配置（增加在 module.rules的数组中）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//  ...other code</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.(gif|jpg|png|bmp|eot|woff|woff2|ttf|svg)/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: <span class="string">'url-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              limit: <span class="number">8192</span>,</span><br><span class="line">              outputPath: <span class="string">'images'</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="支持编译less和sass"><a href="#支持编译less和sass" class="headerlink" title="支持编译less和sass"></a>支持编译less和sass</h2><p>现在大家都习惯使用less或者sass编写css，那么也需要在webpack中进行配置。<br>安装对应的依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add less less-loader --dev</span><br><span class="line">yarn add sass sass-loader --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加 loader 的配置（module.rules数组中）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//  ..  other code</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.less/</span>,</span><br><span class="line">        use: [<span class="string">'style-loader'</span>, <span class="string">'css-loader'</span>, <span class="string">'less-loader'</span>],</span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        include: path.resolve(__dirname, <span class="string">'src'</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.scss/</span>,</span><br><span class="line">        use: [<span class="string">'style-loader'</span>, <span class="string">'css-loader'</span>, <span class="string">'sass-loader'</span>],</span><br><span class="line">        exclude: <span class="regexp">/nodu_modules/</span>,</span><br><span class="line">        include: path.resolve(__dirname, <span class="string">'src'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="支持转义-ES6-ES7-JSX"><a href="#支持转义-ES6-ES7-JSX" class="headerlink" title="支持转义 ES6/ES7/JSX"></a>支持转义 ES6/ES7/JSX</h2><p>ES6/ES7/JSX 转义需要 Babel 的依赖，支持装饰器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @babel/core babel-loader @babel/preset-env @babel/preset-react @babel/plugin-proposal-decorators @babel/plugin-proposal-object-rest-spread --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加 loader 的配置（module.rules 数组中）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ...other code</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      test: <span class="regexp">/\.jsx?$/</span>,</span><br><span class="line">      use: [</span><br><span class="line">        &#123;</span><br><span class="line">          loader: <span class="string">'babel-loader'</span>,</span><br><span class="line">          options: &#123;</span><br><span class="line">            presets: [<span class="string">'@babel/react'</span>],</span><br><span class="line">            plugins: [</span><br><span class="line">              [<span class="string">'@babel/plugin-proposal-decorators'</span>, &#123;<span class="string">'legacy'</span>: <span class="literal">true</span>&#125;]</span><br><span class="line">            ]</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      exclude: <span class="regexp">/nodu_modules/</span>,</span><br><span class="line">      include: path.resolve(__dirname, <span class="string">'src'</span>)</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="压缩js文件"><a href="#压缩js文件" class="headerlink" title="压缩js文件"></a>压缩js文件</h2><p>安装依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add uglifyjs-webpack-plugin --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加 optimization 的配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> UglifyWebpackplugin = <span class="built_in">require</span>(<span class="string">'uglifyjs-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ... other code</span></span><br><span class="line">  optimization: &#123;</span><br><span class="line">    minimizer: [</span><br><span class="line">      <span class="keyword">new</span> UglifyWebpackPlugin(&#123;</span><br><span class="line">        parallel: <span class="number">4</span></span><br><span class="line">      &#125;)</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>以上最新版webpack已经默认开启uglifyjs，不需要单独安装plugins</strong><br>但是它是单线程压缩的，我们还可以利用webpack-parallel-uglify-plugin，解决多个js打包并行压缩的需要，优化打包效率</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add webpack-parallel-uglify-plugin --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> WebpackParallelUglifyPlugin = <span class="built_in">require</span>(<span class="string">'webpack-parallel-uglify-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//  other code</span></span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> WebpackParallelUglifyPlugin(&#123;</span><br><span class="line">      ugfilyJS: &#123;</span><br><span class="line">        output: &#123;</span><br><span class="line">          beautify: <span class="literal">false</span>,  <span class="comment">//  是否保留空格和制表符</span></span><br><span class="line">          comments: <span class="literal">false</span>,  <span class="comment">//  是否保留注释</span></span><br><span class="line">        &#125;,</span><br><span class="line">        compress: &#123;</span><br><span class="line">          warnings: <span class="literal">false</span>,  <span class="comment">//  删除没有用到的代码时的警告信息,</span></span><br><span class="line">          drop_console: <span class="literal">true</span>,   <span class="comment">//  是否删除代码中的console语句</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分离css（如果css文件较大的话）"><a href="#分离css（如果css文件较大的话）" class="headerlink" title="分离css（如果css文件较大的话）"></a>分离css（如果css文件较大的话）</h2><p>因为CSS的下载和JS可以并行，当一个html文件很大的时候，可以把css单独提取出来加载</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add mini-css-extract-plugin --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加 plugins 的配置，并且将 ‘style-loader’ 修改为 {<br>  loader: MiniCssExtractPlugin.loader<br>}。<br>css打包在单独的目录，那么配置filename。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MiniCssExtractPlugin = <span class="built_in">require</span>(<span class="string">'mini-css-extract-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: MiniCssExtractPlugin.loader,</span><br><span class="line">          &#125;, <span class="string">'css-loader'</span></span><br><span class="line">        ],</span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        include: path.resolve(__dirname, <span class="string">'src'</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.less/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: MiniCssExtractPlugin.loader,</span><br><span class="line">          &#125;, <span class="string">'css-loader'</span>, <span class="string">'less-loader'</span></span><br><span class="line">        ],</span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        include: path.resolve(__dirname, <span class="string">'src'</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.sass/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123;</span><br><span class="line">            loader: MiniCssExtractPlugin.loader</span><br><span class="line">          &#125;, <span class="string">'css-loader'</span>, <span class="string">'sass-loader'</span></span><br><span class="line">        ],</span><br><span class="line">        exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        include: path.resolve(__dirname, <span class="string">'src'</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">      filename: <span class="string">'css/[name].css'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="压缩css文件"><a href="#压缩css文件" class="headerlink" title="压缩css文件"></a>压缩css文件</h2><p>安装依赖：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add optimiza-css-assets-webpack-plugin --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中的 optimization 中增加配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> OptimizaCssAssetsWebpackPlugin = <span class="built_in">require</span>(<span class="string">'optimiza-css-assets-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//  ... other code</span></span><br><span class="line">  optimization: &#123;</span><br><span class="line">    minimizer: [</span><br><span class="line">      <span class="keyword">new</span> OptimizaCssAssetsWebpackPlugin()</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打包前先清空输出目录"><a href="#打包前先清空输出目录" class="headerlink" title="打包前先清空输出目录"></a>打包前先清空输出目录</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add clean-webpack-plugin --dev</span><br></pre></td></tr></table></figure>
+<p>在 webpack.config.js 中增加 plugins 的配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CleanWebpackPlugin = <span class="built_in">require</span>(<span class="string">'clean-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// ...other code</span></span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="keyword">new</span> CleanWebpackPlugin()</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/17/2019/May/This/README/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,7 +618,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:20:52" itemprop="dateModified" datetime="2020-03-05T14:20:52+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 11:10:56" itemprop="dateModified" datetime="2020-05-25T11:10:56+08:00">2020-05-25</time>
               
             
           </span>
@@ -424,20 +653,20 @@
       
         
           
-            <h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><ol>
+            <h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><ol>
 <li>默认绑定</li>
 <li>隐式绑定</li>
 <li>硬绑定</li>
 <li>new绑定</li>
 </ol>
-<h2 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h2><p>默认绑定，在不能应用其他绑定规则时使用的默认规则，通常是独立函数调用。</p>
+<h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><p>默认绑定，在不能应用其他绑定规则时使用的默认规则，通常是独立函数调用。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'achen'</span>;</span><br><span class="line">sayHi();</span><br></pre></td></tr></table></figure>
 <p>在调用sayHi()时，应用了默认绑定，this指向全局对象（非严格模式下），严格模式下，this指向undefined，undefined上没有this对象，会抛出错误。<br>上面的代码，如果在浏览器环境中运行，那么结果是 Hello, achen<br>但是如果在node环境中运行，结果就是Hello, undefined，这是因为node中name并不是挂在全局对象上的。</p>
-<h2 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h2><p>函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的形式为 XXX.fun()。</p>
+<h3 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h3><p>函数的调用是在某个对象上触发的，即调用位置上存在上下文对象。典型的形式为 XXX.fun()。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">'achen'</span>,</span><br><span class="line">  sayHi: sayHi</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'achenjs'</span>;</span><br><span class="line">persin.sayHi();</span><br></pre></td></tr></table></figure>
-<h2 id="硬绑定（显示绑定）"><a href="#硬绑定（显示绑定）" class="headerlink" title="硬绑定（显示绑定）"></a>硬绑定（显示绑定）</h2><p>通过call，apply，bind的方式，显示的指定this所指向的对象。<br>call，apply，bind的第一个参数，就是对应函数的this所指向的对象。call和apply的作用一样，只是传参方式不同。call和apply都会执行对应的函数，而bind方法不会。</p>
+<h3 id="硬绑定（显示绑定）"><a href="#硬绑定（显示绑定）" class="headerlink" title="硬绑定（显示绑定）"></a>硬绑定（显示绑定）</h3><p>通过call，apply，bind的方式，显示的指定this所指向的对象。<br>call，apply，bind的第一个参数，就是对应函数的this所指向的对象。call和apply的作用一样，只是传参方式不同。call和apply都会执行对应的函数，而bind方法不会。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">'YvetteLau'</span>,</span><br><span class="line">    sayHi: sayHi</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Wiliam'</span>;</span><br><span class="line"><span class="keyword">var</span> Hi = person.sayHi;</span><br><span class="line">Hi.call(person);  <span class="comment">// Hi.apply(person)</span></span><br></pre></td></tr></table></figure>
-<h2 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h2><blockquote>
+<h3 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h3><blockquote>
 <p>使用new来调用函数，会自动执行下面的操作：</p>
 </blockquote>
 <ol>
@@ -448,10 +677,10 @@
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SayHi</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Hi = <span class="keyword">new</span> SayHi(<span class="string">'achen'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(Hi.name);   <span class="comment">//  achen</span></span><br></pre></td></tr></table></figure>
 <p>输出结果为achen，原因是因为在var Hi = new SayHi(‘achen’); 这一步，会将SayHi中的this绑定到Hi对象上。</p>
-<h3 id="绑定优先级"><a href="#绑定优先级" class="headerlink" title="绑定优先级"></a>绑定优先级</h3><p>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
-<h3 id="绑定另外"><a href="#绑定另外" class="headerlink" title="绑定另外"></a>绑定另外</h3><p>如果我们将null或者undefined作为this的绑定对象传入call、apply或者是bind，这些值在调用时会被忽略，实际应用的是默认绑定规则。</p>
+<h4 id="绑定优先级"><a href="#绑定优先级" class="headerlink" title="绑定优先级"></a>绑定优先级</h4><p>new绑定 &gt; 显示绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
+<h4 id="绑定另外"><a href="#绑定另外" class="headerlink" title="绑定另外"></a>绑定另外</h4><p>如果我们将null或者undefined作为this的绑定对象传入call、apply或者是bind，这些值在调用时会被忽略，实际应用的是默认绑定规则。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  name: <span class="string">'Selina'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Chirs'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line">bar.call(<span class="literal">null</span>);   <span class="comment">//  Chirs</span></span><br></pre></td></tr></table></figure>
-<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数是ES6中新增的，它和普通函数有一些区别，箭头函数没有自己的this，它的this继承于外层代码库中的this。箭头函数在使用中，需要注意以下几点：</p>
+<h5 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h5><p>箭头函数是ES6中新增的，它和普通函数有一些区别，箭头函数没有自己的this，它的this继承于外层代码库中的this。箭头函数在使用中，需要注意以下几点：</p>
 <ol>
 <li>函数体内的this对象，继承的是外层代码块的this。</li>
 <li>不可以当做构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。</li>
@@ -728,7 +957,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:19:45" itemprop="dateModified" datetime="2020-03-05T14:19:45+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:57:09" itemprop="dateModified" datetime="2020-05-25T10:57:09+08:00">2020-05-25</time>
               
             
           </span>
@@ -763,14 +992,14 @@
       
         
           
-            <h1 id="如何写一个jQuery插件"><a href="#如何写一个jQuery插件" class="headerlink" title="如何写一个jQuery插件"></a>如何写一个jQuery插件</h1><h2 id="jQuery-插件开发模式"><a href="#jQuery-插件开发模式" class="headerlink" title="jQuery 插件开发模式"></a>jQuery 插件开发模式</h2><p>jQuery的插件开发模式主要有三种：</p>
+            <h2 id="如何写一个jQuery插件"><a href="#如何写一个jQuery插件" class="headerlink" title="如何写一个jQuery插件"></a>如何写一个jQuery插件</h2><h3 id="jQuery-插件开发模式"><a href="#jQuery-插件开发模式" class="headerlink" title="jQuery 插件开发模式"></a>jQuery 插件开发模式</h3><p>jQuery的插件开发模式主要有三种：</p>
 <ul>
 <li>通过$.extend()来扩展jQuery</li>
 <li>通过$.fn向jQuery添加新的方法</li>
 <li>通过$.widget()应用jQuery UI的部件工厂方式创建</li>
 </ul>
-<h3 id="extend"><a href="#extend" class="headerlink" title="$.extend()"></a>$.extend()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.fn.extend(&#123;</span><br><span class="line"> check: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">true</span>;</span><br><span class="line">    &#125;),</span><br><span class="line"> &#125;</span><br><span class="line"> uncheck: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">false</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(<span class="string">"input[type='checkbox']"</span>).check();</span><br></pre></td></tr></table></figure>
-<h3 id="fn"><a href="#fn" class="headerlink" title="$.fn"></a>$.fn</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myPlugin</span>(<span class="params">$ele, options</span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">myPlugin.prototype = &#123;</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  method2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$.fn.myplugin = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> myPlugin(<span class="keyword">this</span>, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="extend"><a href="#extend" class="headerlink" title="$.extend()"></a>$.extend()</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.fn.extend(&#123;</span><br><span class="line"> check: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">true</span>;</span><br><span class="line">    &#125;),</span><br><span class="line"> &#125;</span><br><span class="line"> uncheck: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">false</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(<span class="string">"input[type='checkbox']"</span>).check();</span><br></pre></td></tr></table></figure>
+<h4 id="fn"><a href="#fn" class="headerlink" title="$.fn"></a>$.fn</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myPlugin</span>(<span class="params">$ele, options</span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">myPlugin.prototype = &#123;</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  method2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$.fn.myplugin = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> myPlugin(<span class="keyword">this</span>, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -886,7 +1115,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-23 09:58:17" itemprop="dateModified" datetime="2020-03-23T09:58:17+08:00">2020-03-23</time>
+                <time title="修改时间：2020-05-25 10:52:16" itemprop="dateModified" datetime="2020-05-25T10:52:16+08:00">2020-05-25</time>
               
             
           </span>
@@ -921,8 +1150,8 @@
       
         
           
-            <h1 id="JS继承的实现方式"><a href="#JS继承的实现方式" class="headerlink" title="JS继承的实现方式"></a>JS继承的实现方式</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'Animal'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.sleep = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'~~~'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Animal.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params">food</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' eat: '</span> + food);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1-原型链继承"><a href="#1-原型链继承" class="headerlink" title="1. 原型链继承"></a>1. 原型链继承</h2><p>核心： 将父类的实例作为子类的原型</p>
+            <h2 id="JS继承的实现方式"><a href="#JS继承的实现方式" class="headerlink" title="JS继承的实现方式"></a>JS继承的实现方式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'Animal'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.sleep = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'~~~'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Animal.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params">food</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">' eat: '</span> + food);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-原型链继承"><a href="#1-原型链继承" class="headerlink" title="1. 原型链继承"></a>1. 原型链继承</h3><p>核心： 将父类的实例作为子类的原型</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal();</span><br><span class="line">Cat.prototype.name = <span class="string">'cat'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> cat();</span><br><span class="line"><span class="built_in">console</span>.log(cat.name); <span class="comment">// cat</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.eat(<span class="string">'fish'</span>)); <span class="comment">// cat eat: fish</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.sleep()); <span class="comment">//  cat~~~</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Animal); <span class="comment">//  true</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Cat);  <span class="comment">//  true</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>特点：</p>
@@ -941,7 +1170,7 @@
 <li>来自原型对象的所有属性被所有实例共享</li>
 <li>创建子类实例时，无法向父类构造函数传参</li>
 </ol>
-<h2 id="2-构造继承"><a href="#2-构造继承" class="headerlink" title="2. 构造继承"></a>2. 构造继承</h2><p>核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）</p>
+<h3 id="2-构造继承"><a href="#2-构造继承" class="headerlink" title="2. 构造继承"></a>2. 构造继承</h3><p>核心：使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Animal.apply(<span class="keyword">this</span>);  <span class="comment">// Animal.call(this);</span></span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'cat'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="built_in">console</span>.log(cat.name);  <span class="comment">//  cat</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.sleep()); <span class="comment">//  cat~~~</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Animal);   <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Cat);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>特点：</p>
@@ -959,7 +1188,7 @@
 <li>只能继承父类的实例属性和方法，不能继承原型属性/方法</li>
 <li>无法实现函数复用，每个子类都有父类实例函数的副本，影响性能</li>
 </ol>
-<h2 id="3-实例继承"><a href="#3-实例继承" class="headerlink" title="3. 实例继承"></a>3. 实例继承</h2><p>核心：为父类实例添加新特性，做为子类实例返回</p>
+<h3 id="3-实例继承"><a href="#3-实例继承" class="headerlink" title="3. 实例继承"></a>3. 实例继承</h3><p>核心：为父类实例添加新特性，做为子类实例返回</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> instance = <span class="keyword">new</span> Animal();</span><br><span class="line">  instance.name = name || <span class="string">'Tom'</span>;</span><br><span class="line">  <span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="built_in">console</span>.log(cat.name);  <span class="comment">//  Tom</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.sleep()); <span class="comment">//  Tom~~~</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Animal);  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Cat);  <span class="comment">//  false</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>特点：</p>
@@ -974,7 +1203,7 @@
 <li>实例是父类的实例，不是子类的实例</li>
 <li>不支持多继承</li>
 </ol>
-<h2 id="4-拷贝继承"><a href="#4-拷贝继承" class="headerlink" title="4. 拷贝继承"></a>4. 拷贝继承</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> animal = <span class="keyword">new</span> Animal();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> animal) &#123;</span><br><span class="line">    Cat.prototype[i] = animal[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Cat.prototype.name = name || <span class="string">'Tom'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="built_in">console</span>.log(cat.name);  <span class="comment">//  Tom</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.sleep()); <span class="comment">//  Tom~~~</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Animal);  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Cat);  <span class="comment">//  true</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-拷贝继承"><a href="#4-拷贝继承" class="headerlink" title="4. 拷贝继承"></a>4. 拷贝继承</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> animal = <span class="keyword">new</span> Animal();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> animal) &#123;</span><br><span class="line">    Cat.prototype[i] = animal[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Cat.prototype.name = name || <span class="string">'Tom'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="built_in">console</span>.log(cat.name);  <span class="comment">//  Tom</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.sleep()); <span class="comment">//  Tom~~~</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Animal);  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Cat);  <span class="comment">//  true</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>特点：</p>
 </blockquote>
@@ -988,7 +1217,7 @@
 <li>效率较低，内存占用高（因为要拷贝父类的属性）</li>
 <li>无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）</li>
 </ol>
-<h2 id="5-组合继承"><a href="#5-组合继承" class="headerlink" title="5. 组合继承"></a>5. 组合继承</h2><p>核心：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用</p>
+<h3 id="5-组合继承"><a href="#5-组合继承" class="headerlink" title="5. 组合继承"></a>5. 组合继承</h3><p>核心：通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  Animal.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>.name = name || <span class="string">'Tom'</span>;</span><br><span class="line">&#125;</span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal();</span><br><span class="line">Cat.prototype.constructor = Cat;  <span class="comment">//  修复Cat的构造函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="built_in">console</span>.log(cat.name);  <span class="comment">//  Tom</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.sleep()); <span class="comment">//  Tom~~~</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Animal);   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Cat);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>特点：</p>
@@ -1006,7 +1235,7 @@
 <ol>
 <li>调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）</li>
 </ol>
-<h2 id="6-寄生组合继承"><a href="#6-寄生组合继承" class="headerlink" title="6. 寄生组合继承"></a>6. 寄生组合继承</h2><p>核心：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点</p>
+<h3 id="6-寄生组合继承"><a href="#6-寄生组合继承" class="headerlink" title="6. 寄生组合继承"></a>6. 寄生组合继承</h3><p>核心：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  Animal.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>.name = name || <span class="string">'Tom'</span>;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//  创建一个没有实例方法的类</span></span><br><span class="line">  <span class="keyword">var</span> Super = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">  Super.prototype = Animal.prototype;</span><br><span class="line">  <span class="comment">//  将实例作为子类的原型</span></span><br><span class="line">  Cat.prototype = <span class="keyword">new</span> Super();</span><br><span class="line">  Cat.prototype.constructor = Cat;  <span class="comment">//  修复Cat的构造函数</span></span><br><span class="line"></span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="built_in">console</span>.log(cat.name);  <span class="comment">//  Tom</span></span><br><span class="line"><span class="built_in">console</span>.log(cat.sleep()); <span class="comment">//  Tom~~~</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Animal); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(cat <span class="keyword">instanceof</span> Cat); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>特点：</p>
@@ -1136,7 +1365,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:19:13" itemprop="dateModified" datetime="2020-03-05T14:19:13+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:50:50" itemprop="dateModified" datetime="2020-05-25T10:50:50+08:00">2020-05-25</time>
               
             
           </span>
@@ -1178,8 +1407,10 @@
 <p>以上代码，@testable就是一个装饰器，它为MyTestableClass这个类添加了一个静态属性isTestable</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">isTestable</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">    target.isTestable = isTestable;</span><br><span class="line">    target.prototype.name = <span class="string">'achen'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@testabel(<span class="literal">false</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestabelClass</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>以上代码，告诉我们@testable何如传递参数，并且如何为类添加原型属性或者方法。</p>
-<h3 id="2-方法修饰器（有三个参数）"><a href="#2-方法修饰器（有三个参数）" class="headerlink" title="2. 方法修饰器（有三个参数）"></a>2. 方法修饰器（有三个参数）</h3><p>target: 方法所在的类<br>name: 方法名称<br>descriptor: 描述对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line">  @log</span><br><span class="line">  add(a, b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">target, name, descriptor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> oldValue = descriptor.value;</span><br><span class="line"></span><br><span class="line">  descriptor.value = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Calling <span class="subst">$&#123;name&#125;</span> with`</span>, <span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> oldValue.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> descriptor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> math = <span class="keyword">new</span> <span class="built_in">Math</span>();</span><br><span class="line"></span><br><span class="line">math.add(<span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure></p>
-<h4 id="为什么修饰器不能用于函数？"><a href="#为什么修饰器不能用于函数？" class="headerlink" title="为什么修饰器不能用于函数？"></a>为什么修饰器不能用于函数？</h4><p>修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conuter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  counter++;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@add</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-方法修饰器（有三个参数）"><a href="#2-方法修饰器（有三个参数）" class="headerlink" title="2. 方法修饰器（有三个参数）"></a>2. 方法修饰器（有三个参数）</h3><p>target: 方法所在的类<br>name: 方法名称<br>descriptor: 描述对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line">  @log</span><br><span class="line">  add(a, b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">target, name, descriptor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> oldValue = descriptor.value;</span><br><span class="line"></span><br><span class="line">  descriptor.value = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Calling <span class="subst">$&#123;name&#125;</span> with`</span>, <span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> oldValue.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> descriptor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> math = <span class="keyword">new</span> <span class="built_in">Math</span>();</span><br><span class="line"></span><br><span class="line">math.add(<span class="number">2</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="为什么修饰器不能用于函数？"><a href="#为什么修饰器不能用于函数？" class="headerlink" title="为什么修饰器不能用于函数？"></a>为什么修饰器不能用于函数？</h4><p>修饰器只能用于类和类的方法，不能用于函数，因为存在函数提升</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> conuter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  counter++;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">@add</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1296,7 +1527,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:17:46" itemprop="dateModified" datetime="2020-03-05T14:17:46+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:42:26" itemprop="dateModified" datetime="2020-05-25T10:42:26+08:00">2020-05-25</time>
               
             
           </span>
@@ -1331,9 +1562,10 @@
       
         
           
-            <h1 id="什么是函数柯里化？实现-sum-1-2-3-返回结果是1-2-3之和"><a href="#什么是函数柯里化？实现-sum-1-2-3-返回结果是1-2-3之和" class="headerlink" title="什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是1,2,3之和"></a>什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是1,2,3之和</h1><p>函数柯里化：把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数</p>
+            <h2 id="什么是函数柯里化？实现-sum-1-2-3-返回结果是1-2-3之和"><a href="#什么是函数柯里化？实现-sum-1-2-3-返回结果是1-2-3之和" class="headerlink" title="什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是1,2,3之和"></a>什么是函数柯里化？实现 sum(1)(2)(3) 返回结果是1,2,3之和</h2><p>函数柯里化：把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">c</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> a+b+c;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="引申：实现一个curry函数，将普通函数进行柯里化"><a href="#引申：实现一个curry函数，将普通函数进行柯里化" class="headerlink" title="引申：实现一个curry函数，将普通函数进行柯里化"></a>引申：实现一个curry函数，将普通函数进行柯里化</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">fn, args = []</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> rest = [...args, ...arguments];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (rest.length &lt; fn.length) &#123;</span><br><span class="line">      <span class="keyword">return</span> curry.call(<span class="keyword">this</span>, fn, rest);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, rest);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a,b,c</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b+c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> sumFn = curry(sum);</span><br><span class="line"><span class="built_in">console</span>.log(sumFn(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)); <span class="comment">//6</span></span><br><span class="line"><span class="built_in">console</span>.log(sumFn(<span class="number">1</span>)(<span class="number">2</span>, <span class="number">3</span>)); <span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+<h3 id="引申：实现一个curry函数，将普通函数进行柯里化"><a href="#引申：实现一个curry函数，将普通函数进行柯里化" class="headerlink" title="引申：实现一个curry函数，将普通函数进行柯里化"></a>引申：实现一个curry函数，将普通函数进行柯里化</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">fn, args = []</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> rest = [...args, ...arguments];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (rest.length &lt; fn.length) &#123;</span><br><span class="line">      <span class="keyword">return</span> curry.call(<span class="keyword">this</span>, fn, rest);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, rest);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a,b,c</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b+c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> sumFn = curry(sum);</span><br><span class="line"><span class="built_in">console</span>.log(sumFn(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)); <span class="comment">//6</span></span><br><span class="line"><span class="built_in">console</span>.log(sumFn(<span class="number">1</span>)(<span class="number">2</span>, <span class="number">3</span>)); <span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -1449,7 +1681,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:17:22" itemprop="dateModified" datetime="2020-03-05T14:17:22+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:40:43" itemprop="dateModified" datetime="2020-05-25T10:40:43+08:00">2020-05-25</time>
               
             
           </span>
@@ -1484,43 +1716,44 @@
       
         
           
-            <h1 id="常见的浏览器兼容问题"><a href="#常见的浏览器兼容问题" class="headerlink" title="常见的浏览器兼容问题"></a>常见的浏览器兼容问题</h1><h2 id="html中的兼容问题"><a href="#html中的兼容问题" class="headerlink" title="html中的兼容问题"></a>html中的兼容问题</h2><h3 id="不同浏览器的标签默认的外补丁和内补丁不同"><a href="#不同浏览器的标签默认的外补丁和内补丁不同" class="headerlink" title="不同浏览器的标签默认的外补丁和内补丁不同"></a>不同浏览器的标签默认的外补丁和内补丁不同</h3><ul>
+            <h2 id="常见的浏览器兼容问题"><a href="#常见的浏览器兼容问题" class="headerlink" title="常见的浏览器兼容问题"></a>常见的浏览器兼容问题</h2><h3 id="html中的兼容问题"><a href="#html中的兼容问题" class="headerlink" title="html中的兼容问题"></a>html中的兼容问题</h3><h4 id="不同浏览器的标签默认的外补丁和内补丁不同"><a href="#不同浏览器的标签默认的外补丁和内补丁不同" class="headerlink" title="不同浏览器的标签默认的外补丁和内补丁不同"></a>不同浏览器的标签默认的外补丁和内补丁不同</h4><ul>
 <li>场景：随便写几个标签，不加样式控制的情况下，各自的margin和padding差异较大。</li>
 <li>解决方法：上来先消除默认样式* {margin: 0, padding: 0}</li>
 </ul>
-<h3 id="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"><a href="#块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）" class="headerlink" title="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"></a>块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）</h3><ul>
+<h4 id="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"><a href="#块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）" class="headerlink" title="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"></a>块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）</h4><ul>
 <li>场景：常见症状是IE6后面的一块被顶到下一行;</li>
 <li>解决方法：在float的标签样式控制中加入display: inline-block; 将其转化为行内属性</li>
 </ul>
-<h3 id="IE6-中z-index失效"><a href="#IE6-中z-index失效" class="headerlink" title="IE6 中z-index失效"></a>IE6 中z-index失效</h3><ul>
+<h4 id="IE6-中z-index失效"><a href="#IE6-中z-index失效" class="headerlink" title="IE6 中z-index失效"></a>IE6 中z-index失效</h4><ul>
 <li>场景：元素的父级元素设置的z-index为1，那么其子级元素再设置z-index时会失效，其层级会继承父级元素的设置，造成某些层级调整上的bug</li>
 <li>原因：z-index起作用有个前提，就是元素的position属性要是relative、absolute或者fixed。</li>
 <li>解决方案：1. position: relative 改为 position: absolute; 2. 去除浮动; 3. 浮动元素添加position属性（如relative，absolute等）。</li>
 </ul>
-<h3 id="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"><a href="#在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了" class="headerlink" title="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"></a>在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了</h3><ul>
+<h4 id="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"><a href="#在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了" class="headerlink" title="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"></a>在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了</h4><ul>
 <li>正确的a标签顺序：link/visited/hover/active</li>
 </ul>
-<h3 id="24位png图片，IE6中不兼容透明底儿"><a href="#24位png图片，IE6中不兼容透明底儿" class="headerlink" title="24位png图片，IE6中不兼容透明底儿"></a>24位png图片，IE6中不兼容透明底儿</h3><ul>
+<h4 id="24位png图片，IE6中不兼容透明底儿"><a href="#24位png图片，IE6中不兼容透明底儿" class="headerlink" title="24位png图片，IE6中不兼容透明底儿"></a>24位png图片，IE6中不兼容透明底儿</h4><ul>
 <li>解决方式：1. 使用8位png图片; 2. 为ie6准备一套特殊的图片</li>
 </ul>
-<h2 id="js在不同浏览器中的兼容问题"><a href="#js在不同浏览器中的兼容问题" class="headerlink" title="js在不同浏览器中的兼容问题"></a>js在不同浏览器中的兼容问题</h2><h3 id="事件监听的兼容"><a href="#事件监听的兼容" class="headerlink" title="事件监听的兼容"></a>事件监听的兼容</h3><ul>
+<h3 id="js在不同浏览器中的兼容问题"><a href="#js在不同浏览器中的兼容问题" class="headerlink" title="js在不同浏览器中的兼容问题"></a>js在不同浏览器中的兼容问题</h3><h4 id="事件监听的兼容"><a href="#事件监听的兼容" class="headerlink" title="事件监听的兼容"></a>事件监听的兼容</h4><ul>
 <li>IE不支持addEventListener;</li>
 <li>解决：给IE使用attachEvent</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addHandler = <span class="function"><span class="keyword">function</span>(<span class="params">e, type, handler</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.addEventListener) &#123;</span><br><span class="line">    e.addEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.attachEvent) &#123;</span><br><span class="line">    e.attachEvent(<span class="string">'on'</span> + type, handler);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    e[<span class="string">'on'</span> + type] = handler;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> removeHandler = <span class="function"><span class="keyword">function</span>(<span class="params">e, type, handler</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.removeEventListener) &#123;</span><br><span class="line">    e.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.detachEvent) &#123;</span><br><span class="line">    e.detachEvent(<span class="string">'on'</span> + type, handler);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    on[<span class="string">'on'</span> + type] = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="event-targey的兼容，引发事件的DOM元素。"><a href="#event-targey的兼容，引发事件的DOM元素。" class="headerlink" title="event.targey的兼容，引发事件的DOM元素。"></a>event.targey的兼容，引发事件的DOM元素。</h3><ul>
+<h4 id="event-target的兼容，引发事件的DOM元素。"><a href="#event-target的兼容，引发事件的DOM元素。" class="headerlink" title="event.target的兼容，引发事件的DOM元素。"></a>event.target的兼容，引发事件的DOM元素。</h4><ul>
 <li>IE 6789不支持event.target</li>
 <li>解决方法：event.srcElement;</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target = event.target || event.srcElement;</span><br></pre></td></tr></table></figure>
-<h3 id="阻止系统默认的兼容"><a href="#阻止系统默认的兼容" class="headerlink" title="阻止系统默认的兼容"></a>阻止系统默认的兼容</h3><ul>
+<h4 id="阻止系统默认的兼容"><a href="#阻止系统默认的兼容" class="headerlink" title="阻止系统默认的兼容"></a>阻止系统默认的兼容</h4><ul>
 <li>IE 6789不支持event.preventDefault;</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.preventDefault ? event.preventDefault() : event.returnValue = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<h3 id="阻止事件冒泡的兼容"><a href="#阻止事件冒泡的兼容" class="headerlink" title="阻止事件冒泡的兼容"></a>阻止事件冒泡的兼容</h3><ul>
+<h4 id="阻止事件冒泡的兼容"><a href="#阻止事件冒泡的兼容" class="headerlink" title="阻止事件冒泡的兼容"></a>阻止事件冒泡的兼容</h4><ul>
 <li>IE 6789不支持event.stopPropagation;</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.stopPropagation ? event.stopPropagation() : event.cancelBubble = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -1636,7 +1869,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:17:07" itemprop="dateModified" datetime="2020-03-05T14:17:07+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:35:22" itemprop="dateModified" datetime="2020-05-25T10:35:22+08:00">2020-05-25</time>
               
             
           </span>
@@ -1671,7 +1904,7 @@
       
         
           
-            <h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><p>constructor是一种用于创建和初始化class创建的对象的特殊方法。<br><strong>描述</strong></p>
+            <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>constructor是一种用于创建和初始化class创建的对象的特殊方法。<br><strong>描述</strong></p>
 <ol>
 <li>在一个类中只能有一个名叫”constructor”的特殊方法。一个类中出现多次将会抛出SyntaxError错误。</li>
 <li>在一个构造方法中可以使用super关键字来调用一个父类的构造方法</li>
@@ -1686,11 +1919,11 @@
 <p>对于派生类，默认构造函数是：</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(...args) &#123;</span><br><span class="line">  <span class="keyword">super</span>(...args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h2><p>extends关键字用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类。<br><strong>描述</strong></p>
+<h3 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h3><p>extends关键字用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类。<br><strong>描述</strong></p>
 <p>extends关键字用来创建一个普通类或者内建对象的子类<br>继承的.prototype必须是一个Object或者null。</p>
-<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>类（class）通过static关键字定义静态方法。不能在类的实例上调用静态方法，而应该通过类本身调用。这些通常是实用程序方法，例如创建或克隆对象的功能</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>类（class）通过static关键字定义静态方法。不能在类的实例上调用静态方法，而应该通过类本身调用。这些通常是实用程序方法，例如创建或克隆对象的功能</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassWithStaticMethod</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'static method has been called.'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ClassWithStaticMethod.staticMethod();</span><br></pre></td></tr></table></figure>
-<h2 id="调用静态方法"><a href="#调用静态方法" class="headerlink" title="调用静态方法"></a>调用静态方法</h2><ul>
+<h3 id="调用静态方法"><a href="#调用静态方法" class="headerlink" title="调用静态方法"></a>调用静态方法</h3><ul>
 <li>从另一个静态方法，静态方法调用同一个类中的其他静态方法，可使用this关键字</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticMethodCall</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Static method has been called'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> anotherStaticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.staticMethod() + <span class="string">' from another static method'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1698,7 +1931,7 @@
 <li>从类的构造函数和其他方法，非静态方法中，不能直接使用this关键字来访问静态方法。而是要用类名来调用；<br>CLASSNAME.STATIC_METHOD_NAME()，或者用构造函数的属性来调用该方法；this.constructor.STATIC_METHOD_NAME()。</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticMethodCall</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(StaticMethodCall.staticMethod());</span><br><span class="line">        <span class="comment">// 'static method has been called.'</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.constructor.staticMethod());</span><br><span class="line">        <span class="comment">// 'static method has been called.'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'static method has been called.'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><ol>
 <li>目前ECMAScript，class中还没有定义Private（私有属性）的能力，所以我们通过约定，用下划线来标记它们。</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">  _milesDriven = <span class="number">0</span>;</span><br><span class="line">  drive(distance) &#123;</span><br><span class="line">    <span class="keyword">this</span>._milesDriven += distance;</span><br><span class="line">  &#125;</span><br><span class="line">  getMilesDriven() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._milesDriven;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1822,7 +2055,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:15:37" itemprop="dateModified" datetime="2020-03-05T14:15:37+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:34:47" itemprop="dateModified" datetime="2020-05-25T10:34:47+08:00">2020-05-25</time>
               
             
           </span>
@@ -1873,192 +2106,6 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.apply = <span class="function"><span class="keyword">function</span>(<span class="params">context, rest</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的是 null 或者 undefined，那么this指向 window/global</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的不是 null 或者 undefined，那么必须是一个对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">if</span> (!context) &#123;</span><br><span class="line">    <span class="comment">//  context为null或者是undefined</span></span><br><span class="line">    <span class="comment">//  判断是浏览器环境还是node环境</span></span><br><span class="line">    context = <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">'undefined'</span> ? global : <span class="built_in">window</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  context.fn = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (rest == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">//  undefined 或者 null 不是 Iterator 对象，不能被...</span></span><br><span class="line">    result = context.fn(rest);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> rest === <span class="string">'object'</span>) &#123;</span><br><span class="line">    result = context.fn(...rest);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> result.fn;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test code</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  name: <span class="string">'Selina'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Chirs'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">job, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">  <span class="built_in">console</span>.log(job, age);</span><br><span class="line">&#125;</span><br><span class="line">bar.apply(foo, [<span class="string">'programmer'</span>, <span class="number">20</span>]);</span><br><span class="line"><span class="comment">//  Selina programmer, 20</span></span><br><span class="line">bar.apply(<span class="literal">null</span>, [<span class="string">'teacher'</span>, <span class="number">25</span>]);</span><br><span class="line"><span class="comment">// brower环境： Chirs teacher, 25； node环境： undefined teacher, 25</span></span><br></pre></td></tr></table></figure>
 <h2 id="bind核心"><a href="#bind核心" class="headerlink" title="bind核心"></a>bind核心</h2><p>bind 和 call/apply 有一个很重要的区别，一个函数被 call/apply 的时候，会直接调用，但是 bind会创建一个新函数。当这个新函数被调用时，bind()的第一个参数将<br>作为它运行时的this，之后的一系列参数将会在传递的实参前传入作为它的参数。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'not a function'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">  Fn.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">  <span class="keyword">let</span> bound = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [...args, ...arguments];  <span class="comment">//  bind传递的参数和函数调用时传递的参数拼接</span></span><br><span class="line">    context = <span class="keyword">this</span> <span class="keyword">instanceof</span> Fn ? <span class="keyword">this</span> : context || <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> self.apply(context, res);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//  原型链</span></span><br><span class="line">  bound.prototype = <span class="keyword">new</span> Fn();</span><br><span class="line">  <span class="keyword">return</span> bound;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Jack'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">person</span>(<span class="params">age, job, gender</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name , age, job, gender);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Yve = &#123;<span class="attr">name</span> : <span class="string">'Yvette'</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> result = person.bind(Yve, <span class="number">22</span>, <span class="string">'enginner'</span>)(<span class="string">'female'</span>);</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2018/10/09/fileReader读取文件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/09/fileReader读取文件/" itemprop="url">
-                  fileReader读取文件，实现图片本地预览
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-09 11:14:34" itemprop="dateCreated datePublished" datetime="2018-10-09T11:14:34+08:00">2018-10-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-17 15:48:10" itemprop="dateModified" datetime="2018-12-17T15:48:10+08:00">2018-12-17</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h3><p>FileReader 对象允许Web应用程序异步读取存储在用户计算机上的文件(或原始数据缓冲区)的内容,使用 File 或 Blob 对象指定要读取的文件或数据。</p>
-<p>首先创建一个FileReader实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var reader = new FileReader();</span><br></pre></td></tr></table></figure></p>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>abort()</td>
-<td>中止读取操作。在返回时，readyState属性为DONE。</td>
-</tr>
-<tr>
-<td>readAsArrayBuffer()</td>
-<td>开始读取指定的 Blob中的内容, 一旦完成, result 属性中保存的将是被读取文件的 ArrayBuffer 数据对象.</td>
-</tr>
-<tr>
-<td>readAsBinaryString()</td>
-<td>开始读取指定的Blob中的内容。一旦完成，result属性中将包含所读取文件的原始二进制数据。</td>
-</tr>
-<tr>
-<td>readAsDataURL()</td>
-<td>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容</td>
-</tr>
-<tr>
-<td>readAsText()</td>
-<td>开始读取指定的Blob中的内容。一旦完成，result属性中将包含一个字符串以表示所读取的文件内容。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="具体事例"><a href="#具体事例" class="headerlink" title="具体事例"></a>具体事例</h4><p>input file实现本地图片预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var inputBox = document.getElementById(&quot;inputBox&quot;);</span><br><span class="line">inputBox.addEventListener(&quot;change&quot;,function()&#123;</span><br><span class="line">  var reader = new FileReader();</span><br><span class="line">  reader.readAsDataURL(inputBox.files[0]);//发起异步请求</span><br><span class="line">  reader.onload = function()&#123;</span><br><span class="line">    // 读取完成后，base64数据保存在对象的result属性中</span><br><span class="line">    console.log(this.result)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="noopener">FileReader详解</a></li>
-</ul>
 
           
         
@@ -2148,7 +2195,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2181,7 +2228,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

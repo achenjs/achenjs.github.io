@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="Symbol的应用场景应用场景1：使用Symbol来作为对象属性名（key）12345678910111213let obj = &amp;#123;  [Symbol()]: &apos;test&apos;,  a: 1,  b: 2,&amp;#125;;Object.keys(obj); // [&apos;a&apos;, &apos;b&apos;]for (let p in obj) &amp;#123;  console.log(p);   //  分别输出: a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-13T08:08:00.613Z">
+<meta property="og:updated_time" content="2020-05-25T03:33:10.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Symbol的应用场景">
 <meta name="twitter:description" content="Symbol的应用场景应用场景1：使用Symbol来作为对象属性名（key）12345678910111213let obj = &amp;#123;  [Symbol()]: &apos;test&apos;,  a: 1,  b: 2,&amp;#125;;Object.keys(obj); // [&apos;a&apos;, &apos;b&apos;]for (let p in obj) &amp;#123;  console.log(p);   //  分别输出: a">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-13 16:08:00" itemprop="dateModified" datetime="2020-05-13T16:08:00+08:00">2020-05-13</time>
+                <time title="修改时间：2020-05-25 11:33:10" itemprop="dateModified" datetime="2020-05-25T11:33:10+08:00">2020-05-25</time>
               
             
           </span>
@@ -427,7 +427,7 @@
       
 
       
-        <h3 id="Symbol的应用场景"><a href="#Symbol的应用场景" class="headerlink" title="Symbol的应用场景"></a>Symbol的应用场景</h3><h5 id="应用场景1：使用Symbol来作为对象属性名（key）"><a href="#应用场景1：使用Symbol来作为对象属性名（key）" class="headerlink" title="应用场景1：使用Symbol来作为对象属性名（key）"></a>应用场景1：使用Symbol来作为对象属性名（key）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>()]: <span class="string">'test'</span>,</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(obj); <span class="comment">// ['a', 'b']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> p <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(p);   <span class="comment">//  分别输出: a 和 b</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj);  <span class="comment">//   ['a', 'b']</span></span><br></pre></td></tr></table></figure>
+        <h4 id="Symbol的应用场景"><a href="#Symbol的应用场景" class="headerlink" title="Symbol的应用场景"></a>Symbol的应用场景</h4><h5 id="应用场景1：使用Symbol来作为对象属性名（key）"><a href="#应用场景1：使用Symbol来作为对象属性名（key）" class="headerlink" title="应用场景1：使用Symbol来作为对象属性名（key）"></a>应用场景1：使用Symbol来作为对象属性名（key）</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>()]: <span class="string">'test'</span>,</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(obj); <span class="comment">// ['a', 'b']</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> p <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(p);   <span class="comment">//  分别输出: a 和 b</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(obj);  <span class="comment">//   ['a', 'b']</span></span><br></pre></td></tr></table></figure>
 <p>由上代码可知，Symbol类型的key是不能通过Object.keys()或者for…in来枚举的，它未被包含对象自身的属性名集合（property names）之中。所以，利用该特性，我们可以把一些不需要对外操作和访问的属性使用Symbol来定义。</p>
 <h5 id="应用场景2：使用Symbol来替代常量"><a href="#应用场景2：使用Symbol来替代常量" class="headerlink" title="应用场景2：使用Symbol来替代常量"></a>应用场景2：使用Symbol来替代常量</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> TYPE_AUDIO = <span class="string">'AUDIO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_VIDEO = <span class="string">'VIDEO'</span></span><br><span class="line"><span class="keyword">const</span> TYPE_IMAGE = <span class="string">'IMAGE'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileResource</span>(<span class="params">resource</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span>(resource.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> TYPE_AUDIO:</span><br><span class="line">      playAudio(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_VIDEO:</span><br><span class="line">      playVideo(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">case</span> TYPE_IMAGE:</span><br><span class="line">      previewImage(resource)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Unknown type of resource'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如上面的代码中那样，我们经常定义一组常量来代表一种业务逻辑下的几个不同类型，我们通常希望这几个常量之间是唯一的关系，常量少的时候还算好，但是常量一多，你可能还得花点脑子好好为他们取个好点的名字。</p>
@@ -570,7 +570,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -603,7 +603,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -653,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol的应用场景"><span class="nav-number">1.</span> <span class="nav-text">Symbol的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景1：使用Symbol来作为对象属性名（key）"><span class="nav-number">1.0.1.</span> <span class="nav-text">应用场景1：使用Symbol来作为对象属性名（key）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景2：使用Symbol来替代常量"><span class="nav-number">1.0.2.</span> <span class="nav-text">应用场景2：使用Symbol来替代常量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景3：使用Symbol定义类的私有属性-方法"><span class="nav-number">1.0.3.</span> <span class="nav-text">应用场景3：使用Symbol定义类的私有属性/方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#彻底搞懂浏览器Event-loop"><span class="nav-number">2.</span> <span class="nav-text">彻底搞懂浏览器Event-loop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-预备知识"><span class="nav-number">2.1.</span> <span class="nav-text">1. 预备知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-事件循环（event-loop）是什么？"><span class="nav-number">2.2.</span> <span class="nav-text">2. 事件循环（event-loop）是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-为什么会需要event-loop"><span class="nav-number">2.3.</span> <span class="nav-text">3. 为什么会需要event-loop?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node中的event-loop与浏览器之间的差异"><span class="nav-number">2.4.</span> <span class="nav-text">node中的event-loop与浏览器之间的差异</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbol的应用场景"><span class="nav-number">1.</span> <span class="nav-text">Symbol的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景1：使用Symbol来作为对象属性名（key）"><span class="nav-number">1.1.</span> <span class="nav-text">应用场景1：使用Symbol来作为对象属性名（key）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景2：使用Symbol来替代常量"><span class="nav-number">1.2.</span> <span class="nav-text">应用场景2：使用Symbol来替代常量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景3：使用Symbol定义类的私有属性-方法"><span class="nav-number">1.3.</span> <span class="nav-text">应用场景3：使用Symbol定义类的私有属性/方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#彻底搞懂浏览器Event-loop"><span class="nav-number"></span> <span class="nav-text">彻底搞懂浏览器Event-loop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-预备知识"><span class="nav-number">1.</span> <span class="nav-text">1. 预备知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-事件循环（event-loop）是什么？"><span class="nav-number">2.</span> <span class="nav-text">2. 事件循环（event-loop）是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-为什么会需要event-loop"><span class="nav-number">3.</span> <span class="nav-text">3. 为什么会需要event-loop?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node中的event-loop与浏览器之间的差异"><span class="nav-number">4.</span> <span class="nav-text">node中的event-loop与浏览器之间的差异</span></a></li></ol></div>
             
 
           </div>

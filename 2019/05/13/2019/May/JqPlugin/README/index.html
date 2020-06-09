@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="如何写一个jQuery插件jQuery 插件开发模式jQuery的插件开发模式主要有三种：  通过$.extend()来扩展jQuery 通过$.fn向jQuery添加新的方法 通过$.widget()应用jQuery UI的部件工厂方式创建  $.extend()1234567891011121314$.fn.extend(&amp;#123; check: function() &amp;#123;    r">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-05T06:19:45.352Z">
+<meta property="og:updated_time" content="2020-05-25T02:57:09.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何写一个jQuery插件">
 <meta name="twitter:description" content="如何写一个jQuery插件jQuery 插件开发模式jQuery的插件开发模式主要有三种：  通过$.extend()来扩展jQuery 通过$.fn向jQuery添加新的方法 通过$.widget()应用jQuery UI的部件工厂方式创建  $.extend()1234567891011121314$.fn.extend(&amp;#123; check: function() &amp;#123;    r">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:19:45" itemprop="dateModified" datetime="2020-03-05T14:19:45+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:57:09" itemprop="dateModified" datetime="2020-05-25T10:57:09+08:00">2020-05-25</time>
               
             
           </span>
@@ -427,14 +427,14 @@
       
 
       
-        <h1 id="如何写一个jQuery插件"><a href="#如何写一个jQuery插件" class="headerlink" title="如何写一个jQuery插件"></a>如何写一个jQuery插件</h1><h2 id="jQuery-插件开发模式"><a href="#jQuery-插件开发模式" class="headerlink" title="jQuery 插件开发模式"></a>jQuery 插件开发模式</h2><p>jQuery的插件开发模式主要有三种：</p>
+        <h2 id="如何写一个jQuery插件"><a href="#如何写一个jQuery插件" class="headerlink" title="如何写一个jQuery插件"></a>如何写一个jQuery插件</h2><h3 id="jQuery-插件开发模式"><a href="#jQuery-插件开发模式" class="headerlink" title="jQuery 插件开发模式"></a>jQuery 插件开发模式</h3><p>jQuery的插件开发模式主要有三种：</p>
 <ul>
 <li>通过$.extend()来扩展jQuery</li>
 <li>通过$.fn向jQuery添加新的方法</li>
 <li>通过$.widget()应用jQuery UI的部件工厂方式创建</li>
 </ul>
-<h3 id="extend"><a href="#extend" class="headerlink" title="$.extend()"></a>$.extend()</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.fn.extend(&#123;</span><br><span class="line"> check: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">true</span>;</span><br><span class="line">    &#125;),</span><br><span class="line"> &#125;</span><br><span class="line"> uncheck: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">false</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(<span class="string">"input[type='checkbox']"</span>).check();</span><br></pre></td></tr></table></figure>
-<h3 id="fn"><a href="#fn" class="headerlink" title="$.fn"></a>$.fn</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myPlugin</span>(<span class="params">$ele, options</span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">myPlugin.prototype = &#123;</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  method2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$.fn.myplugin = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> myPlugin(<span class="keyword">this</span>, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="extend"><a href="#extend" class="headerlink" title="$.extend()"></a>$.extend()</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.fn.extend(&#123;</span><br><span class="line"> check: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">true</span>;</span><br><span class="line">    &#125;),</span><br><span class="line"> &#125;</span><br><span class="line"> uncheck: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.checked = <span class="literal">false</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">$(<span class="string">"input[type='checkbox']"</span>).check();</span><br></pre></td></tr></table></figure>
+<h4 id="fn"><a href="#fn" class="headerlink" title="$.fn"></a>$.fn</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myPlugin</span>(<span class="params">$ele, options</span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">myPlugin.prototype = &#123;</span><br><span class="line">  method1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  method2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$.fn.myplugin = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> myPlugin(<span class="keyword">this</span>, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -553,7 +553,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -586,7 +586,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -636,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何写一个jQuery插件"><span class="nav-number">1.</span> <span class="nav-text">如何写一个jQuery插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-插件开发模式"><span class="nav-number">1.1.</span> <span class="nav-text">jQuery 插件开发模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extend"><span class="nav-number">1.1.1.</span> <span class="nav-text">$.extend()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fn"><span class="nav-number">1.1.2.</span> <span class="nav-text">$.fn</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何写一个jQuery插件"><span class="nav-number">1.</span> <span class="nav-text">如何写一个jQuery插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery-插件开发模式"><span class="nav-number">1.1.</span> <span class="nav-text">jQuery 插件开发模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#extend"><span class="nav-number">1.1.1.</span> <span class="nav-text">$.extend()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fn"><span class="nav-number">1.1.2.</span> <span class="nav-text">$.fn</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="构造方法constructor是一种用于创建和初始化class创建的对象的特殊方法。描述  在一个类中只能有一个名叫”constructor”的特殊方法。一个类中出现多次将会抛出SyntaxError错误。 在一个构造方法中可以使用super关键字来调用一个父类的构造方法 如果没有显示指定构造方法，则会添加默认的construtor方法。 如果不指定一个构造函数（constructor）方法，则">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-05T06:17:07.246Z">
+<meta property="og:updated_time" content="2020-05-25T02:35:22.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构造方法constructor">
 <meta name="twitter:description" content="构造方法constructor是一种用于创建和初始化class创建的对象的特殊方法。描述  在一个类中只能有一个名叫”constructor”的特殊方法。一个类中出现多次将会抛出SyntaxError错误。 在一个构造方法中可以使用super关键字来调用一个父类的构造方法 如果没有显示指定构造方法，则会添加默认的construtor方法。 如果不指定一个构造函数（constructor）方法，则">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-05 14:17:07" itemprop="dateModified" datetime="2020-03-05T14:17:07+08:00">2020-03-05</time>
+                <time title="修改时间：2020-05-25 10:35:22" itemprop="dateModified" datetime="2020-05-25T10:35:22+08:00">2020-05-25</time>
               
             
           </span>
@@ -427,7 +427,7 @@
       
 
       
-        <h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><p>constructor是一种用于创建和初始化class创建的对象的特殊方法。<br><strong>描述</strong></p>
+        <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>constructor是一种用于创建和初始化class创建的对象的特殊方法。<br><strong>描述</strong></p>
 <ol>
 <li>在一个类中只能有一个名叫”constructor”的特殊方法。一个类中出现多次将会抛出SyntaxError错误。</li>
 <li>在一个构造方法中可以使用super关键字来调用一个父类的构造方法</li>
@@ -442,11 +442,11 @@
 <p>对于派生类，默认构造函数是：</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(...args) &#123;</span><br><span class="line">  <span class="keyword">super</span>(...args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h2><p>extends关键字用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类。<br><strong>描述</strong></p>
+<h3 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h3><p>extends关键字用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类。<br><strong>描述</strong></p>
 <p>extends关键字用来创建一个普通类或者内建对象的子类<br>继承的.prototype必须是一个Object或者null。</p>
-<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>类（class）通过static关键字定义静态方法。不能在类的实例上调用静态方法，而应该通过类本身调用。这些通常是实用程序方法，例如创建或克隆对象的功能</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>类（class）通过static关键字定义静态方法。不能在类的实例上调用静态方法，而应该通过类本身调用。这些通常是实用程序方法，例如创建或克隆对象的功能</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassWithStaticMethod</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'static method has been called.'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ClassWithStaticMethod.staticMethod();</span><br></pre></td></tr></table></figure>
-<h2 id="调用静态方法"><a href="#调用静态方法" class="headerlink" title="调用静态方法"></a>调用静态方法</h2><ul>
+<h3 id="调用静态方法"><a href="#调用静态方法" class="headerlink" title="调用静态方法"></a>调用静态方法</h3><ul>
 <li>从另一个静态方法，静态方法调用同一个类中的其他静态方法，可使用this关键字</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticMethodCall</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Static method has been called'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> anotherStaticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.staticMethod() + <span class="string">' from another static method'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -454,7 +454,7 @@
 <li>从类的构造函数和其他方法，非静态方法中，不能直接使用this关键字来访问静态方法。而是要用类名来调用；<br>CLASSNAME.STATIC_METHOD_NAME()，或者用构造函数的属性来调用该方法；this.constructor.STATIC_METHOD_NAME()。</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticMethodCall</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(StaticMethodCall.staticMethod());</span><br><span class="line">        <span class="comment">// 'static method has been called.'</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.constructor.staticMethod());</span><br><span class="line">        <span class="comment">// 'static method has been called.'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'static method has been called.'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ol>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><ol>
 <li>目前ECMAScript，class中还没有定义Private（私有属性）的能力，所以我们通过约定，用下划线来标记它们。</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">  _milesDriven = <span class="number">0</span>;</span><br><span class="line">  drive(distance) &#123;</span><br><span class="line">    <span class="keyword">this</span>._milesDriven += distance;</span><br><span class="line">  &#125;</span><br><span class="line">  getMilesDriven() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._milesDriven;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -581,7 +581,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -614,7 +614,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -664,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构造方法"><span class="nav-number">1.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#extends"><span class="nav-number">1.1.</span> <span class="nav-text">extends</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">1.2.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用静态方法"><span class="nav-number">1.3.</span> <span class="nav-text">调用静态方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">1.3.1.</span> <span class="nav-text">补充</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">1.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extends"><span class="nav-number">1.1.</span> <span class="nav-text">extends</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-number">1.2.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用静态方法"><span class="nav-number">1.3.</span> <span class="nav-text">调用静态方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#补充"><span class="nav-number">1.3.1.</span> <span class="nav-text">补充</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
