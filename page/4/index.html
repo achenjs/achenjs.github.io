@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">48</span></a>
   </li>
         
         
@@ -310,6 +310,593 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/10/09/2019/浅谈iframe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/09/2019/浅谈iframe/" itemprop="url">
+                  iframe的优缺点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-09 11:14:34" itemprop="dateCreated datePublished" datetime="2019-10-09T11:14:34+08:00">2019-10-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:14:23" itemprop="dateModified" datetime="2020-03-05T14:14:23+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="iframe的优缺点"><a href="#iframe的优缺点" class="headerlink" title="iframe的优缺点"></a>iframe的优缺点</h1><h2 id="iframe的优点："><a href="#iframe的优点：" class="headerlink" title="iframe的优点："></a>iframe的优点：</h2><ol>
+<li><p>iframe能够原封不动的把嵌入的网页展现出来。</p>
+</li>
+<li><p>如果有多个网页引用iframe，那么你只需要修改iframe的内容，就可以实现调用的每一个页面内容的更改，方便快捷。</p>
+</li>
+<li><p>网页如果为了统一风格，头部和版本都是一样的，就可以写成一个页面，用iframe来嵌套，可以增加代码的可重用。</p>
+</li>
+<li><p>如果遇到加载缓慢的第三方内容如图标和广告，这些问题可以由iframe来解决。</p>
+</li>
+</ol>
+<h2 id="iframe的缺点："><a href="#iframe的缺点：" class="headerlink" title="iframe的缺点："></a>iframe的缺点：</h2><ol>
+<li><p>会产生很多页面，不容易管理。</p>
+</li>
+<li><p>iframe框架结构有时会让人感到迷惑，如果框架个数多的话，可能会出现上下、左右滚动条，会分散访问者的注意力，用户体验度差。</p>
+</li>
+<li><p>代码复杂，无法被一些搜索引擎索引到，这一点很关键，现在的搜索引擎爬虫还不能很好的处理iframe中的内容，所以使用iframe会不利于搜索引擎优化。</p>
+</li>
+<li><p>很多的移动设备（PDA 手机）无法完全显示框架，设备兼容性差。</p>
+</li>
+<li><p>iframe框架页面会增加服务器的http请求，对于大型网站不是可取的。</p>
+</li>
+</ol>
+<h3 id="iframe迁移问题以及解决方案"><a href="#iframe迁移问题以及解决方案" class="headerlink" title="iframe迁移问题以及解决方案"></a>iframe迁移问题以及解决方案</h3><ol>
+<li>import React, { propTypes } from ‘react’;</li>
+</ol>
+<p>error: PropTypes is undefined;</p>
+<p>出现原因: React在新版本中废弃了集成类似propTypes这种第三方库方案。</p>
+<p>解决方案: 新仓库使用的react版本较高，以上方式已被废弃，应使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>import ‘./style.less’;</li>
+</ol>
+<p>error: 样式失效问题。</p>
+<p>出现原因: 新项目中开启了css-module，需要通过配置:global来声明一个全局class，使其在全局起作用。</p>
+<p>解决方案1:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">### <span class="selector-tag">style</span><span class="selector-class">.less</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">    <span class="selector-pseudo">:global</span> &#123;</span><br><span class="line">        <span class="selector-class">.items</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./style.less'</span>;</span><br><span class="line"></span><br><span class="line">&lt;div className=&#123;styles.content&#125;&gt;</span><br><span class="line">    &lt;div className=<span class="string">"items"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>解决方案2:</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># <span class="selector-tag">style</span><span class="selector-class">.less</span></span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">:global</span> &#123;</span><br><span class="line">    <span class="selector-class">.content</span> &#123;</span><br><span class="line">        <span class="selector-class">.items</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'./style.less'</span>;</span><br><span class="line">&lt;div className=<span class="string">"content"</span>&gt;</span><br><span class="line">    &lt;div className=<span class="string">"items"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>推荐使用方案1，可以利用css-module的命名规则减少项目中样式的冲突问题。方案2改动小但是太暴力，非常可能产生样式冲突问题。</p>
+<ol start="3">
+<li>comm和components中组件出现不可用情况。</li>
+</ol>
+<p>error: 功能不可用情况。</p>
+<p>解决方案: 建议直接使用antd替换，需要花上一点时间对应antd api做一定代码重构。(!这块需要仔细效验功能是否正常)</p>
+<ol start="4">
+<li>ec_fe中使用了Component.contextTypes。</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Manage.contextTypes = &#123;</span><br><span class="line">    history: PropTypes.object.isRequired,</span><br><span class="line">    store: PropTypes.object.isRequired</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Warning: Failed context type: The context <code>history</code> is marked as required in <code>Connect(ContractReview)</code>, but its value is <code>undefined</code>.</p>
+<p>解决方案：拆分出去的仓库，react-router版本使用的是4.x，已经不需要像老版本一样一层层传递history或者绑定在Context上共享的方式。</p>
+<ol start="5">
+<li>ec_fe中使用了this.props.router等路由api</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props.router.replace(&#123;</span><br><span class="line">    pathname: <span class="string">`/admin/web/packageconfig/function.html`</span>,</span><br><span class="line">    query: &#123;</span><br><span class="line">        id: moduleList[<span class="number">0</span>].f_id,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>错误：index.jsx:59 Uncaught TypeError: Cannot read property ‘replace’ of undefined</p>
+<p>解决方案：拆分出去的仓库，react-router版本使用的是4.x，请使用react-router-dom提供的api修改。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.props.history.replace(&#123;</span><br><span class="line">    pathname: <span class="string">`/packageconfig/funModule`</span>,</span><br><span class="line">    search: <span class="string">`id=<span class="subst">$&#123;moduleList[<span class="number">0</span>].f_id&#125;</span>`</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://www.jianshu.com/p/8fbee843437c" target="_blank" rel="noopener">浅谈iframe</a></li>
+<li><a href="https://reacttraining.com/react-router/web/api/history/history-is-mutable" target="_blank" rel="noopener">react-router-dom</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/06/13/2019/June/NextTick/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/13/2019/June/NextTick/README/" itemprop="url">
+                  NextTick 原理分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-13T00:00:00+08:00">2019-06-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-05 14:25:02" itemprop="dateModified" datetime="2020-03-05T14:25:02+08:00">2020-03-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="NextTick-原理分析"><a href="#NextTick-原理分析" class="headerlink" title="NextTick 原理分析"></a>NextTick 原理分析</h1><p>nextTick可以让我们在下次DOM更新循环结束之后执行延迟回调，用于获得更新后的DOM。</p>
+<p>在Vue2.4之前都是使用的microtasks，但是microtasks的优先级过高，在某些情况下可能会出现比事件冒泡更快的情况，但如果都是macrotasks又可能会出现渲染的性能问题。所以在新版本中，会默认使用microtasks，但在特殊情况下会使用macrotasks，比如v-on。</p>
+<p>对于实现macrotasks，会先判断是否能使用setImmediate，不能的话降级为MessageChannel，以上都不行的话就使用setTimeout。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> setImmediate !== <span class="string">'undefined'</span> &amp;&amp; isNative(setImmediate)) &#123;</span><br><span class="line">  macroTimerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setImmediate(flushCallbacks)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (</span><br><span class="line">  <span class="keyword">typeof</span> MessageChannel !== <span class="string">'undefined'</span> &amp;&amp;</span><br><span class="line">  (isNative(MessageChannel) ||</span><br><span class="line">    <span class="comment">// PhantomJS</span></span><br><span class="line">    MessageChannel.toString() === <span class="string">'[object MessageChannelConstructor]'</span>)</span><br><span class="line">) &#123;</span><br><span class="line">  <span class="keyword">const</span> channel = <span class="keyword">new</span> MessageChannel()</span><br><span class="line">  <span class="keyword">const</span> port = channel.port2</span><br><span class="line">  channel.port1.onmessage = flushCallbacks</span><br><span class="line">  macroTimerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    port.postMessage(<span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  macroTimerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(flushCallbacks, <span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码用来判断能不能使用相应的API。</p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><ul>
+<li>macrotasks（宏任务）： setTimeout, setInterval, setImmediate, I/O, UI rendering</li>
+<li>microtasks（微任务）： process.nextTick, Promise, MutationObserver</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/06/09/2019/June/git/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/09/2019/June/git/README/" itemprop="url">
+                  git的基本操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-09T00:00:00+08:00">2019-06-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-25 09:54:56" itemprop="dateModified" datetime="2020-05-25T09:54:56+08:00">2020-05-25</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><ul>
+<li><a href="#rebase-%E5%90%88%E5%B9%B6">Rebase 合并</a></li>
+<li><a href="#stash">stash</a></li>
+<li><a href="#reflog">reflog</a></li>
+<li><a href="#reset">Reset</a></li>
+</ul>
+<h2 id="Rebase-合并"><a href="#Rebase-合并" class="headerlink" title="Rebase 合并"></a>Rebase 合并</h2><p>该命令可以让和 <code>merge</code> 命令得到的结果基本是一致的。</p>
+<p>通常使用 <code>merge</code> 操作将分支上的代码合并到 <code>master</code> 中，分支样子如下所示</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f109db27be054?w=505&amp;h=461&amp;f=png&amp;s=22796" alt=""></p>
+<p>使用 <code>rebase</code> 后，会将 <code>develop</code> 上的 <code>commit</code> 按顺序移到 <code>master</code> 的第三个 <code>commit</code> 后面，分支样子如下所示</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f11cc2cb8b332?w=505&amp;h=563&amp;f=png&amp;s=26514" alt=""></p>
+<p>Rebase 对比 merge，优势在于合并后的结果很清晰，只有一条线，劣势在于如果一旦出现冲突，解决冲突很麻烦，可能要解决多个冲突，但是 merge 出现冲突只需要解决一次。</p>
+<p>使用 rebase 应该在需要被 rebase 的分支上操作，并且该分支是本地分支。如果 <code>develop</code> 分支需要 rebase 到 <code>master</code> 上去，那么应该如下操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># branch develop</span></span></span><br><span class="line">git rebase master</span><br><span class="line">git checkout master</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 用于将 `master` 上的 HEAD 移动到最新的 commit</span></span></span><br><span class="line">git merge develop</span><br></pre></td></tr></table></figure>
+<h2 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h2><p><code>stash</code> 用于临时报错工作目录的改动。开发中可能会遇到代码写一半需要切分支打包的问题，如果这时候你不想 <code>commit</code> 的话，就可以使用该命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure>
+<p>使用该命令可以暂存你的工作目录，后面想恢复工作目录，只需要使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply</span><br></pre></td></tr></table></figure>
+<p>使用apply命令恢复，stash列表中的信息是会继续保留的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
+<p>使用pop恢复，并且会删除暂存列表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure>
+<p>查看暂存列表</p>
+<h2 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h2><p><code>reflog</code> 可以看到 HEAD 的移动记录，假如之前误删了一个分支，可以通过 <code>git reflog</code> 看到移动 HEAD 的哈希值</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/23/162f14df98ce3d83?w=950&amp;h=118&amp;f=png&amp;s=77151" alt=""></p>
+<p>从图中可以看出，HEAD 的最后一次移动行为是 <code>merge</code> 后，接下来分支 <code>new</code> 就被删除了，那么我们可以通过以下命令找回 <code>new</code> 分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout 37d9aca</span><br><span class="line">git checkout -b new</span><br></pre></td></tr></table></figure>
+<p>PS：<code>reflog</code> 记录是时效的，只会保存一段时间内的记录。</p>
+<h2 id="Reset"><a href="#Reset" class="headerlink" title="Reset"></a>Reset</h2><p>如果你想删除刚写的 commit，就可以通过以下命令实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+<p>但是 <code>reset</code> 的本质并不是删除了 commit，而是重新设置了 HEAD 和它指向的 branch。</p>
+<h1 id="git-常用操作"><a href="#git-常用操作" class="headerlink" title="git 常用操作"></a>git 常用操作</h1><p>$ git ch(checkout) -b develop  创建开发分支develop</p>
+<p>$ git push  推送当前分支到远端仓库</p>
+<p>$ git st(status)  查看当前分支工作区、暂存区的工作状态</p>
+<p>$ git diff   diff文件的修改</p>
+<p>$ git ci(commit) .  提交本次修改</p>
+<p>$ git fetch –all  拉取所有远端的最新代码</p>
+<p>$ git merge origin/develop  如果是多人协作，merge同事的修改到当前分支（先人后己原则）</p>
+<p>$ git merge origin/master   上线之前保证当前分支不落后于远端origin/master，一定要merge远端origin/master到当前分支</p>
+<p>$ git push  推送当前分支到远端仓库</p>
+<p>$ git merge –no-ff origin/develop  同事review code之后管理员合并origin/develop到远端主干origin/master</p>
+<hr>
+<p>👉 HEAD：当前commit引用$ git version  git版本</p>
+<p>$ git branch  查看本地所有的分支</p>
+<p>$ git branch -r 查看所有远程的分支</p>
+<p>$ git branch -a 查看所有远程分支和本地分支</p>
+<p>$ git branch -d <branchname> 删除本地branchname分支</branchname></p>
+<p>$ git branch -m brancholdname  branchnewname 重命名分支</p>
+<p>$ git branch <branchname>   创建branchname分支</branchname></p>
+<p>$ git checkout <branchname> 切换分支到branchname</branchname></p>
+<p>$ git checkout -b <branchname> 等同于执行上两步，即创建新的分支并切换到该分支</branchname></p>
+<p>$ git checkout – xx/xx  撤销本文件的更改</p>
+<p>$ git pull origin master:master 将远程origin主机的master分支合并到当前master分支,冒号后面的部分表示当前本地所在的分支</p>
+<p>$ git pull origin master –allow-unrelated-histories  允许合并两个不同项目的历史记录</p>
+<p>$ git push origin -d <branchname>   删除远程branchname分支</branchname></p>
+<p>$ git fetch –p  更新分支</p>
+<p>$ git status 查看本地工作区、暂存区文件的修改状态</p>
+<p>$ git add xx  把xx文件添加到暂存区去</p>
+<p>$ git commit -m ‘ ‘  提交文件 -m 后面的是注释</p>
+<p>$ git commit -am(-a -m) 提交所有的修改，等同于上两步</p>
+<p>$ git commit ./xx   等同于git add ./xx + git commit</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1603,547 +2190,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/05/2019/May/Compatible/README/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/05/2019/May/Compatible/README/" itemprop="url">
-                  常见的浏览器兼容问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-05 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-05T00:00:00+08:00">2019-05-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-05-25 10:40:43" itemprop="dateModified" datetime="2020-05-25T10:40:43+08:00">2020-05-25</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="常见的浏览器兼容问题"><a href="#常见的浏览器兼容问题" class="headerlink" title="常见的浏览器兼容问题"></a>常见的浏览器兼容问题</h2><h3 id="html中的兼容问题"><a href="#html中的兼容问题" class="headerlink" title="html中的兼容问题"></a>html中的兼容问题</h3><h4 id="不同浏览器的标签默认的外补丁和内补丁不同"><a href="#不同浏览器的标签默认的外补丁和内补丁不同" class="headerlink" title="不同浏览器的标签默认的外补丁和内补丁不同"></a>不同浏览器的标签默认的外补丁和内补丁不同</h4><ul>
-<li>场景：随便写几个标签，不加样式控制的情况下，各自的margin和padding差异较大。</li>
-<li>解决方法：上来先消除默认样式* {margin: 0, padding: 0}</li>
-</ul>
-<h4 id="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"><a href="#块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）" class="headerlink" title="块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）"></a>块属性标签float后，又有横行的margin的情况下，在IE6显示margin比设置的大（即双倍边距bug）</h4><ul>
-<li>场景：常见症状是IE6后面的一块被顶到下一行;</li>
-<li>解决方法：在float的标签样式控制中加入display: inline-block; 将其转化为行内属性</li>
-</ul>
-<h4 id="IE6-中z-index失效"><a href="#IE6-中z-index失效" class="headerlink" title="IE6 中z-index失效"></a>IE6 中z-index失效</h4><ul>
-<li>场景：元素的父级元素设置的z-index为1，那么其子级元素再设置z-index时会失效，其层级会继承父级元素的设置，造成某些层级调整上的bug</li>
-<li>原因：z-index起作用有个前提，就是元素的position属性要是relative、absolute或者fixed。</li>
-<li>解决方案：1. position: relative 改为 position: absolute; 2. 去除浮动; 3. 浮动元素添加position属性（如relative，absolute等）。</li>
-</ul>
-<h4 id="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"><a href="#在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了" class="headerlink" title="在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了"></a>在写a标签的样式，写的样式没有效果，其实只是写的样式被覆盖了</h4><ul>
-<li>正确的a标签顺序：link/visited/hover/active</li>
-</ul>
-<h4 id="24位png图片，IE6中不兼容透明底儿"><a href="#24位png图片，IE6中不兼容透明底儿" class="headerlink" title="24位png图片，IE6中不兼容透明底儿"></a>24位png图片，IE6中不兼容透明底儿</h4><ul>
-<li>解决方式：1. 使用8位png图片; 2. 为ie6准备一套特殊的图片</li>
-</ul>
-<h3 id="js在不同浏览器中的兼容问题"><a href="#js在不同浏览器中的兼容问题" class="headerlink" title="js在不同浏览器中的兼容问题"></a>js在不同浏览器中的兼容问题</h3><h4 id="事件监听的兼容"><a href="#事件监听的兼容" class="headerlink" title="事件监听的兼容"></a>事件监听的兼容</h4><ul>
-<li>IE不支持addEventListener;</li>
-<li>解决：给IE使用attachEvent</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addHandler = <span class="function"><span class="keyword">function</span>(<span class="params">e, type, handler</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.addEventListener) &#123;</span><br><span class="line">    e.addEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.attachEvent) &#123;</span><br><span class="line">    e.attachEvent(<span class="string">'on'</span> + type, handler);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    e[<span class="string">'on'</span> + type] = handler;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> removeHandler = <span class="function"><span class="keyword">function</span>(<span class="params">e, type, handler</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.removeEventListener) &#123;</span><br><span class="line">    e.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.detachEvent) &#123;</span><br><span class="line">    e.detachEvent(<span class="string">'on'</span> + type, handler);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    on[<span class="string">'on'</span> + type] = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="event-target的兼容，引发事件的DOM元素。"><a href="#event-target的兼容，引发事件的DOM元素。" class="headerlink" title="event.target的兼容，引发事件的DOM元素。"></a>event.target的兼容，引发事件的DOM元素。</h4><ul>
-<li>IE 6789不支持event.target</li>
-<li>解决方法：event.srcElement;</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target = event.target || event.srcElement;</span><br></pre></td></tr></table></figure>
-<h4 id="阻止系统默认的兼容"><a href="#阻止系统默认的兼容" class="headerlink" title="阻止系统默认的兼容"></a>阻止系统默认的兼容</h4><ul>
-<li>IE 6789不支持event.preventDefault;</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.preventDefault ? event.preventDefault() : event.returnValue = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<h4 id="阻止事件冒泡的兼容"><a href="#阻止事件冒泡的兼容" class="headerlink" title="阻止事件冒泡的兼容"></a>阻止事件冒泡的兼容</h4><ul>
-<li>IE 6789不支持event.stopPropagation;</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.stopPropagation ? event.stopPropagation() : event.cancelBubble = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/03/2019/May/Classes/README/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/03/2019/May/Classes/README/" itemprop="url">
-                  构造方法constructor
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-03T00:00:00+08:00">2019-05-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-05-25 10:35:22" itemprop="dateModified" datetime="2020-05-25T10:35:22+08:00">2020-05-25</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>constructor是一种用于创建和初始化class创建的对象的特殊方法。<br><strong>描述</strong></p>
-<ol>
-<li>在一个类中只能有一个名叫”constructor”的特殊方法。一个类中出现多次将会抛出SyntaxError错误。</li>
-<li>在一个构造方法中可以使用super关键字来调用一个父类的构造方法</li>
-<li>如果没有显示指定构造方法，则会添加默认的construtor方法。</li>
-<li>如果不指定一个构造函数（constructor）方法，则使用一个默认的构造函数（constructor）</li>
-</ol>
-<blockquote>
-<p>如果不指定构造方法，则使用默认构造函数。对于基类，默认构造函数是：</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>() &#123;&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>对于派生类，默认构造函数是：</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(...args) &#123;</span><br><span class="line">  <span class="keyword">super</span>(...args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h3><p>extends关键字用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类。<br><strong>描述</strong></p>
-<p>extends关键字用来创建一个普通类或者内建对象的子类<br>继承的.prototype必须是一个Object或者null。</p>
-<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>类（class）通过static关键字定义静态方法。不能在类的实例上调用静态方法，而应该通过类本身调用。这些通常是实用程序方法，例如创建或克隆对象的功能</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassWithStaticMethod</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'static method has been called.'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">ClassWithStaticMethod.staticMethod();</span><br></pre></td></tr></table></figure>
-<h3 id="调用静态方法"><a href="#调用静态方法" class="headerlink" title="调用静态方法"></a>调用静态方法</h3><ul>
-<li>从另一个静态方法，静态方法调用同一个类中的其他静态方法，可使用this关键字</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticMethodCall</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Static method has been called'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> anotherStaticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.staticMethod() + <span class="string">' from another static method'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>从类的构造函数和其他方法，非静态方法中，不能直接使用this关键字来访问静态方法。而是要用类名来调用；<br>CLASSNAME.STATIC_METHOD_NAME()，或者用构造函数的属性来调用该方法；this.constructor.STATIC_METHOD_NAME()。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticMethodCall</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(StaticMethodCall.staticMethod());</span><br><span class="line">        <span class="comment">// 'static method has been called.'</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.constructor.staticMethod());</span><br><span class="line">        <span class="comment">// 'static method has been called.'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> staticMethod() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'static method has been called.'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><ol>
-<li>目前ECMAScript，class中还没有定义Private（私有属性）的能力，所以我们通过约定，用下划线来标记它们。</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">  _milesDriven = <span class="number">0</span>;</span><br><span class="line">  drive(distance) &#123;</span><br><span class="line">    <span class="keyword">this</span>._milesDriven += distance;</span><br><span class="line">  &#125;</span><br><span class="line">  getMilesDriven() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._milesDriven;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在上面的事例中，我们依靠Car的实例调用getMilesDriven方法来获取到它的私有属性_milesDriven。但是，因为没有什么能使_milesDriven成为私有的，<br>所以任何实例都可以访问它。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tesla = <span class="keyword">new</span> Cal();</span><br><span class="line">tesla.drive(<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(tesla._milesDriven);</span><br></pre></td></tr></table></figure>
-<p>目前Class Fields有个提案，我们可以通过#创建私有字段。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>&#123;</span><br><span class="line">  #milesDriven = 0;</span><br><span class="line">  drive(distance) &#123;</span><br><span class="line">    this.#milesDriven += distance;</span><br><span class="line">  &#125;</span><br><span class="line">  getMilesDriven() &#123;</span><br><span class="line">    return this.#milesDriven;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tesla = <span class="keyword">new</span> Car()</span><br><span class="line">tesla.drive(<span class="number">10</span>)</span><br><span class="line">tesla.getMilesDriven() <span class="comment">// 10</span></span><br><span class="line">tesla.#milesDriven // Invalid</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2019/05/01/2019/May/Bind/README/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/01/2019/May/Bind/README/" itemprop="url">
-                  call、apply有什么区别？call、apply和bind的内部实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-01T00:00:00+08:00">2019-05-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-05-25 10:34:47" itemprop="dateModified" datetime="2020-05-25T10:34:47+08:00">2020-05-25</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="call、apply有什么区别？call、apply和bind的内部实现"><a href="#call、apply有什么区别？call、apply和bind的内部实现" class="headerlink" title="call、apply有什么区别？call、apply和bind的内部实现"></a>call、apply有什么区别？call、apply和bind的内部实现</h1><p>call、apply的功能相同，区别在于传参的方式不一样：</p>
-<ul>
-<li>fn.call(obj, arg1, arg2, …)，调用一个函数，具有一个指定的this值和分别提供的参数（参数的列表）。</li>
-<li>fn.apply(obj, [argsArray])，调用一个函数，具有一个指定的this值，以及作为一个数组（或类数组对象）提供参数。</li>
-</ul>
-<h2 id="call核心"><a href="#call核心" class="headerlink" title="call核心"></a>call核心</h2><ul>
-<li>将函数设为传入参数的属性</li>
-<li>指定this到函数并传入给定参数执行函数</li>
-<li>如果不传入参数或者参数为null，默认指向为 window/global</li>
-<li>删除参数上的函数</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.call = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的是 null 或者 undefined，那么this指向 window/global</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的不是 null 或者 undefined，那么必须是一个对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">if</span> (!context) &#123;</span><br><span class="line">    <span class="comment">//  context为null或者是undefined</span></span><br><span class="line">    <span class="comment">//  判断是浏览器环境还是node环境</span></span><br><span class="line">    context = <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">'undefined'</span> ? global : <span class="built_in">window</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  context.fn = <span class="keyword">this</span>;  <span class="comment">//  this指向是当前的函数（Function的实例）</span></span><br><span class="line">  <span class="keyword">let</span> rest = [...arguments].slice(<span class="number">1</span>); <span class="comment">//  获取除了this指向对象以外的参数，空数组slice后返回的仍然是空数组</span></span><br><span class="line">  <span class="keyword">let</span> result = context.fn(...rest); <span class="comment">//  隐式绑定，当前函数的this指向了context</span></span><br><span class="line">  <span class="keyword">delete</span> context.fn;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test code</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  name: <span class="string">'Selina'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Chirs'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">job, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">  <span class="built_in">console</span>.log(job, age);</span><br><span class="line">&#125;</span><br><span class="line">bar.call(foo, <span class="string">'programmer'</span>, <span class="number">20</span>);</span><br><span class="line"><span class="comment">//  Selina programmer, 20</span></span><br><span class="line">bar.call(<span class="literal">null</span>, <span class="string">'teacher'</span>, <span class="number">25</span>);</span><br><span class="line"><span class="comment">//  brower环境： Chirs teacher, 25； node环境： undefined teacher, 25</span></span><br></pre></td></tr></table></figure>
-<h2 id="apply核心"><a href="#apply核心" class="headerlink" title="apply核心"></a>apply核心</h2><p>apply的实现和call很类似，但是需要注意他们的参数不一样，apply的第二个参数是数组或类数组。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.apply = <span class="function"><span class="keyword">function</span>(<span class="params">context, rest</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的是 null 或者 undefined，那么this指向 window/global</span></span><br><span class="line"><span class="comment">   * 如果第一个参数传入的不是 null 或者 undefined，那么必须是一个对象</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="keyword">if</span> (!context) &#123;</span><br><span class="line">    <span class="comment">//  context为null或者是undefined</span></span><br><span class="line">    <span class="comment">//  判断是浏览器环境还是node环境</span></span><br><span class="line">    context = <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">'undefined'</span> ? global : <span class="built_in">window</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  context.fn = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> result;</span><br><span class="line">  <span class="keyword">if</span> (rest == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">//  undefined 或者 null 不是 Iterator 对象，不能被...</span></span><br><span class="line">    result = context.fn(rest);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> rest === <span class="string">'object'</span>) &#123;</span><br><span class="line">    result = context.fn(...rest);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> result.fn;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test code</span></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  name: <span class="string">'Selina'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Chirs'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">job, age</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">  <span class="built_in">console</span>.log(job, age);</span><br><span class="line">&#125;</span><br><span class="line">bar.apply(foo, [<span class="string">'programmer'</span>, <span class="number">20</span>]);</span><br><span class="line"><span class="comment">//  Selina programmer, 20</span></span><br><span class="line">bar.apply(<span class="literal">null</span>, [<span class="string">'teacher'</span>, <span class="number">25</span>]);</span><br><span class="line"><span class="comment">// brower环境： Chirs teacher, 25； node环境： undefined teacher, 25</span></span><br></pre></td></tr></table></figure>
-<h2 id="bind核心"><a href="#bind核心" class="headerlink" title="bind核心"></a>bind核心</h2><p>bind 和 call/apply 有一个很重要的区别，一个函数被 call/apply 的时候，会直接调用，但是 bind会创建一个新函数。当这个新函数被调用时，bind()的第一个参数将<br>作为它运行时的this，之后的一系列参数将会在传递的实参前传入作为它的参数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="keyword">this</span> !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'not a function'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">let</span> args = [...arguments].slice(<span class="number">1</span>);</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">  Fn.prototype = <span class="keyword">this</span>.prototype;</span><br><span class="line">  <span class="keyword">let</span> bound = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = [...args, ...arguments];  <span class="comment">//  bind传递的参数和函数调用时传递的参数拼接</span></span><br><span class="line">    context = <span class="keyword">this</span> <span class="keyword">instanceof</span> Fn ? <span class="keyword">this</span> : context || <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> self.apply(context, res);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//  原型链</span></span><br><span class="line">  bound.prototype = <span class="keyword">new</span> Fn();</span><br><span class="line">  <span class="keyword">return</span> bound;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Jack'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">person</span>(<span class="params">age, job, gender</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name , age, job, gender);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Yve = &#123;<span class="attr">name</span> : <span class="string">'Yvette'</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> result = person.bind(Yve, <span class="number">22</span>, <span class="string">'enginner'</span>)(<span class="string">'female'</span>);</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2195,7 +2241,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2230,7 +2276,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2795,5 +2843,8 @@
 
   
 
-</body>
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

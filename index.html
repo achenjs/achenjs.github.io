@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">45</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">48</span></a>
   </li>
         
         
@@ -310,6 +310,506 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/07/08/2020/7月/curl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/08/2020/7月/curl/" itemprop="url">
+                  curl
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-07-08 09:00:00" itemprop="dateCreated datePublished" datetime="2020-07-08T09:00:00+08:00">2020-07-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-07-09 14:15:57" itemprop="dateModified" datetime="2020-07-09T14:15:57+08:00">2020-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>curl 是一个命令行工具，用来请求 web 服务器。它的名字就是客户端（client）的 URL 工具的意思。</p>
+<p>不带有任何参数时，curl 就是发出 get 请求。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>上面的命令向 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 发出 get 请求，服务器返回的内容会在命令行输出。</p>
+<h5 id="b"><a href="#b" class="headerlink" title="-b"></a>-b</h5><p>-b 参数用来向服务器发送 cookie</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -b 'foo=bar' www.baidu.com</span><br></pre></td></tr></table></figure>
+<h5 id="c"><a href="#c" class="headerlink" title="-c"></a>-c</h5><p>-c 参数将服务器设置的 cookie 写入一个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -c cookies.txt www.baidu.com</span><br></pre></td></tr></table></figure>
+<h5 id="d"><a href="#d" class="headerlink" title="-d"></a>-d</h5><p>-d 参数用来发送 post 请求</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -d 'login=emma&amp;password=123' -X POST www.baidu.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">curl -d 'login=emma' -d 'password=123' -X POST www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>使用 -d 参数以后， HTTP 请求会自动加上表头 Content-Type: application/x-www-form-urlencoded。并且<br>会自动将请求转为 POST 方法，因此可以省略 -X POST。</p>
+<p>-d 参数也可以读取本地文本文件的数据，向服务器发送。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d '@data.txt' www.baidu.com</span><br></pre></td></tr></table></figure>
+<h5 id="v"><a href="#v" class="headerlink" title="-v"></a>-v</h5><p>-v 参数输出通信的整个过程，用于调试。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>– trace 参数也可以用于调试，还会输出原始的二进制数据。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --trace - www.baidu.com</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/07/08/2020/7月/URI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/08/2020/7月/URI/" itemprop="url">
+                  URI、URL、URN
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-07-08 09:00:00 / 修改时间：09:06:11" itemprop="dateCreated datePublished" datetime="2020-07-08T09:00:00+08:00">2020-07-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>Uniform Resource Identifier/统一资源标志符</p>
+<p>用来唯一标识互联网上的信息资源</p>
+<p>包括 URL 和 URN</p>
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>Uniform Resource Locator/统一资源定位器</p>
+<h3 id="URN"><a href="#URN" class="headerlink" title="URN"></a>URN</h3><p>永久统一资源定位符</p>
+<p>在资源移动之后还能被找到</p>
+<p>目前还没有非常成熟的使用方案</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/07/06/2020/7月/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/06/2020/7月/1/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-07-06 13:57:25" itemprop="dateCreated datePublished" datetime="2020-07-06T13:57:25+08:00">2020-07-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-07-10 09:34:19" itemprop="dateModified" datetime="2020-07-10T09:34:19+08:00">2020-07-10</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            function quickSort(arr) {
+  if (arr.length <= 1)="" return="" arr;="" const="" index="Math.floor(arr.length" 2);="" 如果此处使用="" midval="arr[index];" 那么将会出现无限递归的错误；="" 1);="" left="[];" right="[];" for="" (let="" i="0;" <="" arr.length;="" i++)="" {="" if="" (arr[i]="" midval)="" left.push(arr[i]);="" }="" else="" right.push(arr[i]);="" quicksort(left).concat(midval,="" quicksort(right));="" var="" test1="quickSort([2,1,3,4,1,2,5,2,7,2,10,21,8,9]);" console.log(test1);="" function="" b(arr)="" j="i" +="" 1;="" j++)=""> arr[j]) {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+  }
+
+  return arr;
+}
+
+
+function curry(fn, args = []) {
+  return function result() {
+    const rest = [...args, ...arguments];
+    if (rest.length < fn.length) {
+      return curry.call(this, fn, rest);
+    } else {
+      return fn.apply(this, rest);
+    }
+  }
+}
+
+
+
+document.getElementById('btn').onclick = function () {
+  Print('#wrap', {
+    onStart: function () {
+      console.log('onStart', new Date())
+    },
+    onEnd: function () {
+      console.log('onEnd', new Date())
+    }
+  })
+}
+
+</=>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1602,504 +2102,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/30/2020/3月/0330/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/30/2020/3月/0330/" itemprop="url">
-                  知识点
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-30 22:50:00" itemprop="dateCreated datePublished" datetime="2020-03-30T22:50:00+08:00">2020-03-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-31 08:12:41" itemprop="dateModified" datetime="2020-03-31T08:12:41+08:00">2020-03-31</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h2><h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2><p>CDN 内容分发网络，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络阻塞，提高用户访问响应效率和命中率。<br>CDN 的关键技术有内容存储和分发技术。</p>
-<h2 id="打印一个树结构的对象"><a href="#打印一个树结构的对象" class="headerlink" title="打印一个树结构的对象"></a>打印一个树结构的对象</h2><h2 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a>flex布局</h2><h2 id="js函数的4种调用方式"><a href="#js函数的4种调用方式" class="headerlink" title="js函数的4种调用方式"></a>js函数的4种调用方式</h2><ol>
-<li>作为函数直接调用</li>
-<li>作为对象的方法调用</li>
-<li>使用call、apply动态调用</li>
-<li>new命令间接调用</li>
-</ol>
-<h2 id="this的指向有哪几种情况？"><a href="#this的指向有哪几种情况？" class="headerlink" title="this的指向有哪几种情况？"></a>this的指向有哪几种情况？</h2><ol>
-<li>作为函数直接调用，非严格模式下，this指向window，严格模式下，this指向undefined</li>
-<li>作为某对象的方法调用，this指向这个对象</li>
-<li>使用apply、call、bind调用，this是第一个传递进去的值</li>
-<li>在构造函数中调用，this指向这个新创建的对象</li>
-<li>箭头函数中没有this，this在箭头函数创建时确定，它与声明所在的上下文相同。</li>
-</ol>
-<h2 id="regexp正则，讲讲贪婪模式"><a href="#regexp正则，讲讲贪婪模式" class="headerlink" title="regexp正则，讲讲贪婪模式"></a>regexp正则，讲讲贪婪模式</h2><p>正则默认是贪婪模式，默认的贪婪模式会尽可能多的匹配所搜索的字符串。</p>
-<h2 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h2><h2 id="面向对象和面向过程的区别，以及他们各自的优缺点"><a href="#面向对象和面向过程的区别，以及他们各自的优缺点" class="headerlink" title="面向对象和面向过程的区别，以及他们各自的优缺点"></a>面向对象和面向过程的区别，以及他们各自的优缺点</h2><h2 id="Css实现瀑布流"><a href="#Css实现瀑布流" class="headerlink" title="Css实现瀑布流"></a>Css实现瀑布流</h2><h2 id="Css-实现圆形进度条"><a href="#Css-实现圆形进度条" class="headerlink" title="Css 实现圆形进度条"></a>Css 实现圆形进度条</h2><h2 id="less-sass的区别"><a href="#less-sass的区别" class="headerlink" title="less sass的区别"></a>less sass的区别</h2><h2 id="链表和数组的区别"><a href="#链表和数组的区别" class="headerlink" title="链表和数组的区别"></a>链表和数组的区别</h2><h2 id="js为什么单线程"><a href="#js为什么单线程" class="headerlink" title="js为什么单线程"></a>js为什么单线程</h2><h2 id="说说-typescript-的特性，有什么好处"><a href="#说说-typescript-的特性，有什么好处" class="headerlink" title="说说 typescript 的特性，有什么好处"></a>说说 typescript 的特性，有什么好处</h2><h2 id="移动端适配怎么做"><a href="#移动端适配怎么做" class="headerlink" title="移动端适配怎么做"></a>移动端适配怎么做</h2>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/24/2020/3月/0324-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/24/2020/3月/0324-02/" itemprop="url">
-                  HTTP----HTTP缓存机制
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-24 11:00:00" itemprop="dateCreated datePublished" datetime="2020-03-24T11:00:00+08:00">2020-03-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-05-06 14:42:22" itemprop="dateModified" datetime="2020-05-06T14:42:22+08:00">2020-05-06</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTTP—-HTTP缓存机制"><a href="#HTTP—-HTTP缓存机制" class="headerlink" title="HTTP—-HTTP缓存机制"></a>HTTP—-HTTP缓存机制</h1><h2 id="缓存的规则"><a href="#缓存的规则" class="headerlink" title="缓存的规则"></a>缓存的规则</h2><p>我们知道http的缓存属于客户端缓存，后面会提到为什么属于客户端缓存。所以我们认为浏览器存在一个缓存数据库，用于储存一些不经常变化的静态文件（图片、css、js等）。我们将缓存分为强制缓存和协商缓存。</p>
-<h3 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>强缓存中，当请求再次发出时，浏览器会根据其中的 expires 和 cache-control 判断目标资源是否“命中”强缓存，若命中则直接从缓存中获取资源，<strong>不会再与服务端发生通信。</strong></p>
-<p>命中强缓存的情况下，返回的 HTTP 状态码为 200 （如下图）。</p>
-<p><img src="./images/cache.jpg" alt="avatar"></p>
-<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>又称对比缓存，客户端会先从缓存数据库中获取到一个缓存数据的标识，得到标识后请求服务端验证是否失效，如果没有失效服务端会返回304，此时客户端直接从缓存中获取所以请求的数据，如果标识失效，服务端会返回更新后的数据。</p>
-<p><strong>两类缓存机制可以同时存在，强制缓存的优先级高于协商缓存，当执行强制缓存时，如若缓存命中，则直接使用缓存数据库数据，不在进行缓存协商。</strong></p>
-<h2 id="缓存的方案"><a href="#缓存的方案" class="headerlink" title="缓存的方案"></a>缓存的方案</h2><h3 id="强制缓存-1"><a href="#强制缓存-1" class="headerlink" title="强制缓存"></a>强制缓存</h3><p>对于强制缓存，服务器响应的header中会用两个字段来表明 —– Expires和Cache-Control</p>
-<h4 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h4><p>Expires的值为服务端返回的数据到期时间。当再次请求时的请求时间小于返回的此时间，则直接使用缓存数据。但由于服务端时间和客户端时间可能有误差，这也就导致缓存命中的误差，另一方面，Expires是HTTP1.0的产物，故现在大多数使用Cache-control替代。</p>
-<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>Cache-control有很多属性，不同的属性代表的意义也不同。<br>private：客户端可以缓存<br>public：客户端和代理服务器都可以缓存<br>max-age：缓存内容将在t秒后失效<br>no-cache：需要使用协商缓存来验证数据<br>no-store：所有内容都不会缓存</p>
-<h3 id="协商缓存-1"><a href="#协商缓存-1" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>协商缓存依赖于服务端与浏览器之间的通信。</p>
-<p>协商缓存机制下，浏览器需要向服务器去询问缓存的相关信息，进而判断是重新发起请求、下载完整的响应，还是从本地获取缓存的资源。</p>
-<p>如果服务端提示缓存资源未改动（Not Modified），资源会被重定向到浏览器缓存，这种情况下网络请求对应的状态码是 304（如下图）。</p>
-<p><img src="./images/304.jpg" alt="avatar"></p>
-<h4 id="协商缓存的实-从-Last-midified-到-Etag"><a href="#协商缓存的实-从-Last-midified-到-Etag" class="headerlink" title="协商缓存的实: 从 Last-midified 到 Etag"></a>协商缓存的实: 从 Last-midified 到 Etag</h4><p>Last-Modified 是一个时间戳，如果我们启用了协商缓存，它会在首次请求时随着 Response Headers 返回：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Last-Modified: Fri, 27 Oct 2020 06:35:57 GMT</span><br></pre></td></tr></table></figure>
-<p>随后我们每次请求时，会带上一个叫 If-Modified-Since 的时间戳字段，它的值正是上一次 response 返回给它的 last-modified 值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Modified-Since: Fri, 27 Oct 2020 06:35:57 GMT</span><br></pre></td></tr></table></figure>
-<p>服务器接收到这个时间戳后，会比对该时间戳和资源在服务器上的最后修改时间是否一致，从而判断资源是否发生了变化。如果发生了变化，就会返回一个完整的响应内容，并在 Response Headers 中添加新的 Last-Modified 值；否则，返回如上图的 304 响应，Response Headers 不会再添加 Last-Modified 字段。</p>
-<p>使用 Last-Modified 存在一些弊端，这其中最常见的就是这样两个场景：</p>
-<ul>
-<li><p>我们编辑了文件，但文件的内容没有改变。服务端并不清楚我们是否真正改变了文件，它仍然通过最后编辑时间进行判断。因此这个资源在再次被请求时，会被当做新资源，进而引发一次完整的响应——不该重新请求的时候，也会重新请求。</p>
-</li>
-<li><p>当我们修改文件的速度过快时（比如花了 100ms 完成了改动），由于 If-Modified-Since 只能检查到以秒为最小计量单位的时间差，所以它是感知不到这个改动的——该重新请求的时候，反而没有重新请求了。</p>
-</li>
-</ul>
-<p>这两个场景其实指向了同一个 bug ——服务器并没有正确感知文件的变化。为了解决这样的问题， Etag 作为 Last-Modified 的补充出现了。</p>
-<p>Etag: 是由服务器为每个资源生成的唯一的标识字符串，这个标识字符串是基于文件内容编码的，只要文件内容不同，它们对应的 Etag 就是不同的，反之亦然。因此 Etag 能够精准地感知文件的变化。</p>
-<p>Etag 和 Last-Modified 类似，当首次请求时，我们会在响应头里获取到一个最初的标识符字符串，举个🌰，它可以是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETag: W/&quot;wa3b-1231452&quot;</span><br></pre></td></tr></table></figure>
-<p>那么下一次请求时，请求头里就会带上一个值相同的、名为 if-None-Match 的字符串供服务端比对了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-None-Match: W/&quot;wa3b-1231452&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="缓存的优点"><a href="#缓存的优点" class="headerlink" title="缓存的优点"></a>缓存的优点</h2><ol>
-<li>减少了冗余的数据传递，节省宽带流量</li>
-<li>减少了服务器的负担，大大提高了网站性能</li>
-<li>加快了客户端加载网页的速度</li>
-</ol>
-<h2 id="不同刷新的请求执行过程"><a href="#不同刷新的请求执行过程" class="headerlink" title="不同刷新的请求执行过程"></a>不同刷新的请求执行过程</h2><ol>
-<li>浏览器地址栏写入URL，回车，浏览器发现缓存中有这个文件了，不用继续请求了，直接去缓存拿。（最快）</li>
-<li>F5刷新，别偷懒好歹去服务器看看这个文件是否过期了。于是浏览器就在请求上带上一个if-modify-since。</li>
-<li>Ctrl+F5告诉浏览器，你先把你缓存中的这个文件给我删了，然后再去服务器请求个完整的资源文件下来。于是客户端完成了强行更新的操作。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/24/2020/3月/0324-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/24/2020/3月/0324-01/" itemprop="url">
-                  css常见布局
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-24 09:45:00 / 修改时间：09:47:46" itemprop="dateCreated datePublished" datetime="2020-03-24T09:45:00+08:00">2020-03-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="双飞燕布局"><a href="#双飞燕布局" class="headerlink" title="双飞燕布局"></a>双飞燕布局</h2><h2 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span>圣杯布局<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span>main<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>left<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>right<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span>footer<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2151,7 +2153,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2186,7 +2188,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2751,5 +2755,8 @@
 
   
 
-</body>
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
