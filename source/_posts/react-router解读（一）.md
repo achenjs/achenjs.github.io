@@ -5,8 +5,10 @@ tags: react
 ---
 
 ### 前言
+
 前端路由是通过改变URL，在不重新请求页面的情况下，更新页面视图。
 目前在浏览器环境中这一功能的实现主要有2种:
+
 * 利用URL中的hash
 * 利用H5中history
 
@@ -60,5 +62,4 @@ history.replaceState 方法的参数与 pushState 方法一模一样，区别是
 
     history.go(2)
     // url显示为http://example.com/example.html?page=3
-
 </pre>
