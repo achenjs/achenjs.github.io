@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="说说你对JS模块化的理解模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。 那么模块化的好处也就显然易见了  解决命名冲突 依赖管理 代码更加可读 提高复用性  js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化 123456789101112131415var myModule = (function(window) &amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-14T10:42:28.957Z">
+<meta property="og:updated_time" content="2020-07-27T02:26:24.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面经">
 <meta name="twitter:description" content="说说你对JS模块化的理解模块化就是将一个大的功能拆分为多个块，每一个块都是独立的，你不需要去担心污染全局变量，命名冲突什么的。 那么模块化的好处也就显然易见了  解决命名冲突 依赖管理 代码更加可读 提高复用性  js设计之初并没有模块化的概念，所以原始时代只能通过自执行函数来设计模块化 123456789101112131415var myModule = (function(window) &amp;">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">48</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-14 18:42:28" itemprop="dateModified" datetime="2020-05-14T18:42:28+08:00">2020-05-14</time>
+                <time title="修改时间：2020-07-27 10:26:24" itemprop="dateModified" datetime="2020-07-27T10:26:24+08:00">2020-07-27</time>
               
             
           </span>
@@ -484,13 +484,13 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>并且这个属性的值是一个对象（也就是原型），只有一个属性constructor</p>
 <ul>
-<li><p>constructor<br>constructor 是一个公有且不可枚举的tag_release_20200514_003属性。一旦我们改变了函数的prototype，那么新对象就没有这个属性了（当然可以通过原型链取到constructor）</p>
+<li><p>constructor<br>constructor 是一个公有且不可枚举的属性。一旦我们改变了函数的prototype，那么新对象就没有这个属性了（当然可以通过原型链取到constructor）</p>
 </li>
 <li><p>__proto__<br>这是每个对象都有的隐式原型属性，指向了创建该对象的构造函数的原型。其实这个属性指向了 [[prototype]]，但是 [[prototype]] 是内部属性，我们并不能访问到，所以使用 __proto__ 来访问。</p>
 </li>
 </ul>
 <p>**实例对象的 __proto__ 如何产生的</p>
-<p>当我们使用 new 操作符时，生成的实例对象拥有了 <em>proto</em>属性。</p>
+<p>当我们使用 new 操作符时，生成的实例对象拥有了 __proto__ 属性。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125; <span class="comment">//  这个函数是 Function的实例对象</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  纯对象的原型</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125;.__proto__); <span class="comment">// &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stu = <span class="keyword">new</span> Student(<span class="string">'wang'</span>);</span><br><span class="line"><span class="comment">//  Student 类型实例的原型，默认也是一个对象</span></span><br><span class="line"><span class="built_in">console</span>.log(stu.__proto__); <span class="comment">//  &#123; constructor: f &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(stu.__proto__.constructor); <span class="comment">//  Student(name, age) &#123; this.name = name &#125;</span></span><br></pre></td></tr></table></figure>
 <h4 id="new做了什么，new的模拟实现"><a href="#new做了什么，new的模拟实现" class="headerlink" title="new做了什么，new的模拟实现"></a>new做了什么，new的模拟实现</h4><ol>
@@ -635,7 +635,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -672,7 +672,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -742,7 +744,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

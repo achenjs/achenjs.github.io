@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="achen的个人博客">
 <meta property="og:description" content="js 为什么是单线程？线程：是操作系统能够进行运算调度的最小单位。单线程：（上面有说：一条线程指的是进程中一个单一顺序的控制流）就是在进程中只有一条线程，在程序执行时，所走的程序路径按照连续顺序排下来，前面的必须处理好，后面的才会执行。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-13T09:33:57.720Z">
+<meta property="og:updated_time" content="2020-07-27T02:28:55.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识点">
 <meta name="twitter:description" content="js 为什么是单线程？线程：是操作系统能够进行运算调度的最小单位。单线程：（上面有说：一条线程指的是进程中一个单一顺序的控制流）就是在进程中只有一条线程，在程序执行时，所走的程序路径按照连续顺序排下来，前面的必须处理好，后面的才会执行。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同">
@@ -237,7 +237,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">48</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
   </li>
         
         
@@ -386,7 +386,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-13 17:33:57" itemprop="dateModified" datetime="2020-05-13T17:33:57+08:00">2020-05-13</time>
+                <time title="修改时间：2020-07-27 10:28:55" itemprop="dateModified" datetime="2020-07-27T10:28:55+08:00">2020-07-27</time>
               
             
           </span>
@@ -488,7 +488,37 @@
 <h2 id="什么是作用域链"><a href="#什么是作用域链" class="headerlink" title="什么是作用域链?"></a>什么是作用域链?</h2><p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。</p>
 <p><strong>什么是作用域</strong></p>
 <p>变量的作用域分为两种：全局变量和局部变量。<br>1、全局作用域： 最外层函数定义的变量拥有全局作用域，即对任何内部函数来说，都是可以访问的；<br>2、局部作用域： 局部作用域一般只在固定的代码片段内可访问到，而对于函数外部是无法访问的，最常见的例如函数内部。</p>
-<h2 id="webpack-优化-webpack4-与-webpack3-的区别"><a href="#webpack-优化-webpack4-与-webpack3-的区别" class="headerlink" title="webpack 优化, webpack4 与 webpack3 的区别"></a>webpack 优化, webpack4 与 webpack3 的区别</h2>
+<h2 id="webpack-优化-webpack4-与-webpack3-的区别"><a href="#webpack-优化-webpack4-与-webpack3-的区别" class="headerlink" title="webpack 优化, webpack4 与 webpack3 的区别"></a>webpack 优化, webpack4 与 webpack3 的区别</h2><ol>
+<li>mode</li>
+</ol>
+<p>webpack4 新增了mode配置，只有两种值 development | production。</p>
+<ol start="2">
+<li>CommonsChunkPlugin</li>
+</ol>
+<p>webpack.optimize.CommonsChunkPlugin 已经从 webpack4 移除。 可使用 optimization.splitChunks 进行模块划分（提取公用代码）。</p>
+<ol start="3">
+<li>mini-css-extract-plugin（css文件提取）</li>
+</ol>
+<p>移除了 extract-text-webpack-plugin 配置，增加 mini-css-extract-plugin 配置。</p>
+<ol start="4">
+<li><p>babel 使用新的命名空间 @babel</p>
+</li>
+<li><p>UglifyJsPlugin</p>
+</li>
+</ol>
+<p>移除 UglifyJsPlugin，采用 TerserPlugin。</p>
+<ol start="6">
+<li>移除 loaders，必须使用 rules</li>
+</ol>
+<p>webpack4之前，loaders 跟 rulrs 是可以一起使用的。</p>
+<ol start="7">
+<li>支持 es6 方式引入文件</li>
+</ol>
+<p>import a from ‘a.js’;</p>
+<ol start="8">
+<li>升级 Happypack 插件进行多线程加速打包</li>
+</ol>
+
       
     </div>
 
@@ -607,7 +637,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -644,7 +674,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -714,7 +746,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

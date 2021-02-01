@@ -236,7 +236,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">48</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">49</span></a>
   </li>
         
         
@@ -326,7 +326,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/07/08/2020/7月/curl/">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/09/07/2020/9月/webpack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="achen">
@@ -345,8 +345,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/08/2020/7月/curl/" itemprop="url">
-                  curl
+                <a class="post-title-link" href="/2020/09/07/2020/9月/webpack/" itemprop="url">
+                  你真的理解 Webpack?
                 </a>
               
             
@@ -372,7 +372,7 @@
                 
               
 
-              <time title="创建时间：2020-07-08 09:00:00" itemprop="dateCreated datePublished" datetime="2020-07-08T09:00:00+08:00">2020-07-08</time>
+              <time title="创建时间：2020-09-07 10:30:00" itemprop="dateCreated datePublished" datetime="2020-09-07T10:30:00+08:00">2020-09-07</time>
             
 
             
@@ -389,7 +389,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-09 14:15:57" itemprop="dateModified" datetime="2020-07-09T14:15:57+08:00">2020-07-09</time>
+                <time title="修改时间：2020-09-10 17:48:27" itemprop="dateModified" datetime="2020-09-10T17:48:27+08:00">2020-09-10</time>
               
             
           </span>
@@ -424,24 +424,67 @@
       
         
           
-            <p>curl 是一个命令行工具，用来请求 web 服务器。它的名字就是客户端（client）的 URL 工具的意思。</p>
-<p>不带有任何参数时，curl 就是发出 get 请求。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl www.baidu.com</span><br></pre></td></tr></table></figure>
-<p>上面的命令向 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 发出 get 请求，服务器返回的内容会在命令行输出。</p>
-<h5 id="b"><a href="#b" class="headerlink" title="-b"></a>-b</h5><p>-b 参数用来向服务器发送 cookie</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -b 'foo=bar' www.baidu.com</span><br></pre></td></tr></table></figure>
-<h5 id="c"><a href="#c" class="headerlink" title="-c"></a>-c</h5><p>-c 参数将服务器设置的 cookie 写入一个文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -c cookies.txt www.baidu.com</span><br></pre></td></tr></table></figure>
-<h5 id="d"><a href="#d" class="headerlink" title="-d"></a>-d</h5><p>-d 参数用来发送 post 请求</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -d 'login=emma&amp;password=123' -X POST www.baidu.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">curl -d 'login=emma' -d 'password=123' -X POST www.baidu.com</span><br></pre></td></tr></table></figure>
-<p>使用 -d 参数以后， HTTP 请求会自动加上表头 Content-Type: application/x-www-form-urlencoded。并且<br>会自动将请求转为 POST 方法，因此可以省略 -X POST。</p>
-<p>-d 参数也可以读取本地文本文件的数据，向服务器发送。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d '@data.txt' www.baidu.com</span><br></pre></td></tr></table></figure>
-<h5 id="v"><a href="#v" class="headerlink" title="-v"></a>-v</h5><p>-v 参数输出通信的整个过程，用于调试。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v www.baidu.com</span><br></pre></td></tr></table></figure>
-<p>– trace 参数也可以用于调试，还会输出原始的二进制数据。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --trace - www.baidu.com</span><br></pre></td></tr></table></figure>
-
+            <h4 id="webpack-实战"><a href="#webpack-实战" class="headerlink" title="webpack 实战"></a>webpack 实战</h4><h5 id="1-与-Webpack-类似的工具还有哪些"><a href="#1-与-Webpack-类似的工具还有哪些" class="headerlink" title="1. 与 Webpack 类似的工具还有哪些"></a>1. 与 Webpack 类似的工具还有哪些</h5><ul>
+<li>webpack</li>
+</ul>
+<blockquote>
+<p>适用于大型复杂的前端站点构建</p>
+</blockquote>
+<ul>
+<li>[<a href="https://rollupjs.org/]rollup" target="_blank" rel="noopener">https://rollupjs.org/]rollup</a></li>
+</ul>
+<blockquote>
+<p>rollup适用于基础库的打包，如vue、react</p>
+</blockquote>
+<ul>
+<li>[<a href="https://parceljs.org/]parcel" target="_blank" rel="noopener">https://parceljs.org/]parcel</a></li>
+</ul>
+<blockquote>
+<p>parcel适用于简单的实验性项目，他可以满足低门槛的快速看到效果parcel</p>
+</blockquote>
+<h5 id="2-谈谈你为什么选择使用或放弃-webpack"><a href="#2-谈谈你为什么选择使用或放弃-webpack" class="headerlink" title="2. 谈谈你为什么选择使用或放弃 webpack"></a>2. 谈谈你为什么选择使用或放弃 webpack</h5><h5 id="3-Loader-和-Plugin-的不同"><a href="#3-Loader-和-Plugin-的不同" class="headerlink" title="3. Loader 和 Plugin 的不同"></a>3. Loader 和 Plugin 的不同</h5><h6 id="不同的作用"><a href="#不同的作用" class="headerlink" title="不同的作用"></a>不同的作用</h6><ul>
+<li><p>Loader 直译为”加载器”。webpack 将一切文件视为模块, 但是 webpack 原生是只能解析 js 文件, 如果想将其他文件也打包的话, 就会用到 loader。<br>所以 loader 的作用是让 webpack 拥有加载和解析非 JavaScript 文件的能力。</p>
+</li>
+<li><p>Plugin 直译为”插件”。 Plugin 可以扩展 webpack 的功能, 让 webpack 具有更多的灵活性。在 webpack 运行的生命周期中会广播出许多事件, Plugin 可以<br>监听这些事件, 在合适的时机</p>
+</li>
+</ul>
+<h6 id="不同的用法"><a href="#不同的用法" class="headerlink" title="不同的用法"></a>不同的用法</h6><ul>
+<li><p>Loader 在 module.rules 中配置, 也就是说他作为模块的解析规则而存在。类型为数组, 每一项都是一个 Object, 里面描述了对于什么类型的文件(test), 使用什么<br>加载(loader)和使用的参数(options)。</p>
+</li>
+<li><p>Plugin 在 Plugins 中单独配置。类型为数组, 每一项是一个 Plugin 的实例, 参数都通过构造函数传入。</p>
+</li>
+</ul>
+<h5 id="4-有哪些常见的-Loader？他们能解决什么问题？"><a href="#4-有哪些常见的-Loader？他们能解决什么问题？" class="headerlink" title="4. 有哪些常见的 Loader？他们能解决什么问题？"></a>4. 有哪些常见的 Loader？他们能解决什么问题？</h5><ul>
+<li>file-loader: 把文件输出到一个文件夹中, 在代码中通过相对 URL 去引用输出的文件</li>
+<li>url-loader: 和 file-loader 类似, 但是能在文件很小的情况下以 base64 的方式把文件内容注入到代码中去</li>
+<li>source-map-loader: 加载额外的 Source Map 文件, 以方便断点调试</li>
+<li>image-loader: 加载并且压缩图片文件</li>
+<li>babel-loader: 把 ES6 转换成 ES5</li>
+<li>css-loader: 加载 CSS, 支持模块化、压缩、文件导入等特性</li>
+<li>style-loader: 把 CSS 代码注入到 JavaScript 中, 通过 DOM 操作去加载 CSS</li>
+<li>eslint-loader: 通过 ESLint 检查 JavaScript 代码</li>
+</ul>
+<h5 id="5-有哪些常见的-Plugin？他们能解决什么问题？"><a href="#5-有哪些常见的-Plugin？他们能解决什么问题？" class="headerlink" title="5. 有哪些常见的 Plugin？他们能解决什么问题？"></a>5. 有哪些常见的 Plugin？他们能解决什么问题？</h5><ul>
+<li>define-plugin: 定义环境变量</li>
+<li>uglifujs-webpack-plugin: 通过 UglifyES 压缩 ES6 代码</li>
+<li>commons-chunk-plugin: 提取公共代码</li>
+</ul>
+<h5 id="6-如何利用-Webpack-来优化前端性能"><a href="#6-如何利用-Webpack-来优化前端性能" class="headerlink" title="6. 如何利用 Webpack 来优化前端性能"></a>6. 如何利用 Webpack 来优化前端性能</h5><p>用 webpack 优化前端性能是指优化 webpack 的输出结果, 让打包的最终结果在浏览器运行快速高效。</p>
+<ul>
+<li>压缩代码。</li>
+<li>利用 CDN 加速。</li>
+<li>删除多余代码(Tree Shaking)。</li>
+<li>提取公共代码。</li>
+</ul>
+<h5 id="7-如何提高-Webpack-的构建速度"><a href="#7-如何提高-Webpack-的构建速度" class="headerlink" title="7. 如何提高 Webpack 的构建速度?"></a>7. 如何提高 Webpack 的构建速度?</h5><ul>
+<li>多入口情况下, 使用 CommonsChunkPlugin 来提取公共代码。</li>
+<li>通过 externals 配置来提取常用库</li>
+<li>利用 DllPlugin 和 DllReferencePlugin 预编译资源模块 通过 Dll来对那些我们引用但是绝对不会修改的 npm 包来<br>进行预编译, 再通过 DllReferencePlugin 将预编译的模块加载进来。</li>
+<li>使用 HappyPack 实现多线程加速编译。</li>
+<li>使用 webpack-uglify-parallel 来提升 uglifyPlugin 的压缩速度。原理上 webpack-uglify-parallel 采用了多核并行<br>压缩来提升压缩速度。</li>
+<li>使用 Tree-shaking 和 Scope Hoisting 来剔除多余代码。</li>
+</ul>
+<h5 id="8-如何对-bundle-体积进行监控和分析"><a href="#8-如何对-bundle-体积进行监控和分析" class="headerlink" title="8. 如何对 bundle 体积进行监控和分析?"></a>8. 如何对 bundle 体积进行监控和分析?</h5><h5 id="9-怎么配置单页应用？怎么配置多页应用？"><a href="#9-怎么配置单页应用？怎么配置多页应用？" class="headerlink" title="9. 怎么配置单页应用？怎么配置多页应用？"></a>9. 怎么配置单页应用？怎么配置多页应用？</h5><h5 id="10-如何在-Vue-和-React-项目中实现按需加载？"><a href="#10-如何在-Vue-和-React-项目中实现按需加载？" class="headerlink" title="10. 如何在 Vue 和 React 项目中实现按需加载？"></a>10. 如何在 Vue 和 React 项目中实现按需加载？</h5><h5 id="11-monorepo-这种项目有什么好处，具体是如何打包的？"><a href="#11-monorepo-这种项目有什么好处，具体是如何打包的？" class="headerlink" title="11. monorepo 这种项目有什么好处，具体是如何打包的？"></a>11. monorepo 这种项目有什么好处，具体是如何打包的？</h5><h5 id="12-Source-Map-是什么？生产环境怎么用？"><a href="#12-Source-Map-是什么？生产环境怎么用？" class="headerlink" title="12. Source Map 是什么？生产环境怎么用？"></a>12. Source Map 是什么？生产环境怎么用？</h5><h5 id="13-什么是长缓存？"><a href="#13-什么是长缓存？" class="headerlink" title="13. 什么是长缓存？"></a>13. 什么是长缓存？</h5><h5 id="14-在-Webpack-中如何做到长缓存优化？"><a href="#14-在-Webpack-中如何做到长缓存优化？" class="headerlink" title="14. 在 Webpack 中如何做到长缓存优化？"></a>14. 在 Webpack 中如何做到长缓存优化？</h5><h5 id="15-Webpack-中-hashchunkhashcontenthash-有什么区别？"><a href="#15-Webpack-中-hashchunkhashcontenthash-有什么区别？" class="headerlink" title="15. Webpack 中 hashchunkhashcontenthash 有什么区别？"></a>15. Webpack 中 hashchunkhashcontenthash 有什么区别？</h5><h4 id="Webpack-原理"><a href="#Webpack-原理" class="headerlink" title="Webpack 原理"></a>Webpack 原理</h4><h5 id="1-Webpack-的构建流程是什么？"><a href="#1-Webpack-的构建流程是什么？" class="headerlink" title="1. Webpack 的构建流程是什么？"></a>1. Webpack 的构建流程是什么？</h5><h5 id="2-是否写过-Loader-描述一下编写-Loader-的思路？"><a href="#2-是否写过-Loader-描述一下编写-Loader-的思路？" class="headerlink" title="2. 是否写过 Loader ?描述一下编写 Loader 的思路？"></a>2. 是否写过 Loader ?描述一下编写 Loader 的思路？</h5><h5 id="3-是否写过-Plugin-描述一下编写-Plugin-的思路？"><a href="#3-是否写过-Plugin-描述一下编写-Plugin-的思路？" class="headerlink" title="3. 是否写过 Plugin ?描述一下编写 Plugin 的思路？"></a>3. 是否写过 Plugin ?描述一下编写 Plugin 的思路？</h5><h5 id="4-inlineprepostnormalloader-执行先后顺序是？"><a href="#4-inlineprepostnormalloader-执行先后顺序是？" class="headerlink" title="4. inlineprepostnormalloader 执行先后顺序是？"></a>4. inlineprepostnormalloader 执行先后顺序是？</h5><h5 id="5-Webpack-打包的原理是什么？聊一聊-babel-和抽象语法树"><a href="#5-Webpack-打包的原理是什么？聊一聊-babel-和抽象语法树" class="headerlink" title="5. Webpack 打包的原理是什么？聊一聊 babel 和抽象语法树"></a>5. Webpack 打包的原理是什么？聊一聊 babel 和抽象语法树</h5><h5 id="6-dev-server-的原理是什么？描述一下它的具体流程"><a href="#6-dev-server-的原理是什么？描述一下它的具体流程" class="headerlink" title="6. dev-server 的原理是什么？描述一下它的具体流程"></a>6. dev-server 的原理是什么？描述一下它的具体流程</h5><h5 id="7-请说一下-DIlPlugin-和-DllReferencePlugin-的工作原理"><a href="#7-请说一下-DIlPlugin-和-DllReferencePlugin-的工作原理" class="headerlink" title="7. 请说一下 DIlPlugin 和 DllReferencePlugin 的工作原理"></a>7. 请说一下 DIlPlugin 和 DllReferencePlugin 的工作原理</h5><h5 id="8-Webpack-的热更新是如何做到的？说明其原理？"><a href="#8-Webpack-的热更新是如何做到的？说明其原理？" class="headerlink" title="8. Webpack 的热更新是如何做到的？说明其原理？"></a>8. Webpack 的热更新是如何做到的？说明其原理？</h5><h5 id="9-Tree-shaking了解过么？它的实现原理说一下"><a href="#9-Tree-shaking了解过么？它的实现原理说一下" class="headerlink" title="9. Tree shaking了解过么？它的实现原理说一下"></a>9. Tree shaking了解过么？它的实现原理说一下</h5><h4 id="Webpack-5"><a href="#Webpack-5" class="headerlink" title="Webpack 5"></a>Webpack 5</h4><h5 id="1-Webpack-5-中有哪些新特性"><a href="#1-Webpack-5-中有哪些新特性" class="headerlink" title="1. Webpack 5 中有哪些新特性"></a>1. Webpack 5 中有哪些新特性</h5><h5 id="2-Webpack-5-中的-Module-Federation-对微前端的意义"><a href="#2-Webpack-5-中的-Module-Federation-对微前端的意义" class="headerlink" title="2. Webpack 5 中的 Module Federation 对微前端的意义"></a>2. Webpack 5 中的 Module Federation 对微前端的意义</h5>
           
         
       
@@ -587,6 +630,174 @@
 <h3 id="URN"><a href="#URN" class="headerlink" title="URN"></a>URN</h3><p>永久统一资源定位符</p>
 <p>在资源移动之后还能被找到</p>
 <p>目前还没有非常成熟的使用方案</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/07/08/2020/7月/curl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="achen">
+      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="achen的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/08/2020/7月/curl/" itemprop="url">
+                  curl
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-07-08 09:00:00" itemprop="dateCreated datePublished" datetime="2020-07-08T09:00:00+08:00">2020-07-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-07-09 14:15:57" itemprop="dateModified" datetime="2020-07-09T14:15:57+08:00">2020-07-09</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>curl 是一个命令行工具，用来请求 web 服务器。它的名字就是客户端（client）的 URL 工具的意思。</p>
+<p>不带有任何参数时，curl 就是发出 get 请求。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>上面的命令向 <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 发出 get 请求，服务器返回的内容会在命令行输出。</p>
+<h5 id="b"><a href="#b" class="headerlink" title="-b"></a>-b</h5><p>-b 参数用来向服务器发送 cookie</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -b 'foo=bar' www.baidu.com</span><br></pre></td></tr></table></figure>
+<h5 id="c"><a href="#c" class="headerlink" title="-c"></a>-c</h5><p>-c 参数将服务器设置的 cookie 写入一个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -c cookies.txt www.baidu.com</span><br></pre></td></tr></table></figure>
+<h5 id="d"><a href="#d" class="headerlink" title="-d"></a>-d</h5><p>-d 参数用来发送 post 请求</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -d 'login=emma&amp;password=123' -X POST www.baidu.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">curl -d 'login=emma' -d 'password=123' -X POST www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>使用 -d 参数以后， HTTP 请求会自动加上表头 Content-Type: application/x-www-form-urlencoded。并且<br>会自动将请求转为 POST 方法，因此可以省略 -X POST。</p>
+<p>-d 参数也可以读取本地文本文件的数据，向服务器发送。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d '@data.txt' www.baidu.com</span><br></pre></td></tr></table></figure>
+<h5 id="v"><a href="#v" class="headerlink" title="-v"></a>-v</h5><p>-v 参数输出通信的整个过程，用于调试。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v www.baidu.com</span><br></pre></td></tr></table></figure>
+<p>– trace 参数也可以用于调试，还会输出原始的二进制数据。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --trace - www.baidu.com</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1723,7 +1934,7 @@ document.getElementById('btn').onclick = function () {
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-13 17:33:57" itemprop="dateModified" datetime="2020-05-13T17:33:57+08:00">2020-05-13</time>
+                <time title="修改时间：2020-07-27 10:28:55" itemprop="dateModified" datetime="2020-07-27T10:28:55+08:00">2020-07-27</time>
               
             
           </span>
@@ -1819,251 +2030,36 @@ document.getElementById('btn').onclick = function () {
 <h2 id="什么是作用域链"><a href="#什么是作用域链" class="headerlink" title="什么是作用域链?"></a>什么是作用域链?</h2><p>当代码在一个环境中执行时，会创建变量对象的一个作用域链。</p>
 <p><strong>什么是作用域</strong></p>
 <p>变量的作用域分为两种：全局变量和局部变量。<br>1、全局作用域： 最外层函数定义的变量拥有全局作用域，即对任何内部函数来说，都是可以访问的；<br>2、局部作用域： 局部作用域一般只在固定的代码片段内可访问到，而对于函数外部是无法访问的，最常见的例如函数内部。</p>
-<h2 id="webpack-优化-webpack4-与-webpack3-的区别"><a href="#webpack-优化-webpack4-与-webpack3-的区别" class="headerlink" title="webpack 优化, webpack4 与 webpack3 的区别"></a>webpack 优化, webpack4 与 webpack3 的区别</h2>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://achenjs.github.io/2020/03/31/2020/3月/0331/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="achen">
-      <meta itemprop="description" content="日常复制粘贴,问啥啥不会">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="achen的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/31/2020/3月/0331/" itemprop="url">
-                  知识点
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-31 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-31T00:00:00+08:00">2020-03-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-04-12 22:24:00" itemprop="dateModified" datetime="2020-04-12T22:24:00+08:00">2020-04-12</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染"><a href="#React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染" class="headerlink" title="React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染"></a>React实现一个场景，渲染多张图片，保证图片的底部尽量是对齐的，然后滚动条拉到底，在请求图片再次渲染</h2><h2 id="React-中-key-的用法，常用使用场景"><a href="#React-中-key-的用法，常用使用场景" class="headerlink" title="React 中 key 的用法，常用使用场景"></a>React 中 key 的用法，常用使用场景</h2><p><strong>key的概念</strong></p>
-<p>react 中的 key 属性是一个特殊的属性，它的出现不是给开发者用的，而是给 react 自身用的。<br>简单的来说，react 利用 key 来识别组件，他是一种身份标识，就像每个人的身份证一样。每个 key 对应一个组件，相同的 key, react 会认为是同一个组件，这样后续相同的 key 对应的组件都不会被创建。(经测试，16版本之后key重复也会渲染出来？)</p>
-<p><strong>key的使用场景</strong></p>
-<p>在项目开发中，key属性的使用场景最多的还是由数组动态创建的子组件情况，需要为每个子组件添加唯一的key属性值。那有的人会自然而然想到，key 和动态渲染的子元素获取的index的值很接近，是不是我们可以直接使用index值 赋值给key呢？</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  data.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> (</span><br><span class="line">    &lt;div key=&#123;index&#125;&gt;item.name&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  ))</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>在尝试后我们发现报错没了，渲染也没问题。但是这里我们强烈不推荐使用数组的index 值来作为key。<br>如果数据更新仅仅是数组重新排序或在其中间位置插入新元素，那么所有元素都将重新渲染。</p>
-<p>例如：<br>本来index=2 的元素向前移动后，那该元素的key 不也同样发生了改变，那这样改变，key 就没有任何存在的意义了，既然是作为身份证一样的存在，那就不容有失，当然，在你用key值创建子组件的时候，若数组的内容只是作为纯展示，而不涉及到数组的动态变更，其实是可以使用index 作为key的，</p>
-<p><strong>key的值必须保证唯一且稳定</strong></p>
-<p>我们在与key值打过几次交到以后，感觉key值就类似于数据库中的主键id一样，有且唯一。</p>
-<h2 id="React如何处理更新"><a href="#React如何处理更新" class="headerlink" title="React如何处理更新"></a>React如何处理更新</h2><h2 id="React-内部-setState-是如何批处理的"><a href="#React-内部-setState-是如何批处理的" class="headerlink" title="React 内部 setState 是如何批处理的"></a>React 内部 setState 是如何批处理的</h2><p>setState 的批量更新按照先进先出的原则，顺序更新。</p>
-<ol>
-<li>在 react 的 event handler 内部同步的多次 setState 会被 batch 为一次更新</li>
-<li>在一个异步的事件循环里面多次 setState，react 不会 batch</li>
-<li>可以使用React.unstable_batchedUpdates 来强制 batch</li>
+<h2 id="webpack-优化-webpack4-与-webpack3-的区别"><a href="#webpack-优化-webpack4-与-webpack3-的区别" class="headerlink" title="webpack 优化, webpack4 与 webpack3 的区别"></a>webpack 优化, webpack4 与 webpack3 的区别</h2><ol>
+<li>mode</li>
 </ol>
-<p><strong>为什么在 setTimeout 中多次 setState，react 不会 batch？</strong></p>
-<p>因为 React 的更新是基于 Transaction（事务）的，Transacation 就是给目标执行的函数包裹一下，加上前置和后置的 hook （有点类似 koa 的 middleware），在开始执行之前先执行 initialize hook，结束之后再执行 close hook，这样搭配上 isBatchingUpdates 这样的布尔标志位就可以实现一整个函数调用栈内的多次 setState 全部入 pending 队列，结束后统一 apply 了。</p>
-<p>但是 setTimeout 这样的方法执行是脱离了事务的，react 管控不到，所以就没法 batch 了。 React没有控制权的函数 setTimeout</p>
-<p><strong>为什么 react 要这么设计？</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;() =&gt; setCount(count + <span class="number">1</span>)&#125;&gt;</span><br><span class="line">      Parent clicked &#123;count&#125; times</span><br><span class="line">      &lt;Child /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">function Child() &#123;</span></span><br><span class="line"><span class="regexp">  let [count, setCount] = useState(0);</span></span><br><span class="line"><span class="regexp">  return (</span></span><br><span class="line"><span class="regexp">    &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span></span><br><span class="line"><span class="regexp">      Child clicked &#123;count&#125; times</span></span><br><span class="line"><span class="regexp">    &lt;/</span>button&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这样的 demo，由于点击事件冒泡的缘故，我们假设如果 react 不 batch 立即更新的话，那么点了 child button 之后的逻辑会是如下这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">*** 进入 react click 的事件函数 ***</span><br><span class="line">Child (onClick) 触发点击</span><br><span class="line">  - setState 修改 state</span><br><span class="line">  - re-render Child 重新渲染 // 😞 不必要的</span><br><span class="line">Parent (onClick) 触发点击（冒泡）</span><br><span class="line">  - setState 修改 state</span><br><span class="line">  - re-render Parent 重新渲染</span><br><span class="line">  - re-render Child 重新渲染 （渲染是自顶向下的，父亲更新会导致儿子更新）</span><br><span class="line">*** 退出 react click 的事件函数  ***</span><br></pre></td></tr></table></figure>
-<p>从上面可以看出，第一次子组件的重新渲染完全是浪费的。</p>
-<p>所以 React 设计成 setState 不立即触发重新渲染，而是先执行完所有的 event handler，然后用一次重新渲染完成所有更新。</p>
-<p><strong>forceUpdate的说明</strong></p>
-<p>forceUpdate 从函数名上理解：“强制更新”。</p>
-<ol>
-<li>forceUpdate 是同步的吗？“强制”会保证调用然后直接dom-diff吗？</li>
-</ol>
-<p>forceUpdate在批量与否的表现上，和setState是一样的。在React有控制权的函数里，是批量的。</p>
+<p>webpack4 新增了mode配置，只有两种值 development | production。</p>
 <ol start="2">
-<li>“强制”更新整个组件树吗？包括自己，子孙后代组件吗？</li>
+<li>CommonsChunkPlugin</li>
 </ol>
-<p>forceUpdate只会强制本身组件的更新，即不调用“shouldComponentUpdate”直接更新，对于子孙后代组件还是要调用自己的“shouldComponentUpdate”来决定的。</p>
-<h2 id="React15如何去优化"><a href="#React15如何去优化" class="headerlink" title="React15如何去优化"></a>React15如何去优化</h2><h2 id="useCallback-useMemo的区别"><a href="#useCallback-useMemo的区别" class="headerlink" title="useCallback useMemo的区别"></a>useCallback useMemo的区别</h2><p><strong>useMemo</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedValue = useMemo(<span class="function"><span class="params">()</span> =&gt;</span> computeExpensiveValue(a, b), [a, b]);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>把创建函数和依赖项数组作为参数传入useMemo，它仅会在某个依赖项改变时才重新计算memoized值。这种优化有助于避免在每次渲染时都进行高开销的计算。</p>
-</blockquote>
-<p><strong>useCallback</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> memoizedCallback = useCallback(</span><br><span class="line">  () =&gt; doSomething(a, b),</span><br><span class="line">  [a, b]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>把内联回调函数及依赖项数组作为参数传入useCallback, 它将返回该回调函数的 memoized 版本，该回调函数仅在某个依赖项改变时才会更新。当你把回调函数<br>传递给经过优化的并使用引用相等性去避免非必要的渲染的子组件时，它将非常有用</p>
-</blockquote>
-<p>看起来似乎和useMemo差不多，我们来看看有什么异同：</p>
-<p>useMemo 和 useCallback 接收的参数都是一样，都是在其依赖项发生变化后才执行，都是返回缓存的值，区别在于 useMemo 返回的是函数运行的结果，useCallback返回的函数。</p>
-<blockquote>
-<p>useCallback(fn, deps) 相当于 useMemo(() =&gt; fn, deps)</p>
-</blockquote>
-<h2 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h2><h4 id="没有破坏性改动"><a href="#没有破坏性改动" class="headerlink" title="没有破坏性改动"></a>没有破坏性改动</h4><ul>
-<li>完全是可选的。</li>
-<li>100%向后兼容的。</li>
-<li>现在可用，hook 发布于 v16.8.0</li>
-</ul>
-<p><strong>没有计划从React移除class。</strong><br><strong>Hook不会影响你对 React 概念的理解。</strong></p>
-<h4 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h4><p>Hook 解决了我们五年来编写和维护成千上万的组件时遇到的各种各样看起来不相关的问题。</p>
-<h5 id="在组件之间复用状态逻辑很难"><a href="#在组件之间复用状态逻辑很难" class="headerlink" title="在组件之间复用状态逻辑很难"></a>在组件之间复用状态逻辑很难</h5><p>你可以使用 Hook 从组件中提取状态逻辑，使得这些逻辑可以单独测试并复用。Hook 使你在无需修改组件结构的情况下复用状态逻辑。</p>
-<h5 id="复杂组件变得难以理解"><a href="#复杂组件变得难以理解" class="headerlink" title="复杂组件变得难以理解"></a>复杂组件变得难以理解</h5><p>我们经常维护一些组件，组件起初很简单，但是逐渐会被状态逻辑和副作用充斥。每个生命周期常常包含一些不相关的逻辑。例如，组件常常在 componentDidMount 和 componentDidUpdate 中获取数据。但是，同一个 componentDidMount 中可能也包含很多其它的逻辑，如设置事件监听，而之后需在 componentWillUnmount 中清除。相互关联且需要对照修改的代码被进行了拆分，而完全不相关的代码却在同一个方法中组合在一起。如此很容易产生 bug，并且导致逻辑不一致。</p>
-<p>为了解决这个问题，Hook 将组件中相互关联的部分拆分成更小的函数（比如设置订阅或请求数据），而并非强制按照生命周期划分。你还可以使用 reducer 来管理组件的内部状态，使其更加可预测。</p>
-<h5 id="难以理解的-class"><a href="#难以理解的-class" class="headerlink" title="难以理解的 class"></a>难以理解的 class</h5><p>除了代码复用和代码管理会遇到困难外，我们还发现 class 是学习 React 的一大屏障。你必须去理解 JavaScript 中 this 的工作方式，这与其他语言存在巨大差异。还不能忘记绑定事件处理器。没有稳定的语法提案，这些代码非常冗余。大家可以很好地理解 props，state 和自顶向下的数据流，但对 class 却一筹莫展。即便在有经验的 React 开发者之间，对于函数组件与 class 组件的差异也存在分歧，甚至还要区分两种组件的使用场景。class 也给目前的工具带来了一些问题。例如，class 不能很好的压缩，并且会使热重载出现不稳定的情况。因此，我们想提供一个使代码更易于优化的 API。</p>
-<p>为了解决这些问题，Hook 使你在非 class 的情况下可以使用更多的 React 特性。 从概念上讲，React 组件一直更像是函数。而 Hook 则拥抱了函数，同时也没有牺牲 React 的精神原则。Hook 提供了问题的解决方案，无需学习复杂的函数式或响应式编程技术。</p>
-<h2 id="React-Context-如何去使用"><a href="#React-Context-如何去使用" class="headerlink" title="React Context 如何去使用"></a>React Context 如何去使用</h2><ul>
-<li>React.createContext</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyContext = React.createContext(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Context.Provider</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;MyContext.Provider value=&#123;value&#125;&gt;</span><br></pre></td></tr></table></figure>
-<p>每个 Context 组件都会返回一个 Provider React组件，它允许消费组件订阅 context 的变化。</p>
-<ul>
-<li>Class.contextType</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Myclass</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> contextType = MyContext;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidUpdate() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">this</span>.context;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>挂载在class上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。 这能让你使用<br>this.context 来消费最近 Context 上的值。你可以在任何生命周期中访问到它，包括render函数中。</p>
-<ul>
-<li>Context.Consumer</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;MyContext.Consumer&gt;</span><br><span class="line">  &#123;</span><br><span class="line">    value =&gt; <span class="comment">/* 基于context的值渲染 */</span></span><br><span class="line">  &#125;</span><br><span class="line">&lt;<span class="regexp">/MyContext.consumer&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="Redux-和-Mobx-的区别"><a href="#Redux-和-Mobx-的区别" class="headerlink" title="Redux 和 Mobx 的区别"></a>Redux 和 Mobx 的区别</h2><ol>
-<li>开发难度低，redux 需要引入很多第三方库来完善工程需求。</li>
-<li>开发代码少， redux 需要写大量的样板代码。</li>
-<li>增加渲染性能，redux需要借助 shouldComponentUpdate 或者 immutable 来优化。</li>
+<p>webpack.optimize.CommonsChunkPlugin 已经从 webpack4 移除。 可使用 optimization.splitChunks 进行模块划分（提取公用代码）。</p>
+<ol start="3">
+<li>mini-css-extract-plugin（css文件提取）</li>
 </ol>
-<h2 id="在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些"><a href="#在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些" class="headerlink" title="在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些"></a>在使用Redux中，当修改一个数据，发现组件没有更新，可能的原因有哪些</h2><ol>
-<li>是否 key 值重复导致</li>
-<li>是否正确的引入数据, 或者传递props</li>
-<li>是否组件内部忘记connect</li>
+<p>移除了 extract-text-webpack-plugin 配置，增加 mini-css-extract-plugin 配置。</p>
+<ol start="4">
+<li><p>babel 使用新的命名空间 @babel</p>
+</li>
+<li><p>UglifyJsPlugin</p>
+</li>
 </ol>
-<h2 id="React16-函数式编程怎么去优化"><a href="#React16-函数式编程怎么去优化" class="headerlink" title="React16 函数式编程怎么去优化"></a>React16 函数式编程怎么去优化</h2><ul>
-<li>useMemo</li>
-<li>useCallback</li>
-<li>fragments</li>
-</ul>
+<p>移除 UglifyJsPlugin，采用 TerserPlugin。</p>
+<ol start="6">
+<li>移除 loaders，必须使用 rules</li>
+</ol>
+<p>webpack4之前，loaders 跟 rulrs 是可以一起使用的。</p>
+<ol start="7">
+<li>支持 es6 方式引入文件</li>
+</ol>
+<p>import a from ‘a.js’;</p>
+<ol start="8">
+<li>升级 Happypack 插件进行多线程加速打包</li>
+</ol>
 
           
         
@@ -2153,7 +2149,7 @@ document.getElementById('btn').onclick = function () {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2190,7 +2186,9 @@ document.getElementById('btn').onclick = function () {
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2244,7 +2242,7 @@ document.getElementById('btn').onclick = function () {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
